@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
   </PropertyGroup>
-<!--test comments-->
+  
   <ItemGroup>
     <Folder Include="Controllers\" />
     <Folder Include="Views\" />
