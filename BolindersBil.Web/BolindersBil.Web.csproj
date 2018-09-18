@@ -1,16 +1,24 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
+<<<<<<< HEAD
     <Folder Include="Views\" />
     <Folder Include="wwwroot\" />
+=======
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.1" />
+>>>>>>> 8bdd25926c95bc92f408166119f1995f78ed7682
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\" />
+
+    <ProjectReference Include="..\BolindersBil.Models\BolindersBil.Models.csproj" />
+    <ProjectReference Include="..\BolindersBil.Repositories\BolindersBil.Repositories.csproj" />
+
   </ItemGroup>
 
   <ItemGroup>

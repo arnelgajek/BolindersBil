@@ -5,7 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+<<<<<<< HEAD
     <PackageReference Include="Microsoft.AspNetCore.App" Version="2.1.4" />
+=======
+    <PackageReference Include="Microsoft.AspNetCore.App" Version="2.1.1" />
+>>>>>>> 8bdd25926c95bc92f408166119f1995f78ed7682
   </ItemGroup>
 
 </Project>
