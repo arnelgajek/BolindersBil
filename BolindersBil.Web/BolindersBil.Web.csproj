@@ -5,13 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-<<<<<<< HEAD
     <Folder Include="Views\" />
     <Folder Include="wwwroot\" />
-=======
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.1" />
->>>>>>> 8bdd25926c95bc92f408166119f1995f78ed7682
   </ItemGroup>
 
   <ItemGroup>
