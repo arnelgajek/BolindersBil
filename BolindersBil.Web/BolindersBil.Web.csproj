@@ -10,8 +10,10 @@
   </ItemGroup>
 
   <ItemGroup>
+
     <ProjectReference Include="..\BolindersBil.Models\BolindersBil.Models.csproj" />
     <ProjectReference Include="..\BolindersBil.Repositories\BolindersBil.Repositories.csproj" />
+
   </ItemGroup>
 
 </Project>
