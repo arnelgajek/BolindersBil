@@ -10,6 +10,12 @@ namespace BolindersBil.Web.Controllers
     {
         public IActionResult Index()
         {
+<<<<<<< HEAD
+            return View();
+        }
+    }
+}
+=======
 
 
             return View();
@@ -23,3 +29,4 @@ namespace BolindersBil.Web.Controllers
         }
     }
 }
+>>>>>>> 8bdd25926c95bc92f408166119f1995f78ed7682
