@@ -8,6 +8,7 @@ namespace BolindersBil.Models
     {
         public int Id { get; set; }
         public string RegNr { get; set; }
+        public string Brand { get; set; }
         public string Model { get; set; }
         public int Year { get; set; }
         public int Kilometer { get; set; }
@@ -23,6 +24,6 @@ namespace BolindersBil.Models
         public bool Leasable { get; set; }
         public DateTime AddedDate { get; set; }
         public DateTime UpdatedDate { get; set; }
-        public string Attribute { get; set; }
+        public string VehicleAttribute { get; set; }
     }
 }

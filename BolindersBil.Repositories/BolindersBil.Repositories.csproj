@@ -6,7 +6,12 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" Version="2.1.4" />
-    <PackageReference Include="Microsoft.AspNetCore.App" Version="2.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.App" Version="2.1.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BolindersBil.Data\BolindersBil.Data.csproj" />
+    <ProjectReference Include="..\BolindersBil.Models\BolindersBil.Models.csproj" />
   </ItemGroup>
 
 </Project>
