@@ -37,7 +37,7 @@ namespace BolindersBil.Web
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                //app.UseStatusCodePages();
+                app.UseStatusCodePages();
             }
 
             // To get access to the wwwroot files...
@@ -45,12 +45,12 @@ namespace BolindersBil.Web
 
             app.UseMvcWithDefaultRoute();
 
-            //app.UseMvc(routes =>
-            //{
-            //    routes.MapRoute(
-            //        name: "default",
-            //        template: "{controller=Home}/{action=Index}/{id?}");
-            //});
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute(
+                    name: "default",
+                    template: "{controller=Start}/{action=Index}/{id?}");
+            });
 
             //Seed.FillIfEmpty(ctx);
         }
