@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace BolindersBil.Models
@@ -7,6 +8,7 @@ namespace BolindersBil.Models
     public class Office
     {
         public int Id { get; set; }
+        //public string OfficeCode { get; set; }
         public string Name { get; set; }
         public string Address { get; set; }
         public int ZipCode { get; set; }
