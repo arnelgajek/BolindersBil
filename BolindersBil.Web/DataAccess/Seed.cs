@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BolindersBil.Models;
 
 namespace BolindersBil.Web.DataAccess
 {
@@ -34,6 +35,87 @@ namespace BolindersBil.Web.DataAccess
             //    ctx.Products.AddRange(products);
             //    ctx.SaveChanges();
             //}
+
+            var Vehicles = new List<Vehicle>
+            {
+                new Vehicle
+                {
+                    RegNr = "ABC - 123",
+                    Brand = "Volvo",
+                    Model = "V60",
+                    Year = 1975,
+                    Kilometer = 12,
+                    Price = 32999.99,
+                    Body = "Halvkombi",
+                    Color = "Gul",
+                    Gearbox = "Manuell",
+                    Fuel = "Bensin",
+                    Horsepower = 110,
+                    Used = false,
+                    Offices = Värnamo,
+                    Picture = "Comming soon",
+                    Leasable = true,
+                    VehicleAttribute = "Speglar|Takfönster|kasettspelare"
+                },
+                new Vehicle
+                {
+                    RegNr = "BCD - 234",
+                    Brand = "SAAB",
+                    Model = "93",
+                    Year = 1985,
+                    Kilometer = 123,
+                    Price = 23999.99,
+                    Body = "kombi",
+                    Color = "Röd",
+                    Gearbox = "Manuell",
+                    Fuel = "Bensin",
+                    Horsepower = 170,
+                    Used = true,
+                    Offices = Jönköping,
+                    Picture = "Comming soon",
+                    Leasable = true,
+                    VehicleAttribute = "Speglar|Cdspelare"
+                },
+                new Vehicle
+                {
+                    RegNr = "LOL - 404",
+                    Brand = "BMW",
+                    Model = "x2000",
+                    Year = 2009,
+                    Kilometer = 1200,
+                    Price = 320000.99,
+                    Body = "Cab",
+                    Color = "Blå",
+                    Gearbox = "Automat",
+                    Fuel = "Miljöbränsle/hybrid",
+                    Horsepower = 320,
+                    Used = true,
+                    Offices = Göteborg,
+                    Picture = "Comming soon",
+                    Leasable = false,
+                    VehicleAttribute = "Speglar|Takfönster|AUX-uttag|Bluetooth"
+                },
+                new Vehicle
+                {
+                    RegNr = "ABC - 123",
+                    Brand = "Renault",
+                    Model = "55",
+                    Year = 2005,
+                    Kilometer = 2300,
+                    Price = 67000,
+                    Body = "Yrkesfordon",
+                    Color = "Vit",
+                    Gearbox = "Manuell",
+                    Fuel = "Disel",
+                    Horsepower = 90,
+                    Used = true,
+                    Offices = Värnamo,
+                    Picture = "Comming soon",
+                    Leasable = true,
+                    VehicleAttribute = "Speglar|Kasettspelare|Cdspelare"
+                }
+            };
+
         }
     }
 }
