@@ -2,33 +2,61 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BolindersBil.Repositories;
+using BolindersBil.Web.DataAccess;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace BolindersBil.Web
 {
     public class Startup
     {
+        IConfiguration _configuration;
+        public Startup(IConfiguration conf)
+        {
+            _configuration = conf;
+        }
+        
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            // Configuration for DB connection.
+            var conn = _configuration.GetConnectionString("BolindersBil");
+            services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(conn));
+
+            // Register the service so the components can access information.
+            services.AddTransient<IVehicleRepository, VehicleRepository>();
+
+            services.AddMvc();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ApplicationDbContext ctx)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseStatusCodePages();
             }
 
-            app.Run(async (context) =>
+            // To get access to the wwwroot files...
+            app.UseStaticFiles();
+
+            app.UseMvcWithDefaultRoute();
+
+            app.UseMvc(routes =>
             {
-                await context.Response.WriteAsync("Hello World!");
+                routes.MapRoute(
+                    name: "default",
+                    template: "{controller=Start}/{action=Index}/{id?}");
             });
+
+            Seed.FillIfEmpty(ctx);
         }
     }
 }

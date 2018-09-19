@@ -6,6 +6,10 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" Version="2.1.4" />
+<<<<<<< HEAD
+=======
+    <PackageReference Include="Microsoft.AspNetCore.App" Version="2.1.4" />
+>>>>>>> 3faef4e68522dce57aa3db2c53bbf5c66a408d66
   </ItemGroup>
 
 </Project>
