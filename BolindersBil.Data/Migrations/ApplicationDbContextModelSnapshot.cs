@@ -36,8 +36,9 @@ namespace BolindersBil.Data.Migrations
 
             modelBuilder.Entity("BolindersBil.Models.Office", b =>
                 {
-                    b.Property<string>("Id")
-                        .ValueGeneratedOnAdd();
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Address");
 
@@ -48,6 +49,8 @@ namespace BolindersBil.Data.Migrations
                     b.Property<string>("Email");
 
                     b.Property<string>("Name");
+
+                    b.Property<string>("OfficeCode");
 
                     b.Property<int>("PhoneNumber");
 
@@ -86,7 +89,7 @@ namespace BolindersBil.Data.Migrations
 
                     b.Property<string>("Model");
 
-                    b.Property<string>("OfficesId");
+                    b.Property<int?>("OfficesId");
 
                     b.Property<string>("Picture");
 
