@@ -54,6 +54,10 @@ namespace BolindersBil.Web
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Start}/{action=Index}/{id?}");
+
+                //routes.MapRoute(
+                //  name: "null",
+                //  template: "{controller=Vehicles}/{action=Cars}/{id?}");
             });
 
             Seed.FillIfEmpty(ctx);
