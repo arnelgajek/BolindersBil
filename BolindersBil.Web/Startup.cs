@@ -15,6 +15,7 @@ namespace BolindersBil.Web
 {
     public class Startup
     {
+        // IConfiguration is what you use to get info from the appsettings.json file.
         IConfiguration _configuration;
         public Startup(IConfiguration conf)
         {
@@ -26,6 +27,7 @@ namespace BolindersBil.Web
         public void ConfigureServices(IServiceCollection services)
         {
             // Configuration for DB connection.
+            // This gets the info from the appsettings.json file.
             var conn = _configuration.GetConnectionString("BolindersBil");
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(conn));
 

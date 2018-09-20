@@ -12,6 +12,7 @@ namespace BolindersBil.Web.DataAccess
         {
             if (!ctx.Admins.Any())
             {
+                //ctx.Admins.Add(new Admin { FirstName = "Mattias", LastName = "Jarl" });
                 ctx.Admins.Add(new Admin { FirstName = "Mallory", LastName = "Fraiche" });
                 ctx.Admins.Add(new Admin { FirstName = "Timmie", LastName = "Bark" });
                 ctx.Admins.Add(new Admin { FirstName = "Arnel", LastName = "Gajek" });
@@ -19,9 +20,9 @@ namespace BolindersBil.Web.DataAccess
             }
             if (!ctx.Offices.Any())
             {
-                ctx.Offices.Add(new Office { Name = "Bolinders Bil Värnamo", Address = "Bultgatan 2", ZipCode = 12345, City = "Värnamo", PhoneNumber = 0370123456, Email = "varnamo@bolindersbil.se" });
-                ctx.Offices.Add(new Office { Name = "Bolinders Bil Jönköping", Address = "Lovsjövägen 33", ZipCode = 67890, City = "Jönköping", PhoneNumber = 036123456, Email = "jonkoping@bolindersbil.se" });
-                ctx.Offices.Add(new Office { Name = "Bolinders Bil Göteborg", Address = "Industrivägen 1", ZipCode = 12378, City = "Göteborg", PhoneNumber = 031123456, Email = "goteborg@bolindersbil.se" });
+                ctx.Offices.Add(new Office { OfficeCode = "BB2", Name = "Bolinders Bil Värnamo", Address = "Bultgatan 2", ZipCode = 12345, City = "Värnamo", PhoneNumber = 0370123456, Email = "varnamo@bolindersbil.se" });
+                ctx.Offices.Add(new Office { OfficeCode = "BB1", Name = "Bolinders Bil Jönköping", Address = "Lovsjövägen 33", ZipCode = 67890, City = "Jönköping", PhoneNumber = 036123456, Email = "jonkoping@bolindersbil.se" });
+                ctx.Offices.Add(new Office { OfficeCode = "BB3", Name = "Bolinders Bil Göteborg", Address = "Industrivägen 1", ZipCode = 12378, City = "Göteborg", PhoneNumber = 031123456, Email = "goteborg@bolindersbil.se" });
                 ctx.SaveChanges();
             }
 
