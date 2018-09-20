@@ -1,7 +1,9 @@
-﻿using BolindersBil.Web.DataAccess;
+﻿using BolindersBil.Models;
+using BolindersBil.Web.DataAccess;
 using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -31,6 +33,15 @@ namespace BolindersBil.Data.DataAccess
                     Email = "admin@bolindersbil.se",
                     EmailConfirmed = true
                 }, _password);
+            }
+
+            if (!_context.Admins.Any())
+            {
+                //ctx.Admins.Add(new Admin { FirstName = "Mattias", LastName = "Jarl" });
+                _context.Admins.Add(new Admin { FirstName = "Mallory", LastName = "Fraiche" });
+                //_context.Admins.Add(new Admin { FirstName = "Timmie", LastName = "Bark" });
+                //_context.Admins.Add(new Admin { FirstName = "Arnel", LastName = "Gajek" });
+                _context.SaveChanges();
             }
 
             return true;

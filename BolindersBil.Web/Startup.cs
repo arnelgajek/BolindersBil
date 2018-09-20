@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BolindersBil.Data.DataAccess;
 using BolindersBil.Repositories;
 using BolindersBil.Web.DataAccess;
 using Microsoft.AspNetCore.Builder;
@@ -40,12 +41,13 @@ namespace BolindersBil.Web
 
             // Register the service so the components can access information.
             services.AddTransient<IVehicleRepository, VehicleRepository>();
+            services.AddTransient<IAdminSeeder, AdminSeeder>();
 
             services.AddMvc();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ApplicationDbContext ctx)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ApplicationDbContext ctx, IAdminSeeder adminSeeder)
         {
             if (env.IsDevelopment())
             {
@@ -56,6 +58,8 @@ namespace BolindersBil.Web
             // To get access to the wwwroot files...
             app.UseStaticFiles();
 
+            app.UseAuthentication();
+
             app.UseMvcWithDefaultRoute();
 
             app.UseMvc(routes =>
@@ -65,6 +69,7 @@ namespace BolindersBil.Web
                     template: "{controller=Start}/{action=Index}/{id?}");
             });
 
+            adminSeeder.CreateAdminAccountIfEmpty();
             Seed.FillIfEmpty(ctx);
         }
     }
