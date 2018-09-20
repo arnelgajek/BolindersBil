@@ -41,6 +41,10 @@ TestResult.xml
 dlldata.c
 
 # DNX
+<<<<<<< HEAD
+=======
+
+>>>>>>> 161bd6b5f9d439340a81e7faf28834b0603c9e1c
 appsettings.json
 
 project.lock.json
