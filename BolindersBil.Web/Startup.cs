@@ -7,6 +7,7 @@ using BolindersBil.Web.DataAccess;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -27,9 +28,15 @@ namespace BolindersBil.Web
         public void ConfigureServices(IServiceCollection services)
         {
             // Configuration for DB connection.
-            // This gets the info from the appsettings.json file.
             var conn = _configuration.GetConnectionString("BolindersBil");
+            // Register a service for the DB.
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(conn));
+
+            // Register a service for Identity.
+            services.AddIdentity<IdentityUser, IdentityRole>()
+                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddDefaultTokenProviders();
+                
 
             // Register the service so the components can access information.
             services.AddTransient<IVehicleRepository, VehicleRepository>();
