@@ -27,35 +27,39 @@
         </div>
     </form>
 
-    @{
+    @*@{
         var newsApiClient = new NewsApiClient("8a9c9b8aa9bb4c01ab3ea332452176af");
-        var articleResponse = newsApiClient.GetEverything(new EverythingRequest
+        var articleResponse = newsApiClient.GetTopHeadlines(new TopHeadlinesRequest
         {
-            Q = "Apple",
-            SortBy = SortBys.Popularity,
-            Language = Languages.EN,
-            From = new DateTime(2018, 8, 20)
+            Q = "Car",
+            Language = Languages.EN
+
         });
+
         if (articleResponse.Status == Statuses.Ok)
         {
-           
             foreach (var article in articleResponse.Articles)
             {
-                <p>
-                    <strong>Title:</strong><br />
-                    @article.Title                    
-                </p>
-                <i>
-                    @article.Description
-                </i>
+            <div class="card-group" style="width: 20rem;">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            @article.Title
+                        </h5>
+                        <i class="card-text">
+                            @article.Description
+                        </i>
+                    </div>
+                </div>
+            </div>
             }
 
         }
         else
         {
-            <p>Statusen är inte OK</p>
+            <strong>Statusen är inte OK</strong>
         }
-    }
+    }*@
 
 
 </body>
