@@ -16,5 +16,43 @@ namespace BolindersBil.Web.Controllers
         {
             return View();
         }
+
+
+
+        [HttpGet]
+        public IActionResult AddNewVehicle()
+        {
+            // Creates a List of all the years from one year in the future and back.
+            // This list is used as the dropdown option in the "Årsmodell" input.
+            List<object> years = new List<object>();
+            var currentYear = DateTime.Now.Year;
+            var theFuture = currentYear + 1;
+            years.Add(theFuture);
+            years.Add(currentYear);
+            var stopYear = 1980;
+            for (int y=currentYear; y>=stopYear; y--)
+            {
+                years.Add(y);
+            }
+            var seventies = "70-tal";
+            var sixties = "60-tal";
+            var fifties = "50-tal";
+            var superOld = "40-tal eller äldre";
+            years.Add(seventies);
+            years.Add(sixties);
+            years.Add(fifties);
+            years.Add(superOld);
+            ViewBag.vehicleYearOptions = years;
+
+
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult AddNewVehicle(int addNewVehicleFormId)
+        {
+            return View();
+        }
+
     }
 }
