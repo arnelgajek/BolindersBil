@@ -30,7 +30,7 @@ namespace BolindersBil.Web.Controllers
             years.Add(theFuture);
             years.Add(currentYear);
             var stopYear = 1980;
-            for (int y=currentYear; y>=stopYear; y--)
+            for (int y = currentYear; y >= stopYear; y--)
             {
                 years.Add(y);
             }
@@ -43,6 +43,19 @@ namespace BolindersBil.Web.Controllers
             years.Add(fifties);
             years.Add(superOld);
             ViewBag.vehicleYearOptions = years;
+
+            // 
+            List<string> bodyType = new List<string>();
+            bodyType.Add("Småbil");
+            bodyType.Add("Sedan");
+            bodyType.Add("Halvkombi");
+            bodyType.Add("Kombi");
+            bodyType.Add("SUV");
+            bodyType.Add("Coupé");
+            bodyType.Add("Cab");
+            bodyType.Add("Familjebuss");
+            bodyType.Add("Yrkesfordon");
+            ViewBag.bodyTypes = bodyType;
 
 
             return View();
