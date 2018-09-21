@@ -7,6 +7,10 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BolindersBil.Web.Controllers
 {
+
+    //NYT KEY: f9e4c9f7922b44828a235c984e930a3a
+
+
     [Route("api/[controller]")]
     [ApiController]
     public class NewsfeedController : ControllerBase
