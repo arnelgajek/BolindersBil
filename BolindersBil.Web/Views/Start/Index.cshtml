@@ -16,11 +16,11 @@
             <div class="input-group-prepend">
                 <div class="input-group-text">
                     <label>Used</label>
-                    <input type="radio" />
+                    <input type="radio" name="Used" />
                 </div>
                 <div class="input-group-text">
                     <label>New</label>
-                    <input type="radio" />
+                    <input type="radio" name="Used" />
                 </div>
             </div>
             <input type="submit" class="btn btn-light" value="Sök" />
@@ -28,24 +28,32 @@
     </form>
 
     @{
-        var newsApiClient = new NewsApiClient("f9e4c9f7922b44828a235c984e930a3a");
+        var newsApiClient = new NewsApiClient("8a9c9b8aa9bb4c01ab3ea332452176af");
         var articleResponse = newsApiClient.GetEverything(new EverythingRequest
         {
-            Q = "Car",
+            Q = "Apple",
             SortBy = SortBys.Popularity,
             Language = Languages.EN,
             From = new DateTime(2018, 8, 20)
         });
         if (articleResponse.Status == Statuses.Ok)
         {
-            app.Run(async (context) =>
+           
+            foreach (var article in articleResponse.Articles)
             {
-                foreach (var article in articleResponse.Articles)
-                {
-                    await context.Response.WriteAsync(article.Title);
-                }
+                <p>
+                    <strong>Title:</strong><br />
+                    @article.Title                    
+                </p>
+                <i>
+                    @article.Description
+                </i>
+            }
 
-            });
+        }
+        else
+        {
+            <p>Statusen är inte OK</p>
         }
     }
 
