@@ -1,0 +1,24 @@
+﻿@model Admin
+
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Admin</title>
+</head>
+<body>
+    <h4>This is the admin page!</h4>
+
+    <div class="pull-right">
+        @if (User.Identity.IsAuthenticated)
+        {
+            <a asp-controller="Admin" asp-action="Logout" class="btn btn-sm btn-danger">Logga ut</a>
+        }
+    </div>
+</body>
+</html>

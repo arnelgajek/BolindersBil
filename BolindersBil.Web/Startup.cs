@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BolindersBil.Data.DataAccess;
 using BolindersBil.Repositories;
 using BolindersBil.Web.DataAccess;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -15,6 +17,7 @@ namespace BolindersBil.Web
 {
     public class Startup
     {
+        // IConfiguration is what you use to get info from the appsettings.json file.
         IConfiguration _configuration;
         public Startup(IConfiguration conf)
         {
@@ -27,16 +30,24 @@ namespace BolindersBil.Web
         {
             // Configuration for DB connection.
             var conn = _configuration.GetConnectionString("BolindersBil");
+            // Register a service for the DB.
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(conn));
+
+            // Register a service for Identity.
+            services.AddIdentity<IdentityUser, IdentityRole>()
+                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddDefaultTokenProviders();
+                
 
             // Register the service so the components can access information.
             services.AddTransient<IVehicleRepository, VehicleRepository>();
+            services.AddTransient<IAdminSeeder, AdminSeeder>();
 
             services.AddMvc();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ApplicationDbContext ctx)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ApplicationDbContext ctx, IAdminSeeder adminSeeder)
         {
             if (env.IsDevelopment())
             {
@@ -47,6 +58,8 @@ namespace BolindersBil.Web
             // To get access to the wwwroot files...
             app.UseStaticFiles();
 
+            app.UseAuthentication();
+
             app.UseMvcWithDefaultRoute();
 
             app.UseMvc(routes =>
@@ -56,6 +69,7 @@ namespace BolindersBil.Web
                     template: "{controller=Start}/{action=Index}/{id?}");
             });
 
+            adminSeeder.CreateAdminAccountIfEmpty();
             Seed.FillIfEmpty(ctx);
         }
     }
