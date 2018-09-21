@@ -12,37 +12,38 @@
     <form asp-action="AddNewVehicle" method="post" class="form-horizontal">
 
         <div class="form-group">
-            <label asp-for="RegNr" class="control-label col-sm-2">Registreringsnummer:</label>
+            <label asp-for="RegNr" class="control-label col-sm-2"><strong>Registreringsnummer:</strong></label>
             <div class="col-sm-10">
                 <input asp-for="RegNr" class="form-control" />
             </div>
         </div>
 
         <div class="form-group">
-            <label asp-for="Brand" class="control-label col-sm-2">Märke:</label>
+            <label asp-for="Brand" class="control-label col-sm-2"><strong>Märke:</strong></label>
             <div class="col-sm-10">
                 <input asp-for="Brand" class="form-control" />
             </div>
         </div>
 
         <div class="form-group">
-            <label asp-for="Model" class="control-label col-sm-2">Modell:</label>
+            <label asp-for="Model" class="control-label col-sm-2"><strong>Modell:</strong></label>
             <div class="col-sm-10">
                 <input asp-for="Model" class="form-control" />
             </div>
         </div>
 
         <div class="form-group">
-            <label asp-for="ModelDescription" class="control-label col-sm-2">Modellbeskrivning:</label>
+            <label asp-for="ModelDescription" class="control-label col-sm-2"><strong>Modellbeskrivning:</strong></label>
             <div class="col-sm-10">
                 <textarea asp-for="ModelDescription" class="form-control"></textarea>
             </div>
         </div>
 
         <div class="form-group">
-            <label asp-for="Year" class="control-label col-sm-2">Årsmodell:</label>
+            <label asp-for="Year" class="control-label col-sm-2"><strong>Årsmodell:</strong></label>
             <div class="col-sm-10">
                 <select asp-for="Year" class="form-control" id="">
+                    <option selected>Välj</option>
                     @foreach (var year in ViewBag.vehicleYearOptions)
                     {
                         <option>@year</option>
@@ -52,72 +53,125 @@
         </div>
 
         <div class="form-group">
-            <label asp-for="Kilometer" class="control-label col-sm-2">Kilometer:</label>
+            <label asp-for="Kilometer" class="control-label col-sm-2"><strong>Kilometer:</strong></label>
             <div class="col-sm-10">
                 <input asp-for="Kilometer" class="form-control" />
             </div>
         </div>
 
         <div class="form-group">
-            <label asp-for="Price" class="control-label col-sm-2">Pris:</label>
+            <label asp-for="Price" class="control-label col-sm-2"><strong>Pris:</strong></label>
             <div class="col-sm-10">
                 <input asp-for="Price" class="form-control" />
             </div>
         </div>
 
         <div class="form-group">
-            <label asp-for="Body" class="control-label col-sm-2">Karosstyp:</label>
+            <label asp-for="Body" class="control-label col-sm-2"><strong>Karosstyp:</strong></label>
             <div class="col-sm-10">
                 <select asp-for="Body" class="form-control" id="">
-                    @foreach (var type in ViewBag.bodyTypes)
+                    <option selected>Välj</option>
+                    @foreach (var bodyType in ViewBag.bodyTypes)
                     {
-                        <option>@type</option>
+                        <option>@bodyType</option>
                     }
                 </select>
             </div>
         </div>
 
-
-
-
-
-
-
-
-
-
-
         <div class="form-group">
-            <label asp-for="Color" class="control-label col-sm-2">Färg:</label>
+            <label asp-for="Color" class="control-label col-sm-2"><strong>Färg:</strong></label>
             <div class="col-sm-10">
                 <input asp-for="Color" class="form-control" />
             </div>
         </div>
 
         <div class="form-group">
-            <label asp-for="Gearbox">Växellådstyp:</label>
-            <div class="col-sm-10"></div>
-            <input asp-for="Gearbox" class="form-control" />
+            <label asp-for="Gearbox" class="control-label col-sm-2"><strong>Växellådstyp:</strong></label>
+            <div class="col-sm-10">
+                <label class="checkbox-inline"><input asp-for="Gearbox" type="checkbox" value="">  Automatisk</label>&nbsp;&nbsp;
+                <label class="checkbox-inline"><input asp-for="Gearbox" type="checkbox" value="">  Manuell</label>
+            </div>
         </div>
+
         <div class="form-group">
-            <label asp-for="Fuel">Bränsletyp:</label>
-            <div class="col-sm-10"></div>
-            <input asp-for="Fuel" class="form-control" />
+            <label asp-for="Fuel" class="control-label col-sm-2"><strong>Bränsletyp:</strong></label>
+            <div class="col-sm-10">
+                <select asp-for="Fuel" class="form-control" id="">
+                    <option selected>Välj</option>
+                    @foreach (var fuelType in ViewBag.fuelTypes)
+                    {
+                        <option>@fuelType</option>
+                    }
+                </select>
+            </div>
         </div>
+
         <div class="form-group">
-            <label asp-for="Horsepower">Hästkrafter:</label>
-            <div class="col-sm-10"></div>
-            <input asp-for="Horsepower" class="form-control" />
+            <label asp-for="Horsepower" class="control-label col-sm-2"><strong>Hästkrafter:</strong></label>
+            <div class="col-sm-10">
+                <input asp-for="Horsepower" class="form-control" />
+            </div>
         </div>
-        <div class="custom-checkbox">
-            <label asp-for="Used">
-                <input asp-for="Used" type="checkbox" />
-                Begagnad
-            </label>
-        </div>
+
         <div class="form-group">
-            <label asp-for="Offices">Anläggning</label>
-            <input asp-for="Offices" class="form-control" />
+            <label asp-for="Used" class="control-label col-sm-2"><strong>Begagnad:</strong></label>
+            <div class="col-sm-10">
+                <label class="checkbox-inline"><input asp-for="Used" type="checkbox" value="">  Ja</label>&nbsp;&nbsp;
+                <label class="checkbox-inline"><input asp-for="Used" type="checkbox" value="">  Nej</label>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Offices" class="control-label col-sm-2"><strong>Anläggning:</strong></label>
+            <div class="col-sm-10">
+                <select asp-for="Offices" class="form-control" id="">
+                    <option selected>Välj</option>
+                    @foreach (var office in ViewBag.offices)
+                    {
+                        <option>@office</option>
+                    }
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Picture" class="control-label col-sm-2"><strong>Bilder:</strong></label>
+            <div class="col-sm-10">
+                <div class="custom-file">
+                    <input asp-for="Picture" type="file" class="custom-file-input" id="customFile">
+                    <label class="custom-file-label control-label col-sm-4" for="customFile">Välj fil</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Leasable" class="control-label col-sm-4"><strong>Leasbar för företag:</strong></label>
+            <div class="col-sm-10">
+                <label class="checkbox-inline"><input asp-for="Leasable" type="checkbox" value="">  Ja</label>&nbsp;&nbsp;
+                <label class="checkbox-inline"><input asp-for="Leasable" type="checkbox" value="">  Nej</label>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="AddedDate" class="control-label col-sm-2"><strong>Inlagd datum:</strong></label>
+            <div class="col-sm-10">
+                <input asp-for="AddedDate" class="form-control" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="UpdatedDate" class="control-label col-sm-2"><strong>Uppdaterad datum:</strong></label>
+            <div class="col-sm-10">
+                <input asp-for="UpdatedDate" class="form-control" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="VehicleAttribute" class="control-label col-sm-2"><strong>Pipe-separerad attributlista:</strong></label>
+            <div class="col-sm-10">
+                <input asp-for="VehicleAttribute" class="form-control" />
+            </div>
         </div>
     </form>
 </div>

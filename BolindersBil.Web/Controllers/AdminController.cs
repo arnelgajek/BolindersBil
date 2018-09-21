@@ -22,7 +22,6 @@ namespace BolindersBil.Web.Controllers
         [HttpGet]
         public IActionResult AddNewVehicle()
         {
-            // Creates a List of all the years from one year in the future and back.
             // This list is used as the dropdown option in the "Årsmodell" input.
             List<object> years = new List<object>();
             var currentYear = DateTime.Now.Year;
@@ -44,7 +43,7 @@ namespace BolindersBil.Web.Controllers
             years.Add(superOld);
             ViewBag.vehicleYearOptions = years;
 
-            // 
+            // This list is used as the dropdown option in the "Karosstyp" input.
             List<string> bodyType = new List<string>();
             bodyType.Add("Småbil");
             bodyType.Add("Sedan");
@@ -57,6 +56,20 @@ namespace BolindersBil.Web.Controllers
             bodyType.Add("Yrkesfordon");
             ViewBag.bodyTypes = bodyType;
 
+            // This list is used as the dropdown option in the "Bränsletyp" input.
+            List<string> fuelType = new List<string>();
+            fuelType.Add("Bensin");
+            fuelType.Add("Diesel");
+            fuelType.Add("El");
+            fuelType.Add("Miljöbränsle/Hybrid");
+            ViewBag.fuelTypes = fuelType;
+
+            // This list is used as the dropdown option in the "Anläggning" input.
+            List<string> theOffices = new List<string>();
+            theOffices.Add("Jönköping");
+            theOffices.Add("Värnamo");
+            theOffices.Add("Göteborg");
+            ViewBag.offices = theOffices;
 
             return View();
         }
