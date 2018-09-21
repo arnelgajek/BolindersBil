@@ -1,0 +1,6 @@
+// The example of how your appsetting.json file should look!
+{
+  "ConnectionStrings": {
+    "BolindersBil": "Server=YourServerName;Database=BolindersBil;Trusted_Connection=True;MultipleActiveResultSets=true"
+  }
+}

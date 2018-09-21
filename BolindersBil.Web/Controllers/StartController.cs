@@ -20,7 +20,6 @@ namespace BolindersBil.Web.Controllers
 
         public IActionResult Index()
         {
-
             return View();
         }
 

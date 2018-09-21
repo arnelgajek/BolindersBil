@@ -12,6 +12,7 @@ namespace BolindersBil.Web.DataAccess
         {
             if (!ctx.Admins.Any())
             {
+                //ctx.Admins.Add(new Admin { FirstName = "Mattias", LastName = "Jarl" });
                 ctx.Admins.Add(new Admin { FirstName = "Mallory", LastName = "Fraiche" });
                 ctx.Admins.Add(new Admin { FirstName = "Timmie", LastName = "Bark" });
                 ctx.Admins.Add(new Admin { FirstName = "Arnel", LastName = "Gajek" });
