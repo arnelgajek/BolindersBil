@@ -16,7 +16,7 @@ namespace BolindersBil.Web.DataAccess
 
         }
 
-        public DbSet<Admin> Admins { get; set; }
+        //public DbSet<Admin> Admins { get; set; }
         public DbSet<Office> Offices { get; set; }
         public DbSet<Vehicle> Vehicles { get; set; }
 
