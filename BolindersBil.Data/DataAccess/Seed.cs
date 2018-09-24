@@ -1,6 +1,7 @@
 ﻿using BolindersBil.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -45,8 +46,7 @@ namespace BolindersBil.Web.DataAccess
                     Fuel = "Bensin",
                     Horsepower = 110,
                     Used = false,
-                    
-                    Picture = "Comming soon",
+                    Picture = File.ReadAllBytes("BMW.jpg"),
                     Leasable = true,
                     VehicleAttribute = "Speglar|Takfönster|kasettspelare"
                 },
@@ -65,7 +65,7 @@ namespace BolindersBil.Web.DataAccess
                     Fuel = "Bensin",
                     Horsepower = 170,
                     Used = true,
-                    Picture = "Comming soon",
+                    Picture = File.ReadAllBytes("BMW.jpg"),
                     Leasable = true,
                     VehicleAttribute = "Speglar|Cdspelare"
                 },
@@ -84,7 +84,7 @@ namespace BolindersBil.Web.DataAccess
                     Fuel = "Miljöbränsle/hybrid",
                     Horsepower = 320,
                     Used = true,
-                    Picture = "Comming soon",
+                    Picture = File.ReadAllBytes("BMW.jpg"),
                     Leasable = false,
                     VehicleAttribute = "Speglar|Takfönster|AUX-uttag|Bluetooth"
                 },
@@ -103,7 +103,7 @@ namespace BolindersBil.Web.DataAccess
                     Fuel = "Disel",
                     Horsepower = 90,
                     Used = true,
-                    Picture = "Comming soon",
+                    Picture = File.ReadAllBytes("BMW.jpg"),
                     Leasable = true,
                     VehicleAttribute = "Speglar|Kasettspelare|Cdspelare"
                 },
@@ -122,7 +122,7 @@ namespace BolindersBil.Web.DataAccess
                     Fuel = "Bensin",
                     Horsepower = 130,
                     Used = true,
-                    Picture = "Comming soon",
+                    Picture = File.ReadAllBytes("BMW.jpg"),
                     Leasable = true,
                     VehicleAttribute = "Speglar|Cdspelare|Elegant"
                 },
@@ -141,7 +141,7 @@ namespace BolindersBil.Web.DataAccess
                     Fuel = "Miljöbränsle/Hybrid",
                     Horsepower = 175,
                     Used = false,
-                    Picture = "Comming soon",
+                    Picture = File.ReadAllBytes("BMW.jpg"),
                     Leasable = true,
                     VehicleAttribute = "Speglar|Takfönster|Bluetooth|AUX-uttag|Cab"
                 },
@@ -160,7 +160,7 @@ namespace BolindersBil.Web.DataAccess
                     Fuel = "Bensin",
                     Horsepower = 190,
                     Used = false,
-                    Picture = "Comming soon",
+                    Picture = File.ReadAllBytes("BMW.jpg"),
                     Leasable = false,
                     VehicleAttribute = "Speglar|Takfönster|CD-växlare"
                 },
@@ -179,7 +179,7 @@ namespace BolindersBil.Web.DataAccess
                     Fuel = "Diesel",
                     Horsepower = 96,
                     Used = true,
-                    Picture = "Comming soon",
+                    Picture = File.ReadAllBytes("BMW.jpg"),
                     Leasable = false,
                     VehicleAttribute = "Speglar|Vinterdäck|El-speglar"
                 },
@@ -198,7 +198,7 @@ namespace BolindersBil.Web.DataAccess
                     Fuel = "Bensin",
                     Horsepower = 116,
                     Used = true,
-                    Picture = "Comming soon",
+                    Picture = File.ReadAllBytes("BMW.jpg"),
                     Leasable = false,
                     VehicleAttribute = "Speglar|Takfönster|Original-fälgar"
                 },
@@ -217,7 +217,7 @@ namespace BolindersBil.Web.DataAccess
                     Fuel = "Bensin",
                     Horsepower = 250,
                     Used = true,
-                    Picture = "Comming soon",
+                    Picture = File.ReadAllBytes("BMW.jpg"),
                     Leasable = false,
                     VehicleAttribute = "Speglar|Takfönster|Original-fälgar"
                 },
@@ -236,7 +236,7 @@ namespace BolindersBil.Web.DataAccess
                     Fuel = "Bensin",
                     Horsepower = 190,
                     Used = false,
-                    Picture = "Comming soon",
+                    Picture = File.ReadAllBytes("BMW.jpg"),
                     Leasable = false,
                     VehicleAttribute = "Speglar|Takfönster|CD-växlare"
                 }
