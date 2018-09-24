@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace BolindersBil.Data.Migrations
 {
-    public partial class Initial : Migration
+    public partial class InitialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -181,6 +181,7 @@ namespace BolindersBil.Data.Migrations
                     RegNr = table.Column<string>(nullable: true),
                     Brand = table.Column<string>(nullable: true),
                     Model = table.Column<string>(nullable: true),
+                    ModelDescription = table.Column<string>(nullable: true),
                     Year = table.Column<int>(nullable: false),
                     Kilometer = table.Column<int>(nullable: false),
                     Price = table.Column<double>(nullable: false),

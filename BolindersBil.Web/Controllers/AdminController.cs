@@ -16,28 +16,16 @@ namespace BolindersBil.Web.Controllers
     public class AdminController : Controller
     {
 
-        // TODO: maybe move all the vehicle repo DI and CRUD logic in a Vehicle controller instead.
+        private readonly UserManager<IdentityUser> _userManager;
+        private readonly SignInManager<IdentityUser> _signInManager;
         private IVehicleRepository vehicleRepo;
-        public AdminController(IVehicleRepository vehicleRepository)
+
+        public AdminController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager, IVehicleRepository vehicleRepository)
         {
+            _userManager = userManager;
+            _signInManager = signInManager;
             vehicleRepo = vehicleRepository;
         }
-
-
-
-
-        public IActionResult Index()
-        {
-            return View("Login");
-        }
-        public IActionResult Login()
-        {
-            return View();
-        }
-
-
-
-
 
         // TODO: maybe move all the vehicle repo DI and CRUD logic in a Vehicle controller instead.
         [HttpGet]
@@ -113,24 +101,13 @@ namespace BolindersBil.Web.Controllers
             return View();
         }
 
-
-        private readonly UserManager<IdentityUser> _userManager;
-        private readonly SignInManager<IdentityUser> _signInManager;
-
-        public AdminController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
-        {
-            _userManager = userManager;
-            _signInManager = signInManager;
-        }
-
         [AllowAnonymous]
-        [HttpGet]
         public IActionResult Index()
         {
             // Checks if the user is authenticated/signed in and redirects him/her to Admin: 
             if (User.Identity.IsAuthenticated)
             {
-                return View("Admin");
+                return RedirectToAction("Admin");
             }
             else
             {
@@ -140,8 +117,8 @@ namespace BolindersBil.Web.Controllers
         }
         
         // Checks if the password matches to the account, redirects the user to Admin:
-        [HttpPost]
         [AllowAnonymous]
+        [HttpPost]
         public async Task<IActionResult> Login(AdminViewModel vm)
         {
             if (ModelState.IsValid)
@@ -152,19 +129,19 @@ namespace BolindersBil.Web.Controllers
                     await _signInManager.SignOutAsync();
                     if ((await _signInManager.PasswordSignInAsync(user, vm.Password, false, false)).Succeeded)
                         {
-                        return RedirectToAction("Index", "Admin");
+                        return RedirectToAction("Admin");
                         }
                 }
             }
             return View("Index", vm);
         }
 
-        public IActionResult Admin()
-        {
-            return View();
-        }
+        //public IActionResult Admin()
+        //{
+        //    return View();
+        //}
+
         // Sends the user back to the login page:
-        [HttpDelete]
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
