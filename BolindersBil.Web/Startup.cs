@@ -82,6 +82,7 @@ namespace BolindersBil.Web
 
             adminSeeder.CreateAdminAccountIfEmpty();
             Seed.FillIfEmpty(ctx);
+            
         }
     }
 }

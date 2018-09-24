@@ -6,7 +6,7 @@ namespace BolindersBil.Models
 {
     public class Vehicle
     {
-        public int Id { get; set; }
+        public int Id { get; set; }        
         public string RegNr { get; set; }
         public string Brand { get; set; }
         public string Model { get; set; }
