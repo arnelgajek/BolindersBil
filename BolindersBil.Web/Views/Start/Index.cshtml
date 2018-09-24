@@ -1,11 +1,4 @@
-﻿@{ var imagePath = "";
-    if (Request["Logo] != null)
-    {
-        imagePath = @"Logo\" + Request["photoChoice"];
-    }
-}
-
-
+﻿
 <!DOCTYPE html>
 
 <html>
@@ -17,18 +10,16 @@
 
     <p>In the Index View</p>
 
+    <img src="~/Logo/BMW-logo-2000-2048x2048.png" style="width:75px;" />
+    <img src="~/Logo/Nissan-logo-2013-1440x900.png" style="width:170px;" />
+    <img src="~/Logo/Toyota-logo-1989-2560x1440.png" style="width:170px" />
+    <img src="~/Logo/Volvo-logo-2014-1920x1080.png" style="width: 150px;" />
+    <img src="~/Logo/Mini-logo-2001-1920x1080.png" style="width:150px;" />
+    <img src="~/Logo/Nissan-logo-2013-1440x900.png" style="width:150px;" />
+    <img src="~/Logo/Porsche-logo-2008-1920x1080.png" style="width:150px;" alt="Porsche" />
+    <img src="~/Logo/Renault-logo-2015-2048x2048.png" style="width:100px;" alt="Renault" />
+    <img src="~/Logo/Saab-logo-2013-2000x450.png" style="width:100px;" />
 
-    <img src="~/Logo/BMW-logo-2000-2048x2048.png" alt="Sample Photo" />
-    <img src="~/Logo/Nissan-logo-2013-1440x900.png" />
-    <img src="~/Logo/Toyota-logo-1989-2560x1440.png" />
-    <img src="~/Logo/Volvo-logo-2014-1920x1080.png" />
-    '
-    I want to see:
-    <select name="Logo">
-        <option value="">Photo 1</option>
-        <option value="Photo2.jpg">Photo 2</option>
-        <option value="Photo3.jpg">Photo 3</option>
-    </select>
 
 </body>
 </html>
