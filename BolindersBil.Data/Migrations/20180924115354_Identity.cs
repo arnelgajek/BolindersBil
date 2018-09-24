@@ -2,7 +2,7 @@
 
 namespace BolindersBil.Data.Migrations
 {
-    public partial class identity : Migration
+    public partial class Identity : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

@@ -12,11 +12,12 @@ namespace BolindersBil.Data.DataAccess
     public class AdminSeeder : IAdminSeeder
     {
         private const string _admin = "admin";
-        private const string _password = "password123";
+        private const string _password = "buggeroff";
 
         // Constructor so we can use Dependency Injection from DB.
         private readonly ApplicationDbContext _context;
         private readonly UserManager<IdentityUser> _userManager;
+
         public AdminSeeder(ApplicationDbContext context, UserManager<IdentityUser> userManager)
         {
             _context = context;
@@ -31,18 +32,18 @@ namespace BolindersBil.Data.DataAccess
                 {
                     UserName = _admin,
                     Email = "admin@bolindersbil.se",
-                    EmailConfirmed = true
+                    EmailConfirmed = true,
                 }, _password);
             }
 
-            if (!_context.Admins.Any())
-            {
-                //ctx.Admins.Add(new Admin { FirstName = "Mattias", LastName = "Jarl" });
-                _context.Admins.Add(new Admin { FirstName = "Mallory", LastName = "Fraiche" });
-                //_context.Admins.Add(new Admin { FirstName = "Timmie", LastName = "Bark" });
-                //_context.Admins.Add(new Admin { FirstName = "Arnel", LastName = "Gajek" });
-                _context.SaveChanges();
-            }
+            //if (!_context.Admins.Any())
+            //{
+            //    ctx.Admins.Add(new Admin { FirstName = "Mattias", LastName = "Jarl" });
+            //    _context.Admins.Add(new Admin { FirstName = "Mallory", LastName = "Fraiche" });
+            //    _context.Admins.Add(new Admin { FirstName = "Timmie", LastName = "Bark" });
+            //    _context.Admins.Add(new Admin { FirstName = "Arnel", LastName = "Gajek" });
+            //    _context.SaveChanges();
+            //}
 
             return true;
         }
