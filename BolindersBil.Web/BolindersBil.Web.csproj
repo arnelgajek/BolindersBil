@@ -8,6 +8,7 @@
     <Folder Include="Views\" />
     <Folder Include="wwwroot\" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.1.2" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.4" />
   </ItemGroup>
 
   <ItemGroup>
