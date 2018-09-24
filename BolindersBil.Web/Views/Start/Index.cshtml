@@ -10,48 +10,41 @@
 
     <p>In the Index View</p>
 
-    <form name="searchForm">
-        <div class="input-group">
-            <input type="search" />
-            <div class="input-group-prepend">
-                <div class="input-group-text">
-                    <label>Used</label>
-                    <input type="radio" name="Used" />
-                </div>
-                <div class="input-group-text">
-                    <label>New</label>
-                    <input type="radio" name="Used" />
-                </div>
-            </div>
-            <input type="submit" class="btn btn-light" value="Sök" />
-        </div>
-    </form>
+    
 
-    @*@{
-        var newsApiClient = new NewsApiClient("8a9c9b8aa9bb4c01ab3ea332452176af");
-        var articleResponse = newsApiClient.GetTopHeadlines(new TopHeadlinesRequest
-        {
-            Q = "Car",
-            Language = Languages.EN
+    @{
+                    var newsApiClient = new NewsApiClient("8a9c9b8aa9bb4c01ab3ea332452176af");
+                    var articleResponse = newsApiClient.GetEverything(new EverythingRequest
+                    {
+                        Q = "Car",
+                        SortBy = SortBys.Popularity,
+                        Language = Languages.EN,
+                        Sources = { "the-new-york-times" }
 
-        });
+                    });
+                    var theResults = articleResponse.TotalResults;
+                    theResults = 5;
+                    
+                    if (articleResponse.Status == Statuses.Ok)
+                    {
+                        foreach (var article in articleResponse.Articles)
+                        {
 
-        if (articleResponse.Status == Statuses.Ok)
-        {
-            foreach (var article in articleResponse.Articles)
-            {
-            <div class="card-group" style="width: 20rem;">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">
-                            @article.Title
-                        </h5>
-                        <i class="card-text">
-                            @article.Description
-                        </i>
-                    </div>
-                </div>
-            </div>
+                            
+
+                    @*<div class="card-group" style="width: 20rem;">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    @article.Title
+                                </h5>
+                                <i class="card-text">
+                                    @article.Description
+                                </i>
+                            </div>
+                        </div>
+                    </div>*@
+
             }
 
         }
@@ -59,7 +52,7 @@
         {
             <strong>Statusen är inte OK</strong>
         }
-    }*@
+    }
 
 
 </body>
