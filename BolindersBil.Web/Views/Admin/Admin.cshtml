@@ -1,6 +1,4 @@
-﻿@model Admin
-
-@{
+﻿@{
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
@@ -14,10 +12,12 @@
 <body>
     <h4>This is the admin page!</h4>
 
+    <!-- ARNEL: Här ska det finnas en startsida för login med listade bilar! -->
+
     <div class="pull-right">
         @if (User.Identity.IsAuthenticated)
         {
-            <a asp-controller="Admin" asp-action="Logout" class="btn btn-sm btn-danger">Logga ut</a>
+            <a asp-controller="Logout" asp-action="Logout" class="btn btn-sm btn-danger">Logga ut</a>
         }
     </div>
 </body>

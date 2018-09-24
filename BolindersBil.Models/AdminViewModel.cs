@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Text;
 
-namespace BolindersBil.Web.ViewModels
+namespace BolindersBil.Models
 {
-    public class LoginViewModel
+    public class AdminViewModel
     {
         [DataType(DataType.EmailAddress)]
         [Required]

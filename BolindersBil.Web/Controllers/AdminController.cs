@@ -1,4 +1,4 @@
-﻿using BolindersBil.Web.ViewModels;
+﻿using BolindersBil.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -21,12 +21,13 @@ namespace BolindersBil.Web.Controllers
         }
 
         [AllowAnonymous]
+        [HttpGet]
         public IActionResult Index()
         {
-            // Checks if the user is authenticated/signed in and redirects him/her to Index: 
+            // Checks if the user is authenticated/signed in and redirects him/her to Admin: 
             if (User.Identity.IsAuthenticated)
             {
-                return View("Index" /*, "Vehicles"*/);
+                return View("Admin");
             }
             else
             {
@@ -35,9 +36,10 @@ namespace BolindersBil.Web.Controllers
             }
         }
         
-        // Checks if the password matches to the account, redirects the user to Index:
+        // Checks if the password matches to the account, redirects the user to Admin:
+        [HttpPost]
         [AllowAnonymous]
-        public async Task<IActionResult> Login(LoginViewModel vm)
+        public async Task<IActionResult> Login(AdminViewModel vm)
         {
             if (ModelState.IsValid)
             {
@@ -47,18 +49,23 @@ namespace BolindersBil.Web.Controllers
                     await _signInManager.SignOutAsync();
                     if ((await _signInManager.PasswordSignInAsync(user, vm.Password, false, false)).Succeeded)
                         {
-                        return RedirectToAction("Index"/*", Vehicles"*/);
+                        return RedirectToAction("Index", "Admin");
                         }
                 }
             }
             return View("Index", vm);
         }
 
+        public IActionResult Admin()
+        {
+            return View();
+        }
         // Sends the user back to the login page:
+        [HttpDelete]
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(Login));
         }
     }
 }

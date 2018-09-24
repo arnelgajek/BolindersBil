@@ -1,25 +1,26 @@
-﻿@model Admin
+﻿@model AdminViewModel
 
 @{
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
-}
+}   
 
 <!DOCTYPE html>
 
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
+    <title>Login</title>
 </head>
 <body>
     <!-- Login-form: -->
+    <!-- ARNEL: Du behöver gå genom nedan punkter gällande asp- för att POST mot databasen ska fungera korrekt: -->
     <div class="container mx-auto" style="width: 330px; margin-top: 50px">
-            <form asp-action="Vehicles" method="post" style="max-width: 330px;">
+            <form asp-action="Login" method="post" style="max-width: 330px;">
                 <h2 class="form-login-heading" style="text-align: center; margin: 10px">Please sign in</h2>
-                <label for="inputUserName" class="sr-only">Email address</label>
-                <input type="email" id="inputUserName" class="form-control" placeholder="Email address" required autofocus style="margin:10px" />
-                <label for="inputPassword" class="sr-only">Password</label>
-                <input type="password" id="inputPassword" class="form-control" placeholder="Password" required style="margin:10px" />
+                <label asp-for="UserName" class="sr-only">Email address</label>
+                <input asp-for="UserName" id="inputUserName" class="form-control" placeholder="Email address" required autofocus style="margin:10px" />
+                <label asp-for="Password" class="sr-only">Password</label>
+                <input asp-for="Password" id="inputPassword" class="form-control" placeholder="Password" required style="margin:10px" />
                 <button class="btn btn-lg btn-primary btn-block" type="submit" style="margin:10px">Sign in</button>
             </form>
     </div>
