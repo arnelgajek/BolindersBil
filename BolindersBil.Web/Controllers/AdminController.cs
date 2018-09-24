@@ -86,6 +86,12 @@ namespace BolindersBil.Web.Controllers
             theOffices.Add("Göteborg");
             ViewBag.offices = theOffices;
 
+            // This list is used as the dropdown option in the "Växellådstyp" input.
+            List<string> gearType = new List<string>();
+            gearType.Add("Automatisk");
+            gearType.Add("Manuell");
+            ViewBag.gears = gearType;
+
             return View();
         }
 

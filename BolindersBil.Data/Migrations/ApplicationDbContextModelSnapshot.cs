@@ -74,6 +74,8 @@ namespace BolindersBil.Data.Migrations
 
                     b.Property<string>("Model");
 
+                    b.Property<string>("ModelDescription");
+
                     b.Property<int?>("OfficesId");
 
                     b.Property<string>("Picture");

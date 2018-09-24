@@ -46,7 +46,7 @@
                     <option selected>Välj</option>
                     @foreach (var year in ViewBag.vehicleYearOptions)
                     {
-                        <option>@year</option>
+                        <option value="@year">@year</option>
                     }
                 </select>
             </div>
@@ -73,7 +73,7 @@
                     <option selected>Välj</option>
                     @foreach (var bodyType in ViewBag.bodyTypes)
                     {
-                        <option>@bodyType</option>
+                        <option value="@bodyType">@bodyType</option>
                     }
                 </select>
             </div>
@@ -89,8 +89,13 @@
         <div class="form-group">
             <label asp-for="Gearbox" class="control-label col-sm-2"><strong>Växellådstyp:</strong></label>
             <div class="col-sm-10">
-                <label class="checkbox-inline"><input asp-for="Gearbox" type="checkbox" value="">  Automatisk</label>&nbsp;&nbsp;
-                <label class="checkbox-inline"><input asp-for="Gearbox" type="checkbox" value="">  Manuell</label>
+                <select asp-for="Gearbox" class="form-control" id="">
+                    <option selected>Välj</option>
+                    @foreach (var gear in ViewBag.gears)
+                    {
+                        <option value="@gear">@gear</option>
+                    }
+                </select>
             </div>
         </div>
 
@@ -101,7 +106,7 @@
                     <option selected>Välj</option>
                     @foreach (var fuelType in ViewBag.fuelTypes)
                     {
-                        <option>@fuelType</option>
+                        <option value="@fuelType">@fuelType</option>
                     }
                 </select>
             </div>
@@ -117,8 +122,8 @@
         <div class="form-group">
             <label asp-for="Used" class="control-label col-sm-2"><strong>Begagnad:</strong></label>
             <div class="col-sm-10">
-                <label class="checkbox-inline"><input asp-for="Used" type="checkbox" value="">  Ja</label>&nbsp;&nbsp;
-                <label class="checkbox-inline"><input asp-for="Used" type="checkbox" value="">  Nej</label>
+                <label class="checkbox-inline"><input asp-for="Used" type="checkbox" value="true">  Ja</label>&nbsp;&nbsp;
+                <label class="checkbox-inline"><input asp-for="Used" type="checkbox" value="false">  Nej</label>
             </div>
         </div>
 
@@ -129,27 +134,31 @@
                     <option selected>Välj</option>
                     @foreach (var office in ViewBag.offices)
                     {
-                        <option>@office</option>
+                        <option value="@office">@office</option>
                     }
                 </select>
             </div>
         </div>
 
+        @* TODO: fix this picture file attachment *@
         <div class="form-group">
             <label asp-for="Picture" class="control-label col-sm-2"><strong>Bilder:</strong></label>
             <div class="col-sm-10">
-                <div class="custom-file">
-                    <input asp-for="Picture" type="file" class="custom-file-input" id="customFile">
-                    <label class="custom-file-label control-label col-sm-4" for="customFile">Välj fil</label>
-                </div>
+                @*<div class="custom-file">
+            <input asp-for="Picture" type="file" class="custom-file-input" id="customFile">
+            <label class="custom-file-label control-label col-sm-4" for="customFile">Välj fil</label>
+        </div>*@
+
+                <input asp-for="Picture" class="form-control" />
+
             </div>
         </div>
 
         <div class="form-group">
             <label asp-for="Leasable" class="control-label col-sm-4"><strong>Leasbar för företag:</strong></label>
             <div class="col-sm-10">
-                <label class="checkbox-inline"><input asp-for="Leasable" type="checkbox" value="">  Ja</label>&nbsp;&nbsp;
-                <label class="checkbox-inline"><input asp-for="Leasable" type="checkbox" value="">  Nej</label>
+                <label class="checkbox-inline"><input asp-for="Leasable" type="checkbox" value="true">  Ja</label>&nbsp;&nbsp;
+                <label class="checkbox-inline"><input asp-for="Leasable" type="checkbox" value="false">  Nej</label>
             </div>
         </div>
 
@@ -175,7 +184,9 @@
         </div>
 
         <div class="form-group">
-            <button class="btn btn-primary" type="submit">Add Vehicle</button>
+            <div class="col-sm-10">
+                <button class="btn btn-primary" type="submit">Add Vehicle</button>
+            </div>
         </div>
 
     </form>
