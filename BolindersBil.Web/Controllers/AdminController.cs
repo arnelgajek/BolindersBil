@@ -3,11 +3,13 @@
 using BolindersBil.Repositories;
 
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -15,17 +17,19 @@ namespace BolindersBil.Web.Controllers
 {
     public class AdminController : Controller
     {
-
-        // TODO: maybe move all the vehicle repo DI and CRUD logic in a Vehicle controller instead.
         private IVehicleRepository vehicleRepo;
-        public AdminController(IVehicleRepository vehicleRepository)
+        private readonly UserManager<IdentityUser> _userManager;
+        private readonly SignInManager<IdentityUser> _signInManager;
+
+        public AdminController(IVehicleRepository vehicleRepository, UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
         {
             vehicleRepo = vehicleRepository;
+            _userManager = userManager;
+            _signInManager = signInManager;
         }
 
-
         
-
+        
         // TODO: maybe move all the vehicle repo DI and CRUD logic in a Vehicle controller instead.
         [HttpGet]
         public IActionResult AddNewVehicle()
@@ -89,10 +93,23 @@ namespace BolindersBil.Web.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddNewVehicle(Vehicle addNewVehicle)
+        public async Task<IActionResult> AddNewVehicle(Vehicle addNewVehicle, List<IFormFile> Picture)
         {
             if (ModelState.IsValid && addNewVehicle != null)
             {
+                // To add the uploaded images into the Picture property of Vehicle.
+                foreach (var item in Picture)
+                {
+                    if (item.Length > 0)
+                    {
+                        using (var stream = new MemoryStream())
+                        {
+                            await item.CopyToAsync(stream);
+                            addNewVehicle.Picture = stream.ToArray();
+                        }
+                    }
+                }
+                addNewVehicle.AddedDate = DateTime.Now;
                 vehicleRepo.AddNewVehicle(addNewVehicle);
                 return View("TestVehicleAdded");
             }
@@ -100,15 +117,7 @@ namespace BolindersBil.Web.Controllers
             return View();
         }
 
-
-        private readonly UserManager<IdentityUser> _userManager;
-        private readonly SignInManager<IdentityUser> _signInManager;
-
-        public AdminController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
-        {
-            _userManager = userManager;
-            _signInManager = signInManager;
-        }
+        
 
         [AllowAnonymous]
         [HttpGet]
