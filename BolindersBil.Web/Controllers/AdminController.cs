@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using BolindersBil.Models;
+using BolindersBil.Repositories;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +10,16 @@ namespace BolindersBil.Web.Controllers
 {
     public class AdminController : Controller
     {
+        // TODO: maybe move all the vehicle repo DI and CRUD logic in a Vehicle controller instead.
+        private IVehicleRepository vehicleRepo;
+        public AdminController(IVehicleRepository vehicleRepository)
+        {
+            vehicleRepo = vehicleRepository;
+        }
+
+
+
+
         public IActionResult Index()
         {
             return View("Login");
@@ -19,6 +31,9 @@ namespace BolindersBil.Web.Controllers
 
 
 
+
+
+        // TODO: maybe move all the vehicle repo DI and CRUD logic in a Vehicle controller instead.
         [HttpGet]
         public IActionResult AddNewVehicle()
         {
@@ -75,8 +90,14 @@ namespace BolindersBil.Web.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddNewVehicle(int addNewVehicleFormId)
+        public IActionResult AddNewVehicle(Vehicle addNewVehicle)
         {
+            if (ModelState.IsValid && addNewVehicle != null)
+            {
+                vehicleRepo.AddNewVehicle(addNewVehicle);
+                return View("TestVehicleAdded");
+            }
+
             return View();
         }
 
