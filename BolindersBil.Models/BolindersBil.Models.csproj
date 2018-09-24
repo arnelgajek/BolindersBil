@@ -9,6 +9,8 @@
 
     <PackageReference Include="Microsoft.AspNetCore.App" Version="2.1.4" />
 
+    <PackageReference Include="NewsAPI" Version="0.5.0" />
+
   </ItemGroup>
 
 </Project>

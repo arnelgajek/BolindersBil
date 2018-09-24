@@ -5,6 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.App" Version="2.1.4" />
+    <PackageReference Include="NewsAPI" Version="0.5.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\BolindersBil.Models\BolindersBil.Models.csproj" />
   </ItemGroup>
 

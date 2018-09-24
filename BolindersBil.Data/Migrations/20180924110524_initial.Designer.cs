@@ -4,14 +4,16 @@ using BolindersBil.Web.DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BolindersBil.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180924110524_initial")]
+    partial class initial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -27,6 +29,8 @@ namespace BolindersBil.Data.Migrations
 
                     b.Property<string>("Address");
 
+                    b.Property<string>("AdminsId");
+
                     b.Property<string>("City");
 
                     b.Property<string>("Email");
@@ -40,6 +44,8 @@ namespace BolindersBil.Data.Migrations
                     b.Property<int>("ZipCode");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AdminsId");
 
                     b.ToTable("Offices");
                 });
@@ -149,6 +155,9 @@ namespace BolindersBil.Data.Migrations
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();
 
+                    b.Property<string>("Discriminator")
+                        .IsRequired();
+
                     b.Property<string>("Email")
                         .HasMaxLength(256);
 
@@ -188,6 +197,8 @@ namespace BolindersBil.Data.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("IdentityUser");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -254,6 +265,26 @@ namespace BolindersBil.Data.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
+                });
+
+            modelBuilder.Entity("BolindersBil.Models.Admin", b =>
+                {
+                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
+
+                    b.Property<string>("FirstName");
+
+                    b.Property<string>("LastName");
+
+                    b.ToTable("Admin");
+
+                    b.HasDiscriminator().HasValue("Admin");
+                });
+
+            modelBuilder.Entity("BolindersBil.Models.Office", b =>
+                {
+                    b.HasOne("BolindersBil.Models.Admin", "Admins")
+                        .WithMany()
+                        .HasForeignKey("AdminsId");
                 });
 
             modelBuilder.Entity("BolindersBil.Models.Vehicle", b =>

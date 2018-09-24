@@ -42,11 +42,12 @@ dlldata.c
 
 # DNX
 <<<<<<< HEAD
+appsettings.json
 =======
 
->>>>>>> 161bd6b5f9d439340a81e7faf28834b0603c9e1c
 appsettings.json
 
+>>>>>>> a060ddd3226665b6051be2a4d06ab8c824c991e3
 project.lock.json
 project.fragment.lock.json
 artifacts/

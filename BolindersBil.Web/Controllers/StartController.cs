@@ -9,6 +9,7 @@ namespace BolindersBil.Web.Controllers
 {
     public class StartController : Controller
     {
+        
         // To be able to use the services.AddTransient from startup.cs.
         // Private property and private contructor. 
         private IVehicleRepository vehicleRepo;

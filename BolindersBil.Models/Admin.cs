@@ -1,12 +1,13 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Identity;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace BolindersBil.Models
 {
-    public class Admin
+    public class Admin : IdentityUser
     {
-        public int Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
     }
