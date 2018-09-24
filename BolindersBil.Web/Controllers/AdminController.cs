@@ -22,23 +22,7 @@ namespace BolindersBil.Web.Controllers
         {
             vehicleRepo = vehicleRepository;
         }
-
-
-
-
-        public IActionResult Index()
-        {
-            return View("Login");
-        }
-        public IActionResult Login()
-        {
-            return View();
-        }
-
-
-
-
-
+        
         // TODO: maybe move all the vehicle repo DI and CRUD logic in a Vehicle controller instead.
         [HttpGet]
         public IActionResult AddNewVehicle()
