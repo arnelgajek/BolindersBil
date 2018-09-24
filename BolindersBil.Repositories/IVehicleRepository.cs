@@ -9,5 +9,7 @@ namespace BolindersBil.Repositories
     {
         // The classes that implement this interface will return an IEnumerable<Vehicle>.
         IEnumerable<Vehicle> Vehicles { get; }
+
+        void AddNewVehicle(Vehicle vehicle);
     }
 }
