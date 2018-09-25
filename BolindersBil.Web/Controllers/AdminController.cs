@@ -30,6 +30,7 @@ namespace BolindersBil.Web.Controllers
 
         
         
+        
         // TODO: maybe move all the vehicle repo DI and CRUD logic in a Vehicle controller instead.
         [HttpGet]
         public IActionResult AddNewVehicle()
@@ -56,37 +57,45 @@ namespace BolindersBil.Web.Controllers
             ViewBag.vehicleYearOptions = years;
 
             // This list is used as the dropdown option in the "Karosstyp" input.
-            List<string> bodyType = new List<string>();
-            bodyType.Add("Småbil");
-            bodyType.Add("Sedan");
-            bodyType.Add("Halvkombi");
-            bodyType.Add("Kombi");
-            bodyType.Add("SUV");
-            bodyType.Add("Coupé");
-            bodyType.Add("Cab");
-            bodyType.Add("Familjebuss");
-            bodyType.Add("Yrkesfordon");
+            List<string> bodyType = new List<string>
+            {
+                "Småbil",
+                "Sedan",
+                "Halvkombi",
+                "Kombi",
+                "SUV",
+                "Coupé",
+                "Cab",
+                "Familjebuss",
+                "Yrkesfordon"
+            };
             ViewBag.bodyTypes = bodyType;
 
             // This list is used as the dropdown option in the "Bränsletyp" input.
-            List<string> fuelType = new List<string>();
-            fuelType.Add("Bensin");
-            fuelType.Add("Diesel");
-            fuelType.Add("El");
-            fuelType.Add("Miljöbränsle/Hybrid");
+            List<string> fuelType = new List<string>
+            {
+                "Bensin",
+                "Diesel",
+                "El",
+                "Miljöbränsle/Hybrid"
+            };
             ViewBag.fuelTypes = fuelType;
 
             // This list is used as the dropdown option in the "Anläggning" input.
-            List<string> theOffices = new List<string>();
-            theOffices.Add("Jönköping");
-            theOffices.Add("Värnamo");
-            theOffices.Add("Göteborg");
+            List<string> theOffices = new List<string>
+            {
+                "Jönköping",
+                "Värnamo",
+                "Göteborg"
+            };
             ViewBag.offices = theOffices;
 
             // This list is used as the dropdown option in the "Växellådstyp" input.
-            List<string> gearType = new List<string>();
-            gearType.Add("Automatisk");
-            gearType.Add("Manuell");
+            List<string> gearType = new List<string>
+            {
+                "Automatisk",
+                "Manuell"
+            };
             ViewBag.gears = gearType;
 
             return View();
@@ -157,8 +166,15 @@ namespace BolindersBil.Web.Controllers
 
         public IActionResult Admin()
         {
+            // List of all Vehicles
+            ViewBag.getVehicles = vehicleRepo.GetAllVehicles();
+            
+
+
             return View();
         }
+
+
         // Sends the user back to the login page:
         [HttpDelete]
         public async Task<IActionResult> Logout()
