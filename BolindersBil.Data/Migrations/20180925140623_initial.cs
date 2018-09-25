@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace BolindersBil.Data.Migrations
 {
-    public partial class Initial : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -191,7 +191,8 @@ namespace BolindersBil.Data.Migrations
                     Fuel = table.Column<string>(nullable: true),
                     Horsepower = table.Column<int>(nullable: false),
                     Used = table.Column<bool>(nullable: false),
-                    OfficeId = table.Column<int>(nullable: true),
+                    OfficeIdId = table.Column<int>(nullable: true),
+                    Office = table.Column<string>(nullable: true),
                     Picture = table.Column<byte[]>(nullable: true),
                     Leasable = table.Column<bool>(nullable: false),
                     AddedDate = table.Column<DateTime>(nullable: false),
@@ -202,8 +203,8 @@ namespace BolindersBil.Data.Migrations
                 {
                     table.PrimaryKey("PK_Vehicles", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Vehicles_Offices_OfficeId",
-                        column: x => x.OfficeId,
+                        name: "FK_Vehicles_Offices_OfficeIdId",
+                        column: x => x.OfficeIdId,
                         principalTable: "Offices",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -249,9 +250,9 @@ namespace BolindersBil.Data.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Vehicles_OfficeId",
+                name: "IX_Vehicles_OfficeIdId",
                 table: "Vehicles",
-                column: "OfficeId");
+                column: "OfficeIdId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

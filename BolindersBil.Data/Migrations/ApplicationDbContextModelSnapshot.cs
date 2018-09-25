@@ -72,7 +72,9 @@ namespace BolindersBil.Data.Migrations
 
                     b.Property<string>("ModelDescription");
 
-                    b.Property<int?>("OfficeId");
+                    b.Property<string>("Office");
+
+                    b.Property<int?>("OfficeIdId");
 
                     b.Property<byte[]>("Picture");
 
@@ -90,7 +92,7 @@ namespace BolindersBil.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("OfficeId");
+                    b.HasIndex("OfficeIdId");
 
                     b.ToTable("Vehicles");
                 });
@@ -258,9 +260,9 @@ namespace BolindersBil.Data.Migrations
 
             modelBuilder.Entity("BolindersBil.Models.Vehicle", b =>
                 {
-                    b.HasOne("BolindersBil.Models.Office", "Office")
+                    b.HasOne("BolindersBil.Models.Office", "OfficeId")
                         .WithMany("Vehicles")
-                        .HasForeignKey("OfficeId");
+                        .HasForeignKey("OfficeIdId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

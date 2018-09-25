@@ -30,10 +30,13 @@ namespace BolindersBil.Web.Controllers
             _signInManager = signInManager;
         }
 
-        // TODO: maybe move all the vehicle repo DI and CRUD logic in a Vehicle controller instead.
+
+       
+        // ****TODO: maybe move all the vehicle repo DI and CRUD logic in a Vehicle controller instead.
         [HttpGet]
         public IActionResult AddNewVehicle()
         {
+            // *****TODO: Fix the year 2018 from showing twice in the dropdown.
             // This list is used as the dropdown option in the "Årsmodell" input.
             List<object> years = new List<object>();
             var currentYear = DateTime.Now.Year;
@@ -164,6 +167,7 @@ namespace BolindersBil.Web.Controllers
         {
             // To get the list of all Vehicles from the repo.
             var getVehicles = vehicleRepo.GetAllVehicles();
+            
 
             return View(getVehicles);
         }
