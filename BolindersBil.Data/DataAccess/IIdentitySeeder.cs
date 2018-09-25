@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace BolindersBil.Data.DataAccess
 {
-    public interface IAdminSeeder
+    public interface IIdentitySeeder
     {
         Task<bool> CreateAdminAccountIfEmpty();
     }
