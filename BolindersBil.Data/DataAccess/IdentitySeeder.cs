@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BolindersBil.Data.DataAccess
 {
-    public class AdminSeeder : IAdminSeeder
+    public class IdentitySeeder : IIdentitySeeder
     {
         private const string _admin = "admin";
         private const string _password = "buggeroff";
@@ -18,7 +18,7 @@ namespace BolindersBil.Data.DataAccess
         private readonly ApplicationDbContext _context;
         private readonly UserManager<IdentityUser> _userManager;
 
-        public AdminSeeder(ApplicationDbContext context, UserManager<IdentityUser> userManager)
+        public IdentitySeeder(ApplicationDbContext context, UserManager<IdentityUser> userManager)
         {
             _context = context;
             _userManager = userManager;
@@ -32,18 +32,9 @@ namespace BolindersBil.Data.DataAccess
                 {
                     UserName = _admin,
                     Email = "admin@bolindersbil.se",
-                    EmailConfirmed = true,
+                    EmailConfirmed = true
                 }, _password);
             }
-
-            //if (!_context.Admins.Any())
-            //{
-            //    ctx.Admins.Add(new Admin { FirstName = "Mattias", LastName = "Jarl" });
-            //    _context.Admins.Add(new Admin { FirstName = "Mallory", LastName = "Fraiche" });
-            //    _context.Admins.Add(new Admin { FirstName = "Timmie", LastName = "Bark" });
-            //    _context.Admins.Add(new Admin { FirstName = "Arnel", LastName = "Gajek" });
-            //    _context.SaveChanges();
-            //}
 
             return true;
         }

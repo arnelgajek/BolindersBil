@@ -34,31 +34,33 @@ namespace BolindersBil.Web
             // Register a service for the DB.
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(conn));
 
+            // Register a service for VehicleRepository
+            services.AddTransient<IVehicleRepository, VehicleRepository>();
+
             // Register a service for Identity.
             services.AddIdentity<IdentityUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
-            services.Configure<IdentityOptions>(options =>
-            {
-                options.Password.RequireDigit = false;
-                options.Password.RequireLowercase = false;
-                options.Password.RequireNonAlphanumeric = false;
-                options.Password.RequiredLength = 5;
-                options.SignIn.RequireConfirmedEmail = false;
-                options.User.RequireUniqueEmail = false;
-            });
-                
+            //services.Configure<IdentityOptions>(options =>
+            //{
+            //    options.Password.RequireDigit = false;
+            //    options.Password.RequireLowercase = false;
+            //    options.Password.RequireNonAlphanumeric = false;
+            //    options.Password.RequiredLength = 5;
+            //    options.SignIn.RequireConfirmedEmail = false;
+            //    options.User.RequireUniqueEmail = false;
+            //});                
 
             // Register the service so the components can access information.
             services.AddTransient<IVehicleRepository, VehicleRepository>();
-            services.AddTransient<IAdminSeeder, AdminSeeder>();
+            services.AddTransient<IIdentitySeeder, IdentitySeeder>();
 
             services.AddMvc();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ApplicationDbContext ctx, IAdminSeeder adminSeeder)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ApplicationDbContext ctx, IIdentitySeeder identitySeeder)
         {
             if (env.IsDevelopment())
             {
@@ -84,7 +86,7 @@ namespace BolindersBil.Web
                 //  template: "{controller=Vehicles}/{action=Cars}/{id?}");
             });
 
-            adminSeeder.CreateAdminAccountIfEmpty();
+            identitySeeder.CreateAdminAccountIfEmpty();
             Seed.FillIfEmpty(ctx);
             
         }
