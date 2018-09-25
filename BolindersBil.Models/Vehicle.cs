@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -20,8 +21,8 @@ namespace BolindersBil.Models
         public string Fuel { get; set; }
         public int Horsepower { get; set; }
         public bool Used { get; set; }
-        public virtual Office Offices { get; set; }
-        public string Picture { get; set; }
+        public virtual Office Office { get; set; }
+        public byte[] Picture { get; set; }
         public bool Leasable { get; set; }
         public DateTime AddedDate { get; set; }
         public DateTime UpdatedDate { get; set; }

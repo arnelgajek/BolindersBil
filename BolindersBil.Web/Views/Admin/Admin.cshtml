@@ -1,4 +1,6 @@
-﻿@{
+﻿@model IEnumerable<Vehicle>
+
+@{
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
@@ -20,5 +22,12 @@
             <a asp-controller="Logout" asp-action="Logout" class="btn btn-sm btn-danger">Logga ut</a>
         }
     </div>
+
+
+    @foreach(var v in Model)
+        {
+            <p>@v.RegNr</p>
+        }
+
 </body>
 </html>
