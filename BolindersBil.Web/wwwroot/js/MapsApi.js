@@ -9,14 +9,50 @@
     let JKPGmarker = new google.maps.Marker({ position: jkpg, map: map, title: 'Jönköping', animation: google.maps.Animation.DROP });
     let GBGmarker = new google.maps.Marker({ position: gbg, map: map, title: 'Göteborg', animation: google.maps.Animation.DROP });
 
+
+    var VMOstring = '<div id="content">' +
+        '<div id="siteNotice">' +
+        '</div>' +
+        '<h3 id="firstHeading" class="firstHeading">Bolinders bil Värnamo</h3>' +
+        '<p><a href="https://goo.gl/maps/LVnPDnKNfeC2" target="_blank">Klicka här<a/> för att öppna i Google maps<p/>' +
+        '</div>' +
+        '</div>';
+
+    var JKPGstring = '<div id="content">' +
+        '<div id="siteNotice">' +
+        '</div>' +
+        '<h3 id="firstHeading" class="firstHeading">Bolinders bil Jönköping</h3>' +
+        '<p><a href="https://goo.gl/maps/C7ACTUndTft" target="_blank">Klicka här<a/> för att öppna i Google maps<p/>' +
+        '</div>' +
+        '</div>';
+
+    var GBGstring = '<div id="content">' +
+        '<div id="siteNotice">' +
+        '</div>' +
+        '<h3 id="firstHeading" class="firstHeading">Bolinders bil Göteborg</h3>' +
+        '<p><a href="https://goo.gl/maps/uRwdVnCYWsE2" target="_blank">Klicka här<a/> för att öppna i Google maps<p/>' +
+        '</div>' +
+        '</div>';
+
+    var VMOinfowindow = new google.maps.InfoWindow({
+        content: VMOstring
+    });
+    var JKPGinfowindow = new google.maps.InfoWindow({
+        content: JKPGstring
+    });
+    var GBGinfowindow = new google.maps.InfoWindow({
+        content: GBGstring
+    });
+
+
     VMOmarker.addListener('click', () => {
-        window.open('https://goo.gl/maps/eZsFk7WEPhN2');
+        VMOinfowindow.open(map, VMOmarker);
     });
     JKPGmarker.addListener('click', () => {
-        window.open('https://goo.gl/maps/SXjBctWRvZR2');
+        JKPGinfowindow.open(map, JKPGmarker);
     });
     GBGmarker.addListener('click', () => {
-        window.open('https://goo.gl/maps/zxMHPXRp9QQ2');
+        GBGinfowindow.open(map, GBGmarker);
     });
 
 }
