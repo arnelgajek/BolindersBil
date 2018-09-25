@@ -25,12 +25,7 @@ namespace BolindersBil.Web.Controllers
             _userManager = userManager;
             _signInManager = signInManager;
         }
-<<<<<<< HEAD
-        
-=======
 
-       
->>>>>>> 3f6c20b41eb390dd77d61f40f71e7e929e25724b
         // TODO: maybe move all the vehicle repo DI and CRUD logic in a Vehicle controller instead.
         [HttpGet]
         public IActionResult AddNewVehicle()
@@ -166,7 +161,7 @@ namespace BolindersBil.Web.Controllers
 
         public IActionResult Admin()
         {
-            // To get th list of all Vehicles from the repo.
+            // To get the list of all Vehicles from the repo.
             var getVehicles = vehicleRepo.GetAllVehicles();
 
             return View(getVehicles);
