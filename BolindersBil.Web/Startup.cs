@@ -34,6 +34,9 @@ namespace BolindersBil.Web
             // Register a service for the DB.
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(conn));
 
+            // Register a service for VehicleRepository
+            services.AddTransient<IVehicleRepository, VehicleRepository>();
+
             // Register a service for Identity.
             services.AddIdentity<IdentityUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()

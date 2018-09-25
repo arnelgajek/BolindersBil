@@ -27,7 +27,7 @@ namespace BolindersBil.Web.Controllers
 
         public IActionResult Search()
         {
-
+            
 
             return View();
         }

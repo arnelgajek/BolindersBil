@@ -4,7 +4,7 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
+    <title>Home</title>
 </head>
 <body>
 
@@ -24,24 +24,29 @@
 
         <div class="row">
 
-            <div id="SearchBar">
-                <div class="input-group mb-3" style="margin: 2em">
-                    <div class="input-group-prepend">
-                        <input type="text" class="form-control" aria-label="Text input with checkbox">
-                    </div>
-                    <div class="input-group-prepend">
-                        <div class="input-group-text">
-                            <input type="checkbox" aria-label="Checkbox for following text input">
+
+
+            @*Search form*@
+            @*<form asp-action="GetVehicles" method="get">
+                <div id="SearchBar">
+                    <div class="input-group mb-3" style="margin: 2em">
+                        <div class="input-group-prepend">
+                            <input type="text" class="form-control" placeholder="T.ex. Volvo (C30)">
                         </div>
-                    </div>
-                    <div class="input-group-prepend">
-                        <div class="input-group-text">
-                            <input type="checkbox" aria-label="Checkbox for following text input">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">
+                                <input type="checkbox" aria-label="Checkbox for following text input">
+                            </div>
                         </div>
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">
+                                <input type="checkbox" aria-label="Checkbox for following text input">
+                            </div>
+                        </div>
+                        <input type="search" class="btn btn-light" value="Sök" style="margin: 2em" />
                     </div>
-                    <input type="search" class="btn btn-light" value="Sök" style="margin: 2em" />
                 </div>
-            </div>
+            </form>*@
 
         </div>
 
