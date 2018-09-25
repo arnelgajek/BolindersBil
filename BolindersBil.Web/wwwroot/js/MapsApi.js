@@ -10,26 +10,26 @@
     let GBGmarker = new google.maps.Marker({ position: gbg, map: map, title: 'Göteborg', animation: google.maps.Animation.DROP });
 
 
-    var VMOstring = '<div id="content">' +
-        '<div id="siteNotice">' +
+    var VMOstring = '<div class="content">' +
+        '<div class="siteNotice">' +
         '</div>' +
-        '<h3 id="firstHeading" class="firstHeading">Bolinders bil Värnamo</h3>' +
+        '<h3 class="firstHeading">Bolinders bil Värnamo</h3>' +
         '<p><a href="https://goo.gl/maps/LVnPDnKNfeC2" target="_blank">Klicka här<a/> för att öppna i Google maps<p/>' +
         '</div>' +
         '</div>';
 
-    var JKPGstring = '<div id="content">' +
-        '<div id="siteNotice">' +
+    var JKPGstring = '<div class="content">' +
+        '<div class="siteNotice">' +
         '</div>' +
-        '<h3 id="firstHeading" class="firstHeading">Bolinders bil Jönköping</h3>' +
+        '<h3 class="firstHeading">Bolinders bil Jönköping</h3>' +
         '<p><a href="https://goo.gl/maps/C7ACTUndTft" target="_blank">Klicka här<a/> för att öppna i Google maps<p/>' +
         '</div>' +
         '</div>';
 
-    var GBGstring = '<div id="content">' +
-        '<div id="siteNotice">' +
+    var GBGstring = '<div class="content">' +
+        '<div class="siteNotice">' +
         '</div>' +
-        '<h3 id="firstHeading" class="firstHeading">Bolinders bil Göteborg</h3>' +
+        '<h3 class="firstHeading">Bolinders bil Göteborg</h3>' +
         '<p><a href="https://goo.gl/maps/uRwdVnCYWsE2" target="_blank">Klicka här<a/> för att öppna i Google maps<p/>' +
         '</div>' +
         '</div>';
