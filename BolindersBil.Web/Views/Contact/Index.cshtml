@@ -8,5 +8,61 @@
 </head>
 <body>
     <h2>In the contact view!</h2>
+    <div class="container">
+        <div class="row">
+
+            <div class="card-deck">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title">Bolinders bil Jönköping</h5>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text"><strong>Telefonnummer: </strong>123-456 78 90</p>
+                        <p class="card-text"><strong>E-mail: </strong>timmie.bark@hotmail.com</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title">Bolinders bil Värnamo</h5>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text"><strong>Telefonnummer: </strong>098-765 43 21</p>
+                        <p class="card-text"><strong>E-mail: </strong>mrthefailman@live.com</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title">Bolinders bil Göteborg</h5>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text"><strong>Telefonnummer: </strong>Saknar telefonnummer ATM</p>
+                        <p class="card-text"><strong>E-mail: </strong>Saknar E-mail ATM</p>
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+
+        @*GoogleMaps API*@
+        <div class="row">
+            <div id="Map" style="height: 400px; width: 100%">
+                
+            </div>
+        </div>
+
+    </div>
+    <script>
+        function initMap() {
+            let vmo = { lat: 57.1894536, lng: 14.0085536 };
+            let map = new google.maps.Map(
+                document.getElementById('Map'), { zoom: 14, center: vmo });
+            let marker = new google.maps.Marker({ position: vmo, map: map });
+        }
+    </script>
+    <script async defer 
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDhSorLtndoX90lRDncEHxwJpa_YSdgjpA&callback=initMap">
+    </script>
 </body>
 </html>

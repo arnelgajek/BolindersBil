@@ -1,10 +1,7 @@
 ﻿using BolindersBil.Models;
-
 using BolindersBil.Repositories;
-
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
-
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -122,7 +119,7 @@ namespace BolindersBil.Web.Controllers
                 return View();
             }
         }
-        
+
         // Checks if the password matches to the account, redirects the user to Admin:
         [HttpPost]
         [AllowAnonymous]

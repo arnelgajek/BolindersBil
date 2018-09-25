@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BolindersBil.Models", "Boli
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BolindersBil.Repositories", "BolindersBil.Repositories\BolindersBil.Repositories.csproj", "{34B713ED-A5D4-43E6-A1DF-5F40C5851EBC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BolindersBil.Data", "BolindersBil.Data\BolindersBil.Data.csproj", "{7C17C3F2-5767-4D78-A187-DBE713947182}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BolindersBil.Data", "BolindersBil.Data\BolindersBil.Data.csproj", "{7C17C3F2-5767-4D78-A187-DBE713947182}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
