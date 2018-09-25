@@ -14,13 +14,17 @@ namespace BolindersBil.Web.Controllers
 {
     public class AdminController : Controller
     {
-        private IVehicleRepository vehicleRepo;
+
+
         private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;
-
+        private IVehicleRepository vehicleRepo;
 
         public AdminController(IVehicleRepository vehicleRepository, UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
+
         {
+            _userManager = userManager;
+            _signInManager = signInManager;
             vehicleRepo = vehicleRepository;
             _userManager = userManager;
             _signInManager = signInManager;
@@ -121,16 +125,13 @@ namespace BolindersBil.Web.Controllers
             return View();
         }
 
-        
-
         [AllowAnonymous]
-        [HttpGet]
         public IActionResult Index()
         {
             // Checks if the user is authenticated/signed in and redirects him/her to Admin: 
             if (User.Identity.IsAuthenticated)
             {
-                return View("Admin");
+                return RedirectToAction("Admin");
             }
             else
             {
@@ -140,8 +141,8 @@ namespace BolindersBil.Web.Controllers
         }
 
         // Checks if the password matches to the account, redirects the user to Admin:
-        [HttpPost]
         [AllowAnonymous]
+        [HttpPost]
         public async Task<IActionResult> Login(AdminViewModel vm)
         {
             if (ModelState.IsValid)
@@ -152,7 +153,7 @@ namespace BolindersBil.Web.Controllers
                     await _signInManager.SignOutAsync();
                     if ((await _signInManager.PasswordSignInAsync(user, vm.Password, false, false)).Succeeded)
                         {
-                        return RedirectToAction("Index", "Admin");
+                        return RedirectToAction("Admin");
                         }
                 }
             }
@@ -167,9 +168,7 @@ namespace BolindersBil.Web.Controllers
             return View(getVehicles);
         }
 
-
         // Sends the user back to the login page:
-        [HttpDelete]
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
