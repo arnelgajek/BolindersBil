@@ -14,21 +14,14 @@ namespace BolindersBil.Web.Controllers
 {
     public class AdminController : Controller
     {
-<<<<<<< HEAD
+
 
         private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;
         private IVehicleRepository vehicleRepo;
-
-        public AdminController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager, IVehicleRepository vehicleRepository)
-=======
-        private IVehicleRepository vehicleRepo;
-        private readonly UserManager<IdentityUser> _userManager;
-        private readonly SignInManager<IdentityUser> _signInManager;
-
 
         public AdminController(IVehicleRepository vehicleRepository, UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
->>>>>>> 3f6c20b41eb390dd77d61f40f71e7e929e25724b
+
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -37,10 +30,6 @@ namespace BolindersBil.Web.Controllers
             _signInManager = signInManager;
         }
 
-<<<<<<< HEAD
-=======
-       
->>>>>>> 3f6c20b41eb390dd77d61f40f71e7e929e25724b
         // TODO: maybe move all the vehicle repo DI and CRUD logic in a Vehicle controller instead.
         [HttpGet]
         public IActionResult AddNewVehicle()
@@ -136,11 +125,6 @@ namespace BolindersBil.Web.Controllers
             return View();
         }
 
-<<<<<<< HEAD
-=======
-        
-
->>>>>>> 3f6c20b41eb390dd77d61f40f71e7e929e25724b
         [AllowAnonymous]
         public IActionResult Index()
         {
@@ -184,10 +168,6 @@ namespace BolindersBil.Web.Controllers
             return View(getVehicles);
         }
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 3f6c20b41eb390dd77d61f40f71e7e929e25724b
         // Sends the user back to the login page:
         public async Task<IActionResult> Logout()
         {

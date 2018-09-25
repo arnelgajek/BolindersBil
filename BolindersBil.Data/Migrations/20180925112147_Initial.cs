@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace BolindersBil.Data.Migrations
 {
-    public partial class jl : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -191,8 +191,8 @@ namespace BolindersBil.Data.Migrations
                     Fuel = table.Column<string>(nullable: true),
                     Horsepower = table.Column<int>(nullable: false),
                     Used = table.Column<bool>(nullable: false),
-                    OfficesId = table.Column<int>(nullable: true),
-                    Picture = table.Column<string>(nullable: true),
+                    OfficeId = table.Column<int>(nullable: true),
+                    Picture = table.Column<byte[]>(nullable: true),
                     Leasable = table.Column<bool>(nullable: false),
                     AddedDate = table.Column<DateTime>(nullable: false),
                     UpdatedDate = table.Column<DateTime>(nullable: false),
@@ -202,8 +202,8 @@ namespace BolindersBil.Data.Migrations
                 {
                     table.PrimaryKey("PK_Vehicles", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Vehicles_Offices_OfficesId",
-                        column: x => x.OfficesId,
+                        name: "FK_Vehicles_Offices_OfficeId",
+                        column: x => x.OfficeId,
                         principalTable: "Offices",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -249,9 +249,9 @@ namespace BolindersBil.Data.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Vehicles_OfficesId",
+                name: "IX_Vehicles_OfficeId",
                 table: "Vehicles",
-                column: "OfficesId");
+                column: "OfficeId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
