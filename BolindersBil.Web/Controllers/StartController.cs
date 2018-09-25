@@ -18,6 +18,7 @@ namespace BolindersBil.Web.Controllers
             vehicleRepo = vehicleRepository;
         }
 
+    
 
         public IActionResult Index()
         {

@@ -1,10 +1,7 @@
 ﻿using BolindersBil.Models;
-
 using BolindersBil.Repositories;
-
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
-
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -20,12 +17,23 @@ namespace BolindersBil.Web.Controllers
         private readonly SignInManager<IdentityUser> _signInManager;
         private IVehicleRepository vehicleRepo;
 
+<<<<<<< HEAD
         public AdminController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager, IVehicleRepository vehicleRepository)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             vehicleRepo = vehicleRepository;
         }
+=======
+        //public IActionResult Index()
+        //{
+        //    return View("Login");
+        //}
+        //public IActionResult Login()
+        //{
+        //    return View();
+        //}
+>>>>>>> 1252940e5124c34d1b5e03f58744d75ae1905644
 
         // TODO: maybe move all the vehicle repo DI and CRUD logic in a Vehicle controller instead.
         [HttpGet]
@@ -115,7 +123,7 @@ namespace BolindersBil.Web.Controllers
                 return View();
             }
         }
-        
+
         // Checks if the password matches to the account, redirects the user to Admin:
         [AllowAnonymous]
         [HttpPost]
