@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BolindersBil.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20180924115354_Identity")]
-    partial class Identity
+    [Migration("20180924150214_jl")]
+    partial class jl
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -71,6 +71,8 @@ namespace BolindersBil.Data.Migrations
                     b.Property<bool>("Leasable");
 
                     b.Property<string>("Model");
+
+                    b.Property<string>("ModelDescription");
 
                     b.Property<int?>("OfficesId");
 
