@@ -166,12 +166,10 @@ namespace BolindersBil.Web.Controllers
 
         public IActionResult Admin()
         {
-            // List of all Vehicles
-            ViewBag.getVehicles = vehicleRepo.GetAllVehicles();
-            
+            // To get th list of all Vehicles from the repo.
+            var getVehicles = vehicleRepo.GetAllVehicles();
 
-
-            return View();
+            return View(getVehicles);
         }
 
 

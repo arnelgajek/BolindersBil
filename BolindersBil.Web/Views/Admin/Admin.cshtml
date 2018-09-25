@@ -24,14 +24,10 @@
     </div>
 
 
-
-    @foreach(var v in ViewBag.getVehicles)
-    {
-        <p>@v</p>
-        
-    }
-
-
+    @foreach(var v in Model)
+        {
+            <p>@v.RegNr</p>
+        }
 
 </body>
 </html>
