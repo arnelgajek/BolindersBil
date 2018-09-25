@@ -1,6 +1,7 @@
 ﻿using BolindersBil.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -35,6 +36,7 @@ namespace BolindersBil.Web.DataAccess
                     RegNr = "ABC - 123",
                     Brand = "Volvo",
                     Model = "V60",
+                    ModelDescription = "The description.",
                     Year = 1975,
                     Kilometer = 12,
                     Price = 32999.99,
@@ -44,7 +46,7 @@ namespace BolindersBil.Web.DataAccess
                     Fuel = "Bensin",
                     Horsepower = 110,
                     Used = false,
-                    Picture = "Comming soon",
+                    Picture = File.ReadAllBytes("BMW.jpg"),
                     Leasable = true,
                     VehicleAttribute = "Speglar|Takfönster|kasettspelare"
                 },
@@ -53,6 +55,7 @@ namespace BolindersBil.Web.DataAccess
                     RegNr = "BCD - 234",
                     Brand = "SAAB",
                     Model = "93",
+                    ModelDescription = "The description.",
                     Year = 1985,
                     Kilometer = 123,
                     Price = 23999.99,
@@ -62,7 +65,7 @@ namespace BolindersBil.Web.DataAccess
                     Fuel = "Bensin",
                     Horsepower = 170,
                     Used = true,
-                    Picture = "Comming soon",
+                    Picture = File.ReadAllBytes("BMW.jpg"),
                     Leasable = true,
                     VehicleAttribute = "Speglar|Cdspelare"
                 },
@@ -71,6 +74,7 @@ namespace BolindersBil.Web.DataAccess
                     RegNr = "LOL - 404",
                     Brand = "BMW",
                     Model = "x2000",
+                    ModelDescription = "The description.",
                     Year = 2009,
                     Kilometer = 1200,
                     Price = 320000.99,
@@ -80,7 +84,7 @@ namespace BolindersBil.Web.DataAccess
                     Fuel = "Miljöbränsle/hybrid",
                     Horsepower = 320,
                     Used = true,
-                    Picture = "Comming soon",
+                    Picture = File.ReadAllBytes("BMW.jpg"),
                     Leasable = false,
                     VehicleAttribute = "Speglar|Takfönster|AUX-uttag|Bluetooth"
                 },
@@ -89,6 +93,7 @@ namespace BolindersBil.Web.DataAccess
                     RegNr = "ABC - 123",
                     Brand = "Renault",
                     Model = "55",
+                    ModelDescription = "The description.",
                     Year = 2005,
                     Kilometer = 2300,
                     Price = 67000,
@@ -98,7 +103,7 @@ namespace BolindersBil.Web.DataAccess
                     Fuel = "Disel",
                     Horsepower = 90,
                     Used = true,
-                    Picture = "Comming soon",
+                    Picture = File.ReadAllBytes("BMW.jpg"),
                     Leasable = true,
                     VehicleAttribute = "Speglar|Kasettspelare|Cdspelare"
                 },
@@ -107,6 +112,7 @@ namespace BolindersBil.Web.DataAccess
                     RegNr = "JLT - 202",
                     Brand = "Ford",
                     Model = "Mondeo",
+                    ModelDescription = "The description.",
                     Year = 2002,
                     Kilometer = 13000,
                     Price = 49999.99,
@@ -116,7 +122,7 @@ namespace BolindersBil.Web.DataAccess
                     Fuel = "Bensin",
                     Horsepower = 130,
                     Used = true,
-                    Picture = "Comming soon",
+                    Picture = File.ReadAllBytes("BMW.jpg"),
                     Leasable = true,
                     VehicleAttribute = "Speglar|Cdspelare|Elegant"
                 },
@@ -125,6 +131,7 @@ namespace BolindersBil.Web.DataAccess
                     RegNr = "YTB - 321",
                     Brand = "Minicooper",
                     Model = "XS",
+                    ModelDescription = "The description.",
                     Year = 2018,
                     Kilometer = 0,
                     Price = 12000000.00,
@@ -134,7 +141,7 @@ namespace BolindersBil.Web.DataAccess
                     Fuel = "Miljöbränsle/Hybrid",
                     Horsepower = 175,
                     Used = false,
-                    Picture = "Comming soon",
+                    Picture = File.ReadAllBytes("BMW.jpg"),
                     Leasable = true,
                     VehicleAttribute = "Speglar|Takfönster|Bluetooth|AUX-uttag|Cab"
                 },
@@ -143,6 +150,7 @@ namespace BolindersBil.Web.DataAccess
                     RegNr = "ABC - 123",
                     Brand = "Mercedes",
                     Model = "CLK200",
+                    ModelDescription = "The description.",
                     Year = 2018,
                     Kilometer = 5,
                     Price = 549.999,
@@ -152,7 +160,7 @@ namespace BolindersBil.Web.DataAccess
                     Fuel = "Bensin",
                     Horsepower = 190,
                     Used = false,
-                    Picture = "Comming soon",
+                    Picture = File.ReadAllBytes("BMW.jpg"),
                     Leasable = false,
                     VehicleAttribute = "Speglar|Takfönster|CD-växlare"
                 },
@@ -161,6 +169,7 @@ namespace BolindersBil.Web.DataAccess
                     RegNr = "HYA - 156",
                     Brand = "Opel",
                     Model = "Corsa",
+                    ModelDescription = "The description.",
                     Year = 2014,
                     Kilometer = 4000,
                     Price = 126.595,
@@ -170,7 +179,7 @@ namespace BolindersBil.Web.DataAccess
                     Fuel = "Diesel",
                     Horsepower = 96,
                     Used = true,
-                    Picture = "Comming soon",
+                    Picture = File.ReadAllBytes("BMW.jpg"),
                     Leasable = false,
                     VehicleAttribute = "Speglar|Vinterdäck|El-speglar"
                 },
@@ -179,6 +188,7 @@ namespace BolindersBil.Web.DataAccess
                     RegNr = "YUU - 574",
                     Brand = "Volvo",
                     Model = "C30",
+                    ModelDescription = "The description.",
                     Year = 2010,
                     Kilometer = 12000,
                     Price = 114.000,
@@ -188,7 +198,7 @@ namespace BolindersBil.Web.DataAccess
                     Fuel = "Bensin",
                     Horsepower = 116,
                     Used = true,
-                    Picture = "Comming soon",
+                    Picture = File.ReadAllBytes("BMW.jpg"),
                     Leasable = false,
                     VehicleAttribute = "Speglar|Takfönster|Original-fälgar"
                 },
@@ -197,6 +207,7 @@ namespace BolindersBil.Web.DataAccess
                     RegNr = "HUA - 123",
                     Brand = "Porsche",
                     Model = "Turbo",
+                    ModelDescription = "The description.",
                     Year = 1966,
                     Kilometer = 25000,
                     Price = 379.999,
@@ -206,7 +217,7 @@ namespace BolindersBil.Web.DataAccess
                     Fuel = "Bensin",
                     Horsepower = 250,
                     Used = true,
-                    Picture = "Comming soon",
+                    Picture = File.ReadAllBytes("BMW.jpg"),
                     Leasable = false,
                     VehicleAttribute = "Speglar|Takfönster|Original-fälgar"
                 },
@@ -215,6 +226,7 @@ namespace BolindersBil.Web.DataAccess
                     RegNr = "HEJ - 178",
                     Brand = "Mercedes",
                     Model = "CLK200",
+                    ModelDescription = "The description.",
                     Year = 2018,
                     Kilometer = 5,
                     Price = 549.999,
@@ -224,7 +236,7 @@ namespace BolindersBil.Web.DataAccess
                     Fuel = "Bensin",
                     Horsepower = 190,
                     Used = false,
-                    Picture = "Comming soon",
+                    Picture = File.ReadAllBytes("BMW.jpg"),
                     Leasable = false,
                     VehicleAttribute = "Speglar|Takfönster|CD-växlare"
                 }

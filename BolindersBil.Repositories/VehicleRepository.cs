@@ -25,6 +25,17 @@ namespace BolindersBil.Repositories
             }
             ctx.SaveChanges();
         }
+<<<<<<< HEAD
         
+=======
+
+
+        // TODO: LIST ALL VEHICLES
+        public IEnumerable<Vehicle> GetAllVehicles()
+        {
+            return Vehicles;
+        }
+
+>>>>>>> 3f6c20b41eb390dd77d61f40f71e7e929e25724b
     }
 }

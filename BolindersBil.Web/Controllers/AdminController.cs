@@ -1,10 +1,12 @@
 ﻿using BolindersBil.Models;
 using BolindersBil.Repositories;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -12,14 +14,23 @@ namespace BolindersBil.Web.Controllers
 {
     public class AdminController : Controller
     {
-
-        // TODO: maybe move all the vehicle repo DI and CRUD logic in a Vehicle controller instead.
         private IVehicleRepository vehicleRepo;
-        public AdminController(IVehicleRepository vehicleRepository)
+        private readonly UserManager<IdentityUser> _userManager;
+        private readonly SignInManager<IdentityUser> _signInManager;
+
+
+        public AdminController(IVehicleRepository vehicleRepository, UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
         {
             vehicleRepo = vehicleRepository;
+            _userManager = userManager;
+            _signInManager = signInManager;
         }
+<<<<<<< HEAD
         
+=======
+
+       
+>>>>>>> 3f6c20b41eb390dd77d61f40f71e7e929e25724b
         // TODO: maybe move all the vehicle repo DI and CRUD logic in a Vehicle controller instead.
         [HttpGet]
         public IActionResult AddNewVehicle()
@@ -46,47 +57,68 @@ namespace BolindersBil.Web.Controllers
             ViewBag.vehicleYearOptions = years;
 
             // This list is used as the dropdown option in the "Karosstyp" input.
-            List<string> bodyType = new List<string>();
-            bodyType.Add("Småbil");
-            bodyType.Add("Sedan");
-            bodyType.Add("Halvkombi");
-            bodyType.Add("Kombi");
-            bodyType.Add("SUV");
-            bodyType.Add("Coupé");
-            bodyType.Add("Cab");
-            bodyType.Add("Familjebuss");
-            bodyType.Add("Yrkesfordon");
+            List<string> bodyType = new List<string>
+            {
+                "Småbil",
+                "Sedan",
+                "Halvkombi",
+                "Kombi",
+                "SUV",
+                "Coupé",
+                "Cab",
+                "Familjebuss",
+                "Yrkesfordon"
+            };
             ViewBag.bodyTypes = bodyType;
 
             // This list is used as the dropdown option in the "Bränsletyp" input.
-            List<string> fuelType = new List<string>();
-            fuelType.Add("Bensin");
-            fuelType.Add("Diesel");
-            fuelType.Add("El");
-            fuelType.Add("Miljöbränsle/Hybrid");
+            List<string> fuelType = new List<string>
+            {
+                "Bensin",
+                "Diesel",
+                "El",
+                "Miljöbränsle/Hybrid"
+            };
             ViewBag.fuelTypes = fuelType;
 
             // This list is used as the dropdown option in the "Anläggning" input.
-            List<string> theOffices = new List<string>();
-            theOffices.Add("Jönköping");
-            theOffices.Add("Värnamo");
-            theOffices.Add("Göteborg");
+            List<string> theOffices = new List<string>
+            {
+                "Jönköping",
+                "Värnamo",
+                "Göteborg"
+            };
             ViewBag.offices = theOffices;
 
             // This list is used as the dropdown option in the "Växellådstyp" input.
-            List<string> gearType = new List<string>();
-            gearType.Add("Automatisk");
-            gearType.Add("Manuell");
+            List<string> gearType = new List<string>
+            {
+                "Automatisk",
+                "Manuell"
+            };
             ViewBag.gears = gearType;
 
             return View();
         }
 
         [HttpPost]
-        public IActionResult AddNewVehicle(Vehicle addNewVehicle)
+        public async Task<IActionResult> AddNewVehicle(Vehicle addNewVehicle, List<IFormFile> Picture)
         {
             if (ModelState.IsValid && addNewVehicle != null)
             {
+                // To add the uploaded images into the Picture property of Vehicle.
+                foreach (var item in Picture)
+                {
+                    if (item.Length > 0)
+                    {
+                        using (var stream = new MemoryStream())
+                        {
+                            await item.CopyToAsync(stream);
+                            addNewVehicle.Picture = stream.ToArray();
+                        }
+                    }
+                }
+                addNewVehicle.AddedDate = DateTime.Now;
                 vehicleRepo.AddNewVehicle(addNewVehicle);
                 return View("TestVehicleAdded");
             }
@@ -94,15 +126,7 @@ namespace BolindersBil.Web.Controllers
             return View();
         }
 
-
-        private readonly UserManager<IdentityUser> _userManager;
-        private readonly SignInManager<IdentityUser> _signInManager;
-
-        public AdminController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
-        {
-            _userManager = userManager;
-            _signInManager = signInManager;
-        }
+        
 
         [AllowAnonymous]
         [HttpGet]
@@ -142,8 +166,13 @@ namespace BolindersBil.Web.Controllers
 
         public IActionResult Admin()
         {
-            return View();
+            // To get th list of all Vehicles from the repo.
+            var getVehicles = vehicleRepo.GetAllVehicles();
+
+            return View(getVehicles);
         }
+
+
         // Sends the user back to the login page:
         [HttpDelete]
         public async Task<IActionResult> Logout()

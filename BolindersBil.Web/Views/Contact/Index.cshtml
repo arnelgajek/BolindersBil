@@ -56,8 +56,11 @@
     <script>
         function initMap() {
             let vmo = { lat: 57.1894536, lng: 14.0085536 };
+            let jkpg = { lat: 57.7559198, lng: 14.0481723 };
+            let gbg = { lat: 57.7006826, lng: 11.6136615 };
+            let centerMap = { lat: 57.4958893, lng: 13.0902289 };
             let map = new google.maps.Map(
-                document.getElementById('Map'), { zoom: 14, center: vmo });
+                document.getElementById('Map'), { zoom: 7, center: vmo }); @*lista ut hur man får flera markers på samma karta*@
             let marker = new google.maps.Marker({ position: vmo, map: map });
         }
     </script>
