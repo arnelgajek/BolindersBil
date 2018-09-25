@@ -21,8 +21,8 @@ namespace BolindersBil.Web.DataAccess
             //}
             if (!ctx.Offices.Any())
             {
-                ctx.Offices.Add(new Office { OfficeCode = "BB2", Name = "Bolinders Bil Värnamo", Address = "Bultgatan 2", ZipCode = 12345, City = "Värnamo", PhoneNumber = 0370123456, Email = "varnamo@bolindersbil.se" });
                 ctx.Offices.Add(new Office { OfficeCode = "BB1", Name = "Bolinders Bil Jönköping", Address = "Lovsjövägen 33", ZipCode = 67890, City = "Jönköping", PhoneNumber = 036123456, Email = "jonkoping@bolindersbil.se" });
+                ctx.Offices.Add(new Office { OfficeCode = "BB2", Name = "Bolinders Bil Värnamo", Address = "Bultgatan 2", ZipCode = 12345, City = "Värnamo", PhoneNumber = 0370123456, Email = "varnamo@bolindersbil.se" });
                 ctx.Offices.Add(new Office { OfficeCode = "BB3", Name = "Bolinders Bil Göteborg", Address = "Industrivägen 1", ZipCode = 12378, City = "Göteborg", PhoneNumber = 031123456, Email = "goteborg@bolindersbil.se" });
                 
                 ctx.SaveChanges();
@@ -52,6 +52,7 @@ namespace BolindersBil.Web.DataAccess
                     Horsepower = 110,
                     Used = false,
                     OfficeId = jkpgOffice,
+                    Office = "Jönköping",
                     Picture = File.ReadAllBytes("BMW.jpg"),
                     Leasable = true,
                     VehicleAttribute = "Speglar|Takfönster|kasettspelare"
@@ -72,6 +73,7 @@ namespace BolindersBil.Web.DataAccess
                     Horsepower = 170,
                     Used = true,
                     OfficeId = varnOffice,
+                    Office = "Varnamö",
                     Picture = File.ReadAllBytes("BMW.jpg"),
                     Leasable = true,
                     VehicleAttribute = "Speglar|Cdspelare"
@@ -92,6 +94,7 @@ namespace BolindersBil.Web.DataAccess
                     Horsepower = 320,
                     Used = true,
                     OfficeId = gbgOffice,
+                    Office = "Göteborg",
                     Picture = File.ReadAllBytes("BMW.jpg"),
                     Leasable = false,
                     VehicleAttribute = "Speglar|Takfönster|AUX-uttag|Bluetooth"
@@ -112,6 +115,7 @@ namespace BolindersBil.Web.DataAccess
                     Horsepower = 90,
                     Used = true,
                     OfficeId = jkpgOffice,
+                    Office = "Jönköping",
                     Picture = File.ReadAllBytes("BMW.jpg"),
                     Leasable = true,
                     VehicleAttribute = "Speglar|Kasettspelare|Cdspelare"
@@ -132,6 +136,7 @@ namespace BolindersBil.Web.DataAccess
                     Horsepower = 130,
                     Used = true,
                     OfficeId = varnOffice,
+                    Office = "Varnamö",
                     Picture = File.ReadAllBytes("BMW.jpg"),
                     Leasable = true,
                     VehicleAttribute = "Speglar|Cdspelare|Elegant"
@@ -152,6 +157,7 @@ namespace BolindersBil.Web.DataAccess
                     Horsepower = 175,
                     Used = false,
                     OfficeId = gbgOffice,
+                    Office = "Göteborg",
                     Picture = File.ReadAllBytes("BMW.jpg"),
                     Leasable = true,
                     VehicleAttribute = "Speglar|Takfönster|Bluetooth|AUX-uttag|Cab"
@@ -172,6 +178,7 @@ namespace BolindersBil.Web.DataAccess
                     Horsepower = 190,
                     Used = false,
                     OfficeId = jkpgOffice,
+                    Office = "Jönköping",
                     Picture = File.ReadAllBytes("BMW.jpg"),
                     Leasable = false,
                     VehicleAttribute = "Speglar|Takfönster|CD-växlare"
@@ -192,6 +199,7 @@ namespace BolindersBil.Web.DataAccess
                     Horsepower = 96,
                     Used = true,
                     OfficeId = varnOffice,
+                    Office = "Varnamö",
                     Picture = File.ReadAllBytes("BMW.jpg"),
                     Leasable = false,
                     VehicleAttribute = "Speglar|Vinterdäck|El-speglar"
@@ -212,6 +220,7 @@ namespace BolindersBil.Web.DataAccess
                     Horsepower = 116,
                     Used = true,
                     OfficeId = gbgOffice,
+                    Office = "Göteborg",
                     Picture = File.ReadAllBytes("BMW.jpg"),
                     Leasable = false,
                     VehicleAttribute = "Speglar|Takfönster|Original-fälgar"
@@ -232,6 +241,7 @@ namespace BolindersBil.Web.DataAccess
                     Horsepower = 250,
                     Used = true,
                     OfficeId = jkpgOffice,
+                    Office = "Jönköping",
                     Picture = File.ReadAllBytes("BMW.jpg"),
                     Leasable = false,
                     VehicleAttribute = "Speglar|Takfönster|Original-fälgar"
@@ -252,6 +262,7 @@ namespace BolindersBil.Web.DataAccess
                     Horsepower = 190,
                     Used = false,
                     OfficeId = varnOffice,
+                    Office = "Varnamö",
                     Picture = File.ReadAllBytes("BMW.jpg"),
                     Leasable = false,
                     VehicleAttribute = "Speglar|Takfönster|CD-växlare"
