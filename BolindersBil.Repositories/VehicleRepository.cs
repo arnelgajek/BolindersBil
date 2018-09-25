@@ -32,6 +32,6 @@ namespace BolindersBil.Repositories
         {
             return Vehicles;
         }
-
+        
     }
 }
