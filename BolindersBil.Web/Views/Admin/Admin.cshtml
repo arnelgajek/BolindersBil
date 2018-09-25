@@ -1,4 +1,6 @@
-﻿@{
+﻿@model Vehicle
+
+@{
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
@@ -10,9 +12,51 @@
     <title>Admin</title>
 </head>
 <body>
-    <h4>This is the admin page!</h4>
+    <h1 style="text-align:center; margin-top:10px">Welcome Admin!</h1>
+    <!-- Denna information finns i PPT 5, sida 81 och framåt: -->
 
-    <!-- ARNEL: Här ska det finnas en startsida för login med listade bilar! -->
+    <!-- The editing section on the top of the page: -->
+    <div class="float-sm-right" style="margin-right:10px; margin-top:80px">
+    <button class="btn btn-success" type="submit">New</button>
+    <button class=" btn btn-warning" type="submit">Update</button>
+    <button class="btn btn-danger" type="submit">Delete</button>
+    </div>
+
+    <!-- The layout for all the vehicles presented on the Admin-page: -->
+    <div class="panel panel-default" style="margin:10px">
+        <div class="panel-body" style="margin-top: 200px; border:solid 1px">
+            <div class="row" style="border:dotted; margin:10px">
+                <div class="col-md-4" style="margin:10px">
+                    <h2>Registreringsnummer@*@Model.RegNr*@</h2>
+                    <p>Lorem ipsum om bilen...@*@Model.VehicleAttribute*@</p>
+                    <span class="badge-success price-label">@*@($"Pris: { Model.Price:C2}")*@1.200.000kr</span>
+                </div>
+                <div class="col-md-8">
+                    <img src="~/Logo/BMW-logo-2000-2048x2048.png" class="rounded float-right; img-thumbnail" />
+                </div>
+            </div>
+            <div class="row" style="border:dotted; margin:10px">
+                <div class="col-md-4" style="margin:10px">
+                    <h2>Registreringsnummer@*@Model.RegNr*@</h2>
+                    <p>Lorem ipsum om bilen...@*@Model.VehicleAttribute*@</p>
+                    <span class="badge-success price-label">@*@($"Pris: { Model.Price:C2}")*@1.200.000kr</span>
+                </div>
+                <div class="col-md-8">
+                    <img src="@*@Model.Picture*@" class="pull-right" />
+                </div>
+            </div>
+            <div class="row" style="border:dotted; margin:10px">
+                <div class="col-md-4" style="margin:10px">
+                    <h2>Registreringsnummer@*@Model.RegNr*@</h2>
+                    <p>Lorem ipsum om bilen...@*@Model.VehicleAttribute*@</p>
+                    <span class="badge-success price-label">@*@($"Pris: { Model.Price:C2}")*@1.200.000kr</span>
+                </div>
+                <div class="col-md-8">
+                    <img src="@*@Model.Picture*@" class="pull-right" />
+                </div>
+            </div>
+        </div>
+    </div>
 
     <div class="pull-right">
         @if (User.Identity.IsAuthenticated)
