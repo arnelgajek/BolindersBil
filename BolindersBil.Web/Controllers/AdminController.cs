@@ -168,6 +168,7 @@ namespace BolindersBil.Web.Controllers
         {
             // To get th list of all Vehicles from the repo.
             var getVehicles = vehicleRepo.GetAllVehicles();
+            
 
             return View(getVehicles);
         }
