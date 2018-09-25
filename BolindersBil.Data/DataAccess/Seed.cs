@@ -13,7 +13,7 @@ namespace BolindersBil.Web.DataAccess
         {
             //if (!ctx.Admins.Any())
             //{
-            //    //ctx.Admins.Add(new Admin { FirstName = "Mattias", LastName = "Jarl" });
+            //    ctx.Admins.Add(new Admin { FirstName = "Mattias", LastName = "Jarl" });
             //    ctx.Admins.Add(new Admin { FirstName = "Mallory", LastName = "Fraiche" });
             //    ctx.Admins.Add(new Admin { FirstName = "Timmie", LastName = "Bark" });
             //    ctx.Admins.Add(new Admin { FirstName = "Arnel", LastName = "Gajek" });
@@ -24,8 +24,13 @@ namespace BolindersBil.Web.DataAccess
                 ctx.Offices.Add(new Office { OfficeCode = "BB2", Name = "Bolinders Bil Värnamo", Address = "Bultgatan 2", ZipCode = 12345, City = "Värnamo", PhoneNumber = 0370123456, Email = "varnamo@bolindersbil.se" });
                 ctx.Offices.Add(new Office { OfficeCode = "BB1", Name = "Bolinders Bil Jönköping", Address = "Lovsjövägen 33", ZipCode = 67890, City = "Jönköping", PhoneNumber = 036123456, Email = "jonkoping@bolindersbil.se" });
                 ctx.Offices.Add(new Office { OfficeCode = "BB3", Name = "Bolinders Bil Göteborg", Address = "Industrivägen 1", ZipCode = 12378, City = "Göteborg", PhoneNumber = 031123456, Email = "goteborg@bolindersbil.se" });
+                
                 ctx.SaveChanges();
             }
+
+            Office jkpgOffice = ctx.Offices.Single(o => o.OfficeCode == "BB1");
+            Office varnOffice = ctx.Offices.Single(o => o.OfficeCode == "BB2");
+            Office gbgOffice = ctx.Offices.Single(o => o.OfficeCode == "BB3");
 
             if (!ctx.Vehicles.Any())
             {
@@ -46,6 +51,7 @@ namespace BolindersBil.Web.DataAccess
                     Fuel = "Bensin",
                     Horsepower = 110,
                     Used = false,
+                    OfficeId = jkpgOffice,
                     Picture = File.ReadAllBytes("BMW.jpg"),
                     Leasable = true,
                     VehicleAttribute = "Speglar|Takfönster|kasettspelare"
@@ -65,6 +71,7 @@ namespace BolindersBil.Web.DataAccess
                     Fuel = "Bensin",
                     Horsepower = 170,
                     Used = true,
+                    OfficeId = varnOffice,
                     Picture = File.ReadAllBytes("BMW.jpg"),
                     Leasable = true,
                     VehicleAttribute = "Speglar|Cdspelare"
@@ -84,6 +91,7 @@ namespace BolindersBil.Web.DataAccess
                     Fuel = "Miljöbränsle/hybrid",
                     Horsepower = 320,
                     Used = true,
+                    OfficeId = gbgOffice,
                     Picture = File.ReadAllBytes("BMW.jpg"),
                     Leasable = false,
                     VehicleAttribute = "Speglar|Takfönster|AUX-uttag|Bluetooth"
@@ -103,6 +111,7 @@ namespace BolindersBil.Web.DataAccess
                     Fuel = "Disel",
                     Horsepower = 90,
                     Used = true,
+                    OfficeId = jkpgOffice,
                     Picture = File.ReadAllBytes("BMW.jpg"),
                     Leasable = true,
                     VehicleAttribute = "Speglar|Kasettspelare|Cdspelare"
@@ -122,6 +131,7 @@ namespace BolindersBil.Web.DataAccess
                     Fuel = "Bensin",
                     Horsepower = 130,
                     Used = true,
+                    OfficeId = varnOffice,
                     Picture = File.ReadAllBytes("BMW.jpg"),
                     Leasable = true,
                     VehicleAttribute = "Speglar|Cdspelare|Elegant"
@@ -141,6 +151,7 @@ namespace BolindersBil.Web.DataAccess
                     Fuel = "Miljöbränsle/Hybrid",
                     Horsepower = 175,
                     Used = false,
+                    OfficeId = gbgOffice,
                     Picture = File.ReadAllBytes("BMW.jpg"),
                     Leasable = true,
                     VehicleAttribute = "Speglar|Takfönster|Bluetooth|AUX-uttag|Cab"
@@ -160,6 +171,7 @@ namespace BolindersBil.Web.DataAccess
                     Fuel = "Bensin",
                     Horsepower = 190,
                     Used = false,
+                    OfficeId = jkpgOffice,
                     Picture = File.ReadAllBytes("BMW.jpg"),
                     Leasable = false,
                     VehicleAttribute = "Speglar|Takfönster|CD-växlare"
@@ -179,6 +191,7 @@ namespace BolindersBil.Web.DataAccess
                     Fuel = "Diesel",
                     Horsepower = 96,
                     Used = true,
+                    OfficeId = varnOffice,
                     Picture = File.ReadAllBytes("BMW.jpg"),
                     Leasable = false,
                     VehicleAttribute = "Speglar|Vinterdäck|El-speglar"
@@ -198,6 +211,7 @@ namespace BolindersBil.Web.DataAccess
                     Fuel = "Bensin",
                     Horsepower = 116,
                     Used = true,
+                    OfficeId = gbgOffice,
                     Picture = File.ReadAllBytes("BMW.jpg"),
                     Leasable = false,
                     VehicleAttribute = "Speglar|Takfönster|Original-fälgar"
@@ -217,6 +231,7 @@ namespace BolindersBil.Web.DataAccess
                     Fuel = "Bensin",
                     Horsepower = 250,
                     Used = true,
+                    OfficeId = jkpgOffice,
                     Picture = File.ReadAllBytes("BMW.jpg"),
                     Leasable = false,
                     VehicleAttribute = "Speglar|Takfönster|Original-fälgar"
@@ -236,16 +251,16 @@ namespace BolindersBil.Web.DataAccess
                     Fuel = "Bensin",
                     Horsepower = 190,
                     Used = false,
+                    OfficeId = varnOffice,
                     Picture = File.ReadAllBytes("BMW.jpg"),
                     Leasable = false,
                     VehicleAttribute = "Speglar|Takfönster|CD-växlare"
                 }
                 };
-
                 ctx.Vehicles.AddRange(vehicles);
                 ctx.SaveChanges();
             }
-
+            
         }
     }
 }
