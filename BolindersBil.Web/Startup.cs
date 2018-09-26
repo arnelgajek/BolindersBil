@@ -32,7 +32,7 @@ namespace BolindersBil.Web
             // Configuration for DB connection.
             var conn = _configuration.GetConnectionString("BolindersBil");
             // Register a service for the DB.
-            services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(conn));
+            services.AddDbContext<ApplicationDbContext>(options => options.UseLazyLoadingProxies().UseSqlServer(conn));
 
             // Register a service for VehicleRepository
             services.AddTransient<IVehicleRepository, VehicleRepository>();

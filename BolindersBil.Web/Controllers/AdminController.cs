@@ -42,7 +42,6 @@ namespace BolindersBil.Web.Controllers
             var currentYear = DateTime.Now.Year;
             var theFuture = currentYear + 1;
             years.Add(theFuture);
-            years.Add(currentYear);
             var stopYear = 1980;
             for (int y = currentYear; y >= stopYear; y--)
             {
