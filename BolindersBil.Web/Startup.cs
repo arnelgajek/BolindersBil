@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using BolindersBil.Data.DataAccess;
+using BolindersBil.Models;
 using BolindersBil.Repositories;
 using BolindersBil.Web.DataAccess;
 using Microsoft.AspNetCore.Builder;
@@ -32,7 +33,7 @@ namespace BolindersBil.Web
             // Configuration for DB connection.
             var conn = _configuration.GetConnectionString("BolindersBil");
             // Register a service for the DB.
-            services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(conn));
+            services.AddDbContext<ApplicationDbContext>(options => options.UseLazyLoadingProxies().UseSqlServer(conn));
 
             // Register a service for VehicleRepository
             services.AddTransient<IVehicleRepository, VehicleRepository>();
@@ -42,19 +43,18 @@ namespace BolindersBil.Web
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
-            //services.Configure<IdentityOptions>(options =>
-            //{
-            //    options.Password.RequireDigit = false;
-            //    options.Password.RequireLowercase = false;
-            //    options.Password.RequireNonAlphanumeric = false;
-            //    options.Password.RequiredLength = 5;
-            //    options.SignIn.RequireConfirmedEmail = false;
-            //    options.User.RequireUniqueEmail = false;
-            //});                
-
             // Register the service so the components can access information.
             services.AddTransient<IVehicleRepository, VehicleRepository>();
             services.AddTransient<IIdentitySeeder, IdentitySeeder>();
+
+            services.Configure<IdentityOptions>(options =>
+            {
+                options.Password.RequireDigit = false;
+                options.Password.RequireLowercase = false;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = false;
+                options.Password.RequiredLength = 3;
+            });
 
             services.AddMvc();
         }
@@ -86,7 +86,9 @@ namespace BolindersBil.Web
                 //  template: "{controller=Vehicles}/{action=Cars}/{id?}");
             });
 
-            identitySeeder.CreateAdminAccountIfEmpty();
+            var runIdentitySeed = Task.Run(async () => await identitySeeder.CreateAdminAccountIfEmpty()).Result;
+
+            //identitySeeder.CreateAdminAccountIfEmpty();
             Seed.FillIfEmpty(ctx);
             
         }
