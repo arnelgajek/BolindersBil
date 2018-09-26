@@ -9,9 +9,9 @@
 
 <div class="container">
     <div class="float-sm-right" style="margin-bottom:10px">
-        <button class="btn btn-success" type="submit" name="newVehicle" id="newVehicle">New</button>
-        <button class=" btn btn-warning" type="submit" name="updateVehcle" disabled="disabled" id="updateVehcle">Update</button>
-        <button class="btn btn-danger" type="submit" name="deleteVehicle" disabled="disabled" id="deleteVehicle">Delete</button>
+        <a asp-controller="Account" asp-action="AddNewVehicle" class="btn btn-success" name="newVehicle" id="newVehicle">New</a>
+        <a asp-controller="Account" asp-action="AddNewVehicle" class="btn btn-warning" name="updateVehicle" @*disabled="disabled" *@ id="updateVehcle">Update</a>
+        <button class="btn btn-danger" type="submit" name="deleteVehicle" @*disabled="disabled" *@ id="deleteVehicle">Delete</button>
     </div>
 
     @foreach (var v in Model)
