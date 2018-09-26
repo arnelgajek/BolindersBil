@@ -15,7 +15,7 @@
     <!-- Login-form: -->
     <!-- ARNEL: Du behöver gå genom nedan punkter gällande asp- för att POST mot databasen ska fungera korrekt: -->
     <div class="container mx-auto" style="width: 330px; margin-top: 50px">
-            <form asp-action="Login" method="post" style="max-width: 330px;">
+            <form asp-action="Login" asp-controller="Admin" method="post" style="max-width: 330px;">
                 <h2 class="form-login-heading" style="text-align: center; margin: 10px">Please sign in</h2>
                 <label asp-for="UserName" class="sr-only">Email address</label>
                 <input asp-for="UserName" id="inputUserName" class="form-control" placeholder="Email address" required autofocus style="margin:10px" />

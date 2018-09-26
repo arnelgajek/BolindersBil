@@ -12,10 +12,29 @@
     <title>Admin</title>
 </head>
 <body>
-    <h4>This is the admin page!</h4>
+    <h1 style="text-align:center; margin-top:20px; margin-bottom:100px">Welcome Admin!</h1>
+    <!-- Denna information finns i PPT 5, sida 81 och framåt: -->
+    <!-- The editing section on the top of the page: -->
 
-    <!-- ARNEL: Här ska det finnas en startsida för login med listade bilar! -->
+    <div class="container">
+        <div class="float-sm-right" style="margin-bottom:10px">
+            <button class="btn btn-success" type="submit" name="newVehicle" id="newVehicle">New</button>
+            <button class=" btn btn-warning" type="submit" name="updateVehcle" disabled="disabled" id="updateVehcle">Update</button>
+            <button class="btn btn-danger" type="submit" name="deleteVehicle" disabled="disabled" id="deleteVehicle">Delete</button>
+        </div>
 
+    @foreach (var v in Model)
+    {
+        <!-- The layout for all the vehicles presented on the Admin-page: -->
+        <table class="table table-bordered table-striped">
+            <tr>
+                <td><input type="checkbox" id="checkedBox" value="@v.Id" /> @v.RegNr</td>
+            </tr>
+        </table>
+    }
+    </div>
+
+    <!-- Sign out: -->
     <div class="pull-right">
         @if (User.Identity.IsAuthenticated)
         {
@@ -23,11 +42,25 @@
         }
     </div>
 
+    <!-- Enable/Disable the buttons: -->
+    <script>
+        var boxChecker = document.getElementById('checkedBox');
+        var newButton = document.getElementById('newVehicle');
+        var updateButton = document.getElementById('updateVehicle');
+        var deleteButton = document.getElementById('deleteVehicle');
 
-    @foreach(var v in Model)
-        {
-            <p>@v.RegNr</p>
-        }
+        checkedBox.onchange = function () {
+            if (this.checked) {
+                updateButton.disabled = false;
+                deleteButton.disabled = false;
+                newButton.disabled = true;
+            } else {
+                updateButton.disabled = true;
+                deleteButton.disabled = true;
+                newButton.disabled = false;
+            }
+        };
 
+    </script>
 </body>
 </html>
