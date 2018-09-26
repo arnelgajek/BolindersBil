@@ -28,7 +28,7 @@ namespace BolindersBil.Data.DataAccess
         {
             if (!_context.Users.Any(u => u.UserName == _admin))
             {
-                var user = new AdminViewModel
+                var user = new IdentityUser
                 {
                     UserName = _admin,
                     Email = "admin@bolindersbil.se",

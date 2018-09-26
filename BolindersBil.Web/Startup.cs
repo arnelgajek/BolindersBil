@@ -39,7 +39,7 @@ namespace BolindersBil.Web
             services.AddTransient<IVehicleRepository, VehicleRepository>();
 
             // Register a service for Identity.
-            services.AddIdentity<AdminViewModel, IdentityRole>()
+            services.AddIdentity<IdentityUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
@@ -86,8 +86,9 @@ namespace BolindersBil.Web
                 //  template: "{controller=Vehicles}/{action=Cars}/{id?}");
             });
 
-            identitySeeder.CreateAdminAccountIfEmpty();
+            var runIdentitySeed = Task.Run(async () => await identitySeeder.CreateAdminAccountIfEmpty()).Result;
 
+            //identitySeeder.CreateAdminAccountIfEmpty();
             Seed.FillIfEmpty(ctx);
             
         }

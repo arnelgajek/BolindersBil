@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BolindersBil.Web.DataAccess
 {
-    public class ApplicationDbContext : IdentityDbContext<AdminViewModel> 
+    public class ApplicationDbContext : IdentityDbContext<IdentityUser> 
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {

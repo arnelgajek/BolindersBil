@@ -6,11 +6,11 @@ using System.Text;
 
 namespace BolindersBil.Models
 {
-    public class AdminViewModel : IdentityUser
+    public class LoginViewModel
     {
-        //[DataType(DataType.EmailAddress)]
-        //[Required]
-        //public string UserName { get; set; }
+        [DataType(DataType.EmailAddress)]
+        [Required]
+        public string UserName { get; set; }
 
         [DataType(DataType.Password)]
         [Required]
