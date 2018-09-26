@@ -33,15 +33,7 @@ namespace BolindersBil.Web.Controllers
                 Body = "<p>This is the body of the email</p><a> href='#'>The link</a>",
                 IsBodyHtml = true
             };
-
-            //    MailMessage message = new MailMessage
-            //{
-            //    From = new MailAddress("from@wu17.com")
-            //};
-            //message.To.Add("to@wu17.com");
-            //message.Subject = "Subject goes here";
-            //message.Body = "<h1>I am the body</h1>";
-            //message.IsBodyHtml = true;
+            
             {
                 smtpClient.Send(message);
             }
