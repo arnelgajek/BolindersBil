@@ -34,6 +34,7 @@ namespace BolindersBil.Web.Controllers
                 IsBodyHtml = true
             };
             
+
             {
                 smtpClient.Send(message);
             }
