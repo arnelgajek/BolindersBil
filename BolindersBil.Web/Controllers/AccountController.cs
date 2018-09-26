@@ -23,7 +23,6 @@ namespace BolindersBil.Web.Controllers
         {
             _userManager = userManager;
             _signInManager = signInManager;
-
             vehicleRepo = vehicleRepository;
         }
 
@@ -61,14 +60,6 @@ namespace BolindersBil.Web.Controllers
             return View("Index", vm);
         }
 
-        public IActionResult Admin()
-        {
-            // To get the list of all Vehicles from the repo.
-            var getVehicles = vehicleRepo.GetAllVehicles();
-
-            return View(getVehicles);
-        }
-
         // Sends the user back to the login page:
         public async Task<IActionResult> Logout()
         {
@@ -76,7 +67,13 @@ namespace BolindersBil.Web.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        public IActionResult Admin()
+        {
+            // To get the list of all Vehicles from the repo.
+            var listOfVehicles = vehicleRepo.GetAllVehicles();
 
+            return View(listOfVehicles);
+        }
        
         // ****TODO: maybe move all the vehicle repo DI and CRUD logic in a Vehicle controller instead.
         [HttpGet]
@@ -172,5 +169,7 @@ namespace BolindersBil.Web.Controllers
 
             return View();
         }
+
+
     }
 }
