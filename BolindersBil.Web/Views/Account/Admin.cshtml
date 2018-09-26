@@ -25,14 +25,6 @@
     }
     </div>
 
-    <!-- Sign out: -->
-    <div class="pull-right">
-        @if (User.Identity.IsAuthenticated)
-        {
-            <a asp-controller="Logout" asp-action="Logout" class="btn btn-sm btn-danger">Logga ut</a>
-        }
-    </div>
-
     <!-- Enable/Disable the buttons: -->
     <script>
             var boxChecker = document.getElementById('checkedBox');
