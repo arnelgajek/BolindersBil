@@ -26,8 +26,6 @@ namespace BolindersBil.Web.Controllers
             _userManager = userManager;
             _signInManager = signInManager;
             vehicleRepo = vehicleRepository;
-            _userManager = userManager;
-            _signInManager = signInManager;
         }
 
         // TODO: maybe move all the vehicle repo DI and CRUD logic in a Vehicle controller instead.
@@ -131,7 +129,7 @@ namespace BolindersBil.Web.Controllers
             // Checks if the user is authenticated/signed in and redirects him/her to Admin: 
             if (User.Identity.IsAuthenticated)
             {
-                return RedirectToAction("Admin");
+                return RedirectToAction("Index", "Admin");
             }
             else
             {
@@ -172,7 +170,7 @@ namespace BolindersBil.Web.Controllers
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
-            return RedirectToAction(nameof(Login));
+            return RedirectToAction(nameof(Index));
         }
 
     }

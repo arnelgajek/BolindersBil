@@ -28,7 +28,7 @@
         <!-- The layout for all the vehicles presented on the Admin-page: -->
         <table class="table table-bordered table-striped">
             <tr>
-                <td><input type="checkbox" id="checkedBox" value="@v.Id" /> @v.RegNr</td>
+                <td><input type="checkbox" id="checkedBox" value="@v.Id" /> @v.Brand @v.Model, @v.RegNr</td>
             </tr>
         </table>
     }
@@ -44,22 +44,22 @@
 
     <!-- Enable/Disable the buttons: -->
     <script>
-        var boxChecker = document.getElementById('checkedBox');
-        var newButton = document.getElementById('newVehicle');
-        var updateButton = document.getElementById('updateVehicle');
-        var deleteButton = document.getElementById('deleteVehicle');
+            var boxChecker = document.getElementById('checkedBox');
+            var newVehicle = document.getElementById('newVehicle');
+            var updateVehicle = document.getElementById('updateVehicle');
+            var deleteVehicle = document.getElementById('deleteVehicle');
 
-        checkedBox.onchange = function () {
+        boxChecker.onchange = function () {
             if (this.checked) {
-                updateButton.disabled = false;
-                deleteButton.disabled = false;
-                newButton.disabled = true;
-            } else {
-                updateButton.disabled = true;
-                deleteButton.disabled = true;
-                newButton.disabled = false;
-            }
-        };
+                    updateVehicle.disabled = false;
+                    deleteVehicle.disabled = false;
+                    newButton.disabled = true;
+                } else {
+                    updateVehicle.disabled = true;
+                    deleteVehicle.disabled = true;
+                    newButton.disabled = false;
+                }
+            };
     </script>
 </body>
 </html>
