@@ -170,6 +170,13 @@ namespace BolindersBil.Web.Controllers
             return View();
         }
 
+        [HttpGet]
+        public IActionResult EditVehicle(int vehicleId)
+        {
+            var vehicle = vehicleRepo.Vehicles.FirstOrDefault(x => x.Id.Equals(vehicleId));
 
+
+            return View(vehicle);
+        }
     }
 }
