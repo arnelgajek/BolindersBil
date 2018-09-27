@@ -174,10 +174,7 @@ namespace BolindersBil.Web.Controllers
         public IActionResult EditVehicle(int vehicleId)
         {
             var vehicle = vehicleRepo.Vehicles.FirstOrDefault(x => x.Id.Equals(vehicleId));
-
             
-            
-
             var vm = new EditVehicleViewModel()
             {
                 RegNr = vehicle.RegNr,

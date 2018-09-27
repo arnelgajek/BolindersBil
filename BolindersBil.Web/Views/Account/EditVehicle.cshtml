@@ -58,8 +58,8 @@
         <label asp-for="Body" class="control-label col-sm-2"><strong>Karosstyp:</strong></label>
         <div class="col-sm-10">
             <select asp-for="Body" class="form-control" id="">
-                <option selected>Välj</option>
-                <option>@Model.Body</option>
+                
+                <option selected>@Model.Body</option>
                 @*@foreach (var bodyType in ViewBag.bodyTypes)
                 {
                     <option value="@bodyType">@bodyType</option>
