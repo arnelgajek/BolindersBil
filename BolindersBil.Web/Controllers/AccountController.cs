@@ -174,7 +174,41 @@ namespace BolindersBil.Web.Controllers
         public IActionResult EditVehicle(int vehicleId)
         {
             var vehicle = vehicleRepo.Vehicles.FirstOrDefault(x => x.Id.Equals(vehicleId));
-            
+
+            List<string> bodyType = new List<string>
+            {
+                "Småbil",
+                "Sedan",
+                "Halvkombi",
+                "Kombi",
+                "SUV",
+                "Coupé",
+                "Cab",
+                "Familjebuss",
+                "Yrkesfordon"
+            };
+
+            List<string> gearType = new List<string>
+            {
+                "Automatisk",
+                "Manuell"
+            };
+
+            List<string> fuelType = new List<string>
+            {
+                "Bensin",
+                "Diesel",
+                "El",
+                "Miljöbränsle/Hybrid"
+            };
+
+            List<string> theOffices = new List<string>
+            {
+                "Jönköping",
+                "Värnamo",
+                "Göteborg"
+            };
+
             var vm = new EditVehicleViewModel()
             {
                 RegNr = vehicle.RegNr,
@@ -195,9 +229,28 @@ namespace BolindersBil.Web.Controllers
                 Picture = vehicle.Picture,
                 Leasable = vehicle.Leasable,
                 UpdatedDate = vehicle.UpdatedDate,
-                VehicleAttribute = vehicle.VehicleAttribute
+                VehicleAttribute = vehicle.VehicleAttribute,
+                BodyTypes = bodyType,
+                GearTypes = gearType,
+                FuelTypes = fuelType,
+                Offices = theOffices
             };
+            
             return View(vm);
+        }
+
+        [HttpPost]
+        public IActionResult EditVehicle(EditVehicleViewModel editVehicleViewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                // TODO: save the vehicle in the repo
+                return View("TestVehicleAdded");
+            }
+            else
+            {
+                return View(editVehicleViewModel);
+            }
         }
     }
 }
