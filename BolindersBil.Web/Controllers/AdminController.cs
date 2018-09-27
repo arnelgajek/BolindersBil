@@ -17,10 +17,12 @@ namespace BolindersBil.Web.Controllers
         private IVehicleRepository vehicleRepo;
         private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;
+       
 
 
         public AdminController(IVehicleRepository vehicleRepository, UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
         {
+           
             vehicleRepo = vehicleRepository;
             _userManager = userManager;
             _signInManager = signInManager;

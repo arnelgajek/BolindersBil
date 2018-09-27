@@ -1,5 +1,4 @@
-﻿
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 
 <html>
 <head>
@@ -14,12 +13,21 @@
             height: 100px;
             width: 70%;
         }
-
     </style>
 
 
     <p>In the Index View</p>
     <div class="container-fluid">
+
+
+
+
+        <form asp-controller="Start" asp-action="Search" method="get">
+            <input name="Search" id="Search" />
+            <input type="submit" value="Submit" />
+            <a asp-action="Search">Submit</a>
+        </form>
+
 
 
         <div class="row">
@@ -169,4 +177,3 @@
 
 
 
- 

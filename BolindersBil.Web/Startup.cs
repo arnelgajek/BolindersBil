@@ -79,9 +79,12 @@ namespace BolindersBil.Web
                     name: "default",
                     template: "{controller=Start}/{action=Index}/{id?}");
 
+                // Incase we need routing in navbar
                 //routes.MapRoute(
-                //  name: "null",
-                //  template: "{controller=Vehicles}/{action=Cars}/{id?}");
+                //  name: null,
+                //  template: "",
+                //  defaults: new { controller = "Home", action = "Home" }
+                //  );
             });
 
             adminSeeder.CreateAdminAccountIfEmpty();
