@@ -1,13 +1,11 @@
-﻿using Microsoft.AspNetCore.Http;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace BolindersBil.Models
 {
-    public class Vehicle
+    public class EditVehicleViewModel
     {
-        public int Id { get; set; }        
         public string RegNr { get; set; }
         public string Brand { get; set; }
         public string Model { get; set; }
@@ -21,11 +19,12 @@ namespace BolindersBil.Models
         public string Fuel { get; set; }
         public int Horsepower { get; set; }
         public bool Used { get; set; }
-        public virtual Office OfficeId { get; set; }
+
+        public Office OfficeId { get; set; }
         public string Office { get; set; }
         public byte[] Picture { get; set; }
         public bool Leasable { get; set; }
-        public DateTime AddedDate { get; set; }
+
         public DateTime UpdatedDate { get; set; }
         public string VehicleAttribute { get; set; }
     }

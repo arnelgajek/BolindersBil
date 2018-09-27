@@ -27,11 +27,11 @@ namespace BolindersBil.Repositories
         }
 
 
-        // TODO: LIST ALL VEHICLES
+        // List all the Vehicles from DB.
         public IEnumerable<Vehicle> GetAllVehicles()
         {
             return Vehicles;
         }
-
+        
     }
 }

@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BolindersBil.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20180924155911_initial")]
+    [Migration("20180926124005_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -74,7 +74,9 @@ namespace BolindersBil.Data.Migrations
 
                     b.Property<string>("ModelDescription");
 
-                    b.Property<int?>("OfficeId");
+                    b.Property<string>("Office");
+
+                    b.Property<int?>("OfficeIdId");
 
                     b.Property<byte[]>("Picture");
 
@@ -92,7 +94,7 @@ namespace BolindersBil.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("OfficeId");
+                    b.HasIndex("OfficeIdId");
 
                     b.ToTable("Vehicles");
                 });
@@ -260,9 +262,9 @@ namespace BolindersBil.Data.Migrations
 
             modelBuilder.Entity("BolindersBil.Models.Vehicle", b =>
                 {
-                    b.HasOne("BolindersBil.Models.Office", "Office")
+                    b.HasOne("BolindersBil.Models.Office", "OfficeId")
                         .WithMany("Vehicles")
-                        .HasForeignKey("OfficeId");
+                        .HasForeignKey("OfficeIdId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using BolindersBil.Data.DataAccess;
+using BolindersBil.Models;
 using BolindersBil.Repositories;
 using BolindersBil.Web.DataAccess;
 using Microsoft.AspNetCore.Builder;
@@ -32,33 +33,34 @@ namespace BolindersBil.Web
             // Configuration for DB connection.
             var conn = _configuration.GetConnectionString("BolindersBil");
             // Register a service for the DB.
-            services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(conn));
+            services.AddDbContext<ApplicationDbContext>(options => options.UseLazyLoadingProxies().UseSqlServer(conn));
+
+            // Register a service for VehicleRepository
+            services.AddTransient<IVehicleRepository, VehicleRepository>();
 
             // Register a service for Identity.
             services.AddIdentity<IdentityUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
+            // Register the service so the components can access information.
+            services.AddTransient<IVehicleRepository, VehicleRepository>();
+            services.AddTransient<IIdentitySeeder, IdentitySeeder>();
+
             services.Configure<IdentityOptions>(options =>
             {
                 options.Password.RequireDigit = false;
                 options.Password.RequireLowercase = false;
                 options.Password.RequireNonAlphanumeric = false;
-                options.Password.RequiredLength = 5;
-                options.SignIn.RequireConfirmedEmail = false;
-                options.User.RequireUniqueEmail = false;
+                options.Password.RequireUppercase = false;
+                options.Password.RequiredLength = 3;
             });
-                
-
-            // Register the service so the components can access information.
-            services.AddTransient<IVehicleRepository, VehicleRepository>();
-            services.AddTransient<IAdminSeeder, AdminSeeder>();
 
             services.AddMvc();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ApplicationDbContext ctx, IAdminSeeder adminSeeder)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ApplicationDbContext ctx, IIdentitySeeder identitySeeder)
         {
             if (env.IsDevelopment())
             {
@@ -87,7 +89,9 @@ namespace BolindersBil.Web
                 //  );
             });
 
-            adminSeeder.CreateAdminAccountIfEmpty();
+            var runIdentitySeed = Task.Run(async () => await identitySeeder.CreateAdminAccountIfEmpty()).Result;
+
+            //identitySeeder.CreateAdminAccountIfEmpty();
             Seed.FillIfEmpty(ctx);
             
         }

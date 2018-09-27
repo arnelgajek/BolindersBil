@@ -1,0 +1,68 @@
+﻿@model IEnumerable<Vehicle>
+
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<h1 style="text-align:center; margin-top:20px; margin-bottom:100px">Welcome Admin!</h1>
+<!-- Denna information finns i PPT 5, sida 81 och framåt: -->
+<!-- The editing section on the top of the page: -->
+
+<div class="container">
+    <div class="float-sm-right" style="margin-bottom:10px">
+        <a asp-controller="Account" asp-action="AddNewVehicle" class="btn btn-success" name="newVehicle" id="newVehicle">New</a>
+        <button class="btn btn-danger" type="submit" name="deleteVehicle" @*disabled="disabled" *@ id="deleteVehicle">Delete</button>
+    </div>
+
+    @foreach (var v in Model)
+    {
+        <!-- The layout for all the vehicles presented on the Admin-page: -->
+        <table class="table table-bordered table-striped">
+            <tr>
+                <td><input type="checkbox" id="checkedBox" value="@v.Id" /> @v.Brand @v.Model, @v.RegNr</td>
+                <td class="text-right">
+                    <form asp-action="Delete" method="post">
+                        <a asp-controller="Account"
+                           asp-action="EditVehicle"
+                           asp-route-vehicleId="@v.Id"
+                           class="btn btn-sm btn-warning">
+                            Update
+                        </a>
+                    </form>
+                </td>
+            </tr>
+        </table>
+    }
+</div>
+
+<div class="container" style="margin-bottom:10px">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="float-sm-right">
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <a asp-controller="Account" asp-action="Logout" class="btn btn-danger">Logga ut</a>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Enable/Disable the buttons: -->
+<script>
+    var boxChecker = document.getElementById('checkedBox');
+    var newVehicle = document.getElementById('newVehicle');
+    var updateVehicle = document.getElementById('updateVehicle');
+    var deleteVehicle = document.getElementById('deleteVehicle');
+
+    boxChecker.onchange = function () {
+        if (this.checked) {
+            updateVehicle.disabled = false;
+            deleteVehicle.disabled = false;
+            newButton.disabled = true;
+        } else {
+            updateVehicle.disabled = true;
+            deleteVehicle.disabled = true;
+            newButton.disabled = false;
+        }
+    };
+</script>

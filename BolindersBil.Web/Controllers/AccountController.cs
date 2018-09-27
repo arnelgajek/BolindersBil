@@ -12,33 +12,81 @@ using System.Threading.Tasks;
 
 namespace BolindersBil.Web.Controllers
 {
-    public class AdminController : Controller
+    public class AccountController : Controller
     {
-        private IVehicleRepository vehicleRepo;
         private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;
-       
+        private IVehicleRepository vehicleRepo;
 
+        public AccountController(IVehicleRepository vehicleRepository, UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
 
-        public AdminController(IVehicleRepository vehicleRepository, UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
         {
-           
-            vehicleRepo = vehicleRepository;
             _userManager = userManager;
             _signInManager = signInManager;
+            vehicleRepo = vehicleRepository;
         }
 
-       
-        // TODO: maybe move all the vehicle repo DI and CRUD logic in a Vehicle controller instead.
+        [AllowAnonymous]
+        public IActionResult Index()
+        {
+            // Checks if the user is authenticated/signed in and redirects him/her to Admin: 
+            if (User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Admin");
+            }
+            else
+            {
+                // Otherwise, maybe return to an error page?
+                return View();
+            }
+        }
+
+        // Checks if the password matches to the account, redirects the user to Admin:
+        [AllowAnonymous]
+        public async Task<IActionResult> Login(LoginViewModel vm)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = await _userManager.FindByEmailAsync(vm.UserName);
+                if (user != null)
+                {
+                    await _signInManager.SignOutAsync();
+                    if ((await _signInManager.PasswordSignInAsync(user, vm.Password, false, false)).Succeeded)
+                    {
+                        return RedirectToAction("Admin");
+                    }
+                }
+            }
+            return View("Index", vm);
+        }
+
+
+        [Authorize]
+        public IActionResult Admin()
+        {
+            // To get the list of all Vehicles from the repo.
+            var getVehicles = vehicleRepo.GetAllVehicles();
+
+            return View(getVehicles);
+        }
+
+        // Sends the user back to the login page:
+        public async Task<IActionResult> Logout()
+        {
+            await _signInManager.SignOutAsync();
+            return RedirectToAction(nameof(Index));
+        }
+
+        // ****TODO: maybe move all the vehicle repo DI and CRUD logic in a Vehicle controller instead.
         [HttpGet]
         public IActionResult AddNewVehicle()
         {
+            // *****TODO: Fix the year 2018 from showing twice in the dropdown.
             // This list is used as the dropdown option in the "Årsmodell" input.
             List<object> years = new List<object>();
             var currentYear = DateTime.Now.Year;
             var theFuture = currentYear + 1;
             years.Add(theFuture);
-            years.Add(currentYear);
             var stopYear = 1980;
             for (int y = currentYear; y >= stopYear; y--)
             {
@@ -124,60 +172,34 @@ namespace BolindersBil.Web.Controllers
             return View();
         }
 
-        
-
-        [AllowAnonymous]
         [HttpGet]
-        public IActionResult Index()
+        public IActionResult EditVehicle(int vehicleId)
         {
-            // Checks if the user is authenticated/signed in and redirects him/her to Admin: 
-            if (User.Identity.IsAuthenticated)
+            var vehicle = vehicleRepo.Vehicles.FirstOrDefault(x => x.Id.Equals(vehicleId));
+            
+            var vm = new EditVehicleViewModel()
             {
-                return View("Admin");
-            }
-            else
-            {
-                // Otherwise, maybe return to an error page?
-                return View();
-            }
+                RegNr = vehicle.RegNr,
+                Brand = vehicle.Brand,
+                Model = vehicle.Model,
+                ModelDescription = vehicle.ModelDescription,
+                Year = vehicle.Year,
+                Kilometer = vehicle.Kilometer,
+                Price = vehicle.Price,
+                Body = vehicle.Body,
+                Color = vehicle.Color,
+                Gearbox = vehicle.Gearbox,
+                Fuel = vehicle.Fuel,
+                Horsepower = vehicle.Horsepower,
+                Used = vehicle.Used,
+                Office = vehicle.Office,
+                OfficeId = vehicle.OfficeId,
+                Picture = vehicle.Picture,
+                Leasable = vehicle.Leasable,
+                UpdatedDate = vehicle.UpdatedDate,
+                VehicleAttribute = vehicle.VehicleAttribute
+            };
+            return View(vm);
         }
-
-        // Checks if the password matches to the account, redirects the user to Admin:
-        [HttpPost]
-        [AllowAnonymous]
-        public async Task<IActionResult> Login(AdminViewModel vm)
-        {
-            if (ModelState.IsValid)
-            {
-                var user = await _userManager.FindByEmailAsync(vm.UserName);
-                if (user != null)
-                {
-                    await _signInManager.SignOutAsync();
-                    if ((await _signInManager.PasswordSignInAsync(user, vm.Password, false, false)).Succeeded)
-                        {
-                        return RedirectToAction("Index", "Admin");
-                        }
-                }
-            }
-            return View("Index", vm);
-        }
-
-        public IActionResult Admin()
-        {
-            // To get th list of all Vehicles from the repo.
-            var getVehicles = vehicleRepo.GetAllVehicles();
-
-            return View(getVehicles);
-        }
-
-
-        // Sends the user back to the login page:
-        [HttpDelete]
-        public async Task<IActionResult> Logout()
-        {
-            await _signInManager.SignOutAsync();
-            return RedirectToAction(nameof(Login));
-        }
-
     }
 }

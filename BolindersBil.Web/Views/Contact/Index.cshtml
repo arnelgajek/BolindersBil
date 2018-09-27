@@ -1,0 +1,63 @@
+﻿
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <h2>In the contact view!</h2>
+    <div class="container">
+        <div class="row">
+
+            <div class="card-deck">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title">Bolinders bil Jönköping</h5>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text"><strong>Telefonnummer: </strong>123-456 78 90</p>
+                        <p class="card-text"><strong>E-mail: </strong>timmie.bark@hotmail.com</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title">Bolinders bil Värnamo</h5>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text"><strong>Telefonnummer: </strong>098-765 43 21</p>
+                        <p class="card-text"><strong>E-mail: </strong>mrthefailman@live.com</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title">Bolinders bil Göteborg</h5>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text"><strong>Telefonnummer: </strong>Saknar telefonnummer ATM</p>
+                        <p class="card-text"><strong>E-mail: </strong>Saknar E-mail ATM</p>
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+
+        @*GoogleMaps API*@
+        <div class="row">
+            <div class="col-5">
+                <div id="Map" style="height: 400px; width: 100%">
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <script src="~/js/MapsApi.js"></script>
+    <script async defer 
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDhSorLtndoX90lRDncEHxwJpa_YSdgjpA&callback=initMap">
+    </script>
+</body>
+</html>
