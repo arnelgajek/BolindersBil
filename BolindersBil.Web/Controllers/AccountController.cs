@@ -175,8 +175,32 @@ namespace BolindersBil.Web.Controllers
         {
             var vehicle = vehicleRepo.Vehicles.FirstOrDefault(x => x.Id.Equals(vehicleId));
 
+            
+            
 
-            return View(vehicle);
+            var vm = new EditVehicleViewModel()
+            {
+                RegNr = vehicle.RegNr,
+                Brand = vehicle.Brand,
+                Model = vehicle.Model,
+                ModelDescription = vehicle.ModelDescription,
+                Year = vehicle.Year,
+                Kilometer = vehicle.Kilometer,
+                Price = vehicle.Price,
+                Body = vehicle.Body,
+                Color = vehicle.Color,
+                Gearbox = vehicle.Gearbox,
+                Fuel = vehicle.Fuel,
+                Horsepower = vehicle.Horsepower,
+                Used = vehicle.Used,
+                Office = vehicle.Office,
+                OfficeId = vehicle.OfficeId,
+                Picture = vehicle.Picture,
+                Leasable = vehicle.Leasable,
+                UpdatedDate = vehicle.UpdatedDate,
+                VehicleAttribute = vehicle.VehicleAttribute
+            };
+            return View(vm);
         }
     }
 }
