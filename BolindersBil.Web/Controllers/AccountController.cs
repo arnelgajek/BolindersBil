@@ -163,6 +163,14 @@ namespace BolindersBil.Web.Controllers
                     }
                 }
                 addNewVehicle.AddedDate = DateTime.Now;
+
+                //var jkpg = addNewVehicle.OfficeId.OfficeCode;
+                //if (addNewVehicle.Office == "Jönköping")
+                //{
+                //    jkpg = "BB1";
+                //    addNewVehicle.OfficeId.OfficeCode= jkpg;
+                //}
+
                 vehicleRepo.AddNewVehicle(addNewVehicle);
                 return View("TestVehicleAdded");
             }
@@ -244,7 +252,8 @@ namespace BolindersBil.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                // TODO: save the vehicle in the repo
+                editVehicleViewModel.UpdatedDate = DateTime.Now;
+                vehicleRepo.UpdateVehicle(editVehicleViewModel.Vehicle);
                 return View("TestVehicleAdded");
             }
             else
