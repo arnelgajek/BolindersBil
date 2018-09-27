@@ -61,6 +61,7 @@ namespace BolindersBil.Web.Controllers
             return View("Index", vm);
         }
 
+        [Authorize]
         public IActionResult Admin()
         {
             // To get the list of all Vehicles from the repo.
