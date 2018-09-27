@@ -140,7 +140,7 @@
             </div>
         </div>
 
-        @* TODO: fix this picture file attachment *@
+        @* TODO: fix so you can visually see the files you have uploaded. *@
         <div class="form-group">
             <label asp-for="Picture" class="control-label col-sm-2"><strong>Bilder:</strong></label>
             <div class="col-sm-10">
@@ -169,6 +169,7 @@
         <div class="form-group">
             <div class="col-sm-10">
                 <button class="btn btn-primary" type="submit">Add Vehicle</button>
+                <a asp-controller="Account" asp-action="Admin" class="btn btn-secondary">Cancel</a>
             </div>
         </div>
 
