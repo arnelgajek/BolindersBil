@@ -11,7 +11,7 @@
     <div class="float-sm-right" style="margin-bottom:10px">
         <a asp-controller="Account" asp-action="AddNewVehicle" class="btn btn-success" name="newVehicle" id="newVehicle">New</a>
         <a asp-controller="Account" asp-action="AddNewVehicle" class="btn btn-warning" name="updateVehicle" @*disabled="disabled" *@ id="updateVehcle">Update</a>
-        <button class="btn btn-danger" type="submit" name="deleteVehicle" @*disabled="disabled" *@ id="deleteVehicle">Delete</button>
+        <form asp-action="DeleteVehicle" method="delete"></form>
     </div>
 
     @foreach (var v in Model)

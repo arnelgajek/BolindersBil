@@ -17,6 +17,7 @@ namespace BolindersBil.Web.Controllers
         private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;
         private IVehicleRepository vehicleRepo;
+        
 
         public AccountController(IVehicleRepository vehicleRepository, UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
 
@@ -173,5 +174,10 @@ namespace BolindersBil.Web.Controllers
 
             return View();
         }
+
+        //public Vehicle DeleteVehicle(int vehicleId)
+        //{
+        //    var ctxVehicle = ctx.Vehicles.FirstOrDefault(x => x.Id.Equals(vehicleId));
+        //}
     }
 }
