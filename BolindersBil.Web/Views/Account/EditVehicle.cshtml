@@ -5,7 +5,9 @@
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<i>EditVehicleForm</i>
+<div style="text-align:center; margin-top:20px; margin-bottom:25px">
+    <h2><strong>Edit Vehicle: </strong><small><i>@Model.RegNr</i></small></h2>
+</div>
 <hr />
 
 <form asp-action="EditVehicle" method="post" enctype="multipart/form-data" class="form-horizontal">
