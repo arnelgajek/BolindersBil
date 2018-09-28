@@ -1,50 +1,9 @@
 ﻿@model ContactFormViewModel
-@{ 
-    var test = Model;
-}
-<!DOCTYPE html>
+@{ ViewBag.title = "Kontakt";}
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Kontakt</title>
-</head>
-<body>
     <div class="container">
         <div class="row" style="margin-bottom: 2em; margin-top: 1.5em;">
-
-            <div class="card-deck">
-                <div class="card">
-                    <div class="card-header">
-                        <h5 class="card-title">Bolinders bil Jönköping</h5>
-                    </div>
-                    <div class="card-body">
-                        <p class="card-text"><strong>Telefonnummer: </strong>123-456 78 90</p>
-                        <p class="card-text"><strong>E-mail: </strong>timmie.bark@hotmail.com</p>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-header">
-                        <h5 class="card-title">Bolinders bil Värnamo</h5>
-                    </div>
-                    <div class="card-body">
-                        <p class="card-text"><strong>Telefonnummer: </strong>098-765 43 21</p>
-                        <p class="card-text"><strong>E-mail: </strong>mrthefailman@live.com</p>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-header">
-                        <h5 class="card-title">Bolinders bil Göteborg</h5>
-                    </div>
-                    <div class="card-body">
-                        <p class="card-text"><strong>Telefonnummer: </strong>Saknar telefonnummer ATM</p>
-                        <p class="card-text"><strong>E-mail: </strong>Saknar E-mail ATM</p>
-                    </div>
-                </div>
-            </div>
-
-
-
+            <partial name="ContactInfoPartialView" model="Model.Offices" />
         </div>
 
         <div class="row">
@@ -56,7 +15,6 @@
             </div>
             
             @*ContactForm*@
-
             <div class="col-5 offset-1">
                 <form asp-action="SendTheMail" method="post" name="mail">
                     <div class="form-group">
@@ -100,7 +58,6 @@
                     
                 </form>
             </div>
-
         </div>
 
     </div>
@@ -108,5 +65,4 @@
     <script async defer 
             src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDhSorLtndoX90lRDncEHxwJpa_YSdgjpA&callback=initMap">
     </script>
-</body>
-</html>
+

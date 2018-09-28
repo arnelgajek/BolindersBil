@@ -20,7 +20,7 @@ namespace BolindersBil.Repositories
 
         Vehicle BulkDeleteVehicle(int vehicleId);
 
-        IEnumerable<Vehicle> Search(string searchString);
+        IEnumerable<Vehicle> Search(string searchString, bool Used);
 
         void UpdateVehicle(EditVehicleViewModel v);
     }

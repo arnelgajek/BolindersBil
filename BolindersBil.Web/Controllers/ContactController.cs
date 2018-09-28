@@ -5,21 +5,25 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using System.Net.Mail;
 using BolindersBil.Models;
+using BolindersBil.Repositories;
 
 namespace BolindersBil.Web.Controllers
 {
     public class ContactController : Controller
     {
+
+        private IOfficeRepository officeRepo;
+        public ContactController(IOfficeRepository officeRepository)
+        {
+            officeRepo = officeRepository;
+        }
         public IActionResult Index()
         {
-            return View();
+            var offices = officeRepo.GetAllOffices();
+            var vm = new ContactFormViewModel();
+            vm.Offices = offices;
+            return View(vm);
         }
-
-        //[HttpGet]
-        //public IActionResult SendTheMail()
-        //{
-        //    return View("Index");
-        //}
         
         [HttpPost]
         public IActionResult SendTheMail(ContactFormViewModel contactFormViewModel)
@@ -64,19 +68,9 @@ namespace BolindersBil.Web.Controllers
             {
                 smtpClient.Send(message);
             }
-
-            //return View("Index", new ContactFormViewModel());
+            
             return RedirectToAction("Index");
-            //var message = new MailMessage("from@wu18.com", "to@wu18.com")
-            //{                
-            //    IsBodyHtml = true
-            //};
-
-
-
-
-
+            
         }
-
     }
 }

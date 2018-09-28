@@ -20,7 +20,6 @@ namespace BolindersBil.Web.Controllers
         
 
         public AccountController(IVehicleRepository vehicleRepository, UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
-
         {
             vehicleRepo = vehicleRepository;
             _userManager = userManager;
@@ -167,6 +166,8 @@ namespace BolindersBil.Web.Controllers
                     }
                 }
                 addNewVehicle.AddedDate = DateTime.Now;
+
+               
 
                 //var jkpg = addNewVehicle.OfficeId.OfficeCode;
                 //if (addNewVehicle.Office == "Jönköping")

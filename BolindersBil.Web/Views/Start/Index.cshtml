@@ -27,18 +27,16 @@
 
         @*Detta är search men behövs kontrollera efter vi är klara med vehicles view*@
         <form asp-controller="Vehicle" asp-action="Search" method="post">
-            <input name="searchString" placeholder="T.ex. Volvo (C30)" />            
+            <input name="searchString" class="col-md-3" placeholder="T.ex. Volvo (C30)" />            
             <button type="submit">Sök</button>
             <div class="input-group-prepend">
                 <div class="input-group-text">
-                    <input type="checkbox" aria-label="Checkbox for following text input">
+                    <input type="radio" name="Used">New Car<br>
                 </div>
-            </div>
-            <div class="input-group-prepend">
                 <div class="input-group-text">
-                    <input type="checkbox" aria-label="Checkbox for following text input">
+                    <input type="radio" name="Used">Used Car<br>
                 </div>
-            </div>
+            </div>           
         </form>
 
 
@@ -143,9 +141,6 @@
         <div class="col">
 
             @{
-                
-            
-
                 var newsApiClient = new NewsApiClient("8a9c9b8aa9bb4c01ab3ea332452176af");
                 var articleResponse = newsApiClient.GetEverything(new EverythingRequest
                 {
