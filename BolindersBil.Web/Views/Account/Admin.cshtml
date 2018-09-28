@@ -10,7 +10,7 @@
 <div class="container">
     <div class="float-sm-right" style="margin-bottom:10px">
         <a asp-controller="Account" asp-action="AddNewVehicle" class="btn btn-success" name="newVehicle" id="newVehicle">New</a>
-        <button class="btn btn-danger" type="submit" name="deleteVehicle" @*disabled="disabled" *@ id="deleteVehicle">Delete</button>
+        <button class="btn btn-danger" type="submit" name="deleteVehicle" id="deleteVehicle">Delete</button>
     </div>
 
     @foreach (var v in Model)
@@ -48,7 +48,7 @@
 </div>
 
 <!-- Enable/Disable the buttons: -->
-<script>
+@*<script>
     var boxChecker = document.getElementById('checkedBox');
     var newVehicle = document.getElementById('newVehicle');
     var updateVehicle = document.getElementById('updateVehicle');
@@ -65,4 +65,4 @@
             newButton.disabled = false;
         }
     };
-</script>
+</script>*@

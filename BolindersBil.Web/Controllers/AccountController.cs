@@ -166,6 +166,8 @@ namespace BolindersBil.Web.Controllers
                 }
                 addNewVehicle.AddedDate = DateTime.Now;
 
+               
+
                 //var jkpg = addNewVehicle.OfficeId.OfficeCode;
                 //if (addNewVehicle.Office == "Jönköping")
                 //{

@@ -5,7 +5,9 @@
     ViewData["Title"] = "Admin - AddNewVehicle";
 }
 
-<i>AddNewVehicleForm</i>
+<div style="text-align:center; margin-top:20px; margin-bottom:25px">
+    <h2><strong>Add Vehicle</strong></h2>
+</div>
 <hr />
 
 <div>
@@ -122,10 +124,18 @@
         <div class="form-group">
             <label asp-for="Used" class="control-label col-sm-2"><strong>Begagnad:</strong></label>
             <div class="col-sm-10">
+                    <label class="check-inline"><input asp-for="Used" type="radio" name="radioOption" value="true">  Ja</label>
+                    <label class="check-inline"><input asp-for="Used" type="radio" name="radioOption" value="false">  Nej</label>
+            </div>
+        </div>
+
+        @*<div class="form-group">
+            <label asp-for="Used" class="control-label col-sm-2"><strong>Begagnad:</strong></label>
+            <div class="col-sm-10">
                 <label class="checkbox-inline"><input asp-for="Used" type="checkbox" value="true">  Ja</label>&nbsp;&nbsp;
                 <label class="checkbox-inline"><input asp-for="Used" type="checkbox" value="false">  Nej</label>
             </div>
-        </div>
+        </div>*@
 
         <div class="form-group">
             <label asp-for="Office" class="control-label col-sm-2"><strong>Anläggning:</strong></label>
