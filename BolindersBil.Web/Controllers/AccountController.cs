@@ -173,12 +173,6 @@ namespace BolindersBil.Web.Controllers
             return View();
         }
 
-<<<<<<< HEAD
-        //public Vehicle DeleteVehicle(int vehicleId)
-        //{
-        //    var ctxVehicle = ctx.Vehicles.FirstOrDefault(x => x.Id.Equals(vehicleId));
-        //}
-=======
         [HttpGet]
         public IActionResult EditVehicle(int vehicleId)
         {
@@ -208,6 +202,21 @@ namespace BolindersBil.Web.Controllers
             };
             return View(vm);
         }
->>>>>>> c2b72124697d87140d6aa8a5d94e086566efe48f
+
+        [HttpPost]
+        public IActionResult DeleteVehicle(int vehicleId)
+        {
+            var deleted = vehicleRepo.DeleteVehicle(vehicleId);
+            if (deleted != null)
+            {
+                // Vehicle was found and not deleted...
+            }
+            else
+            {
+                //TODO
+                // Vehicle was not found - show error
+            }
+            return RedirectToAction(nameof(Index));
+        }
     }
 }
