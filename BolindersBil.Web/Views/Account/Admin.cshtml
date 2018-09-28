@@ -20,14 +20,14 @@
             <tr>
                 <td><input type="checkbox" id="checkedBox" value="@v.Id" /> @v.Brand @v.Model, @v.RegNr</td>
                 <td class="text-right">
-                    <form asp-action="Delete" method="post">
-                        <a asp-controller="Account"
-                           asp-action="EditVehicle"
-                           asp-route-vehicleId="@v.Id"
-                           class="btn btn-sm btn-warning">
-                            Update
-                        </a>
-                    </form>
+
+                    <a asp-controller="Account"
+                       asp-action="EditVehicle"
+                       asp-route-vehicleId="@v.Id"
+                       class="btn btn-sm btn-warning">
+                        Update
+                    </a>
+
                 </td>
             </tr>
         </table>

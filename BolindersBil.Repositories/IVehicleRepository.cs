@@ -16,8 +16,12 @@ namespace BolindersBil.Repositories
 
         IEnumerable<Vehicle> GetAllVehicles();
 
+
         IEnumerable<Vehicle> Search(string searchString);
 
+
+
+        void UpdateVehicle(EditVehicleViewModel v);
 
     }
 }
