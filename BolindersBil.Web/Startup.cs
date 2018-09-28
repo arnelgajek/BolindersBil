@@ -81,6 +81,14 @@ namespace BolindersBil.Web
                     name: "default",
                     template: "{controller=Start}/{action=Index}/{id?}");
 
+                routes.MapRoute(
+                    name: "Contact",
+                    template: "{controller=Contact}/{action=Contact}/{id?}");
+
+                routes.MapRoute(
+                    name: "Vehicle",
+                    template: "{controller=Vehicle}/{action=Vehicle}/{id?}");
+
                 // Incase we need routing in navbar
                 //routes.MapRoute(
                 //  name: null,
