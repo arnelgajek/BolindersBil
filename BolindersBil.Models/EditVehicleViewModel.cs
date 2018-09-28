@@ -30,6 +30,5 @@ namespace BolindersBil.Models
         public List<string> GearTypes { get; set; }
         public List<string> FuelTypes { get; set; }
         public List<string> Offices { get; set; }
-        //public Vehicle Vehicle { get; set; }
     }
 }
