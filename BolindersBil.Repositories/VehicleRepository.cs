@@ -27,7 +27,6 @@ namespace BolindersBil.Repositories
             ctx.SaveChanges();
         }
 
-<<<<<<< HEAD
         // So we can DeleteVEhicles from our DB:
         public Vehicle DeleteVehicle(int vehicleId)
         {
@@ -40,8 +39,6 @@ namespace BolindersBil.Repositories
             return ctxVehicle;
         }
 
-=======
->>>>>>> 2b3542891beeed45f99092c63fba2d4d6bb6fb43
         // List all the Vehicles from DB.
         public IEnumerable<Vehicle> GetAllVehicles()
         {

@@ -252,7 +252,6 @@ namespace BolindersBil.Web.Controllers
         }
 
         [HttpPost]
-<<<<<<< HEAD
         public IActionResult DeleteVehicle(int vehicleId)
         {
             var deleted = vehicleRepo.DeleteVehicle(vehicleId);
@@ -265,8 +264,10 @@ namespace BolindersBil.Web.Controllers
                 //TODO
                 // Vehicle was not found - show error
             }
-            return RedirectToAction(nameof(Index));
-=======
+            return RedirectToAction(nameof(Admin));
+        }
+
+        [HttpPost]
         public IActionResult EditVehicle(EditVehicleViewModel editVehicleViewModel)
         {
             if (ModelState.IsValid)
@@ -280,7 +281,12 @@ namespace BolindersBil.Web.Controllers
                 // TODO: error message here
                 return View(editVehicleViewModel);
             }
->>>>>>> 2b3542891beeed45f99092c63fba2d4d6bb6fb43
+        }
+
+        [HttpPost]
+        public ActionResult DeleteVehicle()
+        {
+            return RedirectToAction("Admin");
         }
     }
 }

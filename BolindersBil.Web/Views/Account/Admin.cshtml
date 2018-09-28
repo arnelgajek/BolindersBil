@@ -3,49 +3,26 @@
 @{
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
+
 <h1 style="text-align:center; margin-top:20px; margin-bottom:100px">Welcome Admin!</h1>
-<!-- Denna information finns i PPT 5, sida 81 och framåt: -->
-<!-- The editing section on the top of the page: -->
 
-<div class="container">
-    <div class="float-sm-right" style="margin-bottom:10px">
-        <a asp-controller="Account" asp-action="AddNewVehicle" class="btn btn-success" name="newVehicle" id="newVehicle">New</a>
-        <a asp-controller="Account" asp-action="EditVehicle" class="btn btn-warning" name="editVehicle" @*disabled="disabled" *@ id="updateVehicle">Update</a>
-        <button type="button" class="btn btn-danger" name="deleteVehicle" id"deleteVehicle" data-toggle="modal" data-target="#deleteModal">Delete</button>
+    <div class="container">
+        <div class="float-sm-right" style="margin-bottom:10px">
+            <a asp-controller="Account" asp-action="AddNewVehicle" class="btn btn-success" name="newVehicle" id="newVehicle">New</a>
+            <button type="button" class="btn btn-warning" name="updateVehicle" id="updateVehicle">Update</button>
+            <button type="button" class="btn btn-danger" name="deleteVehicle" id="deleteVehicle" data-toggle="modal" data-target="#deleteModal">Delete</button>
+        </div>
+
+        @foreach (var v in Model)
+        {
+            <!-- The layout for all the vehicles presented on the Admin-page: -->
+            <table class="table table-bordered table-striped">
+                <tr>
+                    <td><input type="checkbox" name="ID" value="@v.Id" class="custom-checkbox" chkCheckBoxId/> @v.Brand @v.Model, @v.RegNr</td>
+                </tr>
+            </table>
+        }
     </div>
-
-    @foreach (var v in Model)
-    {
-        <!-- The layout for all the vehicles presented on the Admin-page: -->
-        <table class="table table-bordered table-striped">
-            <tr>
-                <td><input type="checkbox" id="checkedBox" value="@v.Id" /> @v.Brand @v.Model, @v.RegNr</td>
-                <td class="text-right">
-<<<<<<< HEAD
-                    <form asp-action="Delete" method="get">
-                        <a asp-controller="Account"
-                           asp-action="EditVehicle"
-                           asp-route-vehicleId="@v.Id"
-                           class="btn btn-sm btn-warning">
-                            Update
-                        </a>
-                        <input type="hidden" name="vehicleId" value="@v.Id" />
-                    </form>
-=======
-
-                    <a asp-controller="Account"
-                       asp-action="EditVehicle"
-                       asp-route-vehicleId="@v.Id"
-                       class="btn btn-sm btn-warning">
-                        Update
-                    </a>
-
->>>>>>> 2b3542891beeed45f99092c63fba2d4d6bb6fb43
-                </td>
-            </tr>
-        </table>
-    }
-</div>
 
 <!-- LogOut-button: -->
 <div class="container" style="margin-bottom:10px">
@@ -66,7 +43,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title text-center" id="deleteModalLabel">Are you sure that you want to delete?</h5>
+                <h5 class="modal-title mx-auto" id="deleteModalLabel">Are you sure that you want to delete?</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -76,33 +53,8 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-                <a asp-controller="Account" asp-action="DeleteVehicle" asp-route-vehicleId="@Model.Id" method="post" class="btn btn-danger" name="deleteVehicle" @*disabled="disabled" *@ id="deleteVehicle">Delete</a>
+                <button type="submit" value="Delete" class="btn btn-danger">Delete</button>
             </div>
         </div>
     </div>
 </div>
-
-
-<!-- Enable/Disable the buttons: -->
-<script>
-        //var boxChecker = document.getElementById('checkedBox');
-        //var newVehicle = document.getElementById('newVehicle');
-        //var updateVehicle = document.getElementById('updateVehicle');
-        //var deleteVehicle = document.getElementById('deleteVehicle');
-
-        //boxChecker.onchange = function () {
-        //    if (this.checked) {
-        //        updateVehicle.disabled = false;
-        //        deleteVehicle.disabled = false;
-        //        newButton.disabled = true;
-        //    } else {
-        //        updateVehicle.disabled = true;
-        //        deleteVehicle.disabled = true;
-        //        newButton.disabled = false;
-        //    }
-        //};
-
-        //$('#deleteModal').on('shown.bs.modal', function () {
-        //    $('#myInput').trigger('focus');
-        //});
-</script>
