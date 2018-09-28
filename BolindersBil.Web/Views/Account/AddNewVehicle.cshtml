@@ -153,13 +153,9 @@
         @* TODO: fix so you can visually see the files you have uploaded. *@
         <div class="form-group">
             <label asp-for="Picture" class="control-label col-sm-2"><strong>Bilder:</strong></label>
-
             <div class="col-sm-10">
-                <label class="custom-file-label col-sm-6">Välj fil</label>
-                <input asp-for="Picture" type="file" id="files" class="custom-file-input" multiple>
-                <input id="btnUploadFile" type="button" value="Upload File"/>
+                <input asp-for="Picture" type="file" id="files" class="form-control-file" multiple>
             </div>
-
         </div>
 
         <div class="form-group">
@@ -187,3 +183,42 @@
     </form>
 </div>
 
+<script type="text/javascript">
+
+    //function showPreview(input) {
+
+    //    if (input.files && input.files[0]) {
+
+    //        var reader = new FileReader();
+    //        reader.onload = function (e) {
+    //            $('#imgpreview').css('visibility', 'visible');
+    //            $('#imgpreview').attr('src', e.target.result);
+    //        }
+    //        reader.readAsDataURL(input.files[0]);
+    //    }
+
+    //}
+
+
+
+    //$(document).ready(function () {
+
+    //    $("#btnUploadFile").on('click', function () {
+    //        var data = new FormData();
+    //        var files = $("#files").get(0).files;
+    //        // Adding the uploaded image content to the form data collection (data variable).
+    //        if (files.length > 0) {
+    //            data.append("UploadedImage", files[0]);
+    //        }
+    //        var ajaxRequest = $.ajax({
+    //            type: "Post",
+    //            url: "Account/AddNewVehicle",
+    //            contentType: false,
+    //            processData: false,
+    //            data: data
+    //        });
+    //        ajaxRequest.done(function () { });
+    //    });
+
+    //});
+</script>
