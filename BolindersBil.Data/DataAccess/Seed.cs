@@ -66,7 +66,7 @@ namespace BolindersBil.Web.DataAccess
                     Year = 1985,
                     Kilometer = 123,
                     Price = 23999.99,
-                    Body = "kombi",
+                    Body = "Kombi",
                     Color = "Röd",
                     Gearbox = "Manuell",
                     Fuel = "Bensin",

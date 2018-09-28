@@ -11,7 +11,7 @@
 <hr />
 
 <form asp-action="EditVehicle" method="post" enctype="multipart/form-data" class="form-horizontal">
-
+    <input type="hidden" value="@Model.Id" id="id" name="id" />
     <div class="form-group">
         <label asp-for="RegNr" class="control-label col-sm-2"><strong>Registreringsnummer:</strong></label>
         <div class="col-sm-10">
@@ -58,12 +58,11 @@
         <label asp-for="Body" class="control-label col-sm-2"><strong>Karosstyp:</strong></label>
         <div class="col-sm-10">
             <select asp-for="Body" class="form-control" id="">
-                
                 <option selected>@Model.Body</option>
-                @*@foreach (var bodyType in ViewBag.bodyTypes)
+                @foreach (var b in Model.BodyTypes)
                 {
-                    <option value="@bodyType">@bodyType</option>
-                }*@
+                    <option value="@b">@b</option>
+                }
             </select>
         </div>
     </div>
@@ -75,31 +74,31 @@
         </div>
     </div>
 
-    @*<div class="form-group">
+    <div class="form-group">
         <label asp-for="Gearbox" class="control-label col-sm-2"><strong>Växellådstyp:</strong></label>
         <div class="col-sm-10">
             <select asp-for="Gearbox" class="form-control" id="">
-                <option selected>Välj</option>
-                @foreach (var gear in ViewBag.gears)
+                <option selected>@Model.Gearbox</option>
+                @foreach (var g in Model.GearTypes)
                 {
-                    <option value="@gear">@gear</option>
+                    <option value="@g">@g</option>
                 }
             </select>
         </div>
-    </div>*@
+    </div>
 
-    @*<div class="form-group">
+    <div class="form-group">
         <label asp-for="Fuel" class="control-label col-sm-2"><strong>Bränsletyp:</strong></label>
         <div class="col-sm-10">
             <select asp-for="Fuel" class="form-control" id="">
-                <option selected>Välj</option>
-                @foreach (var fuelType in ViewBag.fuelTypes)
+                <option selected>@Model.Fuel</option>
+                @foreach (var f in Model.FuelTypes)
                 {
-                    <option value="@fuelType">@fuelType</option>
+                    <option value="@f">@f</option>
                 }
             </select>
         </div>
-    </div>*@
+    </div>
 
     <div class="form-group">
         <label asp-for="Horsepower" class="control-label col-sm-2"><strong>Hästkrafter:</strong></label>
@@ -116,18 +115,18 @@
         </div>
     </div>
 
-    @*<div class="form-group">
+    <div class="form-group">
         <label asp-for="Office" class="control-label col-sm-2"><strong>Anläggning:</strong></label>
         <div class="col-sm-10">
             <select asp-for="Office" class="form-control" id="">
-                <option selected>Välj</option>
-                @foreach (var office in ViewBag.offices)
+                <option selected>@Model.Office</option>
+                @foreach (var o in Model.Offices)
                 {
-                    <option value="@office">@office</option>
+                    <option value="@o">@o</option>
                 }
             </select>
         </div>
-    </div>*@
+    </div>
 
     @* TODO: fix so you can visually see the files you have uploaded. *@
     <div class="form-group">
