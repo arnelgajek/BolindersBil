@@ -19,7 +19,6 @@ namespace BolindersBil.Web.Controllers
         private IVehicleRepository vehicleRepo;
 
         public AccountController(IVehicleRepository vehicleRepository, UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
-
         {
             _userManager = userManager;
             _signInManager = signInManager;
