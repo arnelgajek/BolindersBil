@@ -17,8 +17,13 @@
     <p>This is the Vehicle Index page!</p>
 
     @foreach (var item in Model)
-    {   
-       
+    {
+
+        if (item.Used)
+        {
+
+        
+
          <div class="col-md-4">
             <div class="thumbnail">
             <img src="@item.Picture" data-holder-rendered="true" style="height: 150px; width: 50%; display: block;">
@@ -28,13 +33,14 @@
                 <p>@item.Brand</p>
                 <p>@item.Color</p>
                 <p>@item.Gearbox</p>
+                <p>@item.Used</p>
             </div>
            </div>
           </div>
 
-
-
         }
+
+    }
 
 
 </body>

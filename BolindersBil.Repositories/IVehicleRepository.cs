@@ -22,7 +22,7 @@ namespace BolindersBil.Repositories
         IEnumerable<Vehicle> GetAllVehicles();
 
 
-        IEnumerable<Vehicle> Search(string searchString);
+        IEnumerable<Vehicle> Search(string searchString, bool Used);
 
 
 
