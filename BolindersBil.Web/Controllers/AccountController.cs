@@ -17,10 +17,12 @@ namespace BolindersBil.Web.Controllers
         private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;
         private IVehicleRepository vehicleRepo;
+        
 
         public AccountController(IVehicleRepository vehicleRepository, UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
 
         {
+            vehicleRepo = vehicleRepository;
             _userManager = userManager;
             _signInManager = signInManager;
             vehicleRepo = vehicleRepository;
@@ -253,6 +255,22 @@ namespace BolindersBil.Web.Controllers
         }
 
         [HttpPost]
+        public IActionResult DeleteVehicle(int vehicleId)
+        {
+            var deleted = vehicleRepo.DeleteVehicle(vehicleId);
+            if (deleted != null)
+            {
+                // Vehicle was found and not deleted...
+            }
+            else
+            {
+                //TODO
+                // Vehicle was not found - show error
+            }
+            return RedirectToAction(nameof(Admin));
+        }
+
+        [HttpPost]
         public IActionResult EditVehicle(EditVehicleViewModel editVehicleViewModel)
         {
             if (ModelState.IsValid)
@@ -266,6 +284,12 @@ namespace BolindersBil.Web.Controllers
                 // TODO: error message here
                 return View(editVehicleViewModel);
             }
+        }
+
+        [HttpPost]
+        public ActionResult DeleteVehicle()
+        {
+            return RedirectToAction("Admin");
         }
     }
 }
