@@ -21,6 +21,7 @@
             <tr>
                 <td><input type="checkbox" id="checkedBox" value="@v.Id" /> @v.Brand @v.Model, @v.RegNr</td>
                 <td class="text-right">
+<<<<<<< HEAD
                     <form asp-action="Delete" method="get">
                         <a asp-controller="Account"
                            asp-action="EditVehicle"
@@ -30,6 +31,16 @@
                         </a>
                         <input type="hidden" name="vehicleId" value="@v.Id" />
                     </form>
+=======
+
+                    <a asp-controller="Account"
+                       asp-action="EditVehicle"
+                       asp-route-vehicleId="@v.Id"
+                       class="btn btn-sm btn-warning">
+                        Update
+                    </a>
+
+>>>>>>> 2b3542891beeed45f99092c63fba2d4d6bb6fb43
                 </td>
             </tr>
         </table>
