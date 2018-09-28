@@ -285,8 +285,16 @@ namespace BolindersBil.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult DeleteVehicle()
+        public IActionResult DeleteVehicle()
         {
+            // TODO: Convert into a string, bring the Id from the unique vehicle selected with the checkbox using jQuery.
+            return RedirectToAction("Admin");
+        }
+
+        [HttpPost]
+        public IActionResult BulkDelete()
+        {
+            // TODO: Convert into a string, bring the Id from the unique vehicle selected with the checkbox using jQuery.
             return RedirectToAction("Admin");
         }
     }
