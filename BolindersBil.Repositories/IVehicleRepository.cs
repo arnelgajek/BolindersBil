@@ -16,8 +16,14 @@ namespace BolindersBil.Repositories
 
         IEnumerable<Vehicle> GetAllVehicles();
 
+        Vehicle DeleteVehicle(int vehicleId);
+
+
+        IEnumerable<Vehicle> GetAllVehicles();
+
 
         IEnumerable<Vehicle> Search(string searchString);
+
 
 
 
