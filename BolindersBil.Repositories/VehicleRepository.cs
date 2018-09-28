@@ -34,7 +34,7 @@ namespace BolindersBil.Repositories
         }
         
         // Update(Edit) the vehicle. 
-        public void UpdateVehicle(Vehicle v)
+        public void UpdateVehicle(EditVehicleViewModel v)
         {
             //ctx.AttachRange(v);
             var ctxVehicle = ctx.Vehicles.FirstOrDefault(x => x.Id.Equals(v.Id));
@@ -60,7 +60,7 @@ namespace BolindersBil.Repositories
                 ctxVehicle.UpdatedDate = v.UpdatedDate;
                 ctxVehicle.VehicleAttribute = v.VehicleAttribute;
             }
-           
+            //ctx.Update(ctxVehicle);
             ctx.SaveChanges();
         }
     }

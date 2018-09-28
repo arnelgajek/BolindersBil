@@ -221,6 +221,7 @@ namespace BolindersBil.Web.Controllers
 
             var vm = new EditVehicleViewModel()
             {
+                Id = vehicle.Id,
                 RegNr = vehicle.RegNr,
                 Brand = vehicle.Brand,
                 Model = vehicle.Model,
@@ -255,11 +256,12 @@ namespace BolindersBil.Web.Controllers
             if (ModelState.IsValid)
             {
                 editVehicleViewModel.UpdatedDate = DateTime.Now;
-                vehicleRepo.UpdateVehicle(editVehicleViewModel.Vehicle);
+                vehicleRepo.UpdateVehicle(editVehicleViewModel);
                 return View("TestVehicleAdded");
             }
             else
             {
+                // TODO: error message here
                 return View(editVehicleViewModel);
             }
         }

@@ -6,6 +6,7 @@ namespace BolindersBil.Models
 {
     public class EditVehicleViewModel
     {
+        public int Id { get; set; }
         public string RegNr { get; set; }
         public string Brand { get; set; }
         public string Model { get; set; }
@@ -29,6 +30,6 @@ namespace BolindersBil.Models
         public List<string> GearTypes { get; set; }
         public List<string> FuelTypes { get; set; }
         public List<string> Offices { get; set; }
-        public Vehicle Vehicle { get; set; }
+        //public Vehicle Vehicle { get; set; }
     }
 }

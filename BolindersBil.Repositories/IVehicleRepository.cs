@@ -13,6 +13,6 @@ namespace BolindersBil.Repositories
 
         void AddNewVehicle(Vehicle vehicle);
         IEnumerable<Vehicle> GetAllVehicles();
-        void UpdateVehicle(Vehicle v);
+        void UpdateVehicle(EditVehicleViewModel v);
     }
 }
