@@ -1,9 +1,13 @@
-﻿
+﻿@model BolindersBil.Models.VehiclesSearchViewModel
+
 <!DOCTYPE html>
 
 <html>
 <head>
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8" />
+
+
     <title>Home</title>
 </head>
 <body>
@@ -14,12 +18,31 @@
             height: 100px;
             width: 70%;
         }
-
     </style>
 
 
     <p>In the Index View</p>
     <div class="container-fluid">
+
+
+        @*Detta är search men behövs kontrollera efter vi är klara med vehicles view*@
+        <form asp-controller="Vehicle" asp-action="Search" method="post">
+            <input name="searchString" placeholder="T.ex. Volvo (C30)" />            
+            <button type="submit">Sök</button>
+            <div class="input-group-prepend">
+                <div class="input-group-text">
+                    <input type="checkbox" aria-label="Checkbox for following text input">
+                </div>
+            </div>
+            <div class="input-group-prepend">
+                <div class="input-group-text">
+                    <input type="checkbox" aria-label="Checkbox for following text input">
+                </div>
+            </div>
+        </form>
+
+
+
 
 
         <div class="row">
@@ -28,25 +51,25 @@
 
             @*Search form*@
             @*<form asp-action="GetVehicles" method="get">
-                <div id="SearchBar">
-                    <div class="input-group mb-3" style="margin: 2em">
-                        <div class="input-group-prepend">
-                            <input type="text" class="form-control" placeholder="T.ex. Volvo (C30)">
-                        </div>
-                        <div class="input-group-prepend">
-                            <div class="input-group-text">
-                                <input type="checkbox" aria-label="Checkbox for following text input">
+                    <div id="SearchBar">
+                        <div class="input-group mb-3" style="margin: 2em">
+                            <div class="input-group-prepend">
+                                <input type="text" class="form-control" placeholder="T.ex. Volvo (C30)">
                             </div>
-                        </div>
-                        <div class="input-group-prepend">
-                            <div class="input-group-text">
-                                <input type="checkbox" aria-label="Checkbox for following text input">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">
+                                    <input type="checkbox" aria-label="Checkbox for following text input">
+                                </div>
                             </div>
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">
+                                    <input type="checkbox" aria-label="Checkbox for following text input">
+                                </div>
+                            </div>
+                            <input type="search" class="btn btn-light" value="Sök" style="margin: 2em" />
                         </div>
-                        <input type="search" class="btn btn-light" value="Sök" style="margin: 2em" />
                     </div>
-                </div>
-            </form>*@
+                </form>*@
 
         </div>
 
@@ -177,4 +200,3 @@
 
 
 
- 

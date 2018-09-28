@@ -1,8 +1,10 @@
-﻿@model Vehicle
+﻿@model IEnumerable<Vehicle>
 
 @{
     Layout = null;
+    
 }
+
 
 <!DOCTYPE html>
 
@@ -13,5 +15,27 @@
 </head>
 <body>
     <p>This is the Vehicle Index page!</p>
+
+    @foreach (var item in Model)
+    {   
+       
+         <div class="col-md-4">
+            <div class="thumbnail">
+            <img src="@item.Picture" data-holder-rendered="true" style="height: 150px; width: 50%; display: block;">
+            <div class="caption">
+                <h3 id="thumbnail-label">@item.Model</h3>
+                <p>@item.Price</p>
+                <p>@item.Brand</p>
+                <p>@item.Color</p>
+                <p>@item.Gearbox</p>
+            </div>
+           </div>
+          </div>
+
+
+
+        }
+
+
 </body>
 </html>
