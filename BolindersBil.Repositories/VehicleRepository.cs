@@ -29,7 +29,7 @@ namespace BolindersBil.Repositories
             ctx.SaveChanges();
         }
 
-        // So we can DeleteVEhicles from our DB:
+        // So we can DeleteVehicles from our DB:
         public Vehicle DeleteVehicle(int vehicleId)
         {
             var ctxVehicle = ctx.Vehicles.FirstOrDefault(x => x.Id.Equals(vehicleId));
@@ -47,10 +47,8 @@ namespace BolindersBil.Repositories
             return Vehicles;
         }
 
-
         public IEnumerable<Vehicle> Search(string searchString, bool Used)
         {
-
             var vehicles = (from c in ctx.Vehicles
                             where
                                      c.RegNr.Contains(searchString) ||
@@ -69,37 +67,37 @@ namespace BolindersBil.Repositories
 
         }
 
-            // Update(Edit) the vehicle. 
-            public void UpdateVehicle(EditVehicleViewModel v)
+        // Update(Edit) the vehicle. 
+        public void UpdateVehicle(EditVehicleViewModel v)
+        {
+            //ctx.AttachRange(v);
+            var ctxVehicle = ctx.Vehicles.FirstOrDefault(x => x.Id.Equals(v.Id));
+            if (ctxVehicle != null)
             {
-                //ctx.AttachRange(v);
-                var ctxVehicle = ctx.Vehicles.FirstOrDefault(x => x.Id.Equals(v.Id));
-                if (ctxVehicle != null)
-                {
-                    ctxVehicle.RegNr = v.RegNr;
-                    ctxVehicle.Brand = v.Brand;
-                    ctxVehicle.Model = v.Model;
-                    ctxVehicle.ModelDescription = v.ModelDescription;
-                    ctxVehicle.Year = v.Year;
-                    ctxVehicle.Kilometer = v.Kilometer;
-                    ctxVehicle.Price = v.Price;
-                    ctxVehicle.Body = v.Body;
-                    ctxVehicle.Color = v.Color;
-                    ctxVehicle.Gearbox = v.Gearbox;
-                    ctxVehicle.Fuel = v.Fuel;
-                    ctxVehicle.Horsepower = v.Horsepower;
-                    ctxVehicle.Used = v.Used;
-                    ctxVehicle.OfficeId = v.OfficeId;
-                    ctxVehicle.Office = v.Office;
-                    ctxVehicle.Picture = v.Picture;
-                    ctxVehicle.Leasable = v.Leasable;
-                    ctxVehicle.UpdatedDate = v.UpdatedDate;
-                    ctxVehicle.VehicleAttribute = v.VehicleAttribute;
-                }
-                //ctx.Update(ctxVehicle);
-                ctx.SaveChanges();
-
+                ctxVehicle.RegNr = v.RegNr;
+                ctxVehicle.Brand = v.Brand;
+                ctxVehicle.Model = v.Model;
+                ctxVehicle.ModelDescription = v.ModelDescription;
+                ctxVehicle.Year = v.Year;
+                ctxVehicle.Kilometer = v.Kilometer;
+                ctxVehicle.Price = v.Price;
+                ctxVehicle.Body = v.Body;
+                ctxVehicle.Color = v.Color;
+                ctxVehicle.Gearbox = v.Gearbox;
+                ctxVehicle.Fuel = v.Fuel;
+                ctxVehicle.Horsepower = v.Horsepower;
+                ctxVehicle.Used = v.Used;
+                ctxVehicle.OfficeId = v.OfficeId;
+                ctxVehicle.Office = v.Office;
+                ctxVehicle.Picture = v.Picture;
+                ctxVehicle.Leasable = v.Leasable;
+                ctxVehicle.UpdatedDate = v.UpdatedDate;
+                ctxVehicle.VehicleAttribute = v.VehicleAttribute;
             }
+            //ctx.Update(ctxVehicle);
+            ctx.SaveChanges();
+
         }
     }
+}
 
