@@ -153,8 +153,29 @@
         @* TODO: fix so you can visually see the files you have uploaded. *@
         <div class="form-group">
             <label asp-for="Picture" class="control-label col-sm-2"><strong>Bilder:</strong></label>
-            <div class="col-sm-10">
-                <input asp-for="Picture" type="file" id="files" class="form-control-file" multiple>
+            <div class="col-md-9">
+
+                <div class="col-md-4">
+
+                    <div class="btn">
+                        <input asp-for="Picture" type="file" id="browseImages" class="form-control-file" multiple>
+                    </div>
+
+
+                    <div id="imgPreview" class="img-thumbnail" style="display:none;">
+                        <img class="img-responsive" id="targetImg" style="height:100px; width:100%;" />
+                        <hr />
+                        <div class="caption">
+                            <a class="btn btn-sm btn-warning" onclick="ClearPreview()">Ta bort</a>
+                            <small><span id="description"></span></small>
+                        </div>
+                    </div>
+
+
+                </div>
+
+
+                @*<input asp-for="Picture" type="file" id="browseImages" class="form-control-file" multiple>*@
             </div>
         </div>
 
@@ -183,42 +204,40 @@
     </form>
 </div>
 
-<script type="text/javascript">
+<script src="~/js/site.min.js"></script>
+<script>
+    $(document).ready(function () {
 
-    //function showPreview(input) {
+        $("#browseImages").change(function () {
+            var File = this.files;
+            if (File && File[0]) {
+                ReadImage(File[0]);
+            }
+        });
+    });
 
-    //    if (input.files && input.files[0]) {
+    var ReadImage = function (file) {
+        var reader = new FileReader;
+        var image = new Image;
+        reader.readAsDataURL(file);
+        reader.onload = function (_file) {
+            image.src = _file.target.result;
+            image.onload = function () {
+                var height = this.height;
+                var width = this.width;
+                var type = file.type;
+                // Changing the image from byte to kilobyte here.
+                var size = ~~(file.size / 1024) + "KB";
+                $("#targetImg").attr('src', _file.target.result);
+                $("#description").text("Size: " + size + ", " + height + " x " + width + ", " + type + "");
+                $("#imgPreview").show();
+            }
+        }
+    };
 
-    //        var reader = new FileReader();
-    //        reader.onload = function (e) {
-    //            $('#imgpreview').css('visibility', 'visible');
-    //            $('#imgpreview').attr('src', e.target.result);
-    //        }
-    //        reader.readAsDataURL(input.files[0]);
-    //    }
-
-    //}
-
-
-
-    //$(document).ready(function () {
-
-    //    $("#btnUploadFile").on('click', function () {
-    //        var data = new FormData();
-    //        var files = $("#files").get(0).files;
-    //        // Adding the uploaded image content to the form data collection (data variable).
-    //        if (files.length > 0) {
-    //            data.append("UploadedImage", files[0]);
-    //        }
-    //        var ajaxRequest = $.ajax({
-    //            type: "Post",
-    //            url: "Account/AddNewVehicle",
-    //            contentType: false,
-    //            processData: false,
-    //            data: data
-    //        });
-    //        ajaxRequest.done(function () { });
-    //    });
-
-    //});
+    var ClearPreview = function () {
+        $("#browseImages").val('');
+        $("#description").text('');
+        $("#imgPreview").hide();
+    };
 </script>
