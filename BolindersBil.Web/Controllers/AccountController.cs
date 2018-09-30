@@ -177,18 +177,21 @@ namespace BolindersBil.Web.Controllers
                 {
                     await uploadedImage.CopyToAsync(stream);
                 }
-
+                
                 // Resize and save the image under the folder named: 80. Calls on the ImageResize function.
                 ImageResize(fileTargetOriginal, pathOfTargetFolder + "\\80\\" + targetFilename, 80);
-
+                
                 // Output. 
-                ViewData["FileUploaded"] = "/images/Vehicle_Images/Original/" + targetFilename;
                 ViewData["FileResized_80"] = "/images/Vehicle_Images/80/" + targetFilename;
 
 
+                // ****To save the image to the DB.
+                using (var stream = new MemoryStream())
+                {
+                    await uploadedImage.CopyToAsync(stream);
+                    addNewVehicle.Picture = stream.ToArray();
+                }
 
-
-                // addNewVehicle.Picture = ***The resized image that comes out of the ImageResize() function...
 
 
 
@@ -237,7 +240,7 @@ namespace BolindersBil.Web.Controllers
                 // Draw into placeholder.
                 // Imports the image into the drawarea.
                 graphic_of_DrawArea.DrawImage(sourceBitmap, 0, 0, newWidth, newHeight);
-                
+
                 // Output as .Jpg
                 using (var output = System.IO.File.Open(outputImagePath, FileMode.Create))
                 {
@@ -245,13 +248,14 @@ namespace BolindersBil.Web.Controllers
                     var qualityParamId = Encoder.Quality;
                     var encoderParameters = new EncoderParameters(1);
                     encoderParameters.Param[0] = new EncoderParameter(qualityParamId, quality);
-                    
+
                     // Save Bitmap as Jpg 
                     var codec = ImageCodecInfo.GetImageDecoders().FirstOrDefault(c => c.FormatID == ImageFormat.Jpeg.Guid);
                     newDrawArea.Save(output, codec, encoderParameters);
+
                     output.Close();
                 }
-                
+
                 graphic_of_DrawArea.Dispose();
             }
             sourceBitmap.Dispose();
