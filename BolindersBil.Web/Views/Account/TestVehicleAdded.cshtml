@@ -1,2 +1,21 @@
 ﻿
 <h1>TEST VEHICLE ADDED OR UPDATED TO DB!!</h1>
+
+<br />
+
+@if (ViewData["FileResized_80"] != null)
+{
+    <br />
+    <span>Resized 80</span>
+    <img src="@ViewData["FileResized_80"]" alt="Uploaded Image" />
+    <br />
+}
+
+<br />
+@if (ViewData["FileUploaded"] != null)
+{
+    <br />
+    <span>Original Upload</span>
+    <img src="@ViewData["FileUploaded"]" alt="Uploaded Image" />
+    <br />
+}
