@@ -153,30 +153,30 @@
         @* TODO: fix so you can visually see the files you have uploaded. *@
         <div class="form-group">
             <label asp-for="Picture" class="control-label col-sm-2"><strong>Bilder:</strong></label>
-            <div class="col-md-9">
+            @*<div class="col-md-9">*@
 
-                <div class="col-md-4">
+            <div class="col-sm-4">
 
-                    <div class="btn">
-                        <input asp-for="Picture" type="file" name="uploadedImage" id="browseImages" class="form-control-file" multiple>
-                    </div>
-
-
-                    <div id="imgPreview" class="img-thumbnail" style="display:none;">
-                        <img class="img-responsive" id="targetImg" style="height:100px; width:100%;" />
-                        <hr />
-                        <div class="caption">
-                            <a class="btn btn-sm btn-warning" onclick="ClearPreview()">Ta bort</a>
-                            <small><span id="description"></span></small>
-                        </div>
-                    </div>
-
-
+                <div class="btn">
+                    <input asp-for="Picture" type="file" name="uploadedImage" id="browseImages" class="form-control-file" multiple>
                 </div>
 
 
-                @*<input asp-for="Picture" type="file" id="browseImages" class="form-control-file" multiple>*@
+                <div id="imgPreview" class="img-thumbnail" style="display:none;">
+                    <img class="img-responsive" id="targetImg" style="height:100px; width:100%;" />
+                    <hr />
+                    <div class="caption">
+                        <a class="btn btn-sm btn-warning" onclick="ClearPreview()">Ta bort</a>
+                        <small><span id="description"></span></small>
+                    </div>
+                </div>
+
+
             </div>
+
+
+            @*<input asp-for="Picture" type="file" id="browseImages" class="form-control-file" multiple>*@
+            @*</div>*@
         </div>
 
         <div class="form-group">
@@ -210,9 +210,17 @@
 
         $("#browseImages").change(function () {
             var File = this.files;
-            if (File && File[0]) {
-                ReadImage(File[0]);
+
+            for (var i = 0; i != File.length; i++) {
+                //ReadImage[i];
+                if (File && File[i]) {
+                    ReadImage(File[i]);
+                }
             }
+
+            //if (File && File[0]) {
+            //    ReadImage(File[0]);
+            //}
         });
     });
 
