@@ -39,7 +39,7 @@ namespace BolindersBil.Web.Controllers
         [HttpGet]
         public IActionResult Vehicles()
         {
-            return View();
+            return View("Index");
         }
 
         [HttpPost]

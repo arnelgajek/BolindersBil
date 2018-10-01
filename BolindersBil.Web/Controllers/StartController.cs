@@ -38,14 +38,11 @@ namespace BolindersBil.Web.Controllers
 
             return View(model);
         }
-        
-      
 
-
-       
-
-
-        
+        public IActionResult Vehicles()
+        {
+            return RedirectToAction("Vehicles", "Vehicle");
+        }
 
     }
 }       
