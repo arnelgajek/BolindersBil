@@ -29,7 +29,7 @@ namespace BolindersBil.Repositories
             ctx.SaveChanges();
         }
 
-        // So we can DeleteVEhicles from our DB:
+        // So we can Delete Vehicles from our DB:
         public Vehicle DeleteVehicle(int vehicleId)
         {
             var ctxVehicle = ctx.Vehicles.FirstOrDefault(x => x.Id.Equals(vehicleId));

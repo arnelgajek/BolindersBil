@@ -82,7 +82,6 @@ namespace BolindersBil.Web.Controllers
         [HttpGet]
         public IActionResult AddNewVehicle()
         {
-            // *****TODO: Fix the year 2018 from showing twice in the dropdown.
             // This list is used as the dropdown option in the "Årsmodell" input.
             List<object> years = new List<object>();
             var currentYear = DateTime.Now.Year;
