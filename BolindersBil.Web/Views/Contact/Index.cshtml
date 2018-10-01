@@ -2,6 +2,8 @@
 @{ ViewBag.title = "Kontakt";}
 
     <div class="container">
+
+        @*Cards with office info*@
         <div class="row" style="margin-bottom: 2em; margin-top: 1.5em;">
             <partial name="ContactInfoPartialView" model="Model.Offices" />
         </div>
@@ -15,6 +17,8 @@
             </div>
             
             @*ContactForm*@
+            @*Good to know: This won't work unless you have 
+                Smtp4Dev downloaded and running*@
             <div class="col-5 offset-1">
                 <form asp-action="SendTheMail" method="post" name="mail">
                     <div class="form-group">

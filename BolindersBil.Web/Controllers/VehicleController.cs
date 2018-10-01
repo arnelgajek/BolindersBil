@@ -22,24 +22,17 @@ namespace BolindersBil.Web.Controllers
         {
             repo = vehicleRepository;
         }
-
-        //public IActionResult List(int page = 1)
-        //{
-        //    var ToSkip = (page - 1) * PageLimit;
-
-        //    var vehicles = repo.Vehicles.OrderBy(x => x.Id).Skip(ToSkip).Take(PageLimit);
-        //    var paging = new PagingInfo { CurrentPage = page, CarPerPage = PageLimit, TotalICar = repo.Vehicles.Count() };
-        //    var vm = new VehicleListViewModel { Vehicle = vehicles, Pager = paging };
-        //    return View(vm);
-
-            
-        //}
-        
+                
         // Gets all the vehicles so the admin can see them when logged in:
         [HttpGet]
         public IActionResult Vehicles()
         {
-            return View();
+            var vehicles = repo.GetAllVehicles();
+            var vm = new VehiclesSearchViewModel();
+
+            vm.Vehicles = vehicles;
+
+            return View("Index", vehicles);
         }
 
         [HttpPost]

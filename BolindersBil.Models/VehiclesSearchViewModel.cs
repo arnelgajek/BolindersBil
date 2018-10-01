@@ -5,11 +5,10 @@ using System.Text;
 namespace BolindersBil.Models
 {
      public class VehiclesSearchViewModel
-    {
+     {
         public string RegNr { get; set; }
         public string Brand { get; set; }
         public string Model { get; set; }
-       
         public int Year { get; set; }
         public int Kilometer { get; set; }
         public double Price { get; set; }
@@ -24,6 +23,6 @@ namespace BolindersBil.Models
         public DateTime AddedDate { get; set; }
         public DateTime UpdatedDate { get; set; }
         public string VehicleAttribute { get; set; }
-        
-    }
+        public IEnumerable<Vehicle> Vehicles { get; set; }
+     }
 }

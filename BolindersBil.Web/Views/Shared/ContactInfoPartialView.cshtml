@@ -2,6 +2,7 @@
 
 <div class="card-deck">
 
+    @*Top cards in the Contact view*@
     @foreach(var o in Model)
     {
         <div class="card">
@@ -11,6 +12,7 @@
            <div class="card-body">
                <p class="card-text"><strong>Adress: </strong>@o.Address</p>
                <p class="card-text"><strong>Telefonnummer: </strong><a href="tel:@o.PhoneNumber">@o.PhoneNumber</a></p>
+                                                                @*Det ser fel ut men det funkar*@
                <p class="card-text"><strong>E-mail: </strong><a href="mailto:@o.Email">@o.Email</a></p>
            </div>
         </div>
