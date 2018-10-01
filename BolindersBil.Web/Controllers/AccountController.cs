@@ -254,22 +254,6 @@ namespace BolindersBil.Web.Controllers
         }
 
         [HttpPost]
-        public IActionResult DeleteVehicle(int vehicleId)
-        {
-            var deleted = vehicleRepo.DeleteVehicle(vehicleId);
-            if (deleted != null)
-            {
-                // Vehicle was found and not deleted...
-            }
-            else
-            {
-                //TODO
-                // Vehicle was not found - show error
-            }
-            return RedirectToAction(nameof(Admin));
-        }
-
-        [HttpPost]
         public IActionResult EditVehicle(EditVehicleViewModel editVehicleViewModel)
         {
             if (ModelState.IsValid)
@@ -286,17 +270,34 @@ namespace BolindersBil.Web.Controllers
         }
 
         [HttpPost]
-        public IActionResult DeleteVehicle()
+        public IActionResult DeleteVehicle(int vehicleId)
         {
-            // TODO: Convert into a string, bring the Id from the unique vehicle selected with the checkbox using jQuery.
-            return RedirectToAction("Admin");
+            var deleted = vehicleRepo.DeleteVehicle(vehicleId);
+            if (deleted != null)
+            {
+                // Vehicle was found and not deleted...
+            }
+            else
+            {
+                // Vehicle was not found - show error
+            }
+            return RedirectToAction(nameof(Admin));
         }
 
         [HttpPost]
-        public IActionResult BulkDelete()
+        public IActionResult BulkDeleteVehicle(string vehicleId)
         {
-            // TODO: Convert into a string, bring the Id from the unique vehicle selected with the checkbox using jQuery.
-            return RedirectToAction("Admin");
+            // Creates an array with all the Ids checked to make an BulkDelete:
+            int[] bulkDelete = Array.ConvertAll(vehicleId.Split(','), int.Parse);
+
+            // Loops through all the Ids from the array above:
+            foreach (var vehicle in bulkDelete)
+            {
+                // Deletes the vehicles with the specific Ids chosen:
+                DeleteVehicle(vehicle);
+            }
+            // Redirects the user to the account/admin:
+            return RedirectToAction(nameof(Admin));
         }
     }
 }
