@@ -19,12 +19,16 @@ namespace BolindersBil.Web.Controllers
         }
         public IActionResult Index()
         {
+            // offices with a small "O" fetches all offices from the database
             var offices = officeRepo.GetAllOffices();
             var vm = new ContactFormViewModel();
+            // Offices with a big "O" checks the Office objekt from the local solution
             vm.Offices = offices;
             return View(vm);
         }
         
+        // This adds information to smtpClient and sends it to Smtp4Dev
+        // And it will not work unless you have it downloaded
         [HttpPost]
         public IActionResult SendTheMail(ContactFormViewModel contactFormViewModel)
         {
@@ -56,6 +60,7 @@ namespace BolindersBil.Web.Controllers
             {
                 vm.PhoneNr = $"{vm.Name} har inte angett ett telefonnummer.";
             }
+            // This is the information that will be sent
             var message = new MailMessage($"{vm.Email}", $"{vm.Office}@bolindersbil.se")
             {
                 Body = $"{vm.Message}<br />" +
@@ -65,6 +70,7 @@ namespace BolindersBil.Web.Controllers
                 IsBodyHtml = true
             };
 
+            // Sending the mail
             {
                 smtpClient.Send(message);
             }
