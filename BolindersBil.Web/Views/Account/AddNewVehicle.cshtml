@@ -161,6 +161,7 @@
                     <input asp-for="Picture" type="file" name="uploadedImage" id="browseImages" class="form-control-file" multiple>
                 </div>
 
+                <div class="dropzone"></div>
 
                 <div id="imgPreview" class="img-thumbnail" style="display:none;">
                     <img class="img-responsive" id="targetImg" style="height:100px; width:100%;" />
@@ -205,6 +206,7 @@
 </div>
 
 <script src="~/js/site.min.js"></script>
+<script src="~/js/dropzone.js"></script>
 <script>
     $(document).ready(function () {
 

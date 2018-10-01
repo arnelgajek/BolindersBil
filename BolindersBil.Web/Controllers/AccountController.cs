@@ -90,7 +90,6 @@ namespace BolindersBil.Web.Controllers
         [HttpGet]
         public IActionResult AddNewVehicle()
         {
-            // *****TODO: Fix the year 2018 from showing twice in the dropdown.
             // This list is used as the dropdown option in the "Årsmodell" input.
             List<object> years = new List<object>();
             var currentYear = DateTime.Now.Year;
@@ -161,8 +160,7 @@ namespace BolindersBil.Web.Controllers
         {
             if (ModelState.IsValid && addNewVehicle != null)
             {
-
-
+                
                 // ****To take the uploaded photo and resize it to the same size (80)****
                 string imageFolder = "Vehicle_Images";
                 string targetFilename = uploadedImage.FileName;
@@ -180,7 +178,9 @@ namespace BolindersBil.Web.Controllers
                 
                 // Resize and save the image under the folder named: 80. Calls on the ImageResize function.
                 ImageResize(fileTargetOriginal, pathOfTargetFolder + "\\80\\" + targetFilename, 80);
-                
+
+               // var newImage = ImageResize();
+
                 // Output. 
                 ViewData["FileResized_80"] = "/images/Vehicle_Images/80/" + targetFilename;
 
@@ -221,6 +221,7 @@ namespace BolindersBil.Web.Controllers
         private void ImageResize(string inputImagePath, string outputImagePath, int newWidth)
         {
             const long quality = 50L;
+             
 
             Bitmap sourceBitmap = new Bitmap(inputImagePath);
             double dblWidthOriginal = sourceBitmap.Width;
