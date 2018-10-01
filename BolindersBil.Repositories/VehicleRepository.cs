@@ -29,8 +29,22 @@ namespace BolindersBil.Repositories
             ctx.SaveChanges();
         }
 
+
         // So we can Delete Vehicles from our DB:
+
         public Vehicle DeleteVehicle(int vehicleId)
+        {
+            var ctxVehicle = ctx.Vehicles.FirstOrDefault(x => x.Id.Equals(vehicleId));
+            if (ctxVehicle != null)
+            {
+                ctx.Vehicles.Remove(ctxVehicle);
+                ctx.SaveChanges();
+            }
+            return ctxVehicle;
+        }
+
+        // So we can BulkDeleteVehicles from our DB:
+        public Vehicle BulkDeleteVehicle(int vehicleId)
         {
             var ctxVehicle = ctx.Vehicles.FirstOrDefault(x => x.Id.Equals(vehicleId));
             if (ctxVehicle != null)
