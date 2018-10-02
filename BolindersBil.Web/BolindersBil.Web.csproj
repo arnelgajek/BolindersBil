@@ -27,4 +27,19 @@
     <ProjectReference Include="..\BolindersBil.Repositories\BolindersBil.Repositories.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Update="Views\Vehicle\AddNewVehicle.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Vehicle\Admin.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Vehicle\EditVehicle.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Vehicle\TestVehicleAdded.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+  </ItemGroup>
+
 </Project>

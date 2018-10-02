@@ -15,7 +15,8 @@ namespace BolindersBil.Models
         public string City { get; set; }
         public int PhoneNumber { get; set; }
         public string Email { get; set; }
-        //public virtual Admin Admins { get; set; }
-        public virtual List<Vehicle> Vehicles { get; set; }
+
+        // Does this need to be virtual?
+        public List<Vehicle> Vehicles { get; set; }
     }
 }
