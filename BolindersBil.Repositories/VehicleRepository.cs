@@ -66,8 +66,7 @@ namespace BolindersBil.Repositories
                                      c.Model.Contains(searchString) ||
                                      c.ModelDescription.Contains(searchString) ||
                                      c.Year.Equals(searchString) ||
-                                     c.Kilometer.Equals(searchString) ||
-                                     c.Picture.Equals(searchString) &&
+                                     c.Kilometer.Equals(searchString) &&
                                      c.Used.Equals(Used)
 
                             select c
@@ -98,7 +97,6 @@ namespace BolindersBil.Repositories
                 ctxVehicle.Used = v.Used;
                 ctxVehicle.OfficeId = v.OfficeId;
                 ctxVehicle.Office = v.Office;
-                ctxVehicle.Picture = v.Picture;
                 ctxVehicle.Leasable = v.Leasable;
                 ctxVehicle.UpdatedDate = v.UpdatedDate;
                 ctxVehicle.VehicleAttribute = v.VehicleAttribute;

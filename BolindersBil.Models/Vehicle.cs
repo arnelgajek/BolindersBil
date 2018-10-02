@@ -24,8 +24,7 @@ namespace BolindersBil.Models
         public virtual Office OfficeId { get; set; }
         public string Office { get; set; }
         
-        // Does this need to be virtual?
-        public List<Image> Images { get; set; }
+        public virtual List<Image> Images { get; set; }
         
         public bool Leasable { get; set; }
         public DateTime AddedDate { get; set; }
