@@ -23,8 +23,7 @@ namespace BolindersBil.Models
         public bool Used { get; set; }
         public virtual Office OfficeId { get; set; }
         public string Office { get; set; }
-
-
+        // TODO: delete this egenskap later.
         public byte[] Picture { get; set; }
 
         public virtual List<Image> Images { get; set; }

@@ -12,6 +12,7 @@ using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using static System.Net.Mime.MediaTypeNames;
 
@@ -23,7 +24,7 @@ namespace BolindersBil.Web.Controllers
     {
         private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;
-        private readonly IHostingEnvironment _hostingEnvironment;
+        private IHostingEnvironment _hostingEnvironment;
         private IVehicleRepository vehicleRepo;
 
 
@@ -68,7 +69,6 @@ namespace BolindersBil.Web.Controllers
             }
             return View("Index", vm);
         }
-
 
         [Authorize]
         public IActionResult Admin()
@@ -156,41 +156,95 @@ namespace BolindersBil.Web.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddNewVehicle(Vehicle addNewVehicle, IFormFile uploadedImage)
+        public async Task<IActionResult> AddNewVehicle(Vehicle addNewVehicle, ICollection<IFormFile> uploadedImages /*List<IFormFile> uploadedImage*/)
         {
             if (ModelState.IsValid && addNewVehicle != null)
             {
-                
-                // ****To take the uploaded photo and resize it to the same size (80)****
-                string imageFolder = "Vehicle_Images";
-                string targetFilename = uploadedImage.FileName;
-                // Get the path.
                 string webrootPath = _hostingEnvironment.WebRootPath;
-                string pathOfTargetFolder = webrootPath + "\\images\\" + imageFolder + "\\";
-                string fileTargetOriginal = pathOfTargetFolder + "\\Original\\" + targetFilename;
-                //string originalFilenameImage = pathOfTargetFolder + uploadedImage.FileName;
-
-                // Copy file to target.
-                using (var stream = new FileStream(fileTargetOriginal, FileMode.Create))
-                {
-                    await uploadedImage.CopyToAsync(stream);
-                }
+                string path = webrootPath + "\\images\\Vehicle_Images\\";
                 
-                // Resize and save the image under the folder named: 80. Calls on the ImageResize function.
-                ImageResize(fileTargetOriginal, pathOfTargetFolder + "\\80\\" + targetFilename, 80);
+                //string pathOfTargetFolder = webrootPath + "\\images\\" + imageFolder + "\\";
+                //string fileTargetOriginal = pathOfTargetFolder + addNewVehicle.RegNr + "\\Original\\" + targetFilename;
 
-               // var newImage = ImageResize();
+                
+                //DirectoryInfo directoryInfo = Directory.CreateDirectory(path);
 
-                // Output. 
-                ViewData["FileResized_80"] = "/images/Vehicle_Images/80/" + targetFilename;
-
-
-                // ****To save the image to the DB.
-                using (var stream = new MemoryStream())
+                foreach (var file in uploadedImages)
                 {
-                    await uploadedImage.CopyToAsync(stream);
-                    addNewVehicle.Picture = stream.ToArray();
+                    string targetFilename = file.FileName;
+                    string theTEST = path + targetFilename;
+                    
+                    if (file.Length > 0)
+                    {
+                        // Copy file to target.
+                        using (var stream = new FileStream(theTEST, FileMode.Create))
+                        {
+                            await file.CopyToAsync(stream);
+                        }
+                    }
+                        
                 }
+
+
+
+
+
+
+
+
+                //// ****To take the uploaded photo and resize it to the same size****
+                //foreach (var i in uploadedImage)
+                //{
+                //    //string webrootPath = _hostingEnvironment.WebRootPath;
+                //    //string path = webrootPath + "\\images\\Vehicle_Images\\" + addNewVehicle.RegNr + "\\Original\\" + i.FileName;
+
+
+                //    string imageFolder = "Vehicle_Images";
+                //    string targetFilename = i.FileName;
+                //    string webrootPath = _hostingEnvironment.WebRootPath;
+                //    string pathOfTargetFolder = webrootPath + "\\images\\" + imageFolder + "\\";
+                //    string fileTargetOriginal = pathOfTargetFolder + addNewVehicle.RegNr + "\\Original\\" + targetFilename;
+
+                //    // Copy file to target.
+                //    using (var stream = new FileStream(fileTargetOriginal, FileMode.Create))
+                //    {
+                //        await i.CopyToAsync(stream);
+                //    }
+
+                //    // Resize and save the image under the folder named: 100. Calls on the ImageResize function.
+                //    ImageResize(fileTargetOriginal, pathOfTargetFolder + "\\100\\" + targetFilename, 100);
+                //    // Output. 
+                //    ViewData["FileResized_100"] = "/images/Vehicle_Images/100/" + targetFilename;
+                //}
+
+
+
+                //string imageFolder = "Vehicle_Images";
+                //string targetFilename = uploadedImage.FileName;
+                //// Get the path.
+                //string webrootPath = _hostingEnvironment.WebRootPath;
+                //string pathOfTargetFolder = webrootPath + "\\images\\" + imageFolder + "\\";
+                //string fileTargetOriginal = pathOfTargetFolder + addNewVehicle.RegNr + "\\Original\\" + targetFilename;
+                //// Copy file to target.
+                //using (var stream = new FileStream(fileTargetOriginal, FileMode.Create))
+                //{
+                //    await uploadedImage.CopyToAsync(stream);
+                //}
+
+                //// Resize and save the image under the folder named: 80. Calls on the ImageResize function.
+                //ImageResize(fileTargetOriginal, pathOfTargetFolder + "\\80\\" + targetFilename, 80);
+
+
+                //// Output. 
+                //ViewData["FileResized_80"] = "/images/Vehicle_Images/80/" + targetFilename;
+
+
+                ////****To save the image to the DB.
+                //using (var stream = new MemoryStream())
+                //{
+                //    await uploadedImage.CopyToAsync(stream);
+                //    addNewVehicle.Picture = stream.ToArray();
+                //}
 
 
 
@@ -209,6 +263,7 @@ namespace BolindersBil.Web.Controllers
                 //}
 
                 addNewVehicle.AddedDate = DateTime.Now;
+                addNewVehicle.UpdatedDate = DateTime.Now;
 
                 vehicleRepo.AddNewVehicle(addNewVehicle);
 
@@ -217,6 +272,7 @@ namespace BolindersBil.Web.Controllers
 
             return View();
         }
+
 
         private void ImageResize(string inputImagePath, string outputImagePath, int newWidth)
         {
@@ -264,17 +320,7 @@ namespace BolindersBil.Web.Controllers
 
 
 
-
-
-
-
-
-
-
-
-
-
-
+        
         [HttpGet]
         public IActionResult EditVehicle(int vehicleId)
         {

@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BolindersBil.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20180928142232_initial")]
+    [Migration("20181001131456_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -20,6 +20,25 @@ namespace BolindersBil.Data.Migrations
                 .HasAnnotation("ProductVersion", "2.1.3-rtm-32065")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("BolindersBil.Models.Image", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<Guid>("Name");
+
+                    b.Property<string>("Path");
+
+                    b.Property<int?>("VehicleId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("VehicleId");
+
+                    b.ToTable("Image");
+                });
 
             modelBuilder.Entity("BolindersBil.Models.Office", b =>
                 {
@@ -258,6 +277,13 @@ namespace BolindersBil.Data.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
+                });
+
+            modelBuilder.Entity("BolindersBil.Models.Image", b =>
+                {
+                    b.HasOne("BolindersBil.Models.Vehicle")
+                        .WithMany("Images")
+                        .HasForeignKey("VehicleId");
                 });
 
             modelBuilder.Entity("BolindersBil.Models.Vehicle", b =>

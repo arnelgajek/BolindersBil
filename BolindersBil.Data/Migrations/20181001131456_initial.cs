@@ -210,6 +210,27 @@ namespace BolindersBil.Data.Migrations
                         onDelete: ReferentialAction.Restrict);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Image",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Name = table.Column<Guid>(nullable: false),
+                    Path = table.Column<string>(nullable: true),
+                    VehicleId = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Image", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Image_Vehicles_VehicleId",
+                        column: x => x.VehicleId,
+                        principalTable: "Vehicles",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -250,6 +271,11 @@ namespace BolindersBil.Data.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Image_VehicleId",
+                table: "Image",
+                column: "VehicleId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Vehicles_OfficeIdId",
                 table: "Vehicles",
                 column: "OfficeIdId");
@@ -273,13 +299,16 @@ namespace BolindersBil.Data.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Vehicles");
+                name: "Image");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "Vehicles");
 
             migrationBuilder.DropTable(
                 name: "Offices");

@@ -6,6 +6,8 @@
 
   <ItemGroup>
 
+    <PackageReference Include="jQuery.FileUpload" Version="9.22.0" />
+
     <PackageReference Include="Microsoft.AspNetCore.App" Version="2.1.4" />
 
     <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="2.1.3" />
