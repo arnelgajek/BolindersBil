@@ -17,7 +17,18 @@ namespace BolindersBil.Repositories
             ctx = context;
         }
         public IEnumerable<Vehicle> Vehicles => ctx.Vehicles;
+        public IEnumerable<Image> Images => ctx.Images;
 
+
+        public void AddImage(Image image)
+        {
+            if (image.Id == 0)
+            {
+                ctx.Images.Add(image);
+            }
+            ctx.SaveChanges();
+        }
+        
         // So we can AddNewVehicles to our DB.
         public void AddNewVehicle(Vehicle vehicle)
         {

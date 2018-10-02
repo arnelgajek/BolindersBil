@@ -169,7 +169,7 @@ namespace BolindersBil.Web.Controllers
                 string createSpecificVehicleFolder = createVehicleImagesFolder + "\\" + addNewVehicle.Brand + "_" + addNewVehicle.RegNr;
                 Directory.CreateDirectory(createSpecificVehicleFolder);
 
-                // Taking each uploaded image and saving it in the correct folder structure. 
+                // Taking each uploaded image and saving it in the correct folder. 
                 foreach (var file in uploadedImages)
                 {
                     Guid uniqueGuid = Guid.NewGuid();
@@ -185,6 +185,7 @@ namespace BolindersBil.Web.Controllers
                         }
                     }
 
+
                     // TODO: get the image data to save in the DB....
                     Models.Image theImage = new Models.Image
                     {
@@ -192,7 +193,8 @@ namespace BolindersBil.Web.Controllers
                         Name = uniqueGuid,
                         Path = finalTargetFilePath
                     };
-                    addNewVehicle.Images.Add(theImage);
+                    vehicleRepo.AddImage(theImage);
+
 
                     // Resize and save the image under the correct folder. Calls on the ImageResize function.
                     string resizedImageFolder = createSpecificVehicleFolder + "\\resized_images";
@@ -202,8 +204,8 @@ namespace BolindersBil.Web.Controllers
                     }
                     ImageResize(finalTargetFilePath, resizedImageFolder + "\\" + targetFileName, 100);
                 }
-                
 
+                
 
                 ////****To save the image to the DB.
                 //using (var stream = new MemoryStream())
@@ -216,6 +218,7 @@ namespace BolindersBil.Web.Controllers
                 addNewVehicle.UpdatedDate = DateTime.Now;
 
                 vehicleRepo.AddNewVehicle(addNewVehicle);
+                
 
                 return View("TestVehicleAdded", ViewData);
             }
