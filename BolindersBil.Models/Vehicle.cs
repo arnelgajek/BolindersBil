@@ -26,7 +26,7 @@ namespace BolindersBil.Models
         // TODO: delete this egenskap later.
         public byte[] Picture { get; set; }
 
-        public virtual List<Image> Images { get; set; }
+        public List<Image> Images { get; set; }
 
 
         public bool Leasable { get; set; }

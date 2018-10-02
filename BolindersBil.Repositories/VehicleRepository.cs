@@ -32,7 +32,6 @@ namespace BolindersBil.Repositories
         // So we can AddNewVehicles to our DB.
         public void AddNewVehicle(Vehicle vehicle)
         {
-            //ctx.AttachRange(vehicle);
             if (vehicle.Id == 0)
             {
                 ctx.Vehicles.Add(vehicle);
@@ -81,7 +80,6 @@ namespace BolindersBil.Repositories
         // Update(Edit) the vehicle. 
         public void UpdateVehicle(EditVehicleViewModel v)
         {
-            //ctx.AttachRange(v);
             var ctxVehicle = ctx.Vehicles.FirstOrDefault(x => x.Id.Equals(v.Id));
             if (ctxVehicle != null)
             {
@@ -105,7 +103,6 @@ namespace BolindersBil.Repositories
                 ctxVehicle.UpdatedDate = v.UpdatedDate;
                 ctxVehicle.VehicleAttribute = v.VehicleAttribute;
             }
-            //ctx.Update(ctxVehicle);
             ctx.SaveChanges();
 
         }

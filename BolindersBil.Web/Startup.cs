@@ -37,7 +37,7 @@ namespace BolindersBil.Web
 
             // Register a service for VehicleRepository
             services.AddTransient<IVehicleRepository, VehicleRepository>();
-            //Register service for VehicleRepository
+            //Register service for OfficeRepository
             services.AddTransient<IOfficeRepository, OfficeRepository>();
 
             // Register a service for Identity.

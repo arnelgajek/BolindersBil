@@ -186,16 +186,16 @@ namespace BolindersBil.Web.Controllers
                     }
 
 
-                    // TODO: get the image data to save in the DB....
-                    Models.Image theImage = new Models.Image
-                    {
-                        VehicleId = addNewVehicle.Id,
-                        Name = uniqueGuid,
-                        Path = finalTargetFilePath
-                    };
-                    vehicleRepo.AddImage(theImage);
+                    //// TODO: get the image data to save in the DB....
+                    //Models.Image theImage = new Models.Image
+                    //{
+                    //    VehicleId = addNewVehicle.Id,
+                    //    Name = uniqueGuid,
+                    //    Path = finalTargetFilePath
+                    //};
+                    //vehicleRepo.AddImage(theImage);
 
-
+                  
                     // Resize and save the image under the correct folder. Calls on the ImageResize function.
                     string resizedImageFolder = createSpecificVehicleFolder + "\\resized_images";
                     if (!Directory.Exists(resizedImageFolder))
@@ -206,7 +206,6 @@ namespace BolindersBil.Web.Controllers
                 }
 
                 
-
                 ////****To save the image to the DB.
                 //using (var stream = new MemoryStream())
                 //{
