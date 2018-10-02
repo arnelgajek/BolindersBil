@@ -156,33 +156,34 @@ namespace BolindersBil.Web.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddNewVehicle(Vehicle addNewVehicle, ICollection<IFormFile> uploadedImages /*List<IFormFile> uploadedImage*/)
+        public async Task<IActionResult> AddNewVehicle(Vehicle addNewVehicle, ICollection<IFormFile> uploadedImages)
         {
             if (ModelState.IsValid && addNewVehicle != null)
             {
+                // Creating the folder structure.
                 string webrootPath = _hostingEnvironment.WebRootPath;
-                string path = webrootPath + "\\images\\Vehicle_Images\\";
-                
-                //string pathOfTargetFolder = webrootPath + "\\images\\" + imageFolder + "\\";
-                //string fileTargetOriginal = pathOfTargetFolder + addNewVehicle.RegNr + "\\Original\\" + targetFilename;
+                string createImageFolder = webrootPath + "\\images";
+                Directory.CreateDirectory(createImageFolder);
+                string createVehicleImagesFolder = createImageFolder + "\\vehicle_images";
+                Directory.CreateDirectory(createVehicleImagesFolder);
+                string createSpecificVehicleFolder = createVehicleImagesFolder + "\\" + addNewVehicle.Brand + "_" + addNewVehicle.RegNr;
+                Directory.CreateDirectory(createSpecificVehicleFolder);
 
-                
-                //DirectoryInfo directoryInfo = Directory.CreateDirectory(path);
-
+                // Taking each uploaded image and saving it in the correct folder structure. 
                 foreach (var file in uploadedImages)
                 {
-                    string targetFilename = file.FileName;
-                    string theTEST = path + targetFilename;
-                    
+                    var uniqueGuid = new Guid();
+                    string targetFileName = uniqueGuid + "_" + file.FileName;
+                    string finalTargetFilePath = createSpecificVehicleFolder + "\\" + targetFileName;
+
                     if (file.Length > 0)
                     {
                         // Copy file to target.
-                        using (var stream = new FileStream(theTEST, FileMode.Create))
+                        using (var stream = new FileStream(finalTargetFilePath, FileMode.Create))
                         {
                             await file.CopyToAsync(stream);
                         }
                     }
-                        
                 }
 
 
@@ -246,22 +247,7 @@ namespace BolindersBil.Web.Controllers
                 //    addNewVehicle.Picture = stream.ToArray();
                 //}
 
-
-
-
-                //// To add the uploaded images into the Picture property of Vehicle.
-                //foreach (var item in Picture)
-                //{
-                //    if (item.Length > 0)
-                //    {
-                //        using (var stream = new MemoryStream())
-                //        {
-                //            await item.CopyToAsync(stream);
-                //            addNewVehicle.Picture = stream.ToArray();
-                //        }
-                //    }
-                //}
-
+                
                 addNewVehicle.AddedDate = DateTime.Now;
                 addNewVehicle.UpdatedDate = DateTime.Now;
 
