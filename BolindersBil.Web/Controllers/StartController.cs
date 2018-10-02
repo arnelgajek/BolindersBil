@@ -14,9 +14,6 @@ namespace BolindersBil.Web.Controllers
 {
     public class StartController : Controller
     {
-       
-      
-
         // To be able to use the services.AddTransient from startup.cs.
         // Private property and private contructor. 
         private IVehicleRepository vehicleRepo;
@@ -24,8 +21,6 @@ namespace BolindersBil.Web.Controllers
         {
             vehicleRepo = vehicleRepository;
         }
-
-    
 
         public IActionResult Index()
         {
@@ -97,6 +92,11 @@ namespace BolindersBil.Web.Controllers
             ViewBag.gears = gearType;
 
             return RedirectToAction("Vehicles", "Vehicle");
+        }
+
+        public IActionResult Contact()
+        {
+            return RedirectToAction("Index", "Contact");
         }
 
     }
