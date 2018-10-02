@@ -156,8 +156,24 @@
             <div class="col-sm-4">
 
                 <div class="btn">
-                    <input asp-for="Images" type="file" name="uploadedImages" id="browseImages" class="form-control-file" multiple>
+                    <input asp-for="Images" type="file" name="uploadedImages" id="browseImages" onchange="myFunction()" class="form-control-file" multiple>
                 </div>
+
+
+
+
+                <div id="demo" style="display:none;">
+                    @*<img class="img-responsive" id="targetImg" style="height:100px; width:100%;" />
+                    <hr />
+                    <div class="caption">
+                        <a class="btn btn-sm btn-warning" onclick="ClearPreview()">Ta bort</a>
+                        <small><span id="description"></span></small>
+                    </div>*@
+                </div>
+
+
+
+
 
                 <div id="imgPreview" class="img-thumbnail" style="display:none;">
                     <img class="img-responsive" id="targetImg" style="height:100px; width:100%;" />
@@ -192,7 +208,7 @@
         <div class="form-group">
             <div class="col-sm-10">
                 <button class="btn btn-primary" type="submit">Add Vehicle</button>
-                <a asp-controller="Account" asp-action="Admin" class="btn btn-secondary">Cancel</a>
+                <a asp-controller="Vehicle" asp-action="Admin" class="btn btn-secondary">Cancel</a>
             </div>
         </div>
 
@@ -202,46 +218,76 @@
 <script src="~/js/site.min.js"></script>
 <script>
 
-        $(document).ready(function () {
+    function myFunction() {
+        var x = document.getElementById("browseImages");
+        var txt = "";
 
-            $("#browseImages").change(function () {
-                var File = this.files;
+        if ('files' in x) {
+            for (var i = 0; i < x.files.length; i++) {
+                
+                txt += "<br><strong>" + (i + 1) + ". file</strong><br>";
 
-                for (var i = 0; i != File.length; i++) {
-                    //ReadImage[i];
-                    if (File && File[i]) {
-                        ReadImage(File[i]);
-                    }
+                var file = x.files[i];
+
+                if ('name' in file) {
+                    txt += "name: " + file.name + "<br>";
                 }
 
-                //if (File && File[0]) {
-                //    ReadImage(File[0]);
-                //}
-            });
-        });
-
-        var ReadImage = function (file) {
-            var reader = new FileReader;
-            var image = new Image;
-            reader.readAsDataURL(file);
-            reader.onload = function (_file) {
-                image.src = _file.target.result;
-                image.onload = function () {
-                    var height = this.height;
-                    var width = this.width;
-                    var type = file.type;
-                    // Changing the image from byte to kilobyte here.
-                    var size = ~~(file.size / 1024) + "KB";
-                    $("#targetImg").attr('src', _file.target.result);
-                    $("#description").text("Size: " + size + ", " + height + " x " + width + ", " + type + "");
-                    $("#imgPreview").show();
+                if ('size' in file) {
+                    txt += "size: " + file.size + " bytes <br>";
                 }
+
+                txt += "<button class='btn btn-sm btn-warning' onclick='ClearPreview()'>" + "Ta bort" + "</button><br>";
+
             }
-        };
+        }
+        document.getElementById("demo").innerHTML = txt;
+        $("#demo").show();
+    }
 
-        var ClearPreview = function () {
-            $("#browseImages").val('');
-            $("#description").text('');
-            $("#imgPreview").hide();
-        };
+    var ClearPreview = function () {
+        $("#demo").hide();
+    };
+
+
+    //$(document).ready(function () {
+    //    $("#browseImages").change(function () {
+
+    //        var File = this.files;
+    //        for (var i = 0; i != File.length; i++)
+    //        {
+    //            if (File && File[i]) {
+    //                ReadImage(File[i]);
+    //            }
+    //        }
+    //        //if (File && File[0]) {
+    //        //    ReadImage(File[0]);
+    //        //}
+    //    });
+    //});
+
+    //var ReadImage = function (file) {
+    //    var reader = new FileReader;
+    //    var image = new Image;
+    //    reader.readAsDataURL(file);
+    //    reader.onload = function (_file) {
+    //        image.src = _file.target.result;
+    //        image.onload = function () {
+    //            var height = this.height;
+    //            var width = this.width;
+    //            var type = file.type;
+    //            // Changing the image from byte to kilobyte here.
+    //            var size = ~~(file.size / 1024) + "KB";
+    //            $("#targetImg").attr('src', _file.target.result);
+    //            $("#description").text("Size: " + size + ", " + height + " x " + width + ", " + type + "");
+    //            $("#imgPreview").show();
+    //        }
+    //    }
+    //};
+
+    //var ClearPreview = function () {
+    //    $("#browseImages").val('');
+    //    $("#description").text('');
+    //    $("#imgPreview").hide();
+    //};
 </script>
