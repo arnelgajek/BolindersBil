@@ -168,11 +168,11 @@ namespace BolindersBil.Web.Controllers
                 Directory.CreateDirectory(createVehicleImagesFolder);
                 string createSpecificVehicleFolder = createVehicleImagesFolder + "\\" + addNewVehicle.Brand + "_" + addNewVehicle.RegNr;
                 Directory.CreateDirectory(createSpecificVehicleFolder);
-
+                
                 // Taking each uploaded image and saving it in the correct folder structure. 
                 foreach (var file in uploadedImages)
                 {
-                    var uniqueGuid = new Guid();
+                    Guid uniqueGuid = Guid.NewGuid();
                     string targetFileName = uniqueGuid + "_" + file.FileName;
                     string finalTargetFilePath = createSpecificVehicleFolder + "\\" + targetFileName;
 
@@ -184,39 +184,36 @@ namespace BolindersBil.Web.Controllers
                             await file.CopyToAsync(stream);
                         }
                     }
+
+                    // Resize and save the image under the correct folder. Calls on the ImageResize function.
+                    string resizedImageFolder = createSpecificVehicleFolder + "\\resized_images";
+                    Directory.CreateDirectory(resizedImageFolder);
+
+                    // TODO: figure out how to create the resize folder and have it show up physically first....
+                    using (var resizefolder = new FileStream(resizedImageFolder, FileMode.Create)) { }
+                    
+                    ImageResize(finalTargetFilePath, resizedImageFolder, 100);
+
+
+                    //// TODO: save the data to the DB tables Image and Vehicle....
+                    //var testImage = new Models.Image
+                    //{
+                    //    Id = addNewVehicle.Id,
+                    //    Name = uniqueGuid,
+                    //    Path = finalTargetFilePath
+                    //};
+                    //addNewVehicle.Images = testImage;
                 }
 
 
 
+                
 
 
 
 
 
-                //// ****To take the uploaded photo and resize it to the same size****
-                //foreach (var i in uploadedImage)
-                //{
-                //    //string webrootPath = _hostingEnvironment.WebRootPath;
-                //    //string path = webrootPath + "\\images\\Vehicle_Images\\" + addNewVehicle.RegNr + "\\Original\\" + i.FileName;
 
-
-                //    string imageFolder = "Vehicle_Images";
-                //    string targetFilename = i.FileName;
-                //    string webrootPath = _hostingEnvironment.WebRootPath;
-                //    string pathOfTargetFolder = webrootPath + "\\images\\" + imageFolder + "\\";
-                //    string fileTargetOriginal = pathOfTargetFolder + addNewVehicle.RegNr + "\\Original\\" + targetFilename;
-
-                //    // Copy file to target.
-                //    using (var stream = new FileStream(fileTargetOriginal, FileMode.Create))
-                //    {
-                //        await i.CopyToAsync(stream);
-                //    }
-
-                //    // Resize and save the image under the folder named: 100. Calls on the ImageResize function.
-                //    ImageResize(fileTargetOriginal, pathOfTargetFolder + "\\100\\" + targetFilename, 100);
-                //    // Output. 
-                //    ViewData["FileResized_100"] = "/images/Vehicle_Images/100/" + targetFilename;
-                //}
 
 
 
@@ -235,11 +232,6 @@ namespace BolindersBil.Web.Controllers
                 //// Resize and save the image under the folder named: 80. Calls on the ImageResize function.
                 //ImageResize(fileTargetOriginal, pathOfTargetFolder + "\\80\\" + targetFilename, 80);
 
-
-                //// Output. 
-                //ViewData["FileResized_80"] = "/images/Vehicle_Images/80/" + targetFilename;
-
-
                 ////****To save the image to the DB.
                 //using (var stream = new MemoryStream())
                 //{
@@ -247,7 +239,7 @@ namespace BolindersBil.Web.Controllers
                 //    addNewVehicle.Picture = stream.ToArray();
                 //}
 
-                
+
                 addNewVehicle.AddedDate = DateTime.Now;
                 addNewVehicle.UpdatedDate = DateTime.Now;
 
@@ -263,7 +255,7 @@ namespace BolindersBil.Web.Controllers
         private void ImageResize(string inputImagePath, string outputImagePath, int newWidth)
         {
             const long quality = 50L;
-             
+
 
             Bitmap sourceBitmap = new Bitmap(inputImagePath);
             double dblWidthOriginal = sourceBitmap.Width;
@@ -303,9 +295,6 @@ namespace BolindersBil.Web.Controllers
             }
             sourceBitmap.Dispose();
         }
-
-
-
         
         [HttpGet]
         public IActionResult EditVehicle(int vehicleId)

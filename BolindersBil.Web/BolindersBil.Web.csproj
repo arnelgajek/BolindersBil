@@ -27,4 +27,8 @@
     <ProjectReference Include="..\BolindersBil.Repositories\BolindersBil.Repositories.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\images\vehicle_images\" />
+  </ItemGroup>
+
 </Project>
