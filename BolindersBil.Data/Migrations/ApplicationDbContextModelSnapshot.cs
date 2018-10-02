@@ -29,7 +29,7 @@ namespace BolindersBil.Data.Migrations
 
                     b.Property<string>("Path");
 
-                    b.Property<int?>("VehicleId");
+                    b.Property<int>("VehicleId");
 
                     b.HasKey("Id");
 
@@ -279,9 +279,10 @@ namespace BolindersBil.Data.Migrations
 
             modelBuilder.Entity("BolindersBil.Models.Image", b =>
                 {
-                    b.HasOne("BolindersBil.Models.Vehicle")
+                    b.HasOne("BolindersBil.Models.Vehicle", "Vehicle")
                         .WithMany("Images")
-                        .HasForeignKey("VehicleId");
+                        .HasForeignKey("VehicleId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("BolindersBil.Models.Vehicle", b =>

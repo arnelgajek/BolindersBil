@@ -9,5 +9,7 @@ namespace BolindersBil.Models
         public int Id { get; set; }
         public Guid Name { get; set; }
         public string Path { get; set; }
+        public virtual Vehicle Vehicle { get; set; }
+        public int VehicleId { get; set; }
     }
 }

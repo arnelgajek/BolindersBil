@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BolindersBil.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20181001131456_initial")]
+    [Migration("20181002115837_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -31,7 +31,7 @@ namespace BolindersBil.Data.Migrations
 
                     b.Property<string>("Path");
 
-                    b.Property<int?>("VehicleId");
+                    b.Property<int>("VehicleId");
 
                     b.HasKey("Id");
 
@@ -281,9 +281,10 @@ namespace BolindersBil.Data.Migrations
 
             modelBuilder.Entity("BolindersBil.Models.Image", b =>
                 {
-                    b.HasOne("BolindersBil.Models.Vehicle")
+                    b.HasOne("BolindersBil.Models.Vehicle", "Vehicle")
                         .WithMany("Images")
-                        .HasForeignKey("VehicleId");
+                        .HasForeignKey("VehicleId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("BolindersBil.Models.Vehicle", b =>
