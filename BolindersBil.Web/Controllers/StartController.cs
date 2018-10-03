@@ -22,6 +22,8 @@ namespace BolindersBil.Web.Controllers
             vehicleRepo = vehicleRepository;
         }
 
+        public IActionResult Privacy()
+
         public IActionResult Cookies()
         {
             return View();
@@ -97,6 +99,11 @@ namespace BolindersBil.Web.Controllers
             ViewBag.gears = gearType;
 
             return RedirectToAction("Index", "Vehicle");
+        }
+
+        public IActionResult Contact()
+        {
+            return RedirectToAction("Index", "Contact");
         }
 
     }

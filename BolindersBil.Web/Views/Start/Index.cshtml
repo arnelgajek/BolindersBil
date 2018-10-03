@@ -1,6 +1,14 @@
-﻿@model BolindersBil.Models.VehiclesSearchViewModel
+@model BolindersBil.Models.VehiclesSearchViewModel
 
-<<<<<<< HEAD
+<div class="container-fluid" style="margin-top:100px;">
+    <div class="row">
+        <div class="col-sm-8">
+            @*Detta är search men behövs kontrollera efter vi är klara med vehicles view*@
+            <form asp-controller="Vehicle" asp-action="Search" method="post">
+                <div class="col-sm-12">
+                    <div class="row justify-content-center">
+                        <div class="col-12 col-sm-10 col-sm-8">
+                        
 <div class="container-fluid" style="margin-top:100px;">
     <div class="row">
         <div class="col-lg-8">
@@ -15,6 +23,11 @@
                                 </div>
                                 <!-- End of col -->
                                 <div class="col">
+                                    <input class="form-control form-control-sm form-control-borderless" type="search" placeholder="T.ex. Volvo (C30)">
+                                </div>
+                                <!-- End of col -->
+                                <div class="col-auto">
+                                    <button class="btn btn-sm btn-success float-sm-right" type="submit">Search</button>
                                     <input class="form-control form-control-lg form-control-borderless" type="search" placeholder="T.ex. Volvo (C30)">
                                 </div>
                                 <!-- End of col -->
@@ -25,7 +38,11 @@
                             </div>
                         </div>
                     </div>
-=======
+                </div>
+                
+                <!-- Buttons New/Used: -->
+                <div class="col-sm-12">
+                
 <!DOCTYPE html>
 
 <html>
@@ -104,7 +121,6 @@
                     <a href="LinkT">
                         <img alt="AltText" src="~/Logo/Mini-logo-2001-1920x1080.png" class="img-fluid">
                     </a>
->>>>>>> 72c7c2fdf31adf2a912eacbf29007c91e930385b
                 </div>
                 <!-- Buttons New/Used: -->
                 <div class="col-lg-12">
@@ -117,6 +133,13 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="col-sm-12" style="margin-top:50px;">
+                    
+                    <!-- Skapa en tabell för loggor i databasen, gör en foreach och presentera loggorna här: -->
+                    <div class="container justify-content-center">
+                        <div class="row" style="">
+                            <div class="col-sm-3 col-sm-6 col-xs-12">
                 <div class="col-lg-12" style="margin-top:50px;">
                     <!-- Skapa en tabelel för loggor i databasen, gör en foreach och presentera loggorna här: -->
                     <div class="container justify-content-center">
@@ -126,16 +149,19 @@
                                     <img alt="AltText" src="~/Logo/Saab-logo-2013-2000x450.png" class="img-fluid">
                                 </a>
                             </div>
+                            <div class="col-sm-3 col-sm-6 col-xs-12">
                             <div class="col-md-3 col-sm-6 col-xs-12">
                                 <a href="LinkToImage">
                                     <img alt="AltText" src="~/Logo/Porsche-logo-2008-1920x1080.png" class="img-fluid">
                                 </a>
-                            </div>
+                            </div
+                            <div class="col-sm-3 col-sm-6 col-xs-12">
                             <div class="col-md-3 col-sm-6 col-xs-12">
                                 <a href="LinkToImage">
                                     <img src="~/Logo/BMW-logo-2000-2048x2048.png" alt="AltText" class="img-fluid">
                                 </a>
                             </div>
+                            <div class="col-sm-3 col-sm-6 col-xs-12">
                             <div class="col-md-3 col-sm-6 col-xs-12">
                                 <a href="LinkToImage">
                                     <img alt="AltText" src="~/Logo/Renault-logo-2015-2048x2048.png" class="img-fluid">
@@ -144,6 +170,11 @@
                         </div>
                     </div>
                 </div>
+                <div class="col-sm-12" style="margin-top:50px;">
+                    <!-- Skapa en tabelel för loggor i databasen, gör en foreach och presentera loggorna här: -->
+                    @*<div class="container justify-content-center">
+                        <div class="row" style="">
+                            <div class="col-sm-3 col-sm-6 col-xs-12">
                 <div class="col-lg-12" style="margin-top:50px;">
                     <!-- Skapa en tabelel för loggor i databasen, gör en foreach och presentera loggorna här: -->
                     <div class="container justify-content-center">
@@ -153,22 +184,30 @@
                                     <img alt="AltText" src="~/Logo/Mini-logo-2001-1920x1080.png" class="img-fluid">
                                 </a>
                             </div>
+                            <div class="col-sm-3 col-sm-6 col-xs-12">
                             <div class="col-md-3 col-sm-6 col-xs-12">
                                 <a href="LinkToImage">
                                     <img alt="AltText" src="~/Logo/Nissan-logo-2013-1440x900.png" class="img-fluid">
                                 </a>
                             </div>
+                            <div class="col-sm-3 col-sm-6 col-xs-12">
                             <div class="col-md-3 col-sm-6 col-xs-12">
                                 <a href="LinkToImage">
                                     <img src="~/Logo/Opel-logo-2009-1920x1080.png" alt="AltText" class="img-fluid">
                                 </a>
                             </div>
+                            <div class="col-sm-3 col-sm-6 col-xs-12">
                             <div class="col-md-3 col-sm-6 col-xs-12">
                                 <a href="LinkToImage">
                                     <img alt="AltText" src="~/Logo/Volvo-logo-2014-1920x1080.png" class="img-fluid">
                                 </a>
                             </div>
                         </div>
+                    </div>*@
+                </div>
+            </form>
+        </div>
+        <div class="col-sm-4">
                     </div>
                 </div>
             </form>
