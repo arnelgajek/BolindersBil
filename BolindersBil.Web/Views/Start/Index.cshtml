@@ -1,5 +1,6 @@
 ﻿@model BolindersBil.Models.VehiclesSearchViewModel
 
+<<<<<<< HEAD
 <div class="container-fluid" style="margin-top:100px;">
     <div class="row">
         <div class="col-lg-8">
@@ -24,6 +25,86 @@
                             </div>
                         </div>
                     </div>
+=======
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8" />
+
+
+    <title>Home</title>
+</head>
+<body>
+
+    <style>
+
+        .img-fluid {
+            height: 100px;
+            width: 70%;
+        }
+    </style>
+
+
+    <p>In the Index View</p>
+    <div class="container-fluid">
+
+
+        @*Detta är search men behövs kontrollera efter vi är klara med vehicles view*@
+        <form asp-controller="Vehicle" asp-action="Search" method="post">
+            <input name="searchString" class="col-md-3" placeholder="T.ex. Volvo (C30)" />
+            <button type="submit">Sök</button>
+            <div class="input-group-prepend">
+                <div class="input-group-text">
+                    <input type="radio" name="Used" value="false">New Car<br>
+                </div>
+                <div class="input-group-text">
+                    <input type="radio" name="Used" value="true">Used Car<br>
+                </div>
+            </div>
+        </form>
+
+
+        <div class="container">
+
+            <div class="row" style="">
+                <div class="col-md-3 col-sm-6 col-xs-12">
+                    <a href="LinkT">
+                        <img alt="AltText" src="~/Logo/Saab-logo-2013-2000x450.png" class="img-fluid">
+                    </a>
+                </div>
+
+                <div class="col-md-3 col-sm-6 col-xs-12">
+                    <a href="LinkToImage">
+                        <img alt="AltText" src="~/Logo/Porsche-logo-2008-1920x1080.png" class="img-fluid">
+                    </a>
+                </div>
+
+                <div class="col-md-3 col-sm-6 col-xs-12">
+                    <a href="LinkToImage">
+                        <img src="~/Logo/BMW-logo-2000-2048x2048.png" alt="AltText" class="img-fluid">
+                    </a>
+                </div>
+
+                <div class="col-md-3 col-sm-6 col-xs-12">
+                    <a href="LinkToImage">
+                        <img alt="AltText" src="~/Logo/Renault-logo-2015-2048x2048.png" class="img-fluid">
+                    </a>
+                </div>
+            </div>
+        </div>
+
+
+        @*More logos*@
+        <div class="container">
+
+            <div class="row" style="">
+                <div class="col-md-3 col-sm-6 col-xs-12">
+                    <a href="LinkT">
+                        <img alt="AltText" src="~/Logo/Mini-logo-2001-1920x1080.png" class="img-fluid">
+                    </a>
+>>>>>>> 72c7c2fdf31adf2a912eacbf29007c91e930385b
                 </div>
                 <!-- Buttons New/Used: -->
                 <div class="col-lg-12">
@@ -94,6 +175,7 @@
         </div>
         <div class="col-lg-4">
             @{
+
                 var newsApiClient = new NewsApiClient("8a9c9b8aa9bb4c01ab3ea332452176af");
                 var articleResponse = newsApiClient.GetEverything(new EverythingRequest
                 {

@@ -96,7 +96,7 @@ namespace BolindersBil.Web.Controllers
             };
             ViewBag.gears = gearType;
 
-            return RedirectToAction("Vehicles", "Vehicle");
+            return RedirectToAction("Index", "Vehicle");
         }
 
     }
