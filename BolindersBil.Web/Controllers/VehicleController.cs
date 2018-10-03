@@ -43,18 +43,22 @@ namespace BolindersBil.Web.Controllers
         }
 
         [HttpPost]
-        public IActionResult Search(string searchString, bool Used)
+        public IActionResult Search(string searchString, bool used)
         {
             //should we convert this into a list of vm's?
-            var searchResults = repo.Search(searchString, Used);
+            var searchResults = repo.Search(searchString, used);
+                         
+            
 
             return View("Index", searchResults);
+
+
 
             // Todo If checkbox is new send only new cars in view
             // Todo if checkbox is used send only used cars in view
         }
 
-
+       
 
     }
 }
