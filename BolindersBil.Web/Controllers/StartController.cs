@@ -22,6 +22,11 @@ namespace BolindersBil.Web.Controllers
             vehicleRepo = vehicleRepository;
         }
 
+        public IActionResult Privacy()
+        {
+            return View();
+        }
+
         public IActionResult Index()
         {
             return View();

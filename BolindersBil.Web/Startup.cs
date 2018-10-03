@@ -73,6 +73,8 @@ namespace BolindersBil.Web
             // To get access to the wwwroot files...
             app.UseStaticFiles();
 
+            app.UseCookiePolicy();
+
             app.UseAuthentication();
 
             app.UseMvcWithDefaultRoute();
