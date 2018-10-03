@@ -22,7 +22,10 @@ namespace BolindersBil.Web.Controllers
             vehicleRepo = vehicleRepository;
         }
 
-    
+        public IActionResult Cookies()
+        {
+            return View();
+        }
 
         public IActionResult Index()
         {
