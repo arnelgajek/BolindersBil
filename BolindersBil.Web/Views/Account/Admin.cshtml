@@ -7,23 +7,76 @@
 
 <h1 style="text-align:center; margin-top:20px; margin-bottom:100px">Welcome Admin!</h1>
 
-    <div class="container">
-        <div class="float-sm-right" style="margin-bottom:10px">
-            <a asp-controller="Account" asp-action="AddNewVehicle" class="btn btn-success" name="newVehicle" id="newVehicle">New</a>
-            <button type="button" class="btn btn-warning" name="updateVehicle" id="updateVehicle">Update</button>
-            <button type="button" class="btn btn-danger" name="deleteVehicle" id="deleteVehicle" data-toggle="modal" data-target="#deleteModal">Delete</button>
-        </div>
-
-        @foreach (var v in Model)
-        {
-            <!-- The layout for all the vehicles presented on the Admin-page: -->
-            <table class="table table-bordered table-striped">
-                <tr>
-                    <td><input type="checkbox" name="ID" value="@v.Id" class="custom-checkbox" chkCheckBoxId/> @v.Brand @v.Model, @v.RegNr</td>
-                </tr>
-            </table>
-        }
+<div class="container">
+    <div class="alert-light">
+        <input type="checkbox" id="checkAll" /> Check All
     </div>
+    <div class="float-sm-right" style="margin-bottom:10px">
+        <a asp-controller="Account" asp-action="AddNewVehicle" class="btn btn-success" name="newVehicle" id="newVehicle">New</a>
+        <button type="button" class="btn btn-warning" name="updateVehicle" id="updateVehicle">Update</button>
+        <button type="button" class="btn btn-danger" name="deleteVehicle" id="deleteVehicle" data-toggle="modal" data-target="#deleteModal">Delete</button>
+        <button type="button" class="btn btn-danger" name="bulkDeleteVehicle" id="bulkDeleteVehicle" data-toggle="modal" data-target="#bulkDeleteModal">Bulk Delete</button>
+    </div>
+
+    @foreach (var v in Model)
+    {
+        <!-- The layout for all the vehicles presented on the Admin-page: -->
+        <table class="table table-bordered table-striped">
+            <tr>
+                <td><input type="checkbox" class="chk" value="@v.Id" /> @v.Brand @v.Model, @v.RegNr</td>
+            </tr>
+        </table>
+
+        <!-- This is the deleteModal to make sure that the user really wants to delete a vehicle? -->
+        <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title mx-auto" id="deleteModalLabel">Are you sure that you want to delete?</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p style="text-align:center">You are about to delete a vehicle from the page, are you sure that you want to do that?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                        <form asp-action="DeleteVehicle" method="post">
+                            <input type="hidden" name="vehicleId" value="@v.Id" />
+                            <button type="submit" id="testTest" class="btn btn-danger">Delete</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+
+        <!-- This is the bulkDeleteModal to make sure that the user really wants to delete several vehicles? -->
+        <div class="modal fade" id="bulkDeleteModal" tabindex="-1" role="dialog" aria-labelledby="bulkdDeleteModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title mx-auto" id="bulkDeleteModalLabel">Are you sure that you want to do a bulk delete?</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <p style="text-align:center">You are about to delete several vehicles from the page, are you sure that you want to do that?</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                            <form asp-action="BulkDeleteVehicle" method="post">
+                                <input type="hidden" name="vehicleId" value="@v.Id" />
+                                <button type="submit" id="bulktest" class="btn btn-danger">Delete</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    }
+</div>
 
 <!-- LogOut-button: -->
 <div class="container" style="margin-bottom:10px">
@@ -39,25 +92,4 @@
     </div>
 </div>
 
-
-<!-- This is the deleteModal to make sure that the user really wants to delete a vehicle? -->
-<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title mx-auto" id="deleteModalLabel">Are you sure that you want to delete?</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <p style="text-align:center">You are about to delete a vehicle from the page, are you sure that you want to do that?</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-                <button type="submit" value="Delete" class="btn btn-danger">Delete</button>
-            </div>
-        </div>
-    </div>
-</div>
 
