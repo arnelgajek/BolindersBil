@@ -21,6 +21,7 @@ namespace BolindersBil.Web.Controllers
     {
         private IVehicleRepository vehicleRepo;
         private IHostingEnvironment _hostingEnvironment;
+   
 
         public VehicleController(IVehicleRepository vehicleRepository, IHostingEnvironment hostingEnvironment)
         {
