@@ -61,59 +61,62 @@ namespace BolindersBil.Repositories
             return Vehicles;
         }
 
+     
 
-        public IEnumerable<Vehicle> Search(string searchString, bool Used)
+        public IEnumerable<Vehicle> Search(string searchString, bool used)
         {
+            IEnumerable<Vehicle> vehicles;
+            if (string.IsNullOrEmpty(searchString))
+            {
 
-            var vehicles = (from c in ctx.Vehicles
-                            where
-                                     c.RegNr.Contains(searchString) ||
-                                     c.Brand.Contains(searchString) ||
-                                     c.Model.Contains(searchString) ||
-                                     c.ModelDescription.Contains(searchString) ||
-                                     c.Year.Equals(searchString) ||
-                                     c.Kilometer.Equals(searchString) ||
-                                     c.Picture.Equals(searchString) &&
-                                     c.Used.Equals(Used)
-
-                            select c
-                                );
+                vehicles = ctx.Vehicles.Where(x => x.Used == used);
+            }
+            else
+            {
+                vehicles = ctx.Vehicles.Where(x => x.Brand.Contains(searchString) && x.Used == used ||
+                                                   x.Body.Contains(searchString) && x.Used == used ||
+                                                   x.Brand.Contains(searchString) && x.Used == used ||
+                                                   x.Color.Contains(searchString) && x.Used == used ||
+                                                   x.Fuel.Contains(searchString) && x.Used == used ||
+                                                   x.Gearbox.Contains(searchString) && x.Used == used ||
+                                                   x.Office.Contains(searchString) && x.Used == used ||
+                                                   x.VehicleAttribute.Contains(searchString) && x.Used == used); 
+            }
 
             return vehicles;
-
         }
 
-            // Update(Edit) the vehicle. 
-            public void UpdateVehicle(EditVehicleViewModel v)
+        // Update(Edit) the vehicle. 
+        public void UpdateVehicle(EditVehicleViewModel v)
+        {
+            //ctx.AttachRange(v);
+            var ctxVehicle = ctx.Vehicles.FirstOrDefault(x => x.Id.Equals(v.Id));
+            if (ctxVehicle != null)
             {
-                //ctx.AttachRange(v);
-                var ctxVehicle = ctx.Vehicles.FirstOrDefault(x => x.Id.Equals(v.Id));
-                if (ctxVehicle != null)
-                {
-                    ctxVehicle.RegNr = v.RegNr;
-                    ctxVehicle.Brand = v.Brand;
-                    ctxVehicle.Model = v.Model;
-                    ctxVehicle.ModelDescription = v.ModelDescription;
-                    ctxVehicle.Year = v.Year;
-                    ctxVehicle.Kilometer = v.Kilometer;
-                    ctxVehicle.Price = v.Price;
-                    ctxVehicle.Body = v.Body;
-                    ctxVehicle.Color = v.Color;
-                    ctxVehicle.Gearbox = v.Gearbox;
-                    ctxVehicle.Fuel = v.Fuel;
-                    ctxVehicle.Horsepower = v.Horsepower;
-                    ctxVehicle.Used = v.Used;
-                    ctxVehicle.OfficeId = v.OfficeId;
-                    ctxVehicle.Office = v.Office;
-                    ctxVehicle.Picture = v.Picture;
-                    ctxVehicle.Leasable = v.Leasable;
-                    ctxVehicle.UpdatedDate = v.UpdatedDate;
-                    ctxVehicle.VehicleAttribute = v.VehicleAttribute;
-                }
-                //ctx.Update(ctxVehicle);
-                ctx.SaveChanges();
-
+                ctxVehicle.RegNr = v.RegNr;
+                ctxVehicle.Brand = v.Brand;
+                ctxVehicle.Model = v.Model;
+                ctxVehicle.ModelDescription = v.ModelDescription;
+                ctxVehicle.Year = v.Year;
+                ctxVehicle.Kilometer = v.Kilometer;
+                ctxVehicle.Price = v.Price;
+                ctxVehicle.Body = v.Body;
+                ctxVehicle.Color = v.Color;
+                ctxVehicle.Gearbox = v.Gearbox;
+                ctxVehicle.Fuel = v.Fuel;
+                ctxVehicle.Horsepower = v.Horsepower;
+                ctxVehicle.Used = v.Used;
+                ctxVehicle.OfficeId = v.OfficeId;
+                ctxVehicle.Office = v.Office;
+                ctxVehicle.Picture = v.Picture;
+                ctxVehicle.Leasable = v.Leasable;
+                ctxVehicle.UpdatedDate = v.UpdatedDate;
+                ctxVehicle.VehicleAttribute = v.VehicleAttribute;
             }
+            //ctx.Update(ctxVehicle);
+            ctx.SaveChanges();
+
         }
     }
+}
 

@@ -1,6 +1,8 @@
-﻿@model IEnumerable<Vehicle>
+﻿@model VehiclesSearchViewModel
 
-    <p>This is the Vehicle Index page!</p>
+
+<p>This is the Vehicle Index page!</p>
+
 
 <div class="container">
     <div class="row">
@@ -9,9 +11,7 @@
                 @*TODO: Fix this form with the current model*@
                 <div class="form-group">
                     <label>Årstyp</label>
-                    <select class="form-control">
-
-                    </select>
+                    <select class="form-control"></select>
                 </div>
                 <div class="form-group">
                     <label>Bränsle</label>
@@ -52,14 +52,49 @@
                     </select>
                 </div>
 
+
             </form>
         </div>
     </div>
     <div class="row">
-        @foreach(var v in Model)
+        @foreach (var v in Model.Vehicles)
         {
-            <h1>@v.Brand @v.Model @v.ModelDescription, @v.Year</h1>
+            <div class="row">
+                <input type="hidden" value="@v.Id" />
+                <div class="col-5">
+                    @if (v.Picture != null)
+                    {
+                        <img src="https://via.placeholder.com/300x150" />
+                    }
+                    else
+                    {
+                        <img src="@v.Picture" />
+                    }
+                </div>
+                <div class="col-4">
+                    <span>@v.Office</span>
+                    <h3>@v.Brand @v.Model @v.ModelDescription @v.Year</h3>
+                    <span>@v.Fuel | @v.Gearbox | @v.Kilometer</span>
+                    <h4>@v.Price Kr</h4>
+                </div>
+                <div class="col-3 float-sm-right">
+                    <span>@v.UpdatedDate.ToString("dd/MM/yyyy hh:mm")</span>
+                </div>
+            </div>
         }
     </div>
+    <div page-model="@Model.Pager" page-action="VehicleList">
+
+    </div>
 </div>
+
+@*@Html.ActionLink("Load next 8 Vehicles", "Vehicles", "Controller", new { page = Model.Pager.CurrentPage + 1 })*@
+
+
+
+</div>
+
+
+
+
 
