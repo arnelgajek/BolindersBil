@@ -23,23 +23,49 @@ namespace BolindersBil.Web.Controllers
             repo = vehicleRepository;
         }
 
-        //public IActionResult List(int page = 1)
-        //{
-        //    var ToSkip = (page - 1) * PageLimit;
+        // Paging
+        public IActionResult VehicleList(int page = 1)
+        {
+            // page = 0 x pagelimit
+            var toSkip = (page - 1) * PageLimit;
 
-        //    var vehicles = repo.Vehicles.OrderBy(x => x.Id).Skip(ToSkip).Take(PageLimit);
-        //    var paging = new PagingInfo { CurrentPage = page, CarPerPage = PageLimit, TotalICar = repo.Vehicles.Count() };
-        //    var vm = new VehicleListViewModel { Vehicle = vehicles, Pager = paging };
-        //    return View(vm);
+            // Gets the (pagelimit) amount of vehicles and orders them by their ID
+            // This shall be changed to sort by UpdateDate in the future
+            var vehicles = repo.Vehicles.OrderBy(x => x.Id).Skip(toSkip).Take(PageLimit);
 
-            
-        //}
+            // Gets new info for the paging. Page becomes 1. (1 (page) x 8 (pagelimit)). 
+            // And creates new pages for the amount over the pagelimit (since page becomes 2 then 3...)
+            var paging = new PagingInfo
+            { CurrentPage = page,
+              ItemsPerPage = PageLimit,
+              TotalItems = repo.Vehicles.Count()
+            };
+
+
+            var vm = new VehiclesSearchViewModel
+            {
+              Vehicles = vehicles,
+              Pager = paging
+            };
+
+            return View("Index", vm);
+        }
+         // Index isn't used for anything important atm but is crutial
+        public IActionResult Index()
+        {
+            return RedirectToAction("VehicleList");
+        }
         
         // Gets all the vehicles so the admin can see them when logged in:
         [HttpGet]
         public IActionResult Vehicles()
         {
-            return View();
+            var vehicles = repo.GetAllVehicles();
+            var vm = new VehiclesSearchViewModel();
+
+            vm.Vehicles = vehicles;
+
+            return View("Index", vm);
         }
 
         [HttpPost]
@@ -57,8 +83,6 @@ namespace BolindersBil.Web.Controllers
             // Todo If checkbox is new send only new cars in view
             // Todo if checkbox is used send only used cars in view
         }
-
-       
 
     }
 }

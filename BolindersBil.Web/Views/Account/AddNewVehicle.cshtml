@@ -5,7 +5,9 @@
     ViewData["Title"] = "Admin - AddNewVehicle";
 }
 
-<i>AddNewVehicleForm</i>
+<div style="text-align:center; margin-top:20px; margin-bottom:25px">
+    <h2><strong>Add Vehicle</strong></h2>
+</div>
 <hr />
 
 <div>
@@ -122,10 +124,18 @@
         <div class="form-group">
             <label asp-for="Used" class="control-label col-sm-2"><strong>Begagnad:</strong></label>
             <div class="col-sm-10">
-                <label class="checkbox-inline"><input asp-for="Used" type="checkbox" value="true">  Ja</label>&nbsp;&nbsp;
-                <label class="checkbox-inline"><input asp-for="Used" type="checkbox" value="false">  Nej</label>
+                <label class="check-inline"><input asp-for="Used" type="radio" name="radioOption" value="true">  Ja</label>
+                <label class="check-inline"><input asp-for="Used" type="radio" name="radioOption" value="false">  Nej</label>
             </div>
         </div>
+
+        @*<div class="form-group">
+                <label asp-for="Used" class="control-label col-sm-2"><strong>Begagnad:</strong></label>
+                <div class="col-sm-10">
+                    <label class="checkbox-inline"><input asp-for="Used" type="checkbox" value="true">  Ja</label>&nbsp;&nbsp;
+                    <label class="checkbox-inline"><input asp-for="Used" type="checkbox" value="false">  Nej</label>
+                </div>
+            </div>*@
 
         <div class="form-group">
             <label asp-for="Office" class="control-label col-sm-2"><strong>Anläggning:</strong></label>
@@ -144,10 +154,7 @@
         <div class="form-group">
             <label asp-for="Picture" class="control-label col-sm-2"><strong>Bilder:</strong></label>
             <div class="col-sm-10">
-                <div>
-                    <input asp-for="Picture" type="file" id="files" class="custom-file-input" multiple>
-                    <label class="custom-file-label col-sm-4">Välj fil</label>
-                </div>
+                <input asp-for="Picture" type="file" id="files" class="form-control-file" multiple>
             </div>
         </div>
 
@@ -175,3 +182,43 @@
 
     </form>
 </div>
+
+<script type="text/javascript">
+
+    //function showPreview(input) {
+
+    //    if (input.files && input.files[0]) {
+
+    //        var reader = new FileReader();
+    //        reader.onload = function (e) {
+    //            $('#imgpreview').css('visibility', 'visible');
+    //            $('#imgpreview').attr('src', e.target.result);
+    //        }
+    //        reader.readAsDataURL(input.files[0]);
+    //    }
+
+    //}
+
+
+
+    //$(document).ready(function () {
+
+    //    $("#btnUploadFile").on('click', function () {
+    //        var data = new FormData();
+    //        var files = $("#files").get(0).files;
+    //        // Adding the uploaded image content to the form data collection (data variable).
+    //        if (files.length > 0) {
+    //            data.append("UploadedImage", files[0]);
+    //        }
+    //        var ajaxRequest = $.ajax({
+    //            type: "Post",
+    //            url: "Account/AddNewVehicle",
+    //            contentType: false,
+    //            processData: false,
+    //            data: data
+    //        });
+    //        ajaxRequest.done(function () { });
+    //    });
+
+    //});
+</script>

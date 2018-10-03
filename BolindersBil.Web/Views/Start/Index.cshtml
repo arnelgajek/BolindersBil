@@ -40,40 +40,6 @@
         </form>
 
 
-        
-
-
-
-        <div class="row">
-
-
-
-            @*Search form*@
-            @*<form asp-action="GetVehicles" method="get">
-                <div id="SearchBar">
-                    <div class="input-group mb-3" style="margin: 2em">
-                        <div class="input-group-prepend">
-                            <input type="text" class="form-control" placeholder="T.ex. Volvo (C30)">
-                        </div>
-                        <div class="input-group-prepend">
-                            <div class="input-group-text">
-                                <input type="checkbox" aria-label="Checkbox for following text input">
-                            </div>
-                        </div>
-                        <div class="input-group-prepend">
-                            <div class="input-group-text">
-                                <input type="checkbox" aria-label="Checkbox for following text input">
-                            </div>
-                        </div>
-                        <input type="search" class="btn btn-light" value="Sök" style="margin: 2em" />
-                    </div>
-                </div>
-            </form>*@
-
-        </div>
-
-
-
         <div class="container">
 
             <div class="row" style="">
@@ -104,7 +70,7 @@
         </div>
 
 
-
+        @*More logos*@
         <div class="container">
 
             <div class="row" style="">
@@ -134,16 +100,10 @@
             </div>
         </div>
 
-
-
-
-
         @*Newsfeed*@
         <div class="col">
 
             @{
-
-
 
                 var newsApiClient = new NewsApiClient("8a9c9b8aa9bb4c01ab3ea332452176af");
                 var articleResponse = newsApiClient.GetEverything(new EverythingRequest
@@ -191,9 +151,6 @@
         </div>
 
     </div>
-
-
-
 </body>
 </html>
 

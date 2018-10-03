@@ -17,9 +17,9 @@ namespace BolindersBil.Web.Controllers
         private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;
         private IVehicleRepository vehicleRepo;
+        
 
         public AccountController(IVehicleRepository vehicleRepository, UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
-
         {
             vehicleRepo = vehicleRepository;
             _userManager = userManager;
@@ -82,7 +82,6 @@ namespace BolindersBil.Web.Controllers
         [HttpGet]
         public IActionResult AddNewVehicle()
         {
-            // *****TODO: Fix the year 2018 from showing twice in the dropdown.
             // This list is used as the dropdown option in the "Årsmodell" input.
             List<object> years = new List<object>();
             var currentYear = DateTime.Now.Year;
@@ -166,6 +165,8 @@ namespace BolindersBil.Web.Controllers
                     }
                 }
                 addNewVehicle.AddedDate = DateTime.Now;
+
+               
 
                 //var jkpg = addNewVehicle.OfficeId.OfficeCode;
                 //if (addNewVehicle.Office == "Jönköping")
@@ -265,6 +266,37 @@ namespace BolindersBil.Web.Controllers
                 // TODO: error message here
                 return View(editVehicleViewModel);
             }
+        }
+
+        [HttpPost]
+        public IActionResult DeleteVehicle(int vehicleId)
+        {
+            var deleted = vehicleRepo.DeleteVehicle(vehicleId);
+            if (deleted != null)
+            {
+                // Vehicle was found and not deleted...
+            }
+            else
+            {
+                // Vehicle was not found - show error
+            }
+            return RedirectToAction(nameof(Admin));
+        }
+
+        [HttpPost]
+        public IActionResult BulkDeleteVehicle(string vehicleId)
+        {
+            // Creates an array with all the Ids checked to make an BulkDelete:
+            int[] bulkDelete = Array.ConvertAll(vehicleId.Split(','), int.Parse);
+
+            // Loops through all the Ids from the array above:
+            foreach (var vehicle in bulkDelete)
+            {
+                // Deletes the vehicles with the specific Ids chosen:
+                DeleteVehicle(vehicle);
+            }
+            // Redirects the user to the account/admin:
+            return RedirectToAction(nameof(Admin));
         }
     }
 }

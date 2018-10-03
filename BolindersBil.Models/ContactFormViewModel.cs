@@ -12,6 +12,7 @@ namespace BolindersBil.Models
         public string PhoneNr { get; set; }
         public string Subject { get; set; }
         public string Message { get; set; }
-        public string Office { get; set; }
+        public string Office { get; set; } 
+        public IEnumerable<Office> Offices { get; set; }
     }
 }

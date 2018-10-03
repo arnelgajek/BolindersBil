@@ -3,14 +3,19 @@
 @{
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
+
+
 <h1 style="text-align:center; margin-top:20px; margin-bottom:100px">Welcome Admin!</h1>
-<!-- Denna information finns i PPT 5, sida 81 och framåt: -->
-<!-- The editing section on the top of the page: -->
 
 <div class="container">
+    <div class="alert-light">
+        <input type="checkbox" id="checkAll" /> Check All
+    </div>
     <div class="float-sm-right" style="margin-bottom:10px">
         <a asp-controller="Account" asp-action="AddNewVehicle" class="btn btn-success" name="newVehicle" id="newVehicle">New</a>
-        <button class="btn btn-danger" type="submit" name="deleteVehicle" @*disabled="disabled" *@ id="deleteVehicle">Delete</button>
+        <button type="button" class="btn btn-warning" name="updateVehicle" id="updateVehicle">Update</button>
+        <button type="button" class="btn btn-danger" name="deleteVehicle" id="deleteVehicle" data-toggle="modal" data-target="#deleteModal">Delete</button>
+        <button type="button" class="btn btn-danger" name="bulkDeleteVehicle" id="bulkDeleteVehicle" data-toggle="modal" data-target="#bulkDeleteModal">Bulk Delete</button>
     </div>
 
     @foreach (var v in Model)
@@ -18,22 +23,62 @@
         <!-- The layout for all the vehicles presented on the Admin-page: -->
         <table class="table table-bordered table-striped">
             <tr>
-                <td><input type="checkbox" id="checkedBox" value="@v.Id" /> @v.Brand @v.Model, @v.RegNr</td>
-                <td class="text-right">
-
-                    <a asp-controller="Account"
-                       asp-action="EditVehicle"
-                       asp-route-vehicleId="@v.Id"
-                       class="btn btn-sm btn-warning">
-                        Update
-                    </a>
-
-                </td>
+                <td><input type="checkbox" class="chk" value="@v.Id" /> @v.Brand @v.Model, @v.RegNr</td>
             </tr>
         </table>
+
+        <!-- This is the deleteModal to make sure that the user really wants to delete a vehicle? -->
+        <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title mx-auto" id="deleteModalLabel">Are you sure that you want to delete?</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p style="text-align:center">You are about to delete a vehicle from the page, are you sure that you want to do that?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                        <form asp-action="DeleteVehicle" method="post">
+                            <input type="hidden" name="vehicleId" value="@v.Id" />
+                            <button type="submit" id="testTest" class="btn btn-danger">Delete</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+
+        <!-- This is the bulkDeleteModal to make sure that the user really wants to delete several vehicles? -->
+        <div class="modal fade" id="bulkDeleteModal" tabindex="-1" role="dialog" aria-labelledby="bulkdDeleteModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title mx-auto" id="bulkDeleteModalLabel">Are you sure that you want to do a bulk delete?</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <p style="text-align:center">You are about to delete several vehicles from the page, are you sure that you want to do that?</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                            <form asp-action="BulkDeleteVehicle" method="post">
+                                <input type="hidden" name="vehicleId" value="@v.Id" />
+                                <button type="submit" id="bulktest" class="btn btn-danger">Delete</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
     }
 </div>
 
+<!-- LogOut-button: -->
 <div class="container" style="margin-bottom:10px">
     <div class="row">
         <div class="col-md-12">
@@ -47,22 +92,4 @@
     </div>
 </div>
 
-<!-- Enable/Disable the buttons: -->
-<script>
-    var boxChecker = document.getElementById('checkedBox');
-    var newVehicle = document.getElementById('newVehicle');
-    var updateVehicle = document.getElementById('updateVehicle');
-    var deleteVehicle = document.getElementById('deleteVehicle');
 
-    boxChecker.onchange = function () {
-        if (this.checked) {
-            updateVehicle.disabled = false;
-            deleteVehicle.disabled = false;
-            newButton.disabled = true;
-        } else {
-            updateVehicle.disabled = true;
-            deleteVehicle.disabled = true;
-            newButton.disabled = false;
-        }
-    };
-</script>

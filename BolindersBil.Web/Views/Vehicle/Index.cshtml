@@ -1,44 +1,96 @@
-﻿@model IEnumerable<Vehicle>
-
-@{
-    Layout = null;
-
-}
-
-
-<style>
-    body {
-        padding-top: 54px;
-    }
-         
-   
-</style>
-
+﻿@model VehiclesSearchViewModel
 
 
 <p>This is the Vehicle Index page!</p>
 
+
 <div class="container">
+    <div class="row">
+        <div id="filterBox">
+            <form>
+                @*TODO: Fix this form with the current model*@
+                <div class="form-group">
+                    <label>Årstyp</label>
+                    <select class="form-control"></select>
+                </div>
+                <div class="form-group">
+                    <label>Bränsle</label>
+                    <select class="form-control">
+                        <option selected>Bensin</option>
+                        <option>Disel</option>
+                        <option>El</option>
+                        <option>Miljöbränsle/Hybrid</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Karosstyp</label>
+                    <select class="form-control">
+                        <option selected>Småbil</option>
+                        <option>Sedan</option>
+                        <option>Halvbil</option>
+                        <option>Kombi</option>
+                        <option>SUV</option>
+                        <option>Coupé</option>
+                        <option>Cab</option>
+                        <option>Familjebuss</option>
+                        <option>Yrkesfordon</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Pris</label>
+                    <input class="form-control" type="range" />
+                </div>
+                <div class="form-group">
+                    <label>Mil</label>
+                    <input class="form-control" type="range" />
+                </div>
+                <div class="form-group">
+                    <label>Växellåda</label>
+                    <select class="form-control">
+                        <option selected>Manuell</option>
+                        <option>Automat</option>
+                    </select>
+                </div>
 
-    @foreach (var item in Model)
-    {
 
-        <div class="row">
-            <div class="col-md-7">
-                <a href ="/VehicleForSale">
-                    <img class="img-fluid rounded mb-3 mb-md-0"   src="http://placehold.it/700x300" alt="">
-                </a>
-            </div>
-            <div class="col-md-5">
-                <h3>Project Two</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, odit velit cumque vero doloremque repellendus distinctio maiores rem expedita a nam vitae modi quidem similique ducimus! Velit, esse totam tempore.</p>
-                <a class="btn btn-primary" href="#">View Project</a>
-            </div>
+            </form>
         </div>
+    </div>
+    <div class="row">
+        @foreach (var v in Model.Vehicles)
+        {
+            <div class="row">
+                <input type="hidden" value="@v.Id" />
+                <div class="col-5">
+                    @if (v.Picture != null)
+                    {
+                        <img src="https://via.placeholder.com/300x150" />
+                    }
+                    else
+                    {
+                        <img src="@v.Picture" />
+                    }
+                </div>
+                <div class="col-4">
+                    <span>@v.Office</span>
+                    <h3>@v.Brand @v.Model @v.ModelDescription @v.Year</h3>
+                    <span>@v.Fuel | @v.Gearbox | @v.Kilometer</span>
+                    <h4>@v.Price Kr</h4>
+                </div>
+                <div class="col-3 float-sm-right">
+                    <span>@v.UpdatedDate.ToString("dd/MM/yyyy hh:mm")</span>
+                </div>
+            </div>
+        }
+    </div>
+    <div page-model="@Model.Pager" page-action="VehicleList">
+
+    </div>
+</div>
+
+@*@Html.ActionLink("Load next 8 Vehicles", "Vehicles", "Controller", new { page = Model.Pager.CurrentPage + 1 })*@
 
 
-
-    }
 
 </div>
 
