@@ -93,6 +93,10 @@ namespace BolindersBil.Web
                     name: "Vehicle",
                     template: "{controller=Vehicle}/{action=Vehicle}/{id?}");
 
+                //routes.MapRoute(
+                // name: "VehicleForSale",
+                // template: "{controller=VehicleForSale}/{action=Sale}/{id?}");
+
                 // Incase we need routing in navbar
                 //routes.MapRoute(
                 //  name: null,

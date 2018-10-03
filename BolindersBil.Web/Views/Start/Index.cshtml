@@ -25,6 +25,7 @@
                         </div>
                     </div>
                 </div>
+                
                 <!-- Buttons New/Used: -->
                 <div class="col-sm-12">
                     <div class="input-group-prepend justify-content-center">
@@ -95,6 +96,7 @@
         </div>
         <div class="col-sm-4">
             @{
+
                 var newsApiClient = new NewsApiClient("8a9c9b8aa9bb4c01ab3ea332452176af");
                 var articleResponse = newsApiClient.GetEverything(new EverythingRequest
                 {
