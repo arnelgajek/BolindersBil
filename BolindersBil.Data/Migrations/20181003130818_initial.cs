@@ -193,7 +193,6 @@ namespace BolindersBil.Data.Migrations
                     Used = table.Column<bool>(nullable: false),
                     OfficeIdId = table.Column<int>(nullable: true),
                     Office = table.Column<string>(nullable: true),
-                    Picture = table.Column<byte[]>(nullable: true),
                     Leasable = table.Column<bool>(nullable: false),
                     AddedDate = table.Column<DateTime>(nullable: false),
                     UpdatedDate = table.Column<DateTime>(nullable: false),
@@ -211,7 +210,7 @@ namespace BolindersBil.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Image",
+                name: "Images",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -222,9 +221,9 @@ namespace BolindersBil.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Image", x => x.Id);
+                    table.PrimaryKey("PK_Images", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Image_Vehicles_VehicleId",
+                        name: "FK_Images_Vehicles_VehicleId",
                         column: x => x.VehicleId,
                         principalTable: "Vehicles",
                         principalColumn: "Id",
@@ -271,8 +270,8 @@ namespace BolindersBil.Data.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Image_VehicleId",
-                table: "Image",
+                name: "IX_Images_VehicleId",
+                table: "Images",
                 column: "VehicleId");
 
             migrationBuilder.CreateIndex(
@@ -299,7 +298,7 @@ namespace BolindersBil.Data.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Image");
+                name: "Images");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

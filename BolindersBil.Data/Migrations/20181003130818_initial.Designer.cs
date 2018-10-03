@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BolindersBil.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20181002115837_initial")]
+    [Migration("20181003130818_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -37,7 +37,7 @@ namespace BolindersBil.Data.Migrations
 
                     b.HasIndex("VehicleId");
 
-                    b.ToTable("Image");
+                    b.ToTable("Images");
                 });
 
             modelBuilder.Entity("BolindersBil.Models.Office", b =>
@@ -96,8 +96,6 @@ namespace BolindersBil.Data.Migrations
                     b.Property<string>("Office");
 
                     b.Property<int?>("OfficeIdId");
-
-                    b.Property<byte[]>("Picture");
 
                     b.Property<double>("Price");
 

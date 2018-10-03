@@ -35,7 +35,7 @@ namespace BolindersBil.Data.Migrations
 
                     b.HasIndex("VehicleId");
 
-                    b.ToTable("Image");
+                    b.ToTable("Images");
                 });
 
             modelBuilder.Entity("BolindersBil.Models.Office", b =>
@@ -94,8 +94,6 @@ namespace BolindersBil.Data.Migrations
                     b.Property<string>("Office");
 
                     b.Property<int?>("OfficeIdId");
-
-                    b.Property<byte[]>("Picture");
 
                     b.Property<double>("Price");
 

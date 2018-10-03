@@ -136,6 +136,9 @@ namespace BolindersBil.Web.Controllers
                 string createSpecificVehicleFolder = createVehicleImagesFolder + "\\" + addNewVehicle.Brand + "_" + addNewVehicle.RegNr;
                 Directory.CreateDirectory(createSpecificVehicleFolder);
 
+                List<Models.Image> images = new List<Models.Image>();
+                
+
                 // Taking each uploaded image and saving it in the correct folder. 
                 foreach (var file in uploadedImages)
                 {
@@ -153,16 +156,14 @@ namespace BolindersBil.Web.Controllers
                     }
 
 
-                    //// TODO: get the image data to save in the DB....
-                    //Models.Image theImage = new Models.Image
-                    //{
-                    //    VehicleId = addNewVehicle.Id,
-                    //    Name = uniqueGuid,
-                    //    Path = finalTargetFilePath
-                    //};
-                    //vehicleRepo.AddImage(theImage);
-
-
+                    var theImage = new Models.Image
+                    {
+                        Name = uniqueGuid,
+                        Path = finalTargetFilePath
+                    };
+                    images.Add(theImage);
+                 
+                    
                     // Resize and save the image under the correct folder. Calls on the ImageResize function.
                     string resizedImageFolder = createSpecificVehicleFolder + "\\resized_images";
                     if (!Directory.Exists(resizedImageFolder))
@@ -172,6 +173,7 @@ namespace BolindersBil.Web.Controllers
                     ImageResize(finalTargetFilePath, resizedImageFolder + "\\" + targetFileName, 100);
                 }
 
+                addNewVehicle.Images = images;
 
                 ////****To save the image to the DB----OLD*****
                 //using (var stream = new MemoryStream())
@@ -185,6 +187,9 @@ namespace BolindersBil.Web.Controllers
 
                 vehicleRepo.AddNewVehicle(addNewVehicle);
 
+                // TODO: have a RedirectToAction here and send to the Admin Action method...
+                // ????? don't forget to send the data as well....TempData ppt 12 slide 79.
+                // ????? or just send us back to the Admin page that GetAllVehicles again...
                 return View("TestVehicleAdded", ViewData);
             }
 
