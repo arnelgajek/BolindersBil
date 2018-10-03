@@ -19,7 +19,7 @@ namespace BolindersBil.Data.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-<<<<<<< HEAD
+
             modelBuilder.Entity("BolindersBil.Models.Image", b =>
                 {
                     b.Property<int>("Id")
@@ -39,8 +39,7 @@ namespace BolindersBil.Data.Migrations
                     b.ToTable("Images");
                 });
 
-=======
->>>>>>> 7c735f8f0d487d887d53d1f85be5f772001f4813
+
             modelBuilder.Entity("BolindersBil.Models.Office", b =>
                 {
                     b.Property<int>("Id")
@@ -98,11 +97,9 @@ namespace BolindersBil.Data.Migrations
 
                     b.Property<int?>("OfficeIdId");
 
-<<<<<<< HEAD
-=======
                     b.Property<byte[]>("Picture");
 
->>>>>>> 7c735f8f0d487d887d53d1f85be5f772001f4813
+
                     b.Property<double>("Price");
 
                     b.Property<string>("RegNr");
@@ -283,7 +280,6 @@ namespace BolindersBil.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-<<<<<<< HEAD
             modelBuilder.Entity("BolindersBil.Models.Image", b =>
                 {
                     b.HasOne("BolindersBil.Models.Vehicle", "Vehicle")
@@ -292,8 +288,7 @@ namespace BolindersBil.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-=======
->>>>>>> 7c735f8f0d487d887d53d1f85be5f772001f4813
+
             modelBuilder.Entity("BolindersBil.Models.Vehicle", b =>
                 {
                     b.HasOne("BolindersBil.Models.Office", "OfficeId")
