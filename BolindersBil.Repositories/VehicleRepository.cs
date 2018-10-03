@@ -39,8 +39,19 @@ namespace BolindersBil.Repositories
             ctx.SaveChanges();
         }
 
-        // So we can DeleteVehicles from our DB:
         public Vehicle DeleteVehicle(int vehicleId)
+        {
+            var ctxVehicle = ctx.Vehicles.FirstOrDefault(x => x.Id.Equals(vehicleId));
+            if (ctxVehicle != null)
+            {
+                ctx.Vehicles.Remove(ctxVehicle);
+                ctx.SaveChanges();
+            }
+            return ctxVehicle;
+        }
+
+        // So we can BulkDeleteVehicles from our DB:
+        public Vehicle BulkDeleteVehicle(int vehicleId)
         {
             var ctxVehicle = ctx.Vehicles.FirstOrDefault(x => x.Id.Equals(vehicleId));
             if (ctxVehicle != null)
@@ -57,23 +68,27 @@ namespace BolindersBil.Repositories
             return Vehicles;
         }
 
-        public IEnumerable<Vehicle> Search(string searchString, bool Used)
+        public IEnumerable<Vehicle> Search(string searchString, bool used)
         {
-            var vehicles = (from c in ctx.Vehicles
-                            where
-                                     c.RegNr.Contains(searchString) ||
-                                     c.Brand.Contains(searchString) ||
-                                     c.Model.Contains(searchString) ||
-                                     c.ModelDescription.Contains(searchString) ||
-                                     c.Year.Equals(searchString) ||
-                                     c.Kilometer.Equals(searchString) &&
-                                     c.Used.Equals(Used)
+            IEnumerable<Vehicle> vehicles;
+            if (string.IsNullOrEmpty(searchString))
+            {
 
-                            select c
-                                );
+                vehicles = ctx.Vehicles.Where(x => x.Used == used);
+            }
+            else
+            {
+                vehicles = ctx.Vehicles.Where(x => x.Brand.Contains(searchString) && x.Used == used ||
+                                                   x.Body.Contains(searchString) && x.Used == used ||
+                                                   x.Brand.Contains(searchString) && x.Used == used ||
+                                                   x.Color.Contains(searchString) && x.Used == used ||
+                                                   x.Fuel.Contains(searchString) && x.Used == used ||
+                                                   x.Gearbox.Contains(searchString) && x.Used == used ||
+                                                   x.Office.Contains(searchString) && x.Used == used ||
+                                                   x.VehicleAttribute.Contains(searchString) && x.Used == used); 
+            }
 
             return vehicles;
-
         }
 
         // Update(Edit) the vehicle. 
@@ -102,7 +117,6 @@ namespace BolindersBil.Repositories
                 ctxVehicle.VehicleAttribute = v.VehicleAttribute;
             }
             ctx.SaveChanges();
-
         }
     }
 }

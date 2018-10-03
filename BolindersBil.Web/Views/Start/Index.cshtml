@@ -1,5 +1,48 @@
-﻿@model BolindersBil.Models.VehiclesSearchViewModel
+@model BolindersBil.Models.VehiclesSearchViewModel
 
+<div class="container-fluid" style="margin-top:100px;">
+    <div class="row">
+        <div class="col-sm-8">
+            @*Detta är search men behövs kontrollera efter vi är klara med vehicles view*@
+            <form asp-controller="Vehicle" asp-action="Search" method="post">
+                <div class="col-sm-12">
+                    <div class="row justify-content-center">
+                        <div class="col-12 col-sm-10 col-sm-8">
+                        
+<div class="container-fluid" style="margin-top:100px;">
+    <div class="row">
+        <div class="col-lg-8">
+            @*Detta är search men behövs kontrollera efter vi är klara med vehicles view*@
+            <form asp-controller="Vehicle" asp-action="Search" method="post">
+                <div class="col-lg-12">
+                    <div class="row justify-content-center">
+                        <div class="col-12 col-md-10 col-lg-8">
+                            <div class="card-body row no-gutters align-items-center">
+                                <div class="col-auto">
+                                    <i class="fas fa-search h4 text-body"></i>
+                                </div>
+                                <!-- End of col -->
+                                <div class="col">
+                                    <input class="form-control form-control-sm form-control-borderless" type="search" placeholder="T.ex. Volvo (C30)">
+                                </div>
+                                <!-- End of col -->
+                                <div class="col-auto">
+                                    <button class="btn btn-sm btn-success float-sm-right" type="submit">Search</button>
+                                    <input class="form-control form-control-lg form-control-borderless" type="search" placeholder="T.ex. Volvo (C30)">
+                                </div>
+                                <!-- End of col -->
+                                <div class="col-auto">
+                                    <button class="btn btn-lg btn-success float-lg-right" type="submit">Search</button>
+                                </div>
+                                <!-- End of col -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Buttons New/Used: -->
+                <div class="col-sm-12">
+                
 <!DOCTYPE html>
 
 <html>
@@ -27,50 +70,17 @@
 
         @*Detta är search men behövs kontrollera efter vi är klara med vehicles view*@
         <form asp-controller="Vehicle" asp-action="Search" method="post">
-            <input name="searchString" class="col-md-3" placeholder="T.ex. Volvo (C30)" />            
+            <input name="searchString" class="col-md-3" placeholder="T.ex. Volvo (C30)" />
             <button type="submit">Sök</button>
             <div class="input-group-prepend">
                 <div class="input-group-text">
-                    <input type="radio" name="Used">New Car<br>
+                    <input type="radio" name="Used" value="false">New Car<br>
                 </div>
                 <div class="input-group-text">
-                    <input type="radio" name="Used">Used Car<br>
+                    <input type="radio" name="Used" value="true">Used Car<br>
                 </div>
-            </div>           
+            </div>
         </form>
-
-
-
-
-
-        <div class="row">
-
-
-
-            @*Search form*@
-            @*<form asp-action="GetVehicles" method="get">
-                    <div id="SearchBar">
-                        <div class="input-group mb-3" style="margin: 2em">
-                            <div class="input-group-prepend">
-                                <input type="text" class="form-control" placeholder="T.ex. Volvo (C30)">
-                            </div>
-                            <div class="input-group-prepend">
-                                <div class="input-group-text">
-                                    <input type="checkbox" aria-label="Checkbox for following text input">
-                                </div>
-                            </div>
-                            <div class="input-group-prepend">
-                                <div class="input-group-text">
-                                    <input type="checkbox" aria-label="Checkbox for following text input">
-                                </div>
-                            </div>
-                            <input type="search" class="btn btn-light" value="Sök" style="margin: 2em" />
-                        </div>
-                    </div>
-                </form>*@
-
-        </div>
-
 
 
         <div class="container">
@@ -103,7 +113,7 @@
         </div>
 
 
-
+        @*More logos*@
         <div class="container">
 
             <div class="row" style="">
@@ -112,35 +122,99 @@
                         <img alt="AltText" src="~/Logo/Mini-logo-2001-1920x1080.png" class="img-fluid">
                     </a>
                 </div>
-
-                <div class="col-md-3 col-sm-6 col-xs-12">
-                    <a href="LinkToImage">
-                        <img alt="AltText" src="~/Logo/Nissan-logo-2013-1440x900.png" class="img-fluid">
-                    </a>
+                <!-- Buttons New/Used: -->
+                <div class="col-lg-12">
+                    <div class="input-group-prepend justify-content-center">
+                        <div class="input-group-text" style="margin:10px">
+                            <input type="radio" name="Used">New Car<br>
+                        </div>
+                        <div class="input-group-text" style="margin:10px">
+                            <input type="radio" name="Used">Used Car<br>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="col-md-3 col-sm-6 col-xs-12">
-                    <a href="LinkToImage">
-                        <img src="~/Logo/Opel-logo-2009-1920x1080.png" alt="AltText" class="img-fluid">
-                    </a>
+                <div class="col-sm-12" style="margin-top:50px;">
+                    
+                    <!-- Skapa en tabell för loggor i databasen, gör en foreach och presentera loggorna här: -->
+                    <div class="container justify-content-center">
+                        <div class="row" style="">
+                            <div class="col-sm-3 col-sm-6 col-xs-12">
+                <div class="col-lg-12" style="margin-top:50px;">
+                    <!-- Skapa en tabelel för loggor i databasen, gör en foreach och presentera loggorna här: -->
+                    <div class="container justify-content-center">
+                        <div class="row" style="">
+                            <div class="col-md-3 col-sm-6 col-xs-12">
+                                <a href="LinkT">
+                                    <img alt="AltText" src="~/Logo/Saab-logo-2013-2000x450.png" class="img-fluid">
+                                </a>
+                            </div>
+                            <div class="col-sm-3 col-sm-6 col-xs-12">
+                            <div class="col-md-3 col-sm-6 col-xs-12">
+                                <a href="LinkToImage">
+                                    <img alt="AltText" src="~/Logo/Porsche-logo-2008-1920x1080.png" class="img-fluid">
+                                </a>
+                            </div
+                            <div class="col-sm-3 col-sm-6 col-xs-12">
+                            <div class="col-md-3 col-sm-6 col-xs-12">
+                                <a href="LinkToImage">
+                                    <img src="~/Logo/BMW-logo-2000-2048x2048.png" alt="AltText" class="img-fluid">
+                                </a>
+                            </div>
+                            <div class="col-sm-3 col-sm-6 col-xs-12">
+                            <div class="col-md-3 col-sm-6 col-xs-12">
+                                <a href="LinkToImage">
+                                    <img alt="AltText" src="~/Logo/Renault-logo-2015-2048x2048.png" class="img-fluid">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-
-                <div class="col-md-3 col-sm-6 col-xs-12">
-                    <a href="LinkToImage">
-                        <img alt="AltText" src="~/Logo/Volvo-logo-2014-1920x1080.png" class="img-fluid">
-                    </a>
+                <div class="col-sm-12" style="margin-top:50px;">
+                    <!-- Skapa en tabelel för loggor i databasen, gör en foreach och presentera loggorna här: -->
+                    @*<div class="container justify-content-center">
+                        <div class="row" style="">
+                            <div class="col-sm-3 col-sm-6 col-xs-12">
+                <div class="col-lg-12" style="margin-top:50px;">
+                    <!-- Skapa en tabelel för loggor i databasen, gör en foreach och presentera loggorna här: -->
+                    <div class="container justify-content-center">
+                        <div class="row" style="">
+                            <div class="col-md-3 col-sm-6 col-xs-12">
+                                <a href="LinkT">
+                                    <img alt="AltText" src="~/Logo/Mini-logo-2001-1920x1080.png" class="img-fluid">
+                                </a>
+                            </div>
+                            <div class="col-sm-3 col-sm-6 col-xs-12">
+                            <div class="col-md-3 col-sm-6 col-xs-12">
+                                <a href="LinkToImage">
+                                    <img alt="AltText" src="~/Logo/Nissan-logo-2013-1440x900.png" class="img-fluid">
+                                </a>
+                            </div>
+                            <div class="col-sm-3 col-sm-6 col-xs-12">
+                            <div class="col-md-3 col-sm-6 col-xs-12">
+                                <a href="LinkToImage">
+                                    <img src="~/Logo/Opel-logo-2009-1920x1080.png" alt="AltText" class="img-fluid">
+                                </a>
+                            </div>
+                            <div class="col-sm-3 col-sm-6 col-xs-12">
+                            <div class="col-md-3 col-sm-6 col-xs-12">
+                                <a href="LinkToImage">
+                                    <img alt="AltText" src="~/Logo/Volvo-logo-2014-1920x1080.png" class="img-fluid">
+                                </a>
+                            </div>
+                        </div>
+                    </div>*@
                 </div>
-            </div>
+            </form>
         </div>
-
-
-
-
-
-        @*Newsfeed*@
-        <div class="col">
-
+        <div class="col-sm-4">
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-lg-4">
             @{
+
                 var newsApiClient = new NewsApiClient("8a9c9b8aa9bb4c01ab3ea332452176af");
                 var articleResponse = newsApiClient.GetEverything(new EverythingRequest
                 {
@@ -155,7 +229,6 @@
                 {
                     foreach (var article in articleResponse.Articles.Take(3))
                     {
-
                         <div class="card-group col-9" style="margin: 1em;">
                             <div class="card">
                                 <div class="card-header">
@@ -164,20 +237,16 @@
                                     </h5>
                                 </div>
                                 <div class="card-body">
-
                                     <i class="card-text">
                                         @SubStringCut.ShortenString(article.Description, 40)<a>... </a><u><a target="_blank" href="@article.Url">Läs mer</a></u>
                                     </i>
-
                                 </div>
                                 <div class="card-footer">
                                     @article.PublishedAt?.ToString("dd/MM/yyyy")
                                 </div>
                             </div>
                         </div>
-
                     }
-
                 }
                 else
                 {
@@ -185,13 +254,10 @@
                 }
             }
         </div>
-
     </div>
+</div>
 
 
-
-</body>
-</html>
 
 
 

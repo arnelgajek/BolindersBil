@@ -4,14 +4,16 @@ using BolindersBil.Web.DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BolindersBil.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20181001132204_Initial")]
+    partial class Initial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -19,28 +21,6 @@ namespace BolindersBil.Data.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-<<<<<<< HEAD
-            modelBuilder.Entity("BolindersBil.Models.Image", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<Guid>("Name");
-
-                    b.Property<string>("Path");
-
-                    b.Property<int>("VehicleId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("VehicleId");
-
-                    b.ToTable("Images");
-                });
-
-=======
->>>>>>> 7c735f8f0d487d887d53d1f85be5f772001f4813
             modelBuilder.Entity("BolindersBil.Models.Office", b =>
                 {
                     b.Property<int>("Id")
@@ -98,11 +78,8 @@ namespace BolindersBil.Data.Migrations
 
                     b.Property<int?>("OfficeIdId");
 
-<<<<<<< HEAD
-=======
                     b.Property<byte[]>("Picture");
 
->>>>>>> 7c735f8f0d487d887d53d1f85be5f772001f4813
                     b.Property<double>("Price");
 
                     b.Property<string>("RegNr");
@@ -283,17 +260,6 @@ namespace BolindersBil.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-<<<<<<< HEAD
-            modelBuilder.Entity("BolindersBil.Models.Image", b =>
-                {
-                    b.HasOne("BolindersBil.Models.Vehicle", "Vehicle")
-                        .WithMany("Images")
-                        .HasForeignKey("VehicleId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-=======
->>>>>>> 7c735f8f0d487d887d53d1f85be5f772001f4813
             modelBuilder.Entity("BolindersBil.Models.Vehicle", b =>
                 {
                     b.HasOne("BolindersBil.Models.Office", "OfficeId")

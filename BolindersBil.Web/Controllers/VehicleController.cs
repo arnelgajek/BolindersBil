@@ -21,17 +21,18 @@ namespace BolindersBil.Web.Controllers
     {
         private IVehicleRepository vehicleRepo;
         private IHostingEnvironment _hostingEnvironment;
-   
+        public int PageLimit = 8;
 
         public VehicleController(IVehicleRepository vehicleRepository, IHostingEnvironment hostingEnvironment)
         {
             vehicleRepo = vehicleRepository;
             _hostingEnvironment = hostingEnvironment;
         }
-       
+
+        // Index isn't used for anything important atm but is crutial
         public IActionResult Index()
         {
-            return View();
+            return RedirectToAction("VehicleList");
         }
 
         [HttpPost]
@@ -40,12 +41,7 @@ namespace BolindersBil.Web.Controllers
             var searchResults = vehicleRepo.Search(searchString, Used);
             return View("Index", searchResults);
         }
-
-
-
-
-
-
+        
         [Authorize]
         public IActionResult Admin()
         {
@@ -55,6 +51,33 @@ namespace BolindersBil.Web.Controllers
             return View(getVehicles);
         }
 
+        // Paging
+        public IActionResult VehicleList(int page = 1)
+        {
+            // page = 0 x pagelimit
+            var toSkip = (page - 1) * PageLimit;
+
+            // Gets the (pagelimit) amount of vehicles and orders them by their ID
+            // This shall be changed to sort by UpdateDate in the future
+            var vehicles = vehicleRepo.Vehicles.OrderBy(x => x.Id).Skip(toSkip).Take(PageLimit);
+
+            // Gets new info for the paging. Page becomes 1. (1 (page) x 8 (pagelimit)). 
+            // And creates new pages for the amount over the pagelimit (since page becomes 2 then 3...)
+            var paging = new PagingInfo
+            { CurrentPage = page,
+              ItemsPerPage = PageLimit,
+              TotalItems = vehicleRepo.Vehicles.Count()
+            };
+
+            var vm = new VehiclesSearchViewModel
+            {
+              Vehicles = vehicles,
+              Pager = paging
+            };
+
+            return View("Index", vm);
+        }
+        
         [HttpGet]
         public IActionResult AddNewVehicle()
         {
@@ -139,7 +162,6 @@ namespace BolindersBil.Web.Controllers
 
                 List<Models.Image> images = new List<Models.Image>();
                 
-
                 // Taking each uploaded image and saving it in the correct folder. 
                 foreach (var file in uploadedImages)
                 {
@@ -155,8 +177,7 @@ namespace BolindersBil.Web.Controllers
                             await file.CopyToAsync(stream);
                         }
                     }
-
-
+                    
                     var theImage = new Models.Image
                     {
                         Name = uniqueGuid,
@@ -164,7 +185,6 @@ namespace BolindersBil.Web.Controllers
                     };
                     images.Add(theImage);
                  
-                    
                     // Resize and save the image under the correct folder. Calls on the ImageResize function.
                     string resizedImageFolder = createSpecificVehicleFolder + "\\resized_images";
                     if (!Directory.Exists(resizedImageFolder))
@@ -173,24 +193,13 @@ namespace BolindersBil.Web.Controllers
                     }
                     ImageResize(finalTargetFilePath, resizedImageFolder + "\\" + targetFileName, 100);
                 }
-
                 addNewVehicle.Images = images;
-
-                ////****To save the image to the DB----OLD*****
-                //using (var stream = new MemoryStream())
-                //{
-                //    await uploadedImage.CopyToAsync(stream);
-                //    addNewVehicle.Picture = stream.ToArray();
-                //}
-
                 addNewVehicle.AddedDate = DateTime.Now;
                 addNewVehicle.UpdatedDate = DateTime.Now;
 
                 vehicleRepo.AddNewVehicle(addNewVehicle);
 
                 // TODO: have a RedirectToAction here and send to the Admin Action method...
-                // ????? don't forget to send the data as well....TempData ppt 12 slide 79.
-                // ????? or just send us back to the Admin page that GetAllVehicles again...
                 return View("TestVehicleAdded", ViewData);
             }
 
@@ -346,6 +355,22 @@ namespace BolindersBil.Web.Controllers
         public ActionResult DeleteVehicle()
         {
             return RedirectToAction("Admin");
+        }
+
+        [HttpPost]
+        public IActionResult BulkDeleteVehicle(string vehicleId)
+        {
+            // Creates an array with all the Ids checked to make an BulkDelete:
+            int[] bulkDelete = Array.ConvertAll(vehicleId.Split(','), int.Parse);
+
+            // Loops through all the Ids from the array above:
+            foreach (var vehicle in bulkDelete)
+            {
+                // Deletes the vehicles with the specific Ids chosen:
+                DeleteVehicle(vehicle);
+            }
+            // Redirects the user to the account/admin:
+            return RedirectToAction(nameof(Admin));
         }
     }
 }

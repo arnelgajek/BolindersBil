@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -30,6 +31,17 @@ namespace BolindersBil.Web
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            // Cookies configuration:
+            services.Configure<CookiePolicyOptions>(options =>
+            {
+                // This lambda determines whether user consent for non-essential cookies is needed for a given request.
+                options.CheckConsentNeeded = context => true;
+                options.MinimumSameSitePolicy = SameSiteMode.None;
+            });
+
+
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
             // Configuration for DB connection.
             var conn = _configuration.GetConnectionString("BolindersBil");
             // Register a service for the DB.
@@ -73,6 +85,8 @@ namespace BolindersBil.Web
             // To get access to the wwwroot files...
             app.UseStaticFiles();
 
+            app.UseCookiePolicy();
+
             app.UseAuthentication();
 
             app.UseMvcWithDefaultRoute();
@@ -90,6 +104,10 @@ namespace BolindersBil.Web
                 routes.MapRoute(
                     name: "Vehicle",
                     template: "{controller=Vehicle}/{action=Vehicle}/{id?}");
+
+                //routes.MapRoute(
+                // name: "VehicleForSale",
+                // template: "{controller=VehicleForSale}/{action=Sale}/{id?}");
 
                 // Incase we need routing in navbar
                 //routes.MapRoute(
