@@ -17,6 +17,7 @@ namespace BolindersBil.Web.Controllers
         {
             officeRepo = officeRepository;
         }
+
         public IActionResult Index()
         {
             // offices with a small "O" fetches all offices from the database
