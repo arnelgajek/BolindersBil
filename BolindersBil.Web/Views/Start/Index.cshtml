@@ -16,7 +16,7 @@
                                 </div>
                                 <!-- End of col -->
                                 <div class="col">
-                                    <input class="form-control form-control-lg form-control-borderless" type="search" placeholder="T.ex. Volvo (C30)">
+                                    <input class="form-control form-control-lg form-control-borderless" name="searchString" placeholder="T.ex. Volvo (C30)">
                                 </div>
                                 <!-- End of col -->
                                 <div class="col-auto">
@@ -27,27 +27,42 @@
                         </div>
                     </div>
                 </div>
+
+
+                <!-- Buttons New/Used: -->
+                <div class="col-lg-12">
+                    <div class="input-group-prepend justify-content-center">
+                        <div class="input-group-text" style="margin:10px">
+                            <input type="radio" value="false" name="Used">New Car<br>
+                        </div>
+                        <div class="input-group-text" style="margin:10px">
+                            <input type="radio" value="true" name="Used">Used Car<br>
+                        </div>
+                    </div>
+                </div>
+
             </form>
-                <div class="container">
+
+            <div class="col-lg-12" style="margin-top:50px;">
+
+                <!-- Skapa en tabell för loggor i databasen, gör en foreach och presentera loggorna här: -->
+                <div class="container justify-content-center">
                     <div class="row" style="">
                         <div class="col-md-3 col-sm-6 col-xs-12">
                             <a href="LinkT">
                                 <img alt="AltText" src="~/Logo/Saab-logo-2013-2000x450.png" class="img-fluid">
                             </a>
                         </div>
-
                         <div class="col-md-3 col-sm-6 col-xs-12">
                             <a href="LinkToImage">
                                 <img alt="AltText" src="~/Logo/Porsche-logo-2008-1920x1080.png" class="img-fluid">
                             </a>
                         </div>
-
                         <div class="col-md-3 col-sm-6 col-xs-12">
                             <a href="LinkToImage">
                                 <img src="~/Logo/BMW-logo-2000-2048x2048.png" alt="AltText" class="img-fluid">
                             </a>
                         </div>
-
                         <div class="col-md-3 col-sm-6 col-xs-12">
                             <a href="LinkToImage">
                                 <img alt="AltText" src="~/Logo/Renault-logo-2015-2048x2048.png" class="img-fluid">
@@ -55,76 +70,37 @@
                         </div>
                     </div>
                 </div>
+            </div>
+            <div class="col-lg-12" style="margin-top:50px;">
 
-                <!-- Buttons New/Used: -->
-                <div class="col-lg-12">
-                    <div class="input-group-prepend justify-content-center">
-                        <div class="input-group-text" style="margin:10px">
-                            <input type="radio" name="Used">New Car<br>
+                <!-- Skapa en tabell för loggor i databasen, gör en foreach och presentera loggorna här: -->
+                <div class="container justify-content-center">
+                    <div class="row" style="">
+                        <div class="col-md-3 col-sm-6 col-xs-12">
+                            <a href="LinkT">
+                                <img alt="AltText" src="~/Logo/Mini-logo-2001-1920x1080.png" class="img-fluid">
+                            </a>
                         </div>
-                        <div class="input-group-text" style="margin:10px">
-                            <input type="radio" name="Used">Used Car<br>
+                        <div class="col-md-3 col-sm-6 col-xs-12">
+                            <a href="LinkToImage">
+                                <img alt="AltText" src="~/Logo/Nissan-logo-2013-1440x900.png" class="img-fluid">
+                            </a>
+                        </div>
+                        <div class="col-md-3 col-sm-6 col-xs-12">
+                            <a href="LinkToImage">
+                                <img src="~/Logo/Opel-logo-2009-1920x1080.png" alt="AltText" class="img-fluid">
+                            </a>
+                        </div>
+                        <div class="col-md-3 col-sm-6 col-xs-12">
+                            <a href="LinkToImage">
+                                <img alt="AltText" src="~/Logo/Volvo-logo-2014-1920x1080.png" class="img-fluid">
+                            </a>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-12" style="margin-top:50px;">
-
-                    <!-- Skapa en tabell för loggor i databasen, gör en foreach och presentera loggorna här: -->
-                    <div class="container justify-content-center">
-                        <div class="row" style="">
-                            <div class="col-md-3 col-sm-6 col-xs-12">
-                                <a href="LinkT">
-                                    <img alt="AltText" src="~/Logo/Saab-logo-2013-2000x450.png" class="img-fluid">
-                                </a>
-                            </div>
-                            <div class="col-md-3 col-sm-6 col-xs-12">
-                                <a href="LinkToImage">
-                                    <img alt="AltText" src="~/Logo/Porsche-logo-2008-1920x1080.png" class="img-fluid">
-                                </a>
-                            </div>
-                            <div class="col-md-3 col-sm-6 col-xs-12">
-                                <a href="LinkToImage">
-                                    <img src="~/Logo/BMW-logo-2000-2048x2048.png" alt="AltText" class="img-fluid">
-                                </a>
-                            </div>
-                            <div class="col-md-3 col-sm-6 col-xs-12">
-                                <a href="LinkToImage">
-                                    <img alt="AltText" src="~/Logo/Renault-logo-2015-2048x2048.png" class="img-fluid">
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-12" style="margin-top:50px;">
-
-                    <!-- Skapa en tabell för loggor i databasen, gör en foreach och presentera loggorna här: -->
-                    <div class="container justify-content-center">
-                        <div class="row" style="">
-                            <div class="col-md-3 col-sm-6 col-xs-12">
-                                <a href="LinkT">
-                                    <img alt="AltText" src="~/Logo/Mini-logo-2001-1920x1080.png" class="img-fluid">
-                                </a>
-                            </div>
-                            <div class="col-md-3 col-sm-6 col-xs-12">
-                                <a href="LinkToImage">
-                                    <img alt="AltText" src="~/Logo/Nissan-logo-2013-1440x900.png" class="img-fluid">
-                                </a>
-                            </div>
-                            <div class="col-md-3 col-sm-6 col-xs-12">
-                                <a href="LinkToImage">
-                                    <img src="~/Logo/Opel-logo-2009-1920x1080.png" alt="AltText" class="img-fluid">
-                                </a>
-                            </div>
-                            <div class="col-md-3 col-sm-6 col-xs-12">
-                                <a href="LinkToImage">
-                                    <img alt="AltText" src="~/Logo/Volvo-logo-2014-1920x1080.png" class="img-fluid">
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            </div>
         </div>
-        
+
     </div>
 
     <div class="col-lg-4">
@@ -169,5 +145,4 @@
             }
         }
     </div>
-</div>
 </div>

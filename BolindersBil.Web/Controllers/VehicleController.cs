@@ -40,6 +40,7 @@ namespace BolindersBil.Web.Controllers
         {
             var searchResults = vehicleRepo.Search(searchString, Used);
             return View("Index", searchResults);
+            
         }
         
         [Authorize]
