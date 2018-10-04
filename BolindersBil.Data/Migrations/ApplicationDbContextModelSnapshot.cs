@@ -19,7 +19,6 @@ namespace BolindersBil.Data.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-
             modelBuilder.Entity("BolindersBil.Models.Image", b =>
                 {
                     b.Property<int>("Id")
@@ -38,7 +37,6 @@ namespace BolindersBil.Data.Migrations
 
                     b.ToTable("Images");
                 });
-
 
             modelBuilder.Entity("BolindersBil.Models.Office", b =>
                 {
@@ -96,9 +94,6 @@ namespace BolindersBil.Data.Migrations
                     b.Property<string>("Office");
 
                     b.Property<int?>("OfficeIdId");
-
-                    b.Property<byte[]>("Picture");
-
 
                     b.Property<double>("Price");
 
@@ -287,7 +282,6 @@ namespace BolindersBil.Data.Migrations
                         .HasForeignKey("VehicleId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
-
 
             modelBuilder.Entity("BolindersBil.Models.Vehicle", b =>
                 {
