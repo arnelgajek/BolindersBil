@@ -1,4 +1,4 @@
-﻿@model VehiclesSearchViewModel
+﻿@model IEnumerable<Vehicle>
 
 
 <p>This is the Vehicle Index page!</p>
@@ -57,18 +57,18 @@
         </div>
     </div>
     <div class="row">
-        @foreach (var v in Model.Vehicles)
+        @foreach (var item in Model.Vehicles)
         {
             <div class="col-md-4">
                 <div class="thumbnail">
                     <img src="~/Logo/Ford-logo-2003-1366x768.png" data-holder-rendered="true" style="height: 150px; width: 50%; display: block;">
                     <div class="caption">
-                        <h3 id="thumbnail-label">@v.Model</h3>
-                        <p>@v.Price</p>
-                        <p>@v.Brand</p>
-                        <p>@v.Color</p>
-                        <p>@v.Gearbox</p>
-                        <p>@v.Used</p>
+                        <h3 id="thumbnail-label">@item.Model</h3>
+                        <p>@item</p>
+                        <p>@item.Brand</p>
+                        <p>@item.Color</p>
+                        <p>@item.Gearbox</p>
+                        <p>@item.Used</p>
                     </div>
                 </div>
             </div>
