@@ -61,18 +61,32 @@ namespace BolindersBil.Web.Controllers
             // This shall be changed to sort by UpdateDate in the future
             var vehicles = vehicleRepo.Vehicles.OrderBy(x => x.Id).Skip(toSkip).Take(PageLimit);
 
-            // Gets new info for the paging. Page becomes 1. (1 (page) x 8 (pagelimit)). 
+            // Gets new info for the paging. Page becomes 1. (page x pagelimit). 
             // And creates new pages for the amount over the pagelimit (since page becomes 2 then 3...)
             var paging = new PagingInfo
-            { CurrentPage = page,
+            {
+              CurrentPage = page,
               ItemsPerPage = PageLimit,
               TotalItems = vehicleRepo.Vehicles.Count()
             };
 
+            var images = vehicleRepo.GetAllImages();
+
+            string WebRootPath = _hostingEnvironment.WebRootPath;
+            string ContentRootPath = _hostingEnvironment.ContentRootPath;
+
+            //var str = WebRootPath.Replace(ContentRootPath, "");
+            var ImgPath = images.FirstOrDefault().Path.Replace(WebRootPath, "~");
+            ImgPath.Replace("\"", "/");
+            
+
+
             var vm = new VehiclesSearchViewModel
             {
-              Vehicles = vehicles,
-              Pager = paging
+                Vehicles = vehicles,
+                Pager = paging,
+                Images = images,
+                Path = ImgPath
             };
 
             return View("Index", vm);

@@ -59,7 +59,7 @@
     <div class="row">
         @foreach (var v in Model.Vehicles)
         {
-            <div class="col-md-4">
+            @*<div class="col-md-4">
                 <div class="thumbnail">
                     <img src="~/Logo/Ford-logo-2003-1366x768.png" data-holder-rendered="true" style="height: 150px; width: 50%; display: block;">
                     <div class="caption">
@@ -71,19 +71,21 @@
                         <p>@v.Used</p>
                     </div>
                 </div>
-            </div>
-        }
+            </div>*@
+        
     
-            @*<div class="row">
+            <div class="row">
                 <input type="hidden" value="@v.Id" />
                 <div class="col-5">
-                    @if (v.Picture != null)
+                    @if (Model.Path == null)
                     {
                         <img src="https://via.placeholder.com/300x150" />
                     }
                     else
                     {
-                        <img src="@v.Picture" />
+                        @*<img src="@Model.Path" />*@
+                        <img src="~/images/vehicle_images/Subaru_YUI - 666/6677f70c-7d13-4384-b7f2-55702b000ae6_ATa42LS.png" />
+                        @*<img src="~\images\vehicle_images\Subaru_YUI - 666\6677f70c-7d13-4384-b7f2-55702b000ae6_ATa42LS.png">*@
                     }
                 </div>
                 <div class="col-4">
@@ -95,7 +97,7 @@
                 <div class="col-3 float-sm-right">
                     <span>@v.UpdatedDate.ToString("dd/MM/yyyy hh:mm")</span>
                 </div>
-            </div>*@
+            </div>
         }
     </div>
     <div page-model="@Model.Pager" page-action="VehicleList">
