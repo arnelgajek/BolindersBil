@@ -351,11 +351,11 @@ namespace BolindersBil.Web.Controllers
             return RedirectToAction(nameof(Admin));
         }
         
-        [HttpPost]
-        public ActionResult DeleteVehicle()
-        {
-            return RedirectToAction("Admin");
-        }
+        //[HttpPost]
+        //public ActionResult DeleteVehicle()
+        //{
+        //    return RedirectToAction("Admin");
+        //}
 
         [HttpPost]
         public IActionResult BulkDeleteVehicle(string vehicleId)
