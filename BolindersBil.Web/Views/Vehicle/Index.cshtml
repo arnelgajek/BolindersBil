@@ -59,21 +59,7 @@
     <div class="row">
         @foreach (var v in Model.Vehicles)
         {
-            @*<div class="col-md-4">
-                <div class="thumbnail">
-                    <img src="~/Logo/Ford-logo-2003-1366x768.png" data-holder-rendered="true" style="height: 150px; width: 50%; display: block;">
-                    <div class="caption">
-                        <h3 id="thumbnail-label">@v.Model</h3>
-                        <p>@v.Price</p>
-                        <p>@v.Brand</p>
-                        <p>@v.Color</p>
-                        <p>@v.Gearbox</p>
-                        <p>@v.Used</p>
-                    </div>
-                </div>
-            </div>*@
-        
-    
+            
             <div class="row">
                 <input type="hidden" value="@v.Id" />
                 <div class="col-5">
@@ -83,8 +69,8 @@
                     }
                     else
                     {
-                        @*<img src="@Model.Path" />*@
-                        <img src="~/images/vehicle_images/Subaru_YUI - 666/6677f70c-7d13-4384-b7f2-55702b000ae6_ATa42LS.png" />
+                        <img src="@Model.Path" />
+                        @*<img src="~/images/vehicle_images/Subaru_YUI - 666/6677f70c-7d13-4384-b7f2-55702b000ae6_ATa42LS.png" />*@
                         @*<img src="~\images\vehicle_images\Subaru_YUI - 666\6677f70c-7d13-4384-b7f2-55702b000ae6_ATa42LS.png">*@
                     }
                 </div>

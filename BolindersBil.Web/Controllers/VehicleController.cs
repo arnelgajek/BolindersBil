@@ -76,8 +76,9 @@ namespace BolindersBil.Web.Controllers
             string ContentRootPath = _hostingEnvironment.ContentRootPath;
 
             //var str = WebRootPath.Replace(ContentRootPath, "");
-            var ImgPath = images.FirstOrDefault().Path.Replace(WebRootPath, "~");
-            ImgPath.Replace("\"", "/");
+            string ImgPath = images.FirstOrDefault().Path.Replace(WebRootPath, "");
+            var Parts = ImgPath.Split("\\");
+            var NewPath = string.Join("/", Parts);
             
 
 
@@ -86,7 +87,7 @@ namespace BolindersBil.Web.Controllers
                 Vehicles = vehicles,
                 Pager = paging,
                 Images = images,
-                Path = ImgPath
+                Path = NewPath
             };
 
             return View("Index", vm);
