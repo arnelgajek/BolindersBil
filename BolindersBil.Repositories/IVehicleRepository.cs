@@ -18,6 +18,8 @@ namespace BolindersBil.Repositories
 
         IEnumerable<Vehicle> GetAllVehicles();
 
+        IEnumerable<Image> GetAllImages();
+
         Vehicle DeleteVehicle(int vehicleId);
 
         Vehicle BulkDeleteVehicle(int vehicleId);
