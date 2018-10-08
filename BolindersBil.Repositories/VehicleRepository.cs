@@ -68,6 +68,13 @@ namespace BolindersBil.Repositories
             return Vehicles;
         }
 
+        // List all the Images from DB
+        public IEnumerable<Image> GetAllImages()
+
+        {
+            return Images;
+        }
+
         public IEnumerable<Vehicle> Search(string searchString, bool used)
         {
             IEnumerable<Vehicle> vehicles;
