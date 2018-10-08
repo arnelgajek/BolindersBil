@@ -219,6 +219,20 @@ namespace BolindersBil.Web.Controllers
                 }
                 addNewVehicle.Images = images;
                 
+
+                if (addNewVehicle.Office == "Jönköping")
+                {
+                    addNewVehicle.OfficeId.OfficeCode = "BB1";
+                }
+                else if (addNewVehicle.Office == "Värnamo")
+                {
+                    addNewVehicle.OfficeId.OfficeCode = "BB2";
+                }
+                else
+                {
+                    addNewVehicle.OfficeId.OfficeCode = "BB3";
+                }
+
                 addNewVehicle.AddedDate = DateTime.Now;
                 addNewVehicle.UpdatedDate = DateTime.Now;
 
