@@ -71,6 +71,8 @@ namespace BolindersBil.Web.Controllers
             };
 
             var images = vehicleRepo.GetAllImages();
+            var vehicleId = vehicleRepo.Images.OrderBy(x => x.VehicleId);
+            
 
             string WebRootPath = _hostingEnvironment.WebRootPath;
             string ContentRootPath = _hostingEnvironment.ContentRootPath;
@@ -89,6 +91,8 @@ namespace BolindersBil.Web.Controllers
                 Images = images,
                 Path = NewPath
             };
+
+            //routes.MapRoute();
 
             return View("Index", vm);
         }

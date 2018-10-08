@@ -28,6 +28,7 @@ namespace BolindersBil.Models
         // Get the first image
         public IEnumerable<Image> Images { get; set; }
         public string Path { get; set; }
+        public int VehicleId { get; set; }
         // Pagination
         public PagingInfo Pager { get; set; }
      }
