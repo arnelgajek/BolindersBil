@@ -72,7 +72,6 @@ namespace BolindersBil.Web.Controllers
 
             var images = vehicleRepo.GetAllImages();
             var vehicleId = vehicleRepo.Images.OrderBy(x => x.VehicleId);
-            
 
             string WebRootPath = _hostingEnvironment.WebRootPath;
             string ContentRootPath = _hostingEnvironment.ContentRootPath;
@@ -82,8 +81,6 @@ namespace BolindersBil.Web.Controllers
             var Parts = ImgPath.Split("\\");
             var NewPath = string.Join("/", Parts);
             
-
-
             var vm = new VehiclesSearchViewModel
             {
                 Vehicles = vehicles,
