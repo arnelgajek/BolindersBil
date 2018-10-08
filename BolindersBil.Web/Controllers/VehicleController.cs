@@ -43,6 +43,12 @@ namespace BolindersBil.Web.Controllers
             
         }
         
+        public IActionResult Logo(string searchString)
+        {
+            var searchResults = vehicleRepo.Logo(searchString);
+            return View("Index", searchResults);
+        }
+
         [Authorize]
         public IActionResult Admin()
         {

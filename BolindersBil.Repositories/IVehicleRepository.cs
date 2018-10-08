@@ -24,6 +24,8 @@ namespace BolindersBil.Repositories
 
         IEnumerable<Vehicle> Search(string searchString, bool Used);
 
+        IEnumerable<Vehicle> Logo(string searchString);
+
         void UpdateVehicle(EditVehicleViewModel v);
     }
 }

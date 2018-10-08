@@ -91,6 +91,20 @@ namespace BolindersBil.Repositories
             return vehicles;
         }
 
+        public IEnumerable<Vehicle> Logo(string searchString)
+        {
+            IEnumerable<Vehicle> logo;
+            if (string.IsNullOrEmpty(searchString))
+            {
+                logo = ctx.Vehicles;
+            }
+            else
+            {
+                logo = ctx.Vehicles.Where(x => x.Brand.Contains(searchString));
+            }
+            return logo;
+        }
+
         // Update(Edit) the vehicle. 
         public void UpdateVehicle(EditVehicleViewModel v)
         {
