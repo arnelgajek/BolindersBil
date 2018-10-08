@@ -167,8 +167,11 @@ namespace BolindersBil.Web.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddNewVehicle(Vehicle addNewVehicle, ICollection<IFormFile> uploadedImages)
+        public async Task<IActionResult> AddNewVehicle(Vehicle addNewVehicle)
         {
+            // The uploaded files from the users POST.
+            var uploadedImages = Request.Form.Files;
+
             if (ModelState.IsValid && addNewVehicle != null)
             {
                 // Creating the folder structure.
@@ -215,6 +218,7 @@ namespace BolindersBil.Web.Controllers
 
                 }
                 addNewVehicle.Images = images;
+                
                 addNewVehicle.AddedDate = DateTime.Now;
                 addNewVehicle.UpdatedDate = DateTime.Now;
 

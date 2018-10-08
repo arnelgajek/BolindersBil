@@ -142,34 +142,13 @@
             </div>
         </div>
 
-        @* TODO: fix so you can visually see the files you have uploaded. *@
         <div class="form-group">
             <label for="images" class="control-label col-sm-2"><strong>Bilder:</strong></label>
             <div class="col-sm-4">
-
                 <input type="file" id="images" name="images" class="form-control-file" multiple style="display:none">
-
                 <button class="btn" id="selectFilesBtn">Välj filer</button>
-
                 <div class="form-group" id="filePreviews"></div>
-
-
-
-
-
-                @*<div id="imgPreview" class="img-thumbnail" style="display:none;">
-                        <img class="img-responsive" id="targetImg" style="height:100px; width:100%;" />
-                        <hr />
-                        <div class="caption">
-                            <a class="btn btn-sm btn-warning" onclick="ClearPreview()">Ta bort</a>
-                            <small><span id="description"></span></small>
-                        </div>
-                    </div>*@
-
             </div>
-
-
-            @*<input asp-for="Picture" type="file" id="browseImages" class="form-control-file" multiple>*@
         </div>
 
         <div class="form-group">
@@ -199,109 +178,82 @@
 
 <script src="~/js/site.min.js"></script>
 <script>
+    var formUtils = {
+        files: [],
+        buildPreview: function (dataUrl) {
+            var html = ['<img src="' + dataUrl + '" class="img-thumbnail">'];
+            var button = ['<a class="btn btn-warning btn-sm">Ta bort</a>'];
+            var theDiv = ['<div class="imageThumbnailPreview">'+ html + button + '</div>'];
+            $('#filePreviews').append(theDiv);
+        },
+        removeImage: function (index) {
+            formUtils.files.splice(index, 1);
+            console.log(formUtils.files);
+        }
+    };
 
+    $(document).ready(function () {
 
+        $('#selectFilesBtn').click(function (e) {
+            e.preventDefault();
+            $('#images').trigger('click');
+        });
 
+        $(document).on('click', 'div.imageThumbnailPreview', function () {
+            formUtils.removeImage($(this).index());
+            $(this).remove();
+        });
 
+        if ($('#addNewVehicleForm').length > 0) {
+            $("#images").on("change", function (event) {
+                formUtils.files = [];
+                var files = event.originalEvent.target.files;
+                $(files).each(function (i, file) {
+                    var reader = new FileReader();
+                    reader.addEventListener("load", function () {
+                        formUtils.files.push(file);
+                        var dataUrl = reader.result;
+                        formUtils.buildPreview(dataUrl);
+                    }, false);
+                    reader.readAsDataURL(file);
+                });
+            });
 
+            $('#addNewVehicleForm').submit(function (e) {
+                e.preventDefault();
+                $('#images').remove();
+                var formData = new FormData();
 
+                $('#addNewVehicleForm textarea').each(function () {
+                    formData.append($(this).attr('name'), $(this).val());
+                });
+                $('#addNewVehicleForm select').each(function () {
+                    formData.append($(this).attr('name'), $(this).val());
+                });
+                $('#addNewVehicleForm input').each(function () {
+                    formData.append($(this).attr('name'), $(this).val());
+                });
+                $(formUtils.files).each(function (i, file) {
+                    formData.append('images[' + i + ']', formUtils.files[i]);
+                });
 
+                $.ajax({
+                    url: $('#addNewVehicleForm').attr('action'),
+                    type: 'POST',
+                    data: formData,
+                    dataType: 'json',
+                    processData: false,
+                    contentType: false,
+                    success: function (data) {
+                        console.log(data);
+                    },
+                    error: function (error) {
+                        console.log(error);
+                    }
+                });
 
-
-
-
-
-
-                //function myFunction() {
-                //    var x = document.getElementById("browseImages");
-                //    var txt = "";
-                //    var myFilesArray = [];
-
-                //    if ('files' in x) {
-                //        for (var i = 0; i < x.files.length; i++) {
-                //            var file = x.files[i];
-                //            myFilesArray.push[file];
-
-                //            var size = ~~(file.size / 1024) + " KB";
-
-                //            txt += "<div id='removeNumber'><br><strong>" + (i + 1) + ". File</strong></div>";
-                //            txt += "<div id='removeName'>name: " + file.name + "</div>";
-                //            txt += "<div id='removeSize'>size: " + size + "</div>";
-                //            txt += "<a class='btn btn-sm btn-warning' id='removeButton' onclick='ClearPreview()'>" + "Ta bort" + "</a><br>";
-
-                //        }
-                //    }
-                //    alert(myFilesArray);
-                //    document.getElementById("demo").innerHTML = txt;
-                //    $("#demo").show();
-                //}
-
-                //var ClearPreview = function () {
-                //    $("#removeNumber").remove();
-                //    $("#removeName").remove();
-                //    $("#removeSize").remove();
-                //    $("#removeButton").remove();
-                //};
-
-
-
-                //var ReadImage = function (file) {
-                //    var reader = new FileReader;
-                //    var image = new Image;
-                //    reader.readAsDataURL(file);
-                //    reader.onload = function (_file) {
-                //        image.src = _file.target.result;
-                //        image.onload = function () {
-                //            txt += "<div><img scr='_file.target.result'></img></div>";
-                //        }
-                //    }
-                //};
-
-
-
-
-
-
-                //$(document).ready(function () {
-                //    $("#browseImages").change(function () {
-
-                //        var File = this.files;
-
-
-                //        for (var i = 0; i < File.length; i++)
-                //        {
-                //            if (File && File[i]) {
-                //                ReadImage(File[i]);
-                //            }
-                //        }
-                //        //if (File && File[0]) {
-                //        //    ReadImage(File[0]);
-                //        //}
-                //    });
-                //});
-
-                //var ReadImage = function (file) {
-                //    var reader = new FileReader;
-                //    var image = new Image;
-                //    reader.readAsDataURL(file);
-                //    reader.onload = function (_file) {
-                //        image.src = _file.target.result;
-                //        image.onload = function () {
-                //            var height = this.height;
-                //            var width = this.width;
-                //            var type = file.type;
-                //            // Changing the image from byte to kilobyte here.
-                //            var size = ~~(file.size / 1024) + "KB";
-                //            $("#targetImg").attr('src', _file.target.result);
-                //            $("#description").text("Size: " + size + ", " + height + " x " + width + ", " + type + "");
-                //            $("#imgPreview").show();
-                //        }
-                //    }
-                //};
-
-                //var ClearPreview = function () {
-                //    $("#browseImages").val('');
-                //    $("#description").text('');
-                //    $("#imgPreview").hide();
-                //};
+            });
+        }
+    });
+    
 </script>
