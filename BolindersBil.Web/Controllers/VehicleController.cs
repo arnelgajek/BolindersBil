@@ -178,13 +178,6 @@ namespace BolindersBil.Web.Controllers
                         }
                     }
                     
-                    var theImage = new Models.Image
-                    {
-                        Name = uniqueGuid,
-                        Path = finalTargetFilePath
-                    };
-                    images.Add(theImage);
-                 
                     // Resize and save the image under the correct folder. Calls on the ImageResize function.
                     string resizedImageFolder = createSpecificVehicleFolder + "\\resized_images";
                     if (!Directory.Exists(resizedImageFolder))
@@ -192,6 +185,14 @@ namespace BolindersBil.Web.Controllers
                         Directory.CreateDirectory(resizedImageFolder);
                     }
                     ImageResize(finalTargetFilePath, resizedImageFolder + "\\" + targetFileName, 100);
+
+                    var theImage = new Models.Image
+                    {
+                        Name = uniqueGuid,
+                        Path = resizedImageFolder + "\\" + targetFileName
+                    };
+                    images.Add(theImage);
+
                 }
                 addNewVehicle.Images = images;
                 addNewVehicle.AddedDate = DateTime.Now;
