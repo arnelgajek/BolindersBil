@@ -22,7 +22,7 @@ namespace BolindersBil.Web.Controllers
         private IVehicleRepository vehicleRepo;
         private IHostingEnvironment _hostingEnvironment;
         public int PageLimit = 8;
-
+        
         public VehicleController(IVehicleRepository vehicleRepository, IHostingEnvironment hostingEnvironment)
         {
             vehicleRepo = vehicleRepository;
@@ -81,15 +81,16 @@ namespace BolindersBil.Web.Controllers
             string ImgPath = images.FirstOrDefault().Path.Replace(WebRootPath, "");
             var Parts = ImgPath.Split("\\");
             var NewPath = string.Join("/", Parts);
-            
 
+            
 
             var vm = new VehiclesSearchViewModel
             {
                 Vehicles = vehicles,
                 Pager = paging,
                 Images = images,
-                Path = NewPath
+                Path = NewPath,
+                
             };
 
             //routes.MapRoute();
