@@ -17,6 +17,7 @@
         getValueUsingClass();
     });
 
+    
     function getValueUsingClass() {
         
         // Declaring checkbox array:

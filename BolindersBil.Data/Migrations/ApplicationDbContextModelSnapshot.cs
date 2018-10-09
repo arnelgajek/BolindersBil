@@ -105,7 +105,7 @@ namespace BolindersBil.Data.Migrations
 
                     b.Property<string>("VehicleAttribute");
 
-                    b.Property<int>("Year");
+                    b.Property<string>("Year");
 
                     b.HasKey("Id");
 

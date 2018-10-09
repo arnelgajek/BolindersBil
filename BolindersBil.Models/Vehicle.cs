@@ -12,7 +12,7 @@ namespace BolindersBil.Models
         public string Brand { get; set; }
         public string Model { get; set; }
         public string ModelDescription { get; set; }
-        public int Year { get; set; }
+        public string Year { get; set; }
         public int Kilometer { get; set; }
         public double Price { get; set; }
         public string Body { get; set; }
