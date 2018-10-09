@@ -74,10 +74,6 @@ namespace BolindersBil.Web.Controllers
 
             var images = vehicleRepo.GetAllImages();
             var vehicleId = vehicleRepo.Images.OrderBy(x => x.VehicleId);
-<<<<<<< HEAD
-=======
-
->>>>>>> 915605d5ac3363b788e560fa5c8c6a4e19883064
 
             string WebRootPath = _hostingEnvironment.WebRootPath;
             string ContentRootPath = _hostingEnvironment.ContentRootPath;
@@ -87,11 +83,6 @@ namespace BolindersBil.Web.Controllers
             var Parts = ImgPath.Split("\\");
             var NewPath = string.Join("/", Parts);
 
-<<<<<<< HEAD
-=======
-
-
->>>>>>> 915605d5ac3363b788e560fa5c8c6a4e19883064
             var vm = new VehiclesSearchViewModel
             {
                 Vehicles = vehicles,
@@ -226,6 +217,24 @@ namespace BolindersBil.Web.Controllers
 
                 }
                 addNewVehicle.Images = images;
+
+                if (uploadedImages.Count() == 0)
+                {
+                    List<Models.Image> defaultImageList = new List<Models.Image>();
+                    var path = webrootPath + "\\defaultimages\\Image_Upload.png";
+                    Guid defaultImageGuid = Guid.NewGuid();
+                    var defaultImage = new Models.Image
+                    {
+                        Name = defaultImageGuid,
+                        Path = path
+                    };
+                    defaultImageList.Add(defaultImage);
+                    addNewVehicle.Images = defaultImageList;
+                }
+
+
+                
+
 
                 Office jkpgOffice = officeRepo.Offices.Single(o => o.OfficeCode == "BB1");
                 Office varnOffice = officeRepo.Offices.Single(o => o.OfficeCode == "BB2");
@@ -437,6 +446,7 @@ namespace BolindersBil.Web.Controllers
                     };
                     images.Add(theImage);
                 }
+
                 editVehicleViewModel.Images = images;
 
                 Office jkpgOffice = officeRepo.Offices.Single(o => o.OfficeCode == "BB1");
@@ -481,22 +491,7 @@ namespace BolindersBil.Web.Controllers
             }
             return RedirectToAction(nameof(Admin));
         }
-<<<<<<< HEAD
         
-        //[HttpPost]
-        //public ActionResult DeleteVehicle()
-        //{
-        //    return RedirectToAction("Admin");
-        //}
-=======
-
-        [HttpPost]
-        public ActionResult DeleteVehicle()
-        {
-            return RedirectToAction("Admin");
-        }
->>>>>>> 915605d5ac3363b788e560fa5c8c6a4e19883064
-
         [HttpPost]
         public IActionResult BulkDeleteVehicle(string vehicleId)
         {

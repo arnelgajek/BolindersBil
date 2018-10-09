@@ -12,16 +12,10 @@
     </div>
     <div class="float-sm-right" style="margin-bottom:10px">
         <a asp-controller="Vehicle" asp-action="AddNewVehicle" class="btn btn-success" name="newVehicle" id="newVehicle">New</a>
-<<<<<<< HEAD
-        @*<a asp-controller="Vehicle" asp-action="EditVehicle" class="btn btn-warning" name="editVehicle" id"editVehicle">Edit</a>*@
-        @*<button type="button" class="btn btn-warning" name="editVehicle" id="editVehicle" data-toggle="modal" data-target="#editModal">Edit</button>*@
-        <button type="button" class="btn btn-danger" name="deleteVehicle" id="deleteVehicle" data-toggle="modal" data-target="#deleteModal">Delete</button>
-        <button type="button" class="btn btn-danger" name="bulkDeleteVehicle" id="bulkDeleteVehicle" data-toggle="modal" data-target="#bulkDeleteModal">Bulk Delete</button>
-=======
         <a id="editButton" class="btn btn-sm btn-warning">Edit</a>
         <button type="button" class="btn btn-sm btn-danger" name="deleteVehicle" id="deleteVehicle" data-toggle="modal" data-target="#deleteModal">Delete</button>
         <button type="button" class="btn btn-sm btn-danger" name="bulkDeleteVehicle" id="bulkDeleteVehicle" data-toggle="modal" data-target="#bulkDeleteModal">Bulk Delete</button>
->>>>>>> 915605d5ac3363b788e560fa5c8c6a4e19883064
+
     </div>
 
     @foreach (var v in Model)
