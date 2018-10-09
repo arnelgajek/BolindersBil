@@ -15,11 +15,7 @@
     $('#confirmVehicleBulkDelete').click(function () {
         getValueUsingClass();
     });
-<<<<<<< HEAD
 
-=======
-    
->>>>>>> 1085564e3313107e558b27c5e4d9704ac9601d4e
     function getValueUsingClass() {
         
         // Declaring checkbox array:

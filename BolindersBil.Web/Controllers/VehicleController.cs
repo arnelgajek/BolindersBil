@@ -491,11 +491,7 @@ namespace BolindersBil.Web.Controllers
             }
             return RedirectToAction(nameof(Admin));
         }
-<<<<<<< HEAD
 
-=======
-        
->>>>>>> 1085564e3313107e558b27c5e4d9704ac9601d4e
         [HttpPost]
         public IActionResult BulkDeleteVehicle(string vehicleId)
         {
