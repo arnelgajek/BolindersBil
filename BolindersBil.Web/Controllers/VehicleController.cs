@@ -43,10 +43,10 @@ namespace BolindersBil.Web.Controllers
             
         }
         
-        public IActionResult Logo(string searchString)
+        public IActionResult Logo(string logoString)
         {
-            var searchResults = vehicleRepo.Logo(searchString);
-            return View("Index", searchResults);
+            var logoResults = vehicleRepo.Logo(logoString);
+            return View("Index", logoResults.ToList());
         }
 
         [Authorize]

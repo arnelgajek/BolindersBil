@@ -1,4 +1,4 @@
-﻿@model VehiclesSearchViewModel
+﻿@model IEnumerable<VehiclesSearchViewModel>
 
 
 
@@ -123,7 +123,7 @@
                 <!--Image-->
                 <div class="view overlay z-depth-1-half">
                     <a asp-controller="Vehicle" asp-action="Logo">
-                        <img type="search" id="img_omg" src="~/Logo/Saab-logo-2002-640x550.jpg" class="img-fluid" alt="Responsive image">
+                        <img type="logo" id="img_omg" src="~/Logo/Saab-logo-2002-640x550.jpg" class="img-fluid" alt="Responsive image">
                     </a>
                 </div>
                 

@@ -91,16 +91,16 @@ namespace BolindersBil.Repositories
             return vehicles;
         }
 
-        public IEnumerable<Vehicle> Logo(string searchString)
+        public IEnumerable<Vehicle> Logo(string logoString)
         {
             IEnumerable<Vehicle> logo;
-            if (string.IsNullOrEmpty(searchString))
+            if (string.IsNullOrEmpty(logoString))
             {
                 logo = ctx.Vehicles;
             }
             else
             {
-                logo = ctx.Vehicles.Where(x => x.Brand.Contains(searchString));
+                logo = ctx.Vehicles.Where(x => x.Brand.Contains(logoString));
             }
             return logo;
         }
