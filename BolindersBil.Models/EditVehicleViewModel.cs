@@ -22,8 +22,10 @@ namespace BolindersBil.Models
         public bool Used { get; set; }
         public Office OfficeId { get; set; }
         public string Office { get; set; }
-        public byte[] Picture { get; set; }
         public bool Leasable { get; set; }
+
+        public List<Image> Images { get; set; }
+
         public DateTime UpdatedDate { get; set; }
         public string VehicleAttribute { get; set; }
         public List<string> BodyTypes { get; set; }

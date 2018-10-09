@@ -352,6 +352,7 @@ namespace BolindersBil.Web.Controllers
                 Leasable = vehicle.Leasable,
                 UpdatedDate = vehicle.UpdatedDate,
                 VehicleAttribute = vehicle.VehicleAttribute,
+                Images = vehicle.Images,
                 BodyTypes = bodyType,
                 GearTypes = gearType,
                 FuelTypes = fuelType,
