@@ -245,7 +245,8 @@ namespace BolindersBil.Web.Controllers
                 vehicleRepo.AddNewVehicle(addNewVehicle);
 
                 // TODO: have a RedirectToAction here and send to the Admin Action method...
-                return View("TestVehicleAdded", ViewData);
+                //return View("TestVehicleAdded", ViewData);
+                return Json(new { data = true });
             }
 
             return View();

@@ -148,7 +148,6 @@
                     }
                 </select>
             </div>
-            @*<input asp-for="OfficeId" type="hidden" id="officeIdConnection"/>*@
         </div>
 
         <div class="form-group">
@@ -194,21 +193,7 @@
     };
 
     $(document).ready(function () {
-
-
-        //var officeSelectOption = $('#officeSelectOption').val();
-        //if (officeSelectOption === 'Jönköping') {
-        //    $('#officeIdConnection').val() = 1;
-        //}
-        //else if (officeSelectOption === 'Värnamo') {
-        //    $('#officeIdConnection').val() = 2;
-        //}
-        //else {
-        //    $('#officeIdConnection').val() = 3;
-        //}
-
-
-
+        
         $('#selectFilesBtn').click(function (e) {
             e.preventDefault();
             $('#images').trigger('click');
@@ -238,16 +223,7 @@
                 //console.log($(this).val());
             }
         });
-
-
-
-
         
-
-
-
-
-
         if ($('#addNewVehicleForm').length > 0) {
 
             $("#images").on("change", function (event) {
@@ -291,6 +267,8 @@
                     contentType: false,
                     success: function (data) {
                         console.log(data);
+                        window.location.href = '/Vehicle/Admin';
+                        console.log('Congrats! You have added ' + data + '.');
                     },
                     error: function (error) {
                         console.log(error);
