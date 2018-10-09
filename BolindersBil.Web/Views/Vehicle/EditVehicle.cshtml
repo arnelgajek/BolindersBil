@@ -10,7 +10,7 @@
 </div>
 <hr />
 
-<form asp-action="EditVehicle" method="post" enctype="multipart/form-data" class="form-horizontal">
+<form asp-action="EditVehicle" id="editVehicleForm" enctype="multipart/form-data" class="form-horizontal">
 
     <input type="hidden" value="@Model.Id" id="id" name="id" />
 
@@ -39,6 +39,19 @@
         <label asp-for="ModelDescription" class="control-label col-sm-2"><strong>Modellbeskrivning:</strong></label>
         <div class="col-sm-10">
             <textarea asp-for="ModelDescription" class="form-control"></textarea>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Year" class="control-label col-sm-2"><strong>Årsmodell:</strong></label>
+        <div class="col-sm-10">
+            <select asp-for="Year" class="form-control" id="">
+                <option selected>@Model.Year</option>
+                @foreach (var y in ViewBag.Years)
+                {
+                    <option value="@y">@y</option>
+                }
+            </select>
         </div>
     </div>
 

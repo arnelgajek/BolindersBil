@@ -182,7 +182,7 @@ namespace BolindersBil.Data.Migrations
                     Brand = table.Column<string>(nullable: true),
                     Model = table.Column<string>(nullable: true),
                     ModelDescription = table.Column<string>(nullable: true),
-                    Year = table.Column<int>(nullable: false),
+                    Year = table.Column<string>(nullable: true),
                     Kilometer = table.Column<int>(nullable: false),
                     Price = table.Column<double>(nullable: false),
                     Body = table.Column<string>(nullable: true),
