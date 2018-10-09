@@ -20,12 +20,14 @@ namespace BolindersBil.Web.Controllers
     public class VehicleController : Controller
     {
         private IVehicleRepository vehicleRepo;
+        public IOfficeRepository officeRepo;
         private IHostingEnvironment _hostingEnvironment;
         public int PageLimit = 8;
-
-        public VehicleController(IVehicleRepository vehicleRepository, IHostingEnvironment hostingEnvironment)
+        
+        public VehicleController(IVehicleRepository vehicleRepository, IOfficeRepository officeRepository, IHostingEnvironment hostingEnvironment)
         {
             vehicleRepo = vehicleRepository;
+            officeRepo = officeRepository;
             _hostingEnvironment = hostingEnvironment;
         }
 
@@ -81,15 +83,16 @@ namespace BolindersBil.Web.Controllers
             string ImgPath = images.FirstOrDefault().Path.Replace(WebRootPath, "");
             var Parts = ImgPath.Split("\\");
             var NewPath = string.Join("/", Parts);
-            
 
+            
 
             var vm = new VehiclesSearchViewModel
             {
                 Vehicles = vehicles,
                 Pager = paging,
                 Images = images,
-                Path = NewPath
+                Path = NewPath,
+                
             };
 
             //routes.MapRoute();
@@ -166,8 +169,11 @@ namespace BolindersBil.Web.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddNewVehicle(Vehicle addNewVehicle, ICollection<IFormFile> uploadedImages)
+        public async Task<IActionResult> AddNewVehicle(Vehicle addNewVehicle)
         {
+            // The uploaded files from the users POST.
+            var uploadedImages = Request.Form.Files;
+
             if (ModelState.IsValid && addNewVehicle != null)
             {
                 // Creating the folder structure.
@@ -197,13 +203,6 @@ namespace BolindersBil.Web.Controllers
                         }
                     }
                     
-                    var theImage = new Models.Image
-                    {
-                        Name = uniqueGuid,
-                        Path = finalTargetFilePath
-                    };
-                    images.Add(theImage);
-                 
                     // Resize and save the image under the correct folder. Calls on the ImageResize function.
                     string resizedImageFolder = createSpecificVehicleFolder + "\\resized_images";
                     if (!Directory.Exists(resizedImageFolder))
@@ -211,15 +210,39 @@ namespace BolindersBil.Web.Controllers
                         Directory.CreateDirectory(resizedImageFolder);
                     }
                     ImageResize(finalTargetFilePath, resizedImageFolder + "\\" + targetFileName, 100);
+
+                    var theImage = new Models.Image
+                    {
+                        Name = uniqueGuid,
+                        Path = resizedImageFolder + "\\" + targetFileName
+                    };
+                    images.Add(theImage);
+
                 }
                 addNewVehicle.Images = images;
+                
+                Office jkpgOffice = officeRepo.Offices.Single(o => o.OfficeCode == "BB1");
+                Office varnOffice = officeRepo.Offices.Single(o => o.OfficeCode == "BB2");
+                Office gbgOffice = officeRepo.Offices.Single(o => o.OfficeCode == "BB3");
+                if (addNewVehicle.Office == "Jönköping")
+                {
+                    addNewVehicle.OfficeId = jkpgOffice;
+                }
+                if (addNewVehicle.Office == "Värnamo")
+                {
+                    addNewVehicle.OfficeId = varnOffice;
+                }
+                if (addNewVehicle.Office == "Göteborg")
+                {
+                    addNewVehicle.OfficeId = gbgOffice;
+                }
+                
                 addNewVehicle.AddedDate = DateTime.Now;
                 addNewVehicle.UpdatedDate = DateTime.Now;
 
                 vehicleRepo.AddNewVehicle(addNewVehicle);
-
-                // TODO: have a RedirectToAction here and send to the Admin Action method...
-                return View("TestVehicleAdded", ViewData);
+                
+                return Json(new { data = true });
             }
 
             return View();

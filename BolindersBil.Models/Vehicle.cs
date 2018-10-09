@@ -30,5 +30,6 @@ namespace BolindersBil.Models
         public DateTime AddedDate { get; set; }
         public DateTime UpdatedDate { get; set; }
         public string VehicleAttribute { get; set; }
+
     }
 }

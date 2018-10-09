@@ -9,9 +9,6 @@ namespace BolindersBil.Web.Controllers
 {
     public class VehicleForSaleController : Controller
     {
-
-       
-
         public IActionResult Index()
         {
             
