@@ -34,7 +34,8 @@ namespace BolindersBil.Web.Controllers
         // Index isn't used for anything important atm but is crutial
         public IActionResult Index()
         {
-            return RedirectToAction("VehicleList");
+            return View();
+            //return RedirectToAction("VehicleList");
         }
 
         [HttpPost]
@@ -53,9 +54,46 @@ namespace BolindersBil.Web.Controllers
             return View(getVehicles);
         }
 
+        [HttpPost]
+        public IActionResult VehicleList()
+        {
+
+            var vm = new VehiclesSearchViewModel
+            {
+                
+
+            };
+
+            return View(vm);
+        }
+
         // Paging
+        [HttpGet]
         public IActionResult VehicleList(int page = 1)
         {
+            // This list is used as the dropdown option in the "Årsmodell" input.
+            List<object> years = new List<object>();
+            var currentYear = DateTime.Now.Year;
+            var theFuture = currentYear + 1;
+            years.Add(theFuture);
+            var stopYear = 1980;
+            for (int y = currentYear; y >= stopYear; y--)
+            {
+                years.Add(y);
+            }
+            var seventies = "70-tal";
+            var sixties = "60-tal";
+            var fifties = "50-tal";
+            var superOld = "40-tal eller äldre";
+            years.Add(seventies);
+            years.Add(sixties);
+            years.Add(fifties);
+            years.Add(superOld);
+            ViewBag.vehicleYearOptions = years;
+
+
+
+
             // page = 0 x pagelimit
             var toSkip = (page - 1) * PageLimit;
 
@@ -75,7 +113,7 @@ namespace BolindersBil.Web.Controllers
             var images = vehicleRepo.GetAllImages();
             var vehicleId = vehicleRepo.Images.OrderBy(x => x.VehicleId);
             
-
+            // crutial to remove specific path from ImgPath
             string WebRootPath = _hostingEnvironment.WebRootPath;
             string ContentRootPath = _hostingEnvironment.ContentRootPath;
 
@@ -86,7 +124,7 @@ namespace BolindersBil.Web.Controllers
             var NewPath = string.Join("/", Parts);
 
             
-
+            // What you want to view
             var vm = new VehiclesSearchViewModel
             {
                 Vehicles = vehicles,
@@ -416,16 +454,16 @@ namespace BolindersBil.Web.Controllers
             // Redirects the user to the account/admin:
             return RedirectToAction(nameof(Admin));
         }
-
-        [HttpGet]
-        public IActionResult Vehicle(int id)
+        
+        public IActionResult Vehicle()
         {
 
-            var vehicle = vehicleRepo.Vehicles.FirstOrDefault(x => x.Id.Equals(id));
+            var vehicles = vehicleRepo.GetAllVehicles();
+            //var vehicle = vehicleRepo.Vehicles;
 
-            //var vm = vehiclesSearchViewModel;
+            var vm = new VehiclesSearchViewModel();
 
-            return View(vehicle);
+            return View(vm);
         }
     }
 }

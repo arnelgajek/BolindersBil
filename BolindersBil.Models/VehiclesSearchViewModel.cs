@@ -31,5 +31,12 @@ namespace BolindersBil.Models
         public int VehicleId { get; set; }
         // Pagination
         public PagingInfo Pager { get; set; }
+        // ListFilter
+        public int PriceFrom { get; set; }
+        public int PriceTo { get; set; }
+        public int MillageFrom { get; set; }
+        public int MillageTo { get; set; }
+        public string YearFrom { get; set; }
+        public string YearTo { get; set; }
      }
 }
