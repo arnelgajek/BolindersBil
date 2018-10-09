@@ -129,6 +129,7 @@ namespace BolindersBil.Repositories
                 ctxVehicle.Leasable = v.Leasable;
                 ctxVehicle.UpdatedDate = v.UpdatedDate;
                 ctxVehicle.VehicleAttribute = v.VehicleAttribute;
+                ctxVehicle.Images = v.Images;
             }
             ctx.SaveChanges();
         }
