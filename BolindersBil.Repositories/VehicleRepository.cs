@@ -19,7 +19,6 @@ namespace BolindersBil.Repositories
         public IEnumerable<Vehicle> Vehicles => ctx.Vehicles;
         public IEnumerable<Image> Images => ctx.Images;
 
-
         public void AddImage(Image image)
         {
             if (image.Id == 0)

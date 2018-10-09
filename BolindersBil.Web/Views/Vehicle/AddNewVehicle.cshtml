@@ -11,7 +11,7 @@
 <hr />
 
 <div>
-    <form asp-action="AddNewVehicle" method="post" enctype="multipart/form-data" class="form-horizontal">
+    <form asp-action="AddNewVehicle" id="addNewVehicleForm" enctype="multipart/form-data" class="form-horizontal">
 
         <div class="form-group">
             <label asp-for="RegNr" class="control-label col-sm-2"><strong>Registreringsnummer:</strong></label>
@@ -122,79 +122,40 @@
         </div>
 
         <div class="form-group">
-            <label asp-for="Used" class="control-label col-sm-2"><strong>Begagnad:</strong></label>
+            @*<label asp-for="Used" class="control-label col-sm-2"><strong>Sälj som begagnad?:</strong></label>*@
             <div class="col-sm-10">
-                <label class="check-inline"><input asp-for="Used" type="radio" name="radioOption" value="true">  Ja</label>
-                <label class="check-inline"><input asp-for="Used" type="radio" name="radioOption" value="false">  Nej</label>
+                <label class="checkbox-inline"><strong>Sälj som begagnad?:</strong>&nbsp;&nbsp;&nbsp;&nbsp;<input asp-for="Used" type="checkbox" id="usedCheckbox" value="false"></label>
+                @*<label class="checkbox-inline"><input asp-for="Used" type="checkbox" value="false">  Nej</label>*@
             </div>
         </div>
 
-        @*<div class="form-group">
-                <label asp-for="Used" class="control-label col-sm-2"><strong>Begagnad:</strong></label>
-                <div class="col-sm-10">
-                    <label class="checkbox-inline"><input asp-for="Used" type="checkbox" value="true">  Ja</label>&nbsp;&nbsp;
-                    <label class="checkbox-inline"><input asp-for="Used" type="checkbox" value="false">  Nej</label>
-                </div>
-            </div>*@
+        <div class="form-group">
+            @*<label asp-for="Leasable" class="control-label col-sm-4"><strong>Leasbar för företag:</strong></label>*@
+            <div class="col-sm-10">
+                <label class="checkbox-inline"><strong>Leasbar för företag?:</strong>&nbsp;&nbsp;&nbsp;&nbsp;<input asp-for="Leasable" type="checkbox" id="leasableCheckbox" value="false"></label>
+                @*<label class="checkbox-inline"><input asp-for="Leasable" type="checkbox" value="false">  Nej</label>*@
+            </div>
+        </div>
 
         <div class="form-group">
             <label asp-for="Office" class="control-label col-sm-2"><strong>Anläggning:</strong></label>
             <div class="col-sm-10">
-                <select asp-for="Office" class="form-control" id="">
+                <select asp-for="Office" class="form-control">
                     <option selected>Välj</option>
                     @foreach (var office in ViewBag.offices)
                     {
-                        <option value="@office">@office</option>
+                        <option id="officeSelectOption" value="@office">@office</option>
                     }
                 </select>
             </div>
         </div>
 
-        @* TODO: fix so you can visually see the files you have uploaded. *@
         <div class="form-group">
-            <label asp-for="Images" class="control-label col-sm-2"><strong>Bilder:</strong></label>
+            <label for="images" class="control-label col-sm-2"><strong>Bilder:</strong></label>
             <div class="col-sm-4">
-
-                <div class="btn">
-                    <input asp-for="Images" type="file" name="uploadedImages" id="browseImages" onchange="myFunction()" class="form-control-file" multiple>
-                </div>
-
-
-
-
-                <div id="demo" style="display:none;">
-                    @*<img class="img-responsive" id="targetImg" style="height:100px; width:100%;" />
-                    <hr />
-                    <div class="caption">
-                        <a class="btn btn-sm btn-warning" onclick="ClearPreview()">Ta bort</a>
-                        <small><span id="description"></span></small>
-                    </div>*@
-                </div>
-
-
-
-
-
-                <div id="imgPreview" class="img-thumbnail" style="display:none;">
-                    <img class="img-responsive" id="targetImg" style="height:100px; width:100%;" />
-                    <hr />
-                    <div class="caption">
-                        <a class="btn btn-sm btn-warning" onclick="ClearPreview()">Ta bort</a>
-                        <small><span id="description"></span></small>
-                    </div>
-                </div>
-
-            </div>
-
-
-            @*<input asp-for="Picture" type="file" id="browseImages" class="form-control-file" multiple>*@
-        </div>
-
-        <div class="form-group">
-            <label asp-for="Leasable" class="control-label col-sm-4"><strong>Leasbar för företag:</strong></label>
-            <div class="col-sm-10">
-                <label class="checkbox-inline"><input asp-for="Leasable" type="checkbox" value="true">  Ja</label>&nbsp;&nbsp;
-                <label class="checkbox-inline"><input asp-for="Leasable" type="checkbox" value="false">  Nej</label>
+                <input type="file" id="images" name="images" class="form-control-file" multiple style="display:none">
+                <button class="btn" id="selectFilesBtn">Välj filer</button>
+                <div class="form-group" id="filePreviews"></div>
             </div>
         </div>
 
@@ -217,77 +178,105 @@
 
 <script src="~/js/site.min.js"></script>
 <script>
-
-    function myFunction() {
-        var x = document.getElementById("browseImages");
-        var txt = "";
-
-        if ('files' in x) {
-            for (var i = 0; i < x.files.length; i++) {
-                
-                txt += "<br><strong>" + (i + 1) + ". file</strong><br>";
-
-                var file = x.files[i];
-
-                if ('name' in file) {
-                    txt += "name: " + file.name + "<br>";
-                }
-
-                if ('size' in file) {
-                    txt += "size: " + file.size + " bytes <br>";
-                }
-
-                txt += "<button class='btn btn-sm btn-warning' onclick='ClearPreview()'>" + "Ta bort" + "</button><br>";
-
-            }
+    var formUtils = {
+        files: [],
+        buildPreview: function (dataUrl) {
+            var html = ['<img src="' + dataUrl + '" class="img-thumbnail">'];
+            var button = ['<a class="btn btn-warning btn-sm">Ta bort</a>'];
+            var theDiv = ['<div class="imageThumbnailPreview">' + html + button + '</div>'];
+            $('#filePreviews').append(theDiv);
+        },
+        removeImage: function (index) {
+            formUtils.files.splice(index, 1);
+            console.log(formUtils.files);
         }
-        document.getElementById("demo").innerHTML = txt;
-        $("#demo").show();
-    }
-
-    var ClearPreview = function () {
-        $("#demo").hide();
     };
 
+    $(document).ready(function () {
+        
+        $('#selectFilesBtn').click(function (e) {
+            e.preventDefault();
+            $('#images').trigger('click');
+        });
 
-    //$(document).ready(function () {
-    //    $("#browseImages").change(function () {
+        $(document).on('click', 'div.imageThumbnailPreview', function () {
+            formUtils.removeImage($(this).index());
+            $(this).remove();
+        });
 
-    //        var File = this.files;
-    //        for (var i = 0; i != File.length; i++)
-    //        {
-    //            if (File && File[i]) {
-    //                ReadImage(File[i]);
-    //            }
-    //        }
-    //        //if (File && File[0]) {
-    //        //    ReadImage(File[0]);
-    //        //}
-    //    });
-    //});
+        $(document).on('change', '#usedCheckbox', function () {
+            if ($(this).is(':checked')) {
+                $(this).attr('value', 'true');
+                //console.log($(this).val());
+            } else {
+                $(this).attr('value', 'false');
+                //console.log($(this).val());
+            }
+        });
 
-    //var ReadImage = function (file) {
-    //    var reader = new FileReader;
-    //    var image = new Image;
-    //    reader.readAsDataURL(file);
-    //    reader.onload = function (_file) {
-    //        image.src = _file.target.result;
-    //        image.onload = function () {
-    //            var height = this.height;
-    //            var width = this.width;
-    //            var type = file.type;
-    //            // Changing the image from byte to kilobyte here.
-    //            var size = ~~(file.size / 1024) + "KB";
-    //            $("#targetImg").attr('src', _file.target.result);
-    //            $("#description").text("Size: " + size + ", " + height + " x " + width + ", " + type + "");
-    //            $("#imgPreview").show();
-    //        }
-    //    }
-    //};
+        $(document).on('change', '#leasableCheckbox', function () {
+            if ($(this).is(':checked')) {
+                $(this).attr('value', 'true');
+                //console.log($(this).val());
+            } else {
+                $(this).attr('value', 'false');
+                //console.log($(this).val());
+            }
+        });
+        
+        if ($('#addNewVehicleForm').length > 0) {
 
-    //var ClearPreview = function () {
-    //    $("#browseImages").val('');
-    //    $("#description").text('');
-    //    $("#imgPreview").hide();
-    //};
+            $("#images").on("change", function (event) {
+                formUtils.files = [];
+                var files = event.originalEvent.target.files;
+                $(files).each(function (i, file) {
+                    var reader = new FileReader();
+                    reader.addEventListener("load", function () {
+                        formUtils.files.push(file);
+                        var dataUrl = reader.result;
+                        formUtils.buildPreview(dataUrl);
+                    }, false);
+                    reader.readAsDataURL(file);
+                });
+            });
+
+            $('#addNewVehicleForm').submit(function (e) {
+                e.preventDefault();
+                $('#images').remove();
+                var formData = new FormData();
+                
+                $('#addNewVehicleForm textarea').each(function () {
+                    formData.append($(this).attr('name'), $(this).val());
+                });
+                $('#addNewVehicleForm select').each(function () {
+                    formData.append($(this).attr('name'), $(this).val());
+                });
+                $('#addNewVehicleForm input').each(function () {
+                    formData.append($(this).attr('name'), $(this).val());
+                });
+                $(formUtils.files).each(function (i, file) {
+                    formData.append('images[' + i + ']', formUtils.files[i]);
+                });
+
+                $.ajax({
+                    url: $('#addNewVehicleForm').attr('action'),
+                    type: 'POST',
+                    data: formData,
+                    dataType: 'json',
+                    processData: false,
+                    contentType: false,
+                    success: function (data) {
+                        console.log(data);
+                        window.location.href = '/Vehicle/Admin';
+                        console.log('Congrats! You have added ' + data + '.');
+                    },
+                    error: function (error) {
+                        console.log(error);
+                    }
+                });
+
+            });
+        }
+    });
+
 </script>
