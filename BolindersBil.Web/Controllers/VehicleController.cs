@@ -220,8 +220,7 @@ namespace BolindersBil.Web.Controllers
 
                 }
                 addNewVehicle.Images = images;
-
-
+                
                 Office jkpgOffice = officeRepo.Offices.Single(o => o.OfficeCode == "BB1");
                 Office varnOffice = officeRepo.Offices.Single(o => o.OfficeCode == "BB2");
                 Office gbgOffice = officeRepo.Offices.Single(o => o.OfficeCode == "BB3");
@@ -237,15 +236,12 @@ namespace BolindersBil.Web.Controllers
                 {
                     addNewVehicle.OfficeId = gbgOffice;
                 }
-
-
+                
                 addNewVehicle.AddedDate = DateTime.Now;
                 addNewVehicle.UpdatedDate = DateTime.Now;
 
                 vehicleRepo.AddNewVehicle(addNewVehicle);
-
-                // TODO: have a RedirectToAction here and send to the Admin Action method...
-                //return View("TestVehicleAdded", ViewData);
+                
                 return Json(new { data = true });
             }
 
