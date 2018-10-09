@@ -419,10 +419,10 @@ namespace BolindersBil.Web.Controllers
 
             var vm = new VehicleForSaleViewModel
             {
-                // TODO: Fill with code.
+                Vehicle = vehicle
             };
 
-            return View();
+            return View(vm);
         }
     }
 }
