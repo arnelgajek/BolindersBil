@@ -388,5 +388,18 @@ namespace BolindersBil.Web.Controllers
             // Redirects the user to the account/admin:
             return RedirectToAction(nameof(Admin));
         }
+
+        [HttpGet]
+        public IActionResult Vehicle(int vehicleId)
+        {
+            var vehicle = vehicleRepo.Vehicles.FirstOrDefault(x => x.Id.Equals(vehicleId));
+
+            var vm = new VehicleForSaleViewModel
+            {
+                // TODO: Fill with code.
+            };
+
+            return View();
+        }
     }
 }
