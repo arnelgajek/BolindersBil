@@ -1,19 +1,15 @@
 ﻿@model VehiclesSearchViewModel
 
-
 <p>This is the Vehicle Index page!</p>
 
-
 <div class="container">
-    <div class="row">
-        <div id="filterBox">
-            <form>
+    
+    <div id="filterBox" class="border rounded bg-light" style="margin-bottom: 2em">
+        <form style="margin: 2em">
+            <div class="row">
                 @*TODO: Fix this form with the current model*@
-                <div class="form-group">
-                    <label>Årstyp</label>
-                    <select class="form-control"></select>
-                </div>
-                <div class="form-group">
+
+                <div class="form-group col-3">
                     <label>Bränsle</label>
                     <select class="form-control">
                         <option selected>Bensin</option>
@@ -22,7 +18,7 @@
                         <option>Miljöbränsle/Hybrid</option>
                     </select>
                 </div>
-                <div class="form-group">
+                <div class="form-group col-3">
                     <label>Karosstyp</label>
                     <select class="form-control">
                         <option selected>Småbil</option>
@@ -36,53 +32,81 @@
                         <option>Yrkesfordon</option>
                     </select>
                 </div>
-                <div class="form-group">
-                    <label>Pris</label>
-                    <input class="form-control" type="range" />
-                </div>
-                <div class="form-group">
-                    <label>Mil</label>
-                    <input class="form-control" type="range" />
-                </div>
-                <div class="form-group">
+                <div class="form-group col-3">
                     <label>Växellåda</label>
                     <select class="form-control">
                         <option selected>Manuell</option>
                         <option>Automat</option>
                     </select>
                 </div>
+            </div>
+            <div class="row">
+                <div class="input-group mb-3 col-9">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Pris från:</span>
+                    </div>
+                    <input class="form-control" type="number" />
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Pris till:</span>
+                    </div>
+                    <input class="form-control" type="number" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-group mb-3 col-9">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Mil från:</span>
+                    </div>
+                    <input class="form-control" type="number" />
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Mil till:</span>
+                    </div>
+                    <input class="form-control" type="number" />
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="input-group col-9">
+                    <label>Årstyp</label>
+                    <select class="form-control"></select>
+                </div>
+            </div>
 
 
-            </form>
-        </div>
+
+        </form>
     </div>
+
     <div class="row">
         @foreach (var v in Model.Vehicles)
         {
             
             <div class="row">
-                <input type="hidden" value="@v.Id" />
-                <div class="col-5">
-                    @if (Model.Path == null)
-                    {
-                        <img src="https://via.placeholder.com/300x150" />
-                    }
-                    else
-                    {
-                        <img src="@Model.Path" />
-                        @*<img src="~/images/vehicle_images/Subaru_YUI - 666/6677f70c-7d13-4384-b7f2-55702b000ae6_ATa42LS.png" />*@
-                        @*<img src="~\images\vehicle_images\Subaru_YUI - 666\6677f70c-7d13-4384-b7f2-55702b000ae6_ATa42LS.png">*@
-                    }
-                </div>
-                <div class="col-4">
-                    <span>@v.Office</span>
-                    <h3>@v.Brand @v.Model @v.ModelDescription @v.Year</h3>
-                    <span>@v.Fuel | @v.Gearbox | @v.Kilometer</span>
-                    <h4>@v.Price Kr</h4>
-                </div>
-                <div class="col-3 float-sm-right">
-                    <span>@v.UpdatedDate.ToString("dd/MM/yyyy hh:mm")</span>
-                </div>
+                <form asp-action="Vehicle" method="get">
+                    <input asp-for="VehicleId" type="hidden" value="@v.Id" id="id" name="id" />
+                    <div class="col-5">
+                        @if (Model.Path == null)
+                        {
+                            <img src="https://via.placeholder.com/300x150" />
+                        }
+                        else
+                        {
+                            <img src="@Model.Path" />
+                            @*<img src="~/images/vehicle_images/Subaru_YUI - 666/6677f70c-7d13-4384-b7f2-55702b000ae6_ATa42LS.png" />*@
+                            @*<img src="~\images\vehicle_images\Subaru_YUI - 666\6677f70c-7d13-4384-b7f2-55702b000ae6_ATa42LS.png">*@
+                        }
+                    </div>
+                    <div class="col-4">
+                        <span>@v.Office</span>
+                        <h3>@v.Brand @v.Model @v.ModelDescription @v.Year</h3>
+                        <span>@v.Fuel | @v.Gearbox | @v.Kilometer</span>
+                        <h4>@v.Price Kr</h4>
+                    </div>
+                    <div class="col-3 float-sm-right">
+                        <span>@v.UpdatedDate.ToString("dd/MM/yyyy hh:mm")</span>
+                    </div>
+                    <a asp-controller="Vehicle" asp-action="Vehicle" class="btn btn-success">Party</a>
+                </form>
             </div>
         }
     </div>
@@ -90,5 +114,3 @@
 
     </div>
 </div>
-
-@*@Html.ActionLink("Load next 8 Vehicles", "Vehicles", "Controller", new { page = Model.Pager.CurrentPage + 1 })*@

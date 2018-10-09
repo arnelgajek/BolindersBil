@@ -62,6 +62,13 @@ namespace BolindersBil.Repositories
             return ctxVehicle;
         }
 
+        public Vehicle Vehicle(int vehicleId)
+        {
+            var ctxVehicle = ctx.Vehicles.FirstOrDefault(x => x.Id.Equals(vehicleId));
+            
+            return ctxVehicle;
+        }
+
         // List all the Vehicles from DB.
         public IEnumerable<Vehicle> GetAllVehicles()
         {
@@ -70,11 +77,15 @@ namespace BolindersBil.Repositories
 
         // List all the Images from DB
         public IEnumerable<Image> GetAllImages()
-
         {
             return Images;
         }
+        //public IEnumerable<Vehicle> Filter(string searchString)
+        //{
+        //    IEnumerable<Vehicle> vehicles;
 
+            
+        //}
         public IEnumerable<Vehicle> Search(string searchString, bool used)
         {
             IEnumerable<Vehicle> vehicles;

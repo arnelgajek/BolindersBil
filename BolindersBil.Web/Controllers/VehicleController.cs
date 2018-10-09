@@ -57,9 +57,9 @@ namespace BolindersBil.Web.Controllers
             // page = 0 x pagelimit
             var toSkip = (page - 1) * PageLimit;
 
-            // Gets the (pagelimit) amount of vehicles and orders them by their ID
-            // This shall be changed to sort by UpdateDate in the future
-            var vehicles = vehicleRepo.Vehicles.OrderBy(x => x.Id).Skip(toSkip).Take(PageLimit);
+            // Gets the (pagelimit) amount of vehicles and orders them by 
+            // newest first and then the latest updated vehicle
+            var vehicles = vehicleRepo.Vehicles.OrderBy(x => x.Used == true).ThenByDescending(x => x.UpdatedDate).Skip(toSkip).Take(PageLimit);
 
             // Gets new info for the paging. Page becomes 1. (page x pagelimit). 
             // And creates new pages for the amount over the pagelimit (since page becomes 2 then 3...)
@@ -77,7 +77,8 @@ namespace BolindersBil.Web.Controllers
             string WebRootPath = _hostingEnvironment.WebRootPath;
             string ContentRootPath = _hostingEnvironment.ContentRootPath;
 
-            //var str = WebRootPath.Replace(ContentRootPath, "");
+            // This should be inside a if function to check if there's even a picture to look for
+            // ATM it just checks for a picture and if there isn't one it crashes
             string ImgPath = images.FirstOrDefault().Path.Replace(WebRootPath, "");
             var Parts = ImgPath.Split("\\");
             var NewPath = string.Join("/", Parts);
@@ -197,12 +198,7 @@ namespace BolindersBil.Web.Controllers
                         }
                     }
                     
-                    var theImage = new Models.Image
-                    {
-                        Name = uniqueGuid,
-                        Path = finalTargetFilePath
-                    };
-                    images.Add(theImage);
+                    
                  
                     // Resize and save the image under the correct folder. Calls on the ImageResize function.
                     string resizedImageFolder = createSpecificVehicleFolder + "\\resized_images";
@@ -211,6 +207,12 @@ namespace BolindersBil.Web.Controllers
                         Directory.CreateDirectory(resizedImageFolder);
                     }
                     ImageResize(finalTargetFilePath, resizedImageFolder + "\\" + targetFileName, 100);
+                    var theImage = new Models.Image
+                    {
+                        Name = uniqueGuid,
+                        Path = resizedImageFolder + "\\" + targetFileName
+                    };
+                    images.Add(theImage);
                 }
                 addNewVehicle.Images = images;
                 addNewVehicle.AddedDate = DateTime.Now;
@@ -390,6 +392,17 @@ namespace BolindersBil.Web.Controllers
             }
             // Redirects the user to the account/admin:
             return RedirectToAction(nameof(Admin));
+        }
+
+        [HttpGet]
+        public IActionResult Vehicle(int id)
+        {
+
+            var vehicle = vehicleRepo.Vehicles.FirstOrDefault(x => x.Id.Equals(id));
+
+            //var vm = vehiclesSearchViewModel;
+
+            return View(vehicle);
         }
     }
 }
