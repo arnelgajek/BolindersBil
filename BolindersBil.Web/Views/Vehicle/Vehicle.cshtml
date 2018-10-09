@@ -45,7 +45,7 @@
                 <strong>Attribut: </strong>@Model.Vehicle.VehicleAttribute <br />
                 <strong>Annons tillagd: </strong>@Model.Vehicle.AddedDate <br />
                 <strong>Annons uppdaterad: </strong>@Model.Vehicle.UpdatedDate <br />
-                <strong>Kontakta säljare:</strong>@*@Model.Offices.Name, @Model.Offices.PhoneNumber*@
+                <strong>Kontakta säljare: </strong> <!-- TODO: Can't reach the office phonenumber! -->
             </h6>
             <h1><strong>Pris: </strong>@Model.Vehicle.Price</h1>
         </div>
@@ -64,6 +64,7 @@
             <div class="vehicleButtons" style="float:right">
 
                 <!-- This form and its button allows you to share the vehicle: -->
+                <input asp-for="Email" placeholder="Ange emailadress..." />
                 <a asp-controller="Mail" asp-action="SendMail" class="btn btn-info">Dela</a>
             </div>
         </div>
