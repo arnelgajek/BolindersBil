@@ -1,0 +1,72 @@
+﻿@model VehicleForSaleViewModel
+
+@{
+    Layout = "~/Views/Shared/_VehicleForSaleLayout.cshtml";
+}
+
+<div class="container" style="margin-top:50px">
+    <div class="row">
+        <!-- Carousel: -->
+        <div class="col-sm-12" style="margin-bottom:20px">
+            <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                <!-- Foreach that loops through all the images concerning the specific vehicleId: -->
+                <div class="carousel-inner" style="width:100%">
+                    <div class="carousel-item active">
+                        <img class="d-block w-100" src="~/images/vehicle_images/Test_ABC123/1956d4bc-02be-4829-ab3e-22220c4f72f7_ABC123_test.jpg" alt="IMG_NOT_FOUND">
+                    </div>
+                </div>
+                <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Föregående</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Nästa</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- Bilmärke: -->
+        <div class="col-sm-12" style="background-color:white; margin-bottom:20px">
+            <h1>@Model.Vehicle.Brand @Model.Vehicle.Model</h1>
+        </div>
+        <div class="col-sm-12" style="background-color:lightgray; margin-bottom:20px; padding:10px;">
+            <h6>
+                <strong>Miltal: </strong>@Model.Vehicle.Kilometer <br />
+                <strong>Modellbeskrivning: </strong>@Model.Vehicle.ModelDescription <br />
+                <strong>År: </strong>@Model.Vehicle.Year <br />
+                <strong>Kaross: </strong>@Model.Vehicle.Body <br />
+                <strong>Färg: </strong>@Model.Vehicle.Color <br />
+                <strong>Växellåda: </strong>@Model.Vehicle.Gearbox <br />
+                <strong>Drivmedel: </strong>@Model.Vehicle.Fuel <br />
+                <strong>Hästkrafter: </strong>@Model.Vehicle.Horsepower <br />
+                <strong>Begagnad: </strong>@Model.Vehicle.Used <br />
+                <strong>Leasbar: </strong>@Model.Vehicle.Leasable <br />
+                <strong>Attribut: </strong>@Model.Vehicle.VehicleAttribute <br />
+                <strong>Annons tillagd: </strong>@Model.Vehicle.AddedDate <br />
+                <strong>Annons uppdaterad: </strong>@Model.Vehicle.UpdatedDate <br />
+                <strong>Kontakta säljare:</strong>@*@Model.Offices.Name, @Model.Offices.PhoneNumber*@
+            </h6>
+            <h1><strong>Pris: </strong>@Model.Vehicle.Price</h1>
+        </div>
+        <div class="col-sm-12" style="background-color:orange; margin-bottom:20px; padding:10px;">
+            <h1>PRISKALKYL:</h1>
+        </div>
+        <div class="col-sm-12" style="background-color:lightblue; margin-bottom:20px; padding:10px;">
+            <h1>RELATERADE FORDON:</h1>
+        </div>
+        <div class="col-sm-12" style="background-color:orange; margin-bottom:20px; padding:10px;">
+            <h1>PRISKALKYL:</h1>
+        </div>
+        <div class="col-sm-12" style="background-color:white; margin-bottom:20px; padding:10px;">
+            <!-- Back to the page that lists all the vehicles: -->
+            <button type="button" class="btn btn-warning">Tillbaka</button>
+            <div class="vehicleButtons" style="float:right">
+
+                <!-- This form and its button allows you to share the vehicle: -->
+                <a asp-controller="Mail" asp-action="SendMail" class="btn btn-info">Dela</a>
+            </div>
+        </div>
+    </div>
+</div>
+

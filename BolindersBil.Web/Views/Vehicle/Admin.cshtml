@@ -12,9 +12,16 @@
     </div>
     <div class="float-sm-right" style="margin-bottom:10px">
         <a asp-controller="Vehicle" asp-action="AddNewVehicle" class="btn btn-success" name="newVehicle" id="newVehicle">New</a>
+<<<<<<< HEAD
+        @*<a asp-controller="Vehicle" asp-action="EditVehicle" class="btn btn-warning" name="editVehicle" id"editVehicle">Edit</a>*@
+        @*<button type="button" class="btn btn-warning" name="editVehicle" id="editVehicle" data-toggle="modal" data-target="#editModal">Edit</button>*@
+        <button type="button" class="btn btn-danger" name="deleteVehicle" id="deleteVehicle" data-toggle="modal" data-target="#deleteModal">Delete</button>
+        <button type="button" class="btn btn-danger" name="bulkDeleteVehicle" id="bulkDeleteVehicle" data-toggle="modal" data-target="#bulkDeleteModal">Bulk Delete</button>
+=======
         <a id="editButton" class="btn btn-sm btn-warning">Edit</a>
         <button type="button" class="btn btn-sm btn-danger" name="deleteVehicle" id="deleteVehicle" data-toggle="modal" data-target="#deleteModal">Delete</button>
         <button type="button" class="btn btn-sm btn-danger" name="bulkDeleteVehicle" id="bulkDeleteVehicle" data-toggle="modal" data-target="#bulkDeleteModal">Bulk Delete</button>
+>>>>>>> 915605d5ac3363b788e560fa5c8c6a4e19883064
     </div>
 
     @foreach (var v in Model)
@@ -31,19 +38,19 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title mx-auto" id="deleteModalLabel">Are you sure that you want to delete?</h5>
+                        <h5 class="modal-title mx-auto" style="text-align:center" id="deleteModalLabel">Are you sure that you want to delete?</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
-                        <p style="text-align:center">You are about to delete a vehicle from the page, are you sure that you want to do that?</p>
+                        <p style="text-align:center">Press the Delete-button to confirm your delete...</p>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
                         <form asp-action="DeleteVehicle" method="post">
                             <input type="hidden" name="vehicleId" value="@v.Id" />
-                            <button type="submit" id="testTest" class="btn btn-danger">Delete</button>
+                            <button type="submit" id="confirmVehicleDelete" class="btn btn-danger">Delete</button>
                         </form>
                     </div>
                 </div>
@@ -67,13 +74,13 @@
                         <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
                         <form asp-action="BulkDeleteVehicle" method="post">
                             <input type="hidden" name="vehicleId" value="@v.Id" />
-                            <button type="submit" id="bulktest" class="btn btn-danger">Delete</button>
+                            <button type="submit" id="confirmVehicleBulkDelete" class="btn btn-danger">Delete</button>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
-     }
+    }
 </div>
 
 <!-- LogOut-button: -->

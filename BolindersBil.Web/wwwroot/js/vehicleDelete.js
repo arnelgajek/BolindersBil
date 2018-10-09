@@ -2,22 +2,28 @@
 
     // Checks all the checkboxes for you:
     $('#checkAll').click(function () {
-        // TODO: If the checkAll checked, enable button #bulkDeleteVehicle:
 
         $('input:checkbox').prop('checked',
             this.checked);
-   });
+    });
 
     // Gets the value using class:
-    $('#testTest').click(function () {
+    $('#confirmVehicleDelete').click(function () {
         getValueUsingClass();
     });
 
-    $('#bulktest').click(function (e) {
+    $('#confirmVehicleBulkDelete').click(function () {
         getValueUsingClass();
     });
 
+<<<<<<< HEAD
+    //$('#confirmVehicleEdit').click(function () {
+    //    getValueUsingClass();
+    //});
+
+=======
     
+>>>>>>> 915605d5ac3363b788e560fa5c8c6a4e19883064
     function getValueUsingClass() {
         
         // Declaring checkbox array:

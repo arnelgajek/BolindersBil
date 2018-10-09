@@ -74,7 +74,10 @@ namespace BolindersBil.Web.Controllers
 
             var images = vehicleRepo.GetAllImages();
             var vehicleId = vehicleRepo.Images.OrderBy(x => x.VehicleId);
+<<<<<<< HEAD
+=======
 
+>>>>>>> 915605d5ac3363b788e560fa5c8c6a4e19883064
 
             string WebRootPath = _hostingEnvironment.WebRootPath;
             string ContentRootPath = _hostingEnvironment.ContentRootPath;
@@ -84,8 +87,11 @@ namespace BolindersBil.Web.Controllers
             var Parts = ImgPath.Split("\\");
             var NewPath = string.Join("/", Parts);
 
+<<<<<<< HEAD
+=======
 
 
+>>>>>>> 915605d5ac3363b788e560fa5c8c6a4e19883064
             var vm = new VehiclesSearchViewModel
             {
                 Vehicles = vehicles,
@@ -475,12 +481,21 @@ namespace BolindersBil.Web.Controllers
             }
             return RedirectToAction(nameof(Admin));
         }
+<<<<<<< HEAD
+        
+        //[HttpPost]
+        //public ActionResult DeleteVehicle()
+        //{
+        //    return RedirectToAction("Admin");
+        //}
+=======
 
         [HttpPost]
         public ActionResult DeleteVehicle()
         {
             return RedirectToAction("Admin");
         }
+>>>>>>> 915605d5ac3363b788e560fa5c8c6a4e19883064
 
         [HttpPost]
         public IActionResult BulkDeleteVehicle(string vehicleId)
@@ -496,6 +511,19 @@ namespace BolindersBil.Web.Controllers
             }
             // Redirects the user to the account/admin:
             return RedirectToAction(nameof(Admin));
+        }
+
+        [HttpGet]
+        public IActionResult Vehicle(int vehicleId)
+        {
+            var vehicle = vehicleRepo.Vehicles.FirstOrDefault(x => x.Id.Equals(vehicleId));
+
+            var vm = new VehicleForSaleViewModel
+            {
+                Vehicle = vehicle
+            };
+
+            return View(vm);
         }
     }
 }

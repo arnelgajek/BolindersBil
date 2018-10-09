@@ -59,31 +59,34 @@
     <div class="row">
         @foreach (var v in Model.Vehicles)
         {
-            
-            <div class="row">
-                <input type="hidden" value="@v.Id" />
-                <div class="col-5">
-                    @if (Model.Path == null)
-                    {
-                        <img src="https://via.placeholder.com/300x150" />
-                    }
-                    else
-                    {
-                        <img src="@Model.Path" />
-                        @*<img src="~/images/vehicle_images/Subaru_YUI - 666/6677f70c-7d13-4384-b7f2-55702b000ae6_ATa42LS.png" />*@
-                        @*<img src="~\images\vehicle_images\Subaru_YUI - 666\6677f70c-7d13-4384-b7f2-55702b000ae6_ATa42LS.png">*@
-                    }
-                </div>
-                <div class="col-4">
-                    <span>@v.Office</span>
-                    <h3>@v.Brand @v.Model @v.ModelDescription @v.Year</h3>
-                    <span>@v.Fuel | @v.Gearbox | @v.Kilometer</span>
-                    <h4>@v.Price Kr</h4>
-                </div>
-                <div class="col-3 float-sm-right">
-                    <span>@v.UpdatedDate.ToString("dd/MM/yyyy hh:mm")</span>
-                </div>
+
+        <div class="row">
+            <input type="hidden" value="@v.Id" />
+            <div class="col-5">
+                @if (Model.Path == null)
+                {
+                    <img src="https://via.placeholder.com/300x150" />
+                }
+                else
+                {
+                    <img src="@Model.Path" />
+                    @*<img src="~/images/vehicle_images/Subaru_YUI - 666/6677f70c-7d13-4384-b7f2-55702b000ae6_ATa42LS.png" />*@
+                    @*<img src="~\images\vehicle_images\Subaru_YUI - 666\6677f70c-7d13-4384-b7f2-55702b000ae6_ATa42LS.png">*@
+                }
             </div>
+            <div class="col-4">
+                <span>@v.Office</span>
+                <h3>@v.Brand @v.Model @v.ModelDescription @v.Year</h3>
+                <span>@v.Fuel | @v.Gearbox | @v.Kilometer</span>
+                <h4>@v.Price Kr</h4>
+            </div>
+            <div class="col-3 float-sm-right">
+                <span>@v.UpdatedDate.ToString("dd/MM/yyyy hh:mm")</span>
+            </div>
+                <a asp-action="Vehicle" class="btn btn-success" asp-route-vehicleId="@v.Id">
+                    Mer information...
+                </a>            
+        </div>
         }
     </div>
     <div page-model="@Model.Pager" page-action="VehicleList">
