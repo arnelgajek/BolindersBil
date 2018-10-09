@@ -27,7 +27,7 @@ namespace BolindersBil.Repositories
             }
             ctx.SaveChanges();
         }
-        
+
         // So we can AddNewVehicles to our DB.
         public void AddNewVehicle(Vehicle vehicle)
         {
@@ -77,7 +77,6 @@ namespace BolindersBil.Repositories
 
         // List all the Images from DB
         public IEnumerable<Image> GetAllImages()
-
         {
             return Images;
         }
@@ -99,7 +98,7 @@ namespace BolindersBil.Repositories
                                                    x.Fuel.Contains(searchString) && x.Used == used ||
                                                    x.Gearbox.Contains(searchString) && x.Used == used ||
                                                    x.Office.Contains(searchString) && x.Used == used ||
-                                                   x.VehicleAttribute.Contains(searchString) && x.Used == used); 
+                                                   x.VehicleAttribute.Contains(searchString) && x.Used == used);
             }
 
             return vehicles;
@@ -133,6 +132,29 @@ namespace BolindersBil.Repositories
             }
             ctx.SaveChanges();
         }
+
+
+
+        public IEnumerable<Vehicle> FilterVehicles(FilterVehicleViewModel filterVehicleViewModel)
+        {
+            IEnumerable<Vehicle> listOfVehicles;
+
+            if (filterVehicleViewModel == null)
+            {
+                // Return all of the vehicles in the DB.
+                return Vehicles;
+            }
+            else
+            {
+                listOfVehicles = ctx.Vehicles.Where(x => x.Year.Contains(filterVehicleViewModel.Year) ||
+                                                         x.Fuel.Contains(filterVehicleViewModel.Fuel) ||
+                                                         x.Body.Contains(filterVehicleViewModel.Body) ||
+                                                         x.Gearbox.Contains(filterVehicleViewModel.Gearbox));
+            }
+
+            return listOfVehicles;
+        }
+
     }
 }
 

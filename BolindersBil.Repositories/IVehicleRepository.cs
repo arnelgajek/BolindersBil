@@ -29,5 +29,7 @@ namespace BolindersBil.Repositories
         void UpdateVehicle(EditVehicleViewModel v);
 
         Vehicle Vehicle(int vehicleId);
+
+        IEnumerable<Vehicle> FilterVehicles(FilterVehicleViewModel filterVehicleViewModel);
     }
 }
