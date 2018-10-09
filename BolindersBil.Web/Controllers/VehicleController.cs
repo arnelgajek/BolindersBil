@@ -218,6 +218,24 @@ namespace BolindersBil.Web.Controllers
                 }
                 addNewVehicle.Images = images;
 
+                if (uploadedImages.Count() == 0)
+                {
+                    List<Models.Image> defaultImageList = new List<Models.Image>();
+                    var path = webrootPath + "\\defaultimages\\Image_Upload.png";
+                    Guid defaultImageGuid = Guid.NewGuid();
+                    var defaultImage = new Models.Image
+                    {
+                        Name = defaultImageGuid,
+                        Path = path
+                    };
+                    defaultImageList.Add(defaultImage);
+                    addNewVehicle.Images = defaultImageList;
+                }
+
+
+                
+
+
                 Office jkpgOffice = officeRepo.Offices.Single(o => o.OfficeCode == "BB1");
                 Office varnOffice = officeRepo.Offices.Single(o => o.OfficeCode == "BB2");
                 Office gbgOffice = officeRepo.Offices.Single(o => o.OfficeCode == "BB3");
@@ -428,6 +446,7 @@ namespace BolindersBil.Web.Controllers
                     };
                     images.Add(theImage);
                 }
+
                 editVehicleViewModel.Images = images;
 
                 Office jkpgOffice = officeRepo.Offices.Single(o => o.OfficeCode == "BB1");
@@ -472,7 +491,11 @@ namespace BolindersBil.Web.Controllers
             }
             return RedirectToAction(nameof(Admin));
         }
+<<<<<<< HEAD
 
+=======
+        
+>>>>>>> 1085564e3313107e558b27c5e4d9704ac9601d4e
         [HttpPost]
         public IActionResult BulkDeleteVehicle(string vehicleId)
         {
