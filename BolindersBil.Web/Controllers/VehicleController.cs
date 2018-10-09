@@ -82,13 +82,7 @@ namespace BolindersBil.Web.Controllers
             string ImgPath = images.FirstOrDefault().Path.Replace(WebRootPath, "");
             var Parts = ImgPath.Split("\\");
             var NewPath = string.Join("/", Parts);
-<<<<<<< HEAD
-            
-=======
 
-            
-
->>>>>>> dfdc1ee6fc7340158ad513b7bbf320895c9c9474
             var vm = new VehiclesSearchViewModel
             {
                 Vehicles = vehicles,

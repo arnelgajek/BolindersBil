@@ -12,8 +12,8 @@
     </div>
     <div class="float-sm-right" style="margin-bottom:10px">
         <a asp-controller="Vehicle" asp-action="AddNewVehicle" class="btn btn-success" name="newVehicle" id="newVehicle">New</a>
-        @*<a asp-controller="Vehicle" asp-action="EditVehicle" class="btn btn-warning">Edit</a>*@
-        <button type="button" class="btn btn-warning" name="updateVehicle" id="updateVehicle">Update</button>
+        @*<a asp-controller="Vehicle" asp-action="EditVehicle" class="btn btn-warning" name="editVehicle" id"editVehicle">Edit</a>*@
+        @*<button type="button" class="btn btn-warning" name="editVehicle" id="editVehicle" data-toggle="modal" data-target="#editModal">Edit</button>*@
         <button type="button" class="btn btn-danger" name="deleteVehicle" id="deleteVehicle" data-toggle="modal" data-target="#deleteModal">Delete</button>
         <button type="button" class="btn btn-danger" name="bulkDeleteVehicle" id="bulkDeleteVehicle" data-toggle="modal" data-target="#bulkDeleteModal">Bulk Delete</button>
     </div>
@@ -26,7 +26,6 @@
                 <td><input type="checkbox" class="chk" value="@v.Id" /> @v.Brand @v.Model, @v.RegNr</td>
             </tr>
         </table>
-
 
         <!-- This is the deleteModal to make sure that the user really wants to delete a vehicle? -->
         <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
@@ -75,7 +74,7 @@
                 </div>
             </div>
         </div>
-     }
+    }
 </div>
 
 <!-- LogOut-button: -->

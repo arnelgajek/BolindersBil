@@ -16,6 +16,10 @@
         getValueUsingClass();
     });
 
+    //$('#confirmVehicleEdit').click(function () {
+    //    getValueUsingClass();
+    //});
+
     function getValueUsingClass() {
         
         // Declaring checkbox array:

@@ -11,10 +11,6 @@ namespace BolindersBil.Web.DataAccess
 {
     public class ApplicationDbContext : IdentityDbContext<IdentityUser> 
     {
-<<<<<<< HEAD
-=======
-
->>>>>>> dfdc1ee6fc7340158ad513b7bbf320895c9c9474
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
 
