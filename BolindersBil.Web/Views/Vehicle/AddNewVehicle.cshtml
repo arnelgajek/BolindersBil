@@ -140,14 +140,15 @@
         <div class="form-group">
             <label asp-for="Office" class="control-label col-sm-2"><strong>Anläggning:</strong></label>
             <div class="col-sm-10">
-                <select asp-for="Office" class="form-control" id="">
+                <select asp-for="Office" class="form-control">
                     <option selected>Välj</option>
                     @foreach (var office in ViewBag.offices)
                     {
-                        <option value="@office">@office</option>
+                        <option id="officeSelectOption" value="@office">@office</option>
                     }
                 </select>
             </div>
+            @*<input asp-for="OfficeId" type="hidden" id="officeIdConnection"/>*@
         </div>
 
         <div class="form-group">
@@ -183,7 +184,7 @@
         buildPreview: function (dataUrl) {
             var html = ['<img src="' + dataUrl + '" class="img-thumbnail">'];
             var button = ['<a class="btn btn-warning btn-sm">Ta bort</a>'];
-            var theDiv = ['<div class="imageThumbnailPreview">'+ html + button + '</div>'];
+            var theDiv = ['<div class="imageThumbnailPreview">' + html + button + '</div>'];
             $('#filePreviews').append(theDiv);
         },
         removeImage: function (index) {
@@ -193,7 +194,21 @@
     };
 
     $(document).ready(function () {
-        
+
+
+        //var officeSelectOption = $('#officeSelectOption').val();
+        //if (officeSelectOption === 'Jönköping') {
+        //    $('#officeIdConnection').val() = 1;
+        //}
+        //else if (officeSelectOption === 'Värnamo') {
+        //    $('#officeIdConnection').val() = 2;
+        //}
+        //else {
+        //    $('#officeIdConnection').val() = 3;
+        //}
+
+
+
         $('#selectFilesBtn').click(function (e) {
             e.preventDefault();
             $('#images').trigger('click');
@@ -204,7 +219,6 @@
             $(this).remove();
         });
 
-
         $(document).on('change', '#usedCheckbox', function () {
             if ($(this).is(':checked')) {
                 $(this).attr('value', 'true');
@@ -214,6 +228,7 @@
                 //console.log($(this).val());
             }
         });
+
         $(document).on('change', '#leasableCheckbox', function () {
             if ($(this).is(':checked')) {
                 $(this).attr('value', 'true');
@@ -223,9 +238,18 @@
                 //console.log($(this).val());
             }
         });
+
+
+
+
         
 
+
+
+
+
         if ($('#addNewVehicleForm').length > 0) {
+
             $("#images").on("change", function (event) {
                 formUtils.files = [];
                 var files = event.originalEvent.target.files;
@@ -244,7 +268,6 @@
                 e.preventDefault();
                 $('#images').remove();
                 var formData = new FormData();
-
                 
                 $('#addNewVehicleForm textarea').each(function () {
                     formData.append($(this).attr('name'), $(this).val());
@@ -277,5 +300,5 @@
             });
         }
     });
-    
+
 </script>

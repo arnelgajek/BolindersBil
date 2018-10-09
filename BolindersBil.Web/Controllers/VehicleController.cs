@@ -20,12 +20,14 @@ namespace BolindersBil.Web.Controllers
     public class VehicleController : Controller
     {
         private IVehicleRepository vehicleRepo;
+        public IOfficeRepository officeRepo;
         private IHostingEnvironment _hostingEnvironment;
         public int PageLimit = 8;
         
-        public VehicleController(IVehicleRepository vehicleRepository, IHostingEnvironment hostingEnvironment)
+        public VehicleController(IVehicleRepository vehicleRepository, IOfficeRepository officeRepository, IHostingEnvironment hostingEnvironment)
         {
             vehicleRepo = vehicleRepository;
+            officeRepo = officeRepository;
             _hostingEnvironment = hostingEnvironment;
         }
 
@@ -218,20 +220,24 @@ namespace BolindersBil.Web.Controllers
 
                 }
                 addNewVehicle.Images = images;
-                
 
+
+                Office jkpgOffice = officeRepo.Offices.Single(o => o.OfficeCode == "BB1");
+                Office varnOffice = officeRepo.Offices.Single(o => o.OfficeCode == "BB2");
+                Office gbgOffice = officeRepo.Offices.Single(o => o.OfficeCode == "BB3");
                 if (addNewVehicle.Office == "Jönköping")
                 {
-                    addNewVehicle.OfficeId.OfficeCode = "BB1";
+                    addNewVehicle.OfficeId = jkpgOffice;
                 }
-                else if (addNewVehicle.Office == "Värnamo")
+                if (addNewVehicle.Office == "Värnamo")
                 {
-                    addNewVehicle.OfficeId.OfficeCode = "BB2";
+                    addNewVehicle.OfficeId = varnOffice;
                 }
-                else
+                if (addNewVehicle.Office == "Göteborg")
                 {
-                    addNewVehicle.OfficeId.OfficeCode = "BB3";
+                    addNewVehicle.OfficeId = gbgOffice;
                 }
+
 
                 addNewVehicle.AddedDate = DateTime.Now;
                 addNewVehicle.UpdatedDate = DateTime.Now;
