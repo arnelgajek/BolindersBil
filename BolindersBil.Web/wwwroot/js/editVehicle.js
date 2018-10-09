@@ -21,7 +21,6 @@ $(document).ready(function () {
         var url = '/Vehicle/EditVehicle?vehicleId=' + checkedValue;
         window.location.href = url;
     });
-
     
     $('#selectFilesBtn').click(function (e) {
         e.preventDefault();
@@ -93,7 +92,6 @@ $(document).ready(function () {
                 success: function (data) {
                     console.log(data);
                     window.location.href = '/Vehicle/Admin';
-                    console.log('Congrats! You have UPDATED ' + data + '.');
                 },
                 error: function (error) {
                     console.log(error);
