@@ -17,7 +17,6 @@ using System.Threading.Tasks;
 using static System.Net.Mime.MediaTypeNames;
 
 
-
 namespace BolindersBil.Web.Controllers
 {
     public class AccountController : Controller
