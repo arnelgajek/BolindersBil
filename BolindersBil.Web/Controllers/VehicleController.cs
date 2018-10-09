@@ -31,10 +31,13 @@ namespace BolindersBil.Web.Controllers
             _hostingEnvironment = hostingEnvironment;
         }
 
-        // Index isn't used for anything important atm but is crutial
         public IActionResult Index()
         {
-            return RedirectToAction("VehicleList");
+
+
+
+            //return RedirectToAction("VehicleList");
+            return View();
         }
 
         [HttpPost]
@@ -53,49 +56,49 @@ namespace BolindersBil.Web.Controllers
             return View(getVehicles);
         }
 
-        // Paging
-        public IActionResult VehicleList(int page = 1)
-        {
-            // page = 0 x pagelimit
-            var toSkip = (page - 1) * PageLimit;
+        //// Paging
+        //public IActionResult VehicleList(int page = 1)
+        //{
+        //    // page = 0 x pagelimit
+        //    var toSkip = (page - 1) * PageLimit;
 
-            // Gets the (pagelimit) amount of vehicles and orders them by their ID
-            // This shall be changed to sort by UpdateDate in the future
-            var vehicles = vehicleRepo.Vehicles.OrderBy(x => x.Id).Skip(toSkip).Take(PageLimit);
+        //    // Gets the (pagelimit) amount of vehicles and orders them by their ID
+        //    // This shall be changed to sort by UpdateDate in the future
+        //    var vehicles = vehicleRepo.Vehicles.OrderBy(x => x.Id).Skip(toSkip).Take(PageLimit);
 
-            // Gets new info for the paging. Page becomes 1. (page x pagelimit). 
-            // And creates new pages for the amount over the pagelimit (since page becomes 2 then 3...)
-            var paging = new PagingInfo
-            {
-                CurrentPage = page,
-                ItemsPerPage = PageLimit,
-                TotalItems = vehicleRepo.Vehicles.Count()
-            };
+        //    // Gets new info for the paging. Page becomes 1. (page x pagelimit). 
+        //    // And creates new pages for the amount over the pagelimit (since page becomes 2 then 3...)
+        //    var paging = new PagingInfo
+        //    {
+        //        CurrentPage = page,
+        //        ItemsPerPage = PageLimit,
+        //        TotalItems = vehicleRepo.Vehicles.Count()
+        //    };
 
-            var images = vehicleRepo.GetAllImages();
-            var vehicleId = vehicleRepo.Images.OrderBy(x => x.VehicleId);
+        //    var images = vehicleRepo.GetAllImages();
+        //    var vehicleId = vehicleRepo.Images.OrderBy(x => x.VehicleId);
 
-            string WebRootPath = _hostingEnvironment.WebRootPath;
-            string ContentRootPath = _hostingEnvironment.ContentRootPath;
+        //    string WebRootPath = _hostingEnvironment.WebRootPath;
+        //    string ContentRootPath = _hostingEnvironment.ContentRootPath;
 
-            //var str = WebRootPath.Replace(ContentRootPath, "");
-            string ImgPath = images.FirstOrDefault().Path.Replace(WebRootPath, "");
-            var Parts = ImgPath.Split("\\");
-            var NewPath = string.Join("/", Parts);
+        //    //var str = WebRootPath.Replace(ContentRootPath, "");
+        //    string ImgPath = images.FirstOrDefault().Path.Replace(WebRootPath, "");
+        //    var Parts = ImgPath.Split("\\");
+        //    var NewPath = string.Join("/", Parts);
 
-            var vm = new VehiclesSearchViewModel
-            {
-                Vehicles = vehicles,
-                Pager = paging,
-                Images = images,
-                Path = NewPath,
+        //    var vm = new VehiclesSearchViewModel
+        //    {
+        //        Vehicles = vehicles,
+        //        Pager = paging,
+        //        Images = images,
+        //        Path = NewPath,
 
-            };
+        //    };
 
-            //routes.MapRoute();
+        //    //routes.MapRoute();
 
-            return View("Index", vm);
-        }
+        //    return View("Index", vm);
+        //}
 
         [HttpGet]
         public IActionResult AddNewVehicle()
