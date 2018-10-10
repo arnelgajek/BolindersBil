@@ -10,7 +10,7 @@ namespace BolindersBil.Models
         public string Link { get; set; }
         public Vehicle Vehicle { get; set; }
         public List<Image> Images { get; set; }
-        public Office Offices { get; set; }
+        public Office Office { get; set; }
         public SendMail SendMail { get; set; }
     }
 }
