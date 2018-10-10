@@ -121,7 +121,7 @@ namespace BolindersBil.Web
 
             //identitySeeder.CreateAdminAccountIfEmpty();
             Seed.FillIfEmpty(ctx);
-            
+            LogoSeed.FillIfEmpty(ctx);
         }
     }
 }

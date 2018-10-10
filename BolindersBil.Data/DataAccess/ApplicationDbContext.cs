@@ -20,7 +20,8 @@ namespace BolindersBil.Web.DataAccess
 
         public DbSet<Office> Offices { get; set; }
         public DbSet<Vehicle> Vehicles { get; set; }
-        public DbSet<Image> Images { get; set; }
+        public DbSet<Image> Images { get; set; }        
+        public DbSet<Logo> Logos { get; set; }
 
     }
 }

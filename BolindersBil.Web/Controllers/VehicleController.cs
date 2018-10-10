@@ -39,14 +39,14 @@ namespace BolindersBil.Web.Controllers
         public IActionResult Search(string searchString, bool Used)
         {
             var searchResults = vehicleRepo.Search(searchString, Used);
-            return View("Index", searchResults);
+            return View("SearchResults", searchResults);
             
         }
         
         public IActionResult Logo(string logoString)
         {
             var logoResults = vehicleRepo.Logo(logoString);
-            return View("Index", logoResults.ToList());
+            return View("SearchResults", logoResults);
         }
 
         [Authorize]

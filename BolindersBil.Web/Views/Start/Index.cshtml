@@ -1,5 +1,4 @@
-﻿@model IEnumerable<VehiclesSearchViewModel>
-
+﻿@model VehiclesSearchViewModel
 
 
 <div class="container-fluid" style="margin-top:100px;">
@@ -16,7 +15,7 @@
                                 </div>
                                 <!-- End of col -->
                                 <div class="col">
-                                    <input class="form-control form-control-lg form-control-borderless" type="search" placeholder="T.ex. Volvo (C30)">
+                                    <input class="form-control form-control-lg form-control-borderless" name="searchString" placeholder="T.ex. Volvo (C30)">
                                 </div>
                                 <!-- End of col -->
                                 <div class="col-auto">
@@ -110,98 +109,48 @@
     <h4 class="text-center">Auktoriserad återförsäljare av</h4>
     <br />
     <!-- Footer Elements -->
-    <div class="container">
-        
-            <!--Grid row-->
+    @*<div class="container">
+
+  
+        <!--Grid row-->
         <div class="row">
 
-           
-                <!--Grid column-->
-            <div class="col-lg-2 col-md-12 mb-5">
 
-                
-                <!--Image-->
-                <div class="view overlay z-depth-1-half">
-                    <a asp-controller="Vehicle" asp-action="Logo">
-                        <img type="logo" id="img_omg" src="~/Logo/Saab-logo-2002-640x550.jpg" class="img-fluid" alt="Responsive image">
-                    </a>
+            <div class="available-logo col-12">
+                <div class="row justify-content-center">
+                    @foreach (var v in Model.Vehicles)
+                    {
+                                              
+                        <a asp-controller="Vehicle" asp-action="Logo">
+                            <img  id="img_omg" src="@v.Brand" class="img-fluid" alt="Responsive image">
+                        </a>
+                        
+
+                    }
                 </div>
-                
+            </div>
+        </div>
+
+            <!--Grid column-->
+            <div class="col-lg-2 col-md-12 mb-5">*@
+
+          @*@foreach (var v in Model)
+           {
+            <div class="view overlay z-depth-1-half">
+                <form name="search">
+                  
+                    <input type="hidden" value="Saab" />""
+                </form>
             </div>
 
-         
-            <!--Grid column-->
-            <!--Grid column-->
-            <div class="col-lg-2 col-md-6 mb-4">
+        }*@
 
-                <!--Image-->
-                <div class="view overlay z-depth-1-half">
-                    <img id="img_omg" src="~/Logo/Porsche-emblem-1994-640x550.jpg" class="img-fluid" alt="Responsive image">
-                    <a href="" >
-                        <div class="mask rgba-white-light"></div>
-                    </a>
-                </div>
 
             </div>
-            <!--Grid column-->
-            <!--Grid column-->
-            <div class="col-lg-2 col-md-6 mb-4">
-
-                <!--Image-->
-                <div class="view overlay z-depth-1-half">
-                    <img id="img_omg" src="~/Logo/BMW-logo-2000-2048x2048.png" class="img-fluid" alt="Responsive image">
-                    <a href="">
-                        <div class="mask rgba-white-light"></div>
-                    </a>
-                </div>
-
-            </div>
-            <!--Grid column-->
-            <!--Grid column-->
-            <div class="col-lg-2 col-md-12 mb-4">
-
-                <!--Image-->
-                <div class="view overlay z-depth-1-half">
-                    <img id="img_omg" src="~/Logo/Renault-logo-2015-2048x2048.png" class="img-fluid" alt="Responsive image">
-                    <a href="">
-                        <div class="mask rgba-white-light"></div>
-                    </a>
-                </div>
-
-            </div>
-            <!--Grid column-->
-            <!--Grid column-->
-            <div class="col-lg-2 col-md-6 mb-4">
-
-                <!--Image-->
-                <div class="view overlay z-depth-1-half">
-                    <img id="img_omg" src="~/Logo/Mini-logo-2001-1920x1080.png" class="img-fluid" alt="Responsive image">
-                    <a href="">
-                        <div class="mask rgba-white-light"></div>
-                    </a>
-                </div>
-
-            </div>
-            <!--Grid column-->
-            <!--Grid column-->
-            <div class="col-lg-2 col-md-6 mb-4">
-
-                <!--Image-->
-                <div class="view overlay z-depth-1-half">
-                    <img id="img_omg" src="~/Logo/Mercedes-Benz-emblem-1926-640x550 (1).jpg" class="img-fluid" alt="Responsive image">
-                    <a href="">
-                        <div class="mask rgba-white-light"></div>
-                    </a>
-                </div>
-
-            </div>
-            <!--Grid column-->
 
         </div>
-            <!--Grid row-->
-       
-    </div>
-    <!-- Footer Elements -->
+
+
     <!-- Copyright -->
     <div class="footer-copyright text-center py-3">
         © 2018 Copyright:
