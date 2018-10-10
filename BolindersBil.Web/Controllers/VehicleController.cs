@@ -240,7 +240,7 @@ namespace BolindersBil.Web.Controllers
                     {
                         Name = uniqueGuid,
                         //Path = resizedImageFolder + "\\" + targetFileName
-                        Path = "/images/vehicle_images/" + addNewVehicle.Brand + "_" + addNewVehicle.RegNr + targetFileName
+                        Path = "/images/vehicle_images/" + addNewVehicle.Brand + "_" + addNewVehicle.RegNr + "/" + targetFileName
                     };
                     images.Add(theImage);
 
