@@ -1,15 +1,15 @@
-﻿@model IEnumerable<Vehicle>
+﻿@*@model FilterVehicleViewModel*@
+@model IEnumerable<Vehicle>
 
 <div class="container">
     <div>
         <div>
-            <form asp-controller="Vehicle" asp-action="Index" method="get">
-
+            <form asp-controller="Vehicle" asp-action="Index" method="post">
                 <div class="row">
                     <div class="col">
-                            <div class="form-group">
-                                <label>Årstyp</label>
-                                <select class="form-control">
+                            @*<div class="form-group">
+                                <label asp-for="Year">Årstyp</label>
+                                <select asp-for="Year" class="form-control">
                                     <option disabled selected>Välj</option>
                                     <option value="modern-00">Modern-2000</option>
                                     <option value="00-90">2000-1990</option>
@@ -17,50 +17,53 @@
                                     <option value="80-60">1980-1960</option>
                                     <option value="60-old">1960-Older</option>
                                 </select>
-                            </div>
+                            </div>*@
                         </div>
                     <div class="col">
                         <div class="form-group">
-                            <label>Bränsle</label>
-                            <select class="form-control">
+                            <label for="Fuel">Bränsle</label>
+                            <select name="Fuel" class="form-control">
                                 <option disabled selected>Välj</option>
-                                <option>Diesel</option>
+                                <option value="Bensin">Bensin</option>
+                                <option value="Diesel">Diesel</option>
+                                <option value="El">El</option>
+                                <option value="Miljöbränsle/Hybrid">Miljöbränsle/Hybrid</option>
                             </select>
                         </div>
                     </div>
                 </div>
 
-                <div class="row">
+                @*<div class="row">
                     <div class="col">
                         <div class="form-group">
-                            <label>Karosstyp</label>
-                            <select class="form-control">
+                            <label for="Body">Karosstyp</label>
+                            <select for="Body" class="form-control">
                                 <option disabled selected>Välj</option>
-                                <option>Småbil</option>
-                                <option>Sedan</option>
-                                <option>Halvbil</option>
-                                <option>Kombi</option>
-                                <option>SUV</option>
-                                <option>Coupé</option>
-                                <option>Cab</option>
-                                <option>Familjebuss</option>
-                                <option>Yrkesfordon</option>
+                                <option value="Småbil">Småbil</option>
+                                <option value="Sedan">Sedan</option>
+                                <option value="Halvbil">Halvbil</option>
+                                <option value="Kombi">Kombi</option>
+                                <option value="SUV">SUV</option>
+                                <option value="Coupé">Coupé</option>
+                                <option value="Cab">Cab</option>
+                                <option value="Familjebuss">Familjebuss</option>
+                                <option value="Yrkesfordon">Yrkesfordon</option>
                             </select>
                         </div>
                     </div>
                     <div class="col">
                         <div class="form-group">
-                            <label>Växellåda</label>
-                            <select class="form-control">
+                            <label for="Gearbox">Växellåda</label>
+                            <select for="Gearbox" class="form-control">
                                 <option disabled selected>Välj</option>
-                                <option>Manuell</option>
-                                <option>Automat</option>
+                                <option value="Manuell">Manuell</option>
+                                <option value="Automat">Automat</option>
                             </select>
                         </div>
                     </div>
-                </div>
+                </div>*@
 
-                <div class="row">
+                @*<div class="row">
                     <div class="col">
                         <div class="form-group">
                             <label>Pris</label>
@@ -73,7 +76,7 @@
                             <input class="form-control" type="range" />
                         </div>
                     </div>
-                </div>
+                </div>*@
 
                 <div class="row" style="float:right;">
                     <div class="form-group">

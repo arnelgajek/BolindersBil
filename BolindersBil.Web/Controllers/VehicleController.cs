@@ -30,26 +30,40 @@ namespace BolindersBil.Web.Controllers
             officeRepo = officeRepository;
             _hostingEnvironment = hostingEnvironment;
         }
-
+        
         [HttpGet]
         public IActionResult Index()
         {
-            //var model = vehicleRepo.FilterVehicles(filterVehicleViewModel);
+            //var getVehicles = vehicleRepo.GetAllVehicles();
             //var vm = new FilterVehicleViewModel()
             //{
-            //    Vehicles = model
+            //    Vehicles = getVehicles
             //};
             //return View(vm);
-            var getVehicles = vehicleRepo.GetAllVehicles();
 
-            return View(getVehicles);
+            var filterResults = vehicleRepo.FilterSearch(null);
+            
+            return View(filterResults);
         }
+
 
         [HttpPost]
-        public IActionResult Index(int filterId)
+        public IActionResult Index(string Fuel)
         {
-            return View();
+
+            var filterResults = vehicleRepo.FilterSearch(Fuel);
+
+            return View(filterResults);
         }
+
+
+
+        //[HttpPost]
+        //public IActionResult Index(FilterVehicleViewModel filterForm)
+        //{
+        //    var filterResults = vehicleRepo.FilterVehicles(filterForm).ToList();
+        //    return View(filterResults);
+        //}
 
         [HttpPost]
         public IActionResult Search(string searchString, bool Used)
@@ -225,7 +239,8 @@ namespace BolindersBil.Web.Controllers
                     var theImage = new Models.Image
                     {
                         Name = uniqueGuid,
-                        Path = resizedImageFolder + "\\" + targetFileName
+                        //Path = resizedImageFolder + "\\" + targetFileName
+                        Path = "/images/vehicle_images/" + addNewVehicle.Brand + "_" + addNewVehicle.RegNr + targetFileName
                     };
                     images.Add(theImage);
 
@@ -235,12 +250,12 @@ namespace BolindersBil.Web.Controllers
                 if (uploadedImages.Count() == 0)
                 {
                     List<Models.Image> defaultImageList = new List<Models.Image>();
-                    var path = webrootPath + "\\defaultimages\\Image_Upload.png";
+                    //var path = webrootPath + "\\defaultimages\\Image_Upload.png";
                     Guid defaultImageGuid = Guid.NewGuid();
                     var defaultImage = new Models.Image
                     {
                         Name = defaultImageGuid,
-                        Path = path
+                        Path = "/defaultimages/Image_Upload.png"
                     };
                     defaultImageList.Add(defaultImage);
                     addNewVehicle.Images = defaultImageList;

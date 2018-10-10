@@ -133,13 +133,50 @@ namespace BolindersBil.Repositories
             ctx.SaveChanges();
         }
 
+        public IEnumerable<Vehicle> FilterSearch(string Fuel)
+        {
+            IEnumerable<Vehicle> vehicles;
+
+
+
+            if (string.IsNullOrEmpty(Fuel))
+            {
+
+                vehicles = ctx.Vehicles;
+            }
+            else
+            {
+                vehicles = ctx.Vehicles.Where(x =>
+                                                   x.Fuel.Contains(Fuel));
+                                                   
+            }
+
+            return vehicles;
+        }
+
+        //public IEnumerable<Vehicle> FilterVehicles(FilterVehicleViewModel filterForm)
+        //{
+        //    var vm = new FilterVehicleViewModel()
+        //    {
+        //        Fuel = filterForm.Fuel,
+        //        Body = filterForm.Body,
+        //        Gearbox = filterForm.Gearbox
+        //    };
+
+        //    var filteredInfo = ctx.Vehicles.Where(f => /*f.Year.Contains(filterForm.Year) ||*/
+        //                                               f.Fuel.Contains(vm.Fuel) ||
+        //                                               f.Body.Contains(vm.Body) ||
+        //                                               f.Gearbox.Contains(vm.Gearbox));
+
+        //    return filteredInfo;
+        //}
 
         //public IEnumerable<Vehicle> FilterVehicles(FilterVehicleViewModel filterVehicleViewModel)
         //{
         //    IEnumerable<Vehicle> listOfVehicles;
         //    // List of vehicles in the DB.
         //    listOfVehicles = ctx.Vehicles.ToList();
-            
+
 
         //    if (filterVehicleViewModel.Id != 0)
         //    {
@@ -150,7 +187,7 @@ namespace BolindersBil.Repositories
 
         //        //return SomeOtherVar;    
         //    }
-            
+
         //    // Return ALL of the vehicles in the DB (on first load OR when user has not used filter).
         //    return listOfVehicles;
         //}
