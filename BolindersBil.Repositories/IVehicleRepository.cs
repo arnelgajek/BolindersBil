@@ -10,7 +10,7 @@ namespace BolindersBil.Repositories
         // The classes that implement this interface will return an IEnumerable<Vehicle>.
         // To be able to get a list of all Vehicles from the DB.
         IEnumerable<Vehicle> Vehicles { get; }
-        IEnumerable<Image> Images { get; }
+        IEnumerable<Image> Images { get; }        
 
         void AddImage(Image image);
 

@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BolindersBil.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20181009062245_Initial")]
+    [Migration("20181009133808_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -107,7 +107,7 @@ namespace BolindersBil.Data.Migrations
 
                     b.Property<string>("VehicleAttribute");
 
-                    b.Property<int>("Year");
+                    b.Property<string>("Year");
 
                     b.HasKey("Id");
 

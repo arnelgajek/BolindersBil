@@ -61,6 +61,8 @@ namespace BolindersBil.Repositories
             return ctxVehicle;
         }
 
+
+        // To reload the page so see the vehicle add with specifik id:
         public Vehicle Vehicle(int vehicleId)
         {
             var ctxVehicle = ctx.Vehicles.FirstOrDefault(x => x.Id.Equals(vehicleId));
@@ -132,6 +134,7 @@ namespace BolindersBil.Repositories
                 ctxVehicle.Leasable = v.Leasable;
                 ctxVehicle.UpdatedDate = v.UpdatedDate;
                 ctxVehicle.VehicleAttribute = v.VehicleAttribute;
+                ctxVehicle.Images = v.Images;
             }
             ctx.SaveChanges();
         }

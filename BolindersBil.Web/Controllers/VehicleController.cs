@@ -23,7 +23,7 @@ namespace BolindersBil.Web.Controllers
         public IOfficeRepository officeRepo;
         private IHostingEnvironment _hostingEnvironment;
         public int PageLimit = 8;
-        
+
         public VehicleController(IVehicleRepository vehicleRepository, IOfficeRepository officeRepository, IHostingEnvironment hostingEnvironment)
         {
             vehicleRepo = vehicleRepository;
@@ -34,8 +34,8 @@ namespace BolindersBil.Web.Controllers
         // Index isn't used for anything important atm but is crutial
         public IActionResult Index()
         {
-            return View();
-            //return RedirectToAction("VehicleList");
+            //return View();
+            return RedirectToAction("VehicleList");
         }
 
         [HttpPost]
@@ -44,7 +44,7 @@ namespace BolindersBil.Web.Controllers
             var searchResults = vehicleRepo.Search(searchString, Used);
             return View("Index", searchResults);
         }
-        
+
         [Authorize]
         public IActionResult Admin()
         {
@@ -105,9 +105,9 @@ namespace BolindersBil.Web.Controllers
             // And creates new pages for the amount over the pagelimit (since page becomes 2 then 3...)
             var paging = new PagingInfo
             {
-              CurrentPage = page,
-              ItemsPerPage = PageLimit,
-              TotalItems = vehicleRepo.Vehicles.Count()
+                CurrentPage = page,
+                ItemsPerPage = PageLimit,
+                TotalItems = vehicleRepo.Vehicles.Count()
             };
 
             var images = vehicleRepo.GetAllImages();
@@ -122,7 +122,6 @@ namespace BolindersBil.Web.Controllers
             string ImgPath = images.FirstOrDefault().Path.Replace(WebRootPath, "");
             var Parts = ImgPath.Split("\\");
             var NewPath = string.Join("/", Parts);
-
             
             // What you want to view
             var vm = new VehiclesSearchViewModel
@@ -131,26 +130,26 @@ namespace BolindersBil.Web.Controllers
                 Pager = paging,
                 Images = images,
                 Path = NewPath,
-                
+
             };
 
             //routes.MapRoute();
 
             return View("Index", vm);
         }
-        
+
         [HttpGet]
         public IActionResult AddNewVehicle()
         {
             // This list is used as the dropdown option in the "Årsmodell" input.
-            List<object> years = new List<object>();
+            List<string> years = new List<string>();
             var currentYear = DateTime.Now.Year;
             var theFuture = currentYear + 1;
-            years.Add(theFuture);
+            years.Add(theFuture.ToString());
             var stopYear = 1980;
             for (int y = currentYear; y >= stopYear; y--)
             {
-                years.Add(y);
+                years.Add(y.ToString());
             }
             var seventies = "70-tal";
             var sixties = "60-tal";
@@ -225,7 +224,7 @@ namespace BolindersBil.Web.Controllers
                 Directory.CreateDirectory(createSpecificVehicleFolder);
 
                 List<Models.Image> images = new List<Models.Image>();
-                
+
                 // Taking each uploaded image and saving it in the correct folder. 
                 foreach (var file in uploadedImages)
                 {
@@ -241,7 +240,6 @@ namespace BolindersBil.Web.Controllers
                             await file.CopyToAsync(stream);
                         }
                     }
-                    
 
                     // Resize and save the image under the correct folder. Calls on the ImageResize function.
                     string resizedImageFolder = createSpecificVehicleFolder + "\\resized_images";
@@ -260,7 +258,25 @@ namespace BolindersBil.Web.Controllers
 
                 }
                 addNewVehicle.Images = images;
+
+                if (uploadedImages.Count() == 0)
+                {
+                    List<Models.Image> defaultImageList = new List<Models.Image>();
+                    var path = webrootPath + "\\defaultimages\\Image_Upload.png";
+                    Guid defaultImageGuid = Guid.NewGuid();
+                    var defaultImage = new Models.Image
+                    {
+                        Name = defaultImageGuid,
+                        Path = path
+                    };
+                    defaultImageList.Add(defaultImage);
+                    addNewVehicle.Images = defaultImageList;
+                }
+
+
                 
+
+
                 Office jkpgOffice = officeRepo.Offices.Single(o => o.OfficeCode == "BB1");
                 Office varnOffice = officeRepo.Offices.Single(o => o.OfficeCode == "BB2");
                 Office gbgOffice = officeRepo.Offices.Single(o => o.OfficeCode == "BB3");
@@ -276,12 +292,12 @@ namespace BolindersBil.Web.Controllers
                 {
                     addNewVehicle.OfficeId = gbgOffice;
                 }
-                
+
                 addNewVehicle.AddedDate = DateTime.Now;
                 addNewVehicle.UpdatedDate = DateTime.Now;
 
                 vehicleRepo.AddNewVehicle(addNewVehicle);
-                
+
                 return Json(new { data = true });
             }
 
@@ -371,6 +387,25 @@ namespace BolindersBil.Web.Controllers
                 "Göteborg"
             };
 
+            List<string> theYears = new List<string>();
+            var currentYear = DateTime.Now.Year;
+            var theFuture = currentYear + 1;
+            theYears.Add(theFuture.ToString());
+            var stopYear = 1980;
+            for (int y = currentYear; y >= stopYear; y--)
+            {
+                theYears.Add(y.ToString());
+            }
+            var seventies = "70-tal";
+            var sixties = "60-tal";
+            var fifties = "50-tal";
+            var superOld = "40-tal eller äldre";
+            theYears.Add(seventies);
+            theYears.Add(sixties);
+            theYears.Add(fifties);
+            theYears.Add(superOld);
+            ViewBag.Years = theYears;
+
             var vm = new EditVehicleViewModel()
             {
                 Id = vehicle.Id,
@@ -378,7 +413,6 @@ namespace BolindersBil.Web.Controllers
                 Brand = vehicle.Brand,
                 Model = vehicle.Model,
                 ModelDescription = vehicle.ModelDescription,
-                Year = vehicle.Year,
                 Kilometer = vehicle.Kilometer,
                 Price = vehicle.Price,
                 Body = vehicle.Body,
@@ -392,29 +426,95 @@ namespace BolindersBil.Web.Controllers
                 Leasable = vehicle.Leasable,
                 UpdatedDate = vehicle.UpdatedDate,
                 VehicleAttribute = vehicle.VehicleAttribute,
+                Images = vehicle.Images,
                 BodyTypes = bodyType,
                 GearTypes = gearType,
                 FuelTypes = fuelType,
-                Offices = theOffices
+                Offices = theOffices,
+                Year = vehicle.Year
             };
 
             return View(vm);
         }
 
         [HttpPost]
-        public IActionResult EditVehicle(EditVehicleViewModel editVehicleViewModel)
+        public async Task<IActionResult> EditVehicle(EditVehicleViewModel editVehicleViewModel)
         {
-            if (ModelState.IsValid)
+            // The uploaded files from the users POST.
+            var uploadedImages = Request.Form.Files;
+
+            if (ModelState.IsValid && editVehicleViewModel != null)
             {
+                // Creating the folder structure (if it doesn't already exist).
+                string webrootPath = _hostingEnvironment.WebRootPath;
+                string createImageFolder = webrootPath + "\\images";
+                Directory.CreateDirectory(createImageFolder);
+                string createVehicleImagesFolder = createImageFolder + "\\vehicle_images";
+                Directory.CreateDirectory(createVehicleImagesFolder);
+                string createSpecificVehicleFolder = createVehicleImagesFolder + "\\" + editVehicleViewModel.Brand + "_" + editVehicleViewModel.RegNr;
+                Directory.CreateDirectory(createSpecificVehicleFolder);
+
+                List<Models.Image> images = new List<Models.Image>();
+
+                // Taking each uploaded image and saving it in the correct folder. 
+                foreach (var file in uploadedImages)
+                {
+                    Guid uniqueGuid = Guid.NewGuid();
+                    string targetFileName = uniqueGuid + "_" + file.FileName;
+                    string finalTargetFilePath = createSpecificVehicleFolder + "\\" + targetFileName;
+
+                    if (file.Length > 0)
+                    {
+                        // Copy file to target.
+                        using (var stream = new FileStream(finalTargetFilePath, FileMode.Create))
+                        {
+                            await file.CopyToAsync(stream);
+                        }
+                    }
+
+                    // Resize and save the image under the correct folder. Calls on the ImageResize function.
+                    string resizedImageFolder = createSpecificVehicleFolder + "\\resized_images";
+                    if (!Directory.Exists(resizedImageFolder))
+                    {
+                        Directory.CreateDirectory(resizedImageFolder);
+                    }
+                    ImageResize(finalTargetFilePath, resizedImageFolder + "\\" + targetFileName, 100);
+
+                    var theImage = new Models.Image
+                    {
+                        Name = uniqueGuid,
+                        Path = resizedImageFolder + "\\" + targetFileName
+                    };
+                    images.Add(theImage);
+                }
+
+                editVehicleViewModel.Images = images;
+
+                Office jkpgOffice = officeRepo.Offices.Single(o => o.OfficeCode == "BB1");
+                Office varnOffice = officeRepo.Offices.Single(o => o.OfficeCode == "BB2");
+                Office gbgOffice = officeRepo.Offices.Single(o => o.OfficeCode == "BB3");
+                if (editVehicleViewModel.Office == "Jönköping")
+                {
+                    editVehicleViewModel.OfficeId = jkpgOffice;
+                }
+                if (editVehicleViewModel.Office == "Värnamo")
+                {
+                    editVehicleViewModel.OfficeId = varnOffice;
+                }
+                if (editVehicleViewModel.Office == "Göteborg")
+                {
+                    editVehicleViewModel.OfficeId = gbgOffice;
+                }
+
                 editVehicleViewModel.UpdatedDate = DateTime.Now;
+
                 vehicleRepo.UpdateVehicle(editVehicleViewModel);
-                return View("TestVehicleAdded");
+
+                return Json(new { data = true });
             }
-            else
-            {
-                // TODO: error message here
-                return View(editVehicleViewModel);
-            }
+
+            // TODO: error message here
+            return View(editVehicleViewModel);
         }
 
         [HttpPost]
@@ -432,12 +532,6 @@ namespace BolindersBil.Web.Controllers
             }
             return RedirectToAction(nameof(Admin));
         }
-        
-        [HttpPost]
-        public ActionResult DeleteVehicle()
-        {
-            return RedirectToAction("Admin");
-        }
 
         [HttpPost]
         public IActionResult BulkDeleteVehicle(string vehicleId)
@@ -454,14 +548,16 @@ namespace BolindersBil.Web.Controllers
             // Redirects the user to the account/admin:
             return RedirectToAction(nameof(Admin));
         }
-        
-        public IActionResult Vehicle()
+
+        [HttpGet]
+        public IActionResult Vehicle(int vehicleId)
         {
+            var vehicle = vehicleRepo.Vehicles.FirstOrDefault(x => x.Id.Equals(vehicleId));
 
-            var vehicles = vehicleRepo.GetAllVehicles();
-            //var vehicle = vehicleRepo.Vehicles;
-
-            var vm = new VehiclesSearchViewModel();
+            var vm = new VehicleForSaleViewModel
+            {
+                Vehicle = vehicle
+            };
 
             return View(vm);
         }

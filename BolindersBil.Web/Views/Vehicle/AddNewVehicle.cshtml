@@ -122,18 +122,14 @@
         </div>
 
         <div class="form-group">
-            @*<label asp-for="Used" class="control-label col-sm-2"><strong>Sälj som begagnad?:</strong></label>*@
             <div class="col-sm-10">
                 <label class="checkbox-inline"><strong>Sälj som begagnad?:</strong>&nbsp;&nbsp;&nbsp;&nbsp;<input asp-for="Used" type="checkbox" id="usedCheckbox" value="false"></label>
-                @*<label class="checkbox-inline"><input asp-for="Used" type="checkbox" value="false">  Nej</label>*@
             </div>
         </div>
 
         <div class="form-group">
-            @*<label asp-for="Leasable" class="control-label col-sm-4"><strong>Leasbar för företag:</strong></label>*@
             <div class="col-sm-10">
                 <label class="checkbox-inline"><strong>Leasbar för företag?:</strong>&nbsp;&nbsp;&nbsp;&nbsp;<input asp-for="Leasable" type="checkbox" id="leasableCheckbox" value="false"></label>
-                @*<label class="checkbox-inline"><input asp-for="Leasable" type="checkbox" value="false">  Nej</label>*@
             </div>
         </div>
 
@@ -144,7 +140,7 @@
                     <option selected>Välj</option>
                     @foreach (var office in ViewBag.offices)
                     {
-                        <option id="officeSelectOption" value="@office">@office</option>
+                        <option value="@office">@office</option>
                     }
                 </select>
             </div>
@@ -175,108 +171,3 @@
 
     </form>
 </div>
-
-<script src="~/js/site.min.js"></script>
-<script>
-    var formUtils = {
-        files: [],
-        buildPreview: function (dataUrl) {
-            var html = ['<img src="' + dataUrl + '" class="img-thumbnail">'];
-            var button = ['<a class="btn btn-warning btn-sm">Ta bort</a>'];
-            var theDiv = ['<div class="imageThumbnailPreview">' + html + button + '</div>'];
-            $('#filePreviews').append(theDiv);
-        },
-        removeImage: function (index) {
-            formUtils.files.splice(index, 1);
-            console.log(formUtils.files);
-        }
-    };
-
-    $(document).ready(function () {
-        
-        $('#selectFilesBtn').click(function (e) {
-            e.preventDefault();
-            $('#images').trigger('click');
-        });
-
-        $(document).on('click', 'div.imageThumbnailPreview', function () {
-            formUtils.removeImage($(this).index());
-            $(this).remove();
-        });
-
-        $(document).on('change', '#usedCheckbox', function () {
-            if ($(this).is(':checked')) {
-                $(this).attr('value', 'true');
-                //console.log($(this).val());
-            } else {
-                $(this).attr('value', 'false');
-                //console.log($(this).val());
-            }
-        });
-
-        $(document).on('change', '#leasableCheckbox', function () {
-            if ($(this).is(':checked')) {
-                $(this).attr('value', 'true');
-                //console.log($(this).val());
-            } else {
-                $(this).attr('value', 'false');
-                //console.log($(this).val());
-            }
-        });
-        
-        if ($('#addNewVehicleForm').length > 0) {
-
-            $("#images").on("change", function (event) {
-                formUtils.files = [];
-                var files = event.originalEvent.target.files;
-                $(files).each(function (i, file) {
-                    var reader = new FileReader();
-                    reader.addEventListener("load", function () {
-                        formUtils.files.push(file);
-                        var dataUrl = reader.result;
-                        formUtils.buildPreview(dataUrl);
-                    }, false);
-                    reader.readAsDataURL(file);
-                });
-            });
-
-            $('#addNewVehicleForm').submit(function (e) {
-                e.preventDefault();
-                $('#images').remove();
-                var formData = new FormData();
-                
-                $('#addNewVehicleForm textarea').each(function () {
-                    formData.append($(this).attr('name'), $(this).val());
-                });
-                $('#addNewVehicleForm select').each(function () {
-                    formData.append($(this).attr('name'), $(this).val());
-                });
-                $('#addNewVehicleForm input').each(function () {
-                    formData.append($(this).attr('name'), $(this).val());
-                });
-                $(formUtils.files).each(function (i, file) {
-                    formData.append('images[' + i + ']', formUtils.files[i]);
-                });
-
-                $.ajax({
-                    url: $('#addNewVehicleForm').attr('action'),
-                    type: 'POST',
-                    data: formData,
-                    dataType: 'json',
-                    processData: false,
-                    contentType: false,
-                    success: function (data) {
-                        console.log(data);
-                        window.location.href = '/Vehicle/Admin';
-                        console.log('Congrats! You have added ' + data + '.');
-                    },
-                    error: function (error) {
-                        console.log(error);
-                    }
-                });
-
-            });
-        }
-    });
-
-</script>
