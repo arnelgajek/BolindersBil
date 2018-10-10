@@ -7,7 +7,7 @@
             <form asp-controller="Vehicle" asp-action="Index" method="post">
                 <div class="row">
                     <div class="col">
-                            @*<div class="form-group">
+                        @*<div class="form-group">
                                 <label asp-for="Year">Årstyp</label>
                                 <select asp-for="Year" class="form-control">
                                     <option disabled selected>Välj</option>
@@ -18,7 +18,7 @@
                                     <option value="60-old">1960-Older</option>
                                 </select>
                             </div>*@
-                        </div>
+                    </div>
                     <div class="col">
                         <div class="form-group">
                             <label for="fuel">Bränsle</label>
@@ -64,36 +64,46 @@
                 </div>
 
                 @*<div class="row">
-                    <div class="col">
-                        <div class="form-group">
-                            <label>Pris</label>
-                            <input class="form-control" type="range" />
+                        <div class="col">
+                            <div class="form-group">
+                                <label>Pris</label>
+                                <input class="form-control" type="range" />
+                            </div>
                         </div>
-                    </div>
-                    <div class="col">
-                        <div class="form-group">
-                            <label>Mil</label>
-                            <input class="form-control" type="range" />
+                        <div class="col">
+                            <div class="form-group">
+                                <label>Mil</label>
+                                <input class="form-control" type="range" />
+                            </div>
                         </div>
-                    </div>
-                </div>*@
+                    </div>*@
 
-                <div class="row" style="float:right;">
+                <div class="row" style="margin-left:55%;">
                     <div class="form-group">
                         <button class="btn btn-sm btn-primary" type="submit" id="filterSubmitBtn">Filter</button>&nbsp;
-                        @*<button type="reset" class="btn btn-sm btn-secondary">Clear</button>*@
-                        <button type="submit" class="btn btn-sm" id="seeAllVehiclesBtn">See all vehicles</button>
                     </div>
-                </div>
+                    <div class="form-group">
+                        <button type="reset" class="btn btn-sm btn-secondary">Clear</button>
 
+                    </div>
+
+
+                </div>
             </form>
+            @*<br />
+                <br />*@
+            <div>
+                <a asp-controller="Vehicle" asp-action="Index" class="btn btn-sm" id="seeAllVehiclesBtn" style="float:right;">See all vehicles</a>
+            </div>
+
+
         </div>
     </div>
     <br />
     <br />
     <hr />
     <br />
-    
+
     <div>
         @foreach (var v in Model)
         {
@@ -141,12 +151,9 @@
 
 <script src="~/js/site.min.js"></script>
 <script>
-    $(document).ready(function () {
-        $('#seeAllVehiclesBtn').hide();
-        $('#filterSubmitBtn').on('click', function () {
-            $('#seeAllVehiclesBtn').show();
-        });
-
-
-    });
+        //$(document).ready(function () {
+        //    $('#filterSubmitBtn').on('click', function () {
+        //        $('#seeAllVehiclesBtn').show();
+        //    });
+        //});
 </script>
