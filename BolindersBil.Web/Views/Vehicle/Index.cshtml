@@ -21,8 +21,8 @@
                         </div>
                     <div class="col">
                         <div class="form-group">
-                            <label for="Fuel">Bränsle</label>
-                            <select name="Fuel" class="form-control">
+                            <label for="fuel">Bränsle</label>
+                            <select name="fuel" class="form-control">
                                 <option disabled selected>Välj</option>
                                 <option value="Bensin">Bensin</option>
                                 <option value="Diesel">Diesel</option>
@@ -33,11 +33,11 @@
                     </div>
                 </div>
 
-                @*<div class="row">
+                <div class="row">
                     <div class="col">
                         <div class="form-group">
-                            <label for="Body">Karosstyp</label>
-                            <select for="Body" class="form-control">
+                            <label for="body">Karosstyp</label>
+                            <select name="body" class="form-control">
                                 <option disabled selected>Välj</option>
                                 <option value="Småbil">Småbil</option>
                                 <option value="Sedan">Sedan</option>
@@ -53,15 +53,15 @@
                     </div>
                     <div class="col">
                         <div class="form-group">
-                            <label for="Gearbox">Växellåda</label>
-                            <select for="Gearbox" class="form-control">
+                            <label for="gearbox">Växellåda</label>
+                            <select name="gearbox" class="form-control">
                                 <option disabled selected>Välj</option>
                                 <option value="Manuell">Manuell</option>
                                 <option value="Automat">Automat</option>
                             </select>
                         </div>
                     </div>
-                </div>*@
+                </div>
 
                 @*<div class="row">
                     <div class="col">
@@ -80,8 +80,9 @@
 
                 <div class="row" style="float:right;">
                     <div class="form-group">
-                        <button class="btn btn-primary" type="submit">Filter</button>&nbsp;
-                        <button type="reset" class="btn btn-secondary">Clear</button>
+                        <button class="btn btn-sm btn-primary" type="submit" id="filterSubmitBtn">Filter</button>&nbsp;
+                        @*<button type="reset" class="btn btn-sm btn-secondary">Clear</button>*@
+                        <button type="submit" class="btn btn-sm" id="seeAllVehiclesBtn">See all vehicles</button>
                     </div>
                 </div>
 
@@ -138,3 +139,14 @@
 
 
 
+<script src="~/js/site.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#seeAllVehiclesBtn').hide();
+        $('#filterSubmitBtn').on('click', function () {
+            $('#seeAllVehiclesBtn').show();
+        });
+
+
+    });
+</script>

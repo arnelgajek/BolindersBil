@@ -133,22 +133,20 @@ namespace BolindersBil.Repositories
             ctx.SaveChanges();
         }
 
-        public IEnumerable<Vehicle> FilterSearch(string Fuel)
+        public IEnumerable<Vehicle> FilterSearch(string fuel, string body, string gearbox)
         {
             IEnumerable<Vehicle> vehicles;
+            
 
-
-
-            if (string.IsNullOrEmpty(Fuel))
+            if (string.IsNullOrEmpty(fuel) || string.IsNullOrEmpty(body) || string.IsNullOrEmpty(gearbox))
             {
-
                 vehicles = ctx.Vehicles;
             }
             else
             {
-                vehicles = ctx.Vehicles.Where(x =>
-                                                   x.Fuel.Contains(Fuel));
-                                                   
+                vehicles = ctx.Vehicles.Where(x => x.Fuel.Contains(fuel) &&
+                                                   x.Body.Contains(body) &&
+                                                   x.Gearbox.Contains(gearbox));
             }
 
             return vehicles;
