@@ -49,7 +49,7 @@ namespace BolindersBil.Repositories
             return ctxVehicle;
         }
 
-        // So we can BulkDeleteVehicles from our DB:
+        // So we can BulkDeleteVehicles from our DB.
         public Vehicle BulkDeleteVehicle(int vehicleId)
         {
             var ctxVehicle = ctx.Vehicles.FirstOrDefault(x => x.Id.Equals(vehicleId));
@@ -61,7 +61,7 @@ namespace BolindersBil.Repositories
             return ctxVehicle;
         }
 
-        // To reload the page so see the vehicle add with specifik id:
+        // To reload the page so see the vehicle add with specific id:
         public Vehicle Vehicle(int vehicleId)
         {
             var ctxVehicle = ctx.Vehicles.FirstOrDefault(x => x.Id.Equals(vehicleId));
@@ -75,7 +75,7 @@ namespace BolindersBil.Repositories
             return Vehicles;
         }
 
-        // List all the Images from DB
+        // List all the Images from DB.
         public IEnumerable<Image> GetAllImages()
         {
             return Images;
@@ -133,26 +133,25 @@ namespace BolindersBil.Repositories
             ctx.SaveChanges();
         }
 
-
-
         public IEnumerable<Vehicle> FilterVehicles(FilterVehicleViewModel filterVehicleViewModel)
         {
             IEnumerable<Vehicle> listOfVehicles;
+            // List of vehicles in the DB.
+            listOfVehicles = ctx.Vehicles.ToList();
+            // Setting the DB list of vehicles equal to the VM list of vehicles.
+            filterVehicleViewModel.Vehicles = listOfVehicles;
 
-            if (filterVehicleViewModel == null)
+            if (filterVehicleViewModel.Id != 0)
             {
-                // Return all of the vehicles in the DB.
-                return Vehicles;
-            }
-            else
-            {
-                listOfVehicles = ctx.Vehicles.Where(x => x.Year.Contains(filterVehicleViewModel.Year) ||
-                                                         x.Fuel.Contains(filterVehicleViewModel.Fuel) ||
+                listOfVehicles = ctx.Vehicles.Where(x => x.Fuel.Contains(filterVehicleViewModel.Fuel) ||
                                                          x.Body.Contains(filterVehicleViewModel.Body) ||
                                                          x.Gearbox.Contains(filterVehicleViewModel.Gearbox));
+                return listOfVehicles;
             }
-
+           
+            // Return ALL of the vehicles in the DB (on first load OR when user has not used filter).
             return listOfVehicles;
+            
         }
 
     }

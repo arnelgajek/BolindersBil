@@ -31,13 +31,13 @@ namespace BolindersBil.Web.Controllers
             _hostingEnvironment = hostingEnvironment;
         }
 
-        public IActionResult Index()
+        [HttpGet]
+        public IActionResult Index(FilterVehicleViewModel filterVehicleViewModel)
         {
-
-
-
+            var model = vehicleRepo.FilterVehicles(filterVehicleViewModel);
+            
             //return RedirectToAction("VehicleList");
-            return View();
+            return View(model);
         }
 
         [HttpPost]
