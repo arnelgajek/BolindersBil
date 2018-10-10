@@ -32,15 +32,23 @@ namespace BolindersBil.Web.Controllers
         }
 
         [HttpGet]
-        public IActionResult Index(FilterVehicleViewModel filterVehicleViewModel)
+        public IActionResult Index()
         {
-            var model = vehicleRepo.FilterVehicles(filterVehicleViewModel);
-            var vm = new FilterVehicleViewModel()
-            {
-                Vehicles = model
-            };
-            
-            return View(vm);
+            //var model = vehicleRepo.FilterVehicles(filterVehicleViewModel);
+            //var vm = new FilterVehicleViewModel()
+            //{
+            //    Vehicles = model
+            //};
+            //return View(vm);
+            var getVehicles = vehicleRepo.GetAllVehicles();
+
+            return View(getVehicles);
+        }
+
+        [HttpPost]
+        public IActionResult Index(int filterId)
+        {
+            return View();
         }
 
         [HttpPost]
@@ -237,11 +245,7 @@ namespace BolindersBil.Web.Controllers
                     defaultImageList.Add(defaultImage);
                     addNewVehicle.Images = defaultImageList;
                 }
-
-
                 
-
-
                 Office jkpgOffice = officeRepo.Offices.Single(o => o.OfficeCode == "BB1");
                 Office varnOffice = officeRepo.Offices.Single(o => o.OfficeCode == "BB2");
                 Office gbgOffice = officeRepo.Offices.Single(o => o.OfficeCode == "BB3");

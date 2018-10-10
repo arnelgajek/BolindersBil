@@ -31,6 +31,6 @@ namespace BolindersBil.Repositories
 
         Vehicle Vehicle(int vehicleId);
 
-        IEnumerable<Vehicle> FilterVehicles(FilterVehicleViewModel filterVehicleViewModel);
+        //IEnumerable<Vehicle> FilterVehicles(FilterVehicleViewModel filterVehicleViewModel);
     }
 }

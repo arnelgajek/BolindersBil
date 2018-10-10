@@ -1,6 +1,4 @@
-﻿@model FilterVehicleViewModel
-
-
+﻿@model IEnumerable<Vehicle>
 
 <div class="container">
     <div>
@@ -8,7 +6,7 @@
             <form asp-controller="Vehicle" asp-action="Index" method="get">
 
                 <div class="row">
-                    @*<div class="col">
+                    <div class="col">
                             <div class="form-group">
                                 <label>Årstyp</label>
                                 <select class="form-control">
@@ -20,7 +18,7 @@
                                     <option value="60-old">1960-Older</option>
                                 </select>
                             </div>
-                        </div>*@
+                        </div>
                     <div class="col">
                         <div class="form-group">
                             <label>Bränsle</label>
@@ -54,31 +52,32 @@
                         <div class="form-group">
                             <label>Växellåda</label>
                             <select class="form-control">
-                                <option selected>Manuell</option>
+                                <option disabled selected>Välj</option>
+                                <option>Manuell</option>
                                 <option>Automat</option>
                             </select>
                         </div>
                     </div>
                 </div>
 
-                @*<div class="row">
-                        <div class="col">
-                            <div class="form-group">
-                                <label>Pris</label>
-                                <input class="form-control" type="range" />
-                            </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label>Pris</label>
+                            <input class="form-control" type="range" />
                         </div>
-                        <div class="col">
-                            <div class="form-group">
-                                <label>Mil</label>
-                                <input class="form-control" type="range" />
-                            </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label>Mil</label>
+                            <input class="form-control" type="range" />
                         </div>
-                    </div>*@
+                    </div>
+                </div>
 
-                <div class="form-group">
-                    <div class="col-sm-10">
-                        <button class="btn btn-primary" type="submit">Filter</button>
+                <div class="row" style="float:right;">
+                    <div class="form-group">
+                        <button class="btn btn-primary" type="submit">Filter</button>&nbsp;
                         <button type="reset" class="btn btn-secondary">Clear</button>
                     </div>
                 </div>
@@ -86,41 +85,48 @@
             </form>
         </div>
     </div>
-
-
-    @*<div class="row">
-            @foreach (var v in Model.Vehicles)
-            {
-
-                <div class="row">
-                    <input type="hidden" value="@v.Id" />
-                    <div class="col-5">
-                        @if (Model.Path == null)
+    <br />
+    <br />
+    <hr />
+    <br />
+    
+    <div>
+        @foreach (var v in Model)
+        {
+            <div class="row">
+                <input type="hidden" value="@v.Id" />
+                <div class="col-5">
+                    @if (v.Images != null)
+                    {
+                        foreach (var i in v.Images)
                         {
-                            <img src="https://via.placeholder.com/300x150" />
+                            @*<img src="@i.Path" />*@
                         }
-                        else
-                        {
-                            <img src="@Model.Path" />
-
-                        }
-                    </div>
-                    <div class="col-4">
-                        <span>@v.Office</span>
-                        <h3>@v.Brand @v.Model @v.ModelDescription @v.Year</h3>
-                        <span>@v.Fuel | @v.Gearbox | @v.Kilometer</span>
-                        <h4>@v.Price Kr</h4>
-                    </div>
-                    <div class="col-3 float-sm-right">
-                        <span>@v.UpdatedDate.ToString("dd/MM/yyyy hh:mm")</span>
-                    </div>
-                    <a asp-action="Vehicle" class="btn btn-success" asp-route-vehicleId="@v.Id">
-                        Mer information...
-                    </a>
+                    }
+                    else
+                    {
+                        <img src="~/defaultimages/Image_Upload.png" />
+                    }
                 </div>
-            }
-        </div>
-        <div page-model="@Model.Pager" page-action="VehicleList">
+                <div class="col-4">
+                    <span>@v.Office</span>
+                    <h3>@v.Brand @v.Model @v.ModelDescription @v.Year</h3>
+                    <span>@v.Fuel | @v.Gearbox | @v.Kilometer</span>
+                    <h4>@v.Price Kr</h4>
+                </div>
+                <div class="col-3 float-sm-right">
+                    <span><small><i>@v.UpdatedDate.ToString("dd/MM/yyyy hh:mm")</i></small></span>
+                </div>
+                <a asp-action="Vehicle" class="btn btn-sm btn-success" asp-route-vehicleId="@v.Id">
+                    Mer information...
+                </a>
+            </div>
+            <br />
+            <br />
+        }
+
+    </div>
+    @*<div page-model="@Model.Pager" page-action="VehicleList">
 
         </div>*@
 </div>
@@ -129,8 +135,3 @@
 
 
 
-
-@foreach (var item in Model.Vehicles)
-{
-    <p>@item</p>
-}

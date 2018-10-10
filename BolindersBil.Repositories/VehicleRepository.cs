@@ -134,26 +134,26 @@ namespace BolindersBil.Repositories
         }
 
 
-        public IEnumerable<Vehicle> FilterVehicles(FilterVehicleViewModel filterVehicleViewModel)
-        {
-            IEnumerable<Vehicle> listOfVehicles;
-            // List of vehicles in the DB.
-            listOfVehicles = ctx.Vehicles.ToList();
+        //public IEnumerable<Vehicle> FilterVehicles(FilterVehicleViewModel filterVehicleViewModel)
+        //{
+        //    IEnumerable<Vehicle> listOfVehicles;
+        //    // List of vehicles in the DB.
+        //    listOfVehicles = ctx.Vehicles.ToList();
             
 
-            if (filterVehicleViewModel.Id != 0)
-            {
-                //listOfVehicles = ctx.Vehicles.Where(x => x.Fuel.Contains(filterVehicleViewModel.Fuel) ||
-                //                                         x.Body.Contains(filterVehicleViewModel.Body) ||
-                //                                         x.Gearbox.Contains(filterVehicleViewModel.Gearbox));
+        //    if (filterVehicleViewModel.Id != 0)
+        //    {
+        //        //listOfVehicles = ctx.Vehicles.Where(x => x.Fuel.Contains(filterVehicleViewModel.Fuel) ||
+        //        //                                         x.Body.Contains(filterVehicleViewModel.Body) ||
+        //        //                                         x.Gearbox.Contains(filterVehicleViewModel.Gearbox));
 
 
-                //return SomeOtherVar;    
-            }
+        //        //return SomeOtherVar;    
+        //    }
             
-            // Return ALL of the vehicles in the DB (on first load OR when user has not used filter).
-            return listOfVehicles;
-        }
+        //    // Return ALL of the vehicles in the DB (on first load OR when user has not used filter).
+        //    return listOfVehicles;
+        //}
 
     }
 }
