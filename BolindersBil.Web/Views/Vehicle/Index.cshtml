@@ -1,9 +1,6 @@
 ﻿@model FilterVehicleViewModel
 
-@foreach(var item in Model.Vehicles)
-{
-    <p>@item</p>
-}
+
 
 <div class="container">
     <div>
@@ -129,3 +126,11 @@
 </div>
 
 @*@Html.ActionLink("Load next 8 Vehicles", "Vehicles", "Controller", new { page = Model.Pager.CurrentPage + 1 })*@
+
+
+
+
+@foreach (var item in Model.Vehicles)
+{
+    <p>@item</p>
+}

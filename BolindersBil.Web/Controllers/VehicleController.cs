@@ -35,9 +35,12 @@ namespace BolindersBil.Web.Controllers
         public IActionResult Index(FilterVehicleViewModel filterVehicleViewModel)
         {
             var model = vehicleRepo.FilterVehicles(filterVehicleViewModel);
+            var vm = new FilterVehicleViewModel()
+            {
+                Vehicles = model
+            };
             
-            //return RedirectToAction("VehicleList");
-            return View(model);
+            return View(vm);
         }
 
         [HttpPost]
