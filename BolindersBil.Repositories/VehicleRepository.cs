@@ -89,7 +89,7 @@ namespace BolindersBil.Repositories
 
             
         //}
-
+      
 
         public IEnumerable<Vehicle> Search(string searchString, bool? used)
         {
