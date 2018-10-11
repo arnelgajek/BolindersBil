@@ -25,11 +25,19 @@ namespace BolindersBil.Models
         public DateTime UpdatedDate { get; set; }
         public string VehicleAttribute { get; set; }
         public IEnumerable<Vehicle> Vehicles { get; set; }
+        public IEnumerable<string> Brands { get; set; }
         // Get the first image
         public IEnumerable<Image> Images { get; set; }
         public string Path { get; set; }
         public int VehicleId { get; set; }
         // Pagination
         public PagingInfo Pager { get; set; }
+        // ListFilter
+        public int PriceFrom { get; set; }
+        public int PriceTo { get; set; }
+        public int MillageFrom { get; set; }
+        public int MillageTo { get; set; }
+        public string YearFrom { get; set; }
+        public string YearTo { get; set; }
      }
 }
