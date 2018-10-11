@@ -11,11 +11,10 @@
         <input type="checkbox" id="checkAll" /> Check All
     </div>
     <div class="float-sm-right" style="margin-bottom:10px">
-        <a asp-controller="Vehicle" asp-action="AddNewVehicle" class="btn btn-success" name="newVehicle" id="newVehicle">New</a>
+        <a asp-controller="Vehicle" asp-action="AddNewVehicle" class="btn btn-sm btn-success" name="newVehicle" id="newVehicle">New</a>
         <a id="editButton" class="btn btn-sm btn-warning">Edit</a>
         <button type="button" class="btn btn-sm btn-danger" name="deleteVehicle" id="deleteVehicle" data-toggle="modal" data-target="#deleteModal">Delete</button>
         <button type="button" class="btn btn-sm btn-danger" name="bulkDeleteVehicle" id="bulkDeleteVehicle" data-toggle="modal" data-target="#bulkDeleteModal">Bulk Delete</button>
-
     </div>
 
     @foreach (var v in Model)

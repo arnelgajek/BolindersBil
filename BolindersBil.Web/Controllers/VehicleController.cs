@@ -154,7 +154,16 @@ namespace BolindersBil.Web.Controllers
         public IActionResult Search(string searchString, bool Used)
         {
             var searchResults = vehicleRepo.Search(searchString, Used);
-            return View("Index", searchResults);
+            return View("SearchResults", searchResults);
+            
+        }
+
+        [HttpGet]
+        public IActionResult Search(string searchString)
+        {
+            var searchResults = vehicleRepo.Search(searchString, null);
+            return View("SearchResults", searchResults);
+
         }
 
         [Authorize]
@@ -165,50 +174,6 @@ namespace BolindersBil.Web.Controllers
 
             return View(getVehicles);
         }
-
-        //// Paging
-        //public IActionResult VehicleList(int page = 1)
-        //{
-        //    // page = 0 x pagelimit
-        //    var toSkip = (page - 1) * PageLimit;
-
-        //    // Gets the (pagelimit) amount of vehicles and orders them by their ID
-        //    // This shall be changed to sort by UpdateDate in the future
-        //    var vehicles = vehicleRepo.Vehicles.OrderBy(x => x.Id).Skip(toSkip).Take(PageLimit);
-
-        //    // Gets new info for the paging. Page becomes 1. (page x pagelimit). 
-        //    // And creates new pages for the amount over the pagelimit (since page becomes 2 then 3...)
-        //    var paging = new PagingInfo
-        //    {
-        //        CurrentPage = page,
-        //        ItemsPerPage = PageLimit,
-        //        TotalItems = vehicleRepo.Vehicles.Count()
-        //    };
-
-        //    var images = vehicleRepo.GetAllImages();
-        //    var vehicleId = vehicleRepo.Images.OrderBy(x => x.VehicleId);
-
-        //    string WebRootPath = _hostingEnvironment.WebRootPath;
-        //    string ContentRootPath = _hostingEnvironment.ContentRootPath;
-
-        //    //var str = WebRootPath.Replace(ContentRootPath, "");
-        //    string ImgPath = images.FirstOrDefault().Path.Replace(WebRootPath, "");
-        //    var Parts = ImgPath.Split("\\");
-        //    var NewPath = string.Join("/", Parts);
-
-        //    var vm = new VehiclesSearchViewModel
-        //    {
-        //        Vehicles = vehicles,
-        //        Pager = paging,
-        //        Images = images,
-        //        Path = NewPath,
-
-        //    };
-
-        //    //routes.MapRoute();
-
-        //    return View("Index", vm);
-        //}
 
         [HttpGet]
         public IActionResult AddNewVehicle()
@@ -345,7 +310,7 @@ namespace BolindersBil.Web.Controllers
                     defaultImageList.Add(defaultImage);
                     addNewVehicle.Images = defaultImageList;
                 }
-                
+
                 Office jkpgOffice = officeRepo.Offices.Single(o => o.OfficeCode == "BB1");
                 Office varnOffice = officeRepo.Offices.Single(o => o.OfficeCode == "BB2");
                 Office gbgOffice = officeRepo.Offices.Single(o => o.OfficeCode == "BB3");
@@ -376,7 +341,6 @@ namespace BolindersBil.Web.Controllers
         private void ImageResize(string inputImagePath, string outputImagePath, int newWidth)
         {
             const long quality = 50L;
-
 
             Bitmap sourceBitmap = new Bitmap(inputImagePath);
             double dblWidthOriginal = sourceBitmap.Width;
@@ -601,7 +565,7 @@ namespace BolindersBil.Web.Controllers
             }
             return RedirectToAction(nameof(Admin));
         }
-        
+
         [HttpPost]
         public IActionResult BulkDeleteVehicle(string vehicleId)
         {
@@ -621,11 +585,32 @@ namespace BolindersBil.Web.Controllers
         [HttpGet]
         public IActionResult Vehicle(int vehicleId)
         {
+
+            // If you havent clicked into a vehicle, get the vehicle Id from TempData
+            if(vehicleId == 0)
+            {
+                vehicleId = (int)TempData["vehicleId"];
+            }
+
+            // Get the vehicle with the vehicle Id you clicked on
             var vehicle = vehicleRepo.Vehicles.FirstOrDefault(x => x.Id.Equals(vehicleId));
 
+            var allVehicles = vehicleRepo.Vehicles;
+
+            List<Vehicle> relatedVehicles = new List<Vehicle>();
+
+            foreach (var v in allVehicles)
+            {
+                if (v.Brand == vehicle.Brand && v.Price >= vehicle.Price && v.Id != vehicle.Id)
+                {
+                    relatedVehicles.Add(v);
+                };
+            }
+            
             var vm = new VehicleForSaleViewModel
             {
-                Vehicle = vehicle
+                Vehicle = vehicle,
+                ListOfVehicles = relatedVehicles
             };
 
             return View(vm);

@@ -65,13 +65,15 @@ namespace BolindersBil.Repositories
         public Vehicle Vehicle(int vehicleId)
         {
             var ctxVehicle = ctx.Vehicles.FirstOrDefault(x => x.Id.Equals(vehicleId));
-
+            
             return ctxVehicle;
         }
 
         // List all the Vehicles from DB.
         public IEnumerable<Vehicle> GetAllVehicles()
         {
+
+
             return Vehicles;
         }
 
@@ -80,29 +82,44 @@ namespace BolindersBil.Repositories
         {
             return Images;
         }
+        //public IEnumerable<Vehicle> Filter(string searchString)
+        //{
+        //    IEnumerable<Vehicle> vehicles;
 
-        public IEnumerable<Vehicle> Search(string searchString, bool used)
+            
+        //}
+
+
+        public IEnumerable<Vehicle> Search(string searchString, bool? used)
         {
             IEnumerable<Vehicle> vehicles;
             if (string.IsNullOrEmpty(searchString))
             {
 
-                vehicles = ctx.Vehicles.Where(x => x.Used == used);
+                vehicles = ctx.Vehicles.Where(x => x.Used == used.Value);
             }
             else
             {
-                vehicles = ctx.Vehicles.Where(x => x.Brand.Contains(searchString) && x.Used == used ||
-                                                   x.Body.Contains(searchString) && x.Used == used ||
-                                                   x.Brand.Contains(searchString) && x.Used == used ||
-                                                   x.Color.Contains(searchString) && x.Used == used ||
-                                                   x.Fuel.Contains(searchString) && x.Used == used ||
-                                                   x.Gearbox.Contains(searchString) && x.Used == used ||
-                                                   x.Office.Contains(searchString) && x.Used == used ||
-                                                   x.VehicleAttribute.Contains(searchString) && x.Used == used);
+                vehicles = ctx.Vehicles.Where(x => x.Brand.Contains(searchString) ||
+                                                   x.Body.Contains(searchString) ||
+                                                   x.Brand.Contains(searchString) ||
+                                                   x.Color.Contains(searchString) ||
+                                                   x.Fuel.Contains(searchString) ||
+                                                   x.Gearbox.Contains(searchString) ||
+                                                   x.Office.Contains(searchString) ||
+                                                   x.VehicleAttribute.Contains(searchString));
+                if (used.HasValue)
+                {
+                    vehicles = vehicles.Where(x => x.Used == used.Value);
+                }
+
+
             }
 
             return vehicles;
         }
+
+
 
         // Update(Edit) the vehicle. 
         public void UpdateVehicle(EditVehicleViewModel v)
