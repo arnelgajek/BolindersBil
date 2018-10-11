@@ -22,7 +22,7 @@ namespace BolindersBil.Web.Controllers
         private IVehicleRepository vehicleRepo;
         public IOfficeRepository officeRepo;
         private IHostingEnvironment _hostingEnvironment;
-        public int PageLimit = 8;
+        //public int pageLimit = 8;
 
         public VehicleController(IVehicleRepository vehicleRepository, IOfficeRepository officeRepository, IHostingEnvironment hostingEnvironment)
         {
@@ -56,7 +56,10 @@ namespace BolindersBil.Web.Controllers
 
             var filterResults = vehicleRepo.FilterSearch(null, null, null, null, 0, 0, 0);
 
-            return View(filterResults);
+            var orderFilteredResults = filterResults.OrderByDescending(x => x.UpdatedDate).ThenBy(x => x.Used == true);
+
+
+            return View(orderFilteredResults);
         }
 
         [HttpPost]
@@ -112,7 +115,9 @@ namespace BolindersBil.Web.Controllers
 
             var newVehicles = vehicleRepo.GetNewVehicles();
 
-            return View("Index", newVehicles);
+            var orderedNewVehicles = newVehicles.OrderByDescending(x => x.UpdatedDate).ThenBy(x => x.Used == true);
+
+            return View("Index", orderedNewVehicles);
         }
 
         [HttpGet]
@@ -140,7 +145,9 @@ namespace BolindersBil.Web.Controllers
 
             var usedVehicles = vehicleRepo.GetUsedVehicles();
 
-            return View("Index", usedVehicles);
+            var orderedUsedVehicles = usedVehicles.OrderByDescending(x => x.UpdatedDate).ThenBy(x => x.Used == true);
+
+            return View("Index", orderedUsedVehicles);
         }
 
         [HttpPost]
