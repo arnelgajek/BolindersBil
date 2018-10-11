@@ -258,7 +258,8 @@ namespace BolindersBil.Web.Controllers
                     var theImage = new Models.Image
                     {
                         Name = uniqueGuid,
-                        Path = resizedImageFolder + "\\" + targetFileName
+                        //Path = resizedImageFolder + "\\" + targetFileName
+                        Path = "/images/vehicle_images/" + addNewVehicle.Brand + "_" + addNewVehicle.RegNr + "/" + targetFileName
                     };
                     images.Add(theImage);
 
@@ -268,20 +269,16 @@ namespace BolindersBil.Web.Controllers
                 if (uploadedImages.Count() == 0)
                 {
                     List<Models.Image> defaultImageList = new List<Models.Image>();
-                    var path = webrootPath + "\\defaultimages\\Image_Upload.png";
+                    //var path = webrootPath + "\\defaultimages\\Image_Upload.png";
                     Guid defaultImageGuid = Guid.NewGuid();
                     var defaultImage = new Models.Image
                     {
                         Name = defaultImageGuid,
-                        Path = path
+                        Path = "/defaultimages/Images_Upload.png"
                     };
                     defaultImageList.Add(defaultImage);
                     addNewVehicle.Images = defaultImageList;
                 }
-
-
-                
-
 
                 Office jkpgOffice = officeRepo.Offices.Single(o => o.OfficeCode == "BB1");
                 Office varnOffice = officeRepo.Offices.Single(o => o.OfficeCode == "BB2");
