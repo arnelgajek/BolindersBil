@@ -1,5 +1,4 @@
-﻿@*@model FilterVehicleViewModel*@
-@model IEnumerable<Vehicle>
+﻿@model IEnumerable<Vehicle>
 
 <div class="container">
     <form asp-controller="Vehicle" asp-action="Index" method="post">
@@ -9,18 +8,11 @@
                     <label for="year">Årstyp</label>
                     <select name="year" class="form-control">
                         <option disabled selected>Välj</option>
-                        @foreach(var y in ViewBag.vehicleYearOptions)
+                        @foreach (var y in ViewBag.vehicleYearOptions)
                         {
                             <option value="@y">@y</option>
                         }
                     </select>
-                    @*<select name="year" class="form-control">
-                            <option disabled selected>Välj</option>
-                            <option value="modern-00">Modern-2000</option>
-                            <option value="99-80">1999-1980</option>
-                            <option value="79-60">1979-1960</option>
-                            <option value="59-old">1959-Older</option>
-                        </select>*@
                 </div>
             </div>
             <div class="col">
@@ -67,20 +59,53 @@
             </div>
         </div>
 
-        @*<div class="row">
-                <div class="col">
-                    <div class="form-group">
-                        <label>Pris</label>
-                        <input class="form-control" type="range" />
-                    </div>
+        <div class="row">
+            <div class="col">
+                <div class="form-group">
+                    <label for="minPrice">Min pris</label>
+                    <select name="minPrice" class="form-control">
+                        <option disabled selected>Välj</option>
+                        <option value="0">0</option>
+                        <option value="10000">10 000</option>
+                        <option value="20000">20 000</option>
+                        <option value="30000">30 000</option>
+                        <option value="40000">40 000</option>
+                        <option value="50000">50 000</option>
+                    </select>
                 </div>
-                <div class="col">
-                    <div class="form-group">
-                        <label>Mil</label>
-                        <input class="form-control" type="range" />
-                    </div>
+            </div>
+            <div class="col">
+                <div class="form-group">
+                    <label for="maxPrice">Max pris</label>
+                    <select name="maxPrice" class="form-control">
+                        <option disabled selected>Välj</option>
+                        <option value="0">0</option>
+                        <option value="10000">10 000</option>
+                        <option value="20000">20 000</option>
+                        <option value="30000">30 000</option>
+                        <option value="40000">40 000</option>
+                        <option value="50000">50 000</option>
+                    </select>
                 </div>
-            </div>*@
+            </div>
+            <div class="col">
+                <div class="form-group">
+
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-group">
+
+                </div>
+            </div>
+        </div>
+
+
+
+        @*<label>Mil</label>
+        <input class="form-control" type="range" />*@
+
+
 
         <div class="row">
             <div class="col"></div>
@@ -154,9 +179,9 @@
 
 <script src="~/js/site.min.js"></script>
 <script>
-                    //$(document).ready(function () {
-                    //    $('#filterSubmitBtn').on('click', function () {
-                    //        $('#seeAllVehiclesBtn').show();
-                    //    });
-                    //});
+                        //$(document).ready(function () {
+                        //    $('#filterSubmitBtn').on('click', function () {
+                        //        $('#seeAllVehiclesBtn').show();
+                        //    });
+                        //});
 </script>

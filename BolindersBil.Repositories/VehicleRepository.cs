@@ -133,11 +133,12 @@ namespace BolindersBil.Repositories
             ctx.SaveChanges();
         }
 
-        public IEnumerable<Vehicle> FilterSearch(string year, string fuel, string body, string gearbox)
+        public IEnumerable<Vehicle> FilterSearch(string year, string fuel, string body, string gearbox, double minPrice, double maxPrice)
         {
             IEnumerable<Vehicle> vehicles;
             
-            if (string.IsNullOrEmpty(year) || string.IsNullOrEmpty(fuel) || string.IsNullOrEmpty(body) || string.IsNullOrEmpty(gearbox))
+            if (string.IsNullOrEmpty(year) || string.IsNullOrEmpty(fuel) 
+                || string.IsNullOrEmpty(body) || string.IsNullOrEmpty(gearbox))
             {
                 vehicles = ctx.Vehicles;
             }
@@ -147,10 +148,23 @@ namespace BolindersBil.Repositories
                                                    x.Fuel.Contains(fuel) &&
                                                    x.Body.Contains(body) &&
                                                    x.Gearbox.Contains(gearbox));
+
+
+                List<Vehicle> priceFiltered = new List<Vehicle>();
+                foreach (var v in vehicles)
+                {
+                    if (v.Price >= minPrice && v.Price <= maxPrice)
+                    {
+                        priceFiltered.Add(v);
+                    }
+                }
+                vehicles = priceFiltered;
             }
 
             return vehicles;
         }
+
+        
 
         //public IEnumerable<Vehicle> FilterVehicles(FilterVehicleViewModel filterForm)
         //{

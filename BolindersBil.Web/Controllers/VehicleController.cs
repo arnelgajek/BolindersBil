@@ -54,14 +54,14 @@ namespace BolindersBil.Web.Controllers
             years.Add(superOld);
             ViewBag.vehicleYearOptions = years;
 
-            //var filterResults = vehicleRepo.FilterSearch(null, null, null, null);
-            var theVehicles = vehicleRepo.GetAllVehicles();
+            var filterResults = vehicleRepo.FilterSearch(null, null, null, null, 0, 0);
+            //var theVehicles = vehicleRepo.GetAllVehicles();
 
-            return View(theVehicles);
+            return View(filterResults);
         }
 
         [HttpPost]
-        public IActionResult Index(string year, string fuel, string body, string gearbox)
+        public IActionResult Index(string year, string fuel, string body, string gearbox, double minPrice, double maxPrice)
         {
             // This list is used as the dropdown option in the "Årsmodell" input.
             List<string> years = new List<string>();
@@ -83,8 +83,8 @@ namespace BolindersBil.Web.Controllers
             years.Add(superOld);
             ViewBag.vehicleYearOptions = years;
 
-            var filterResults = vehicleRepo.FilterSearch(year, fuel, body, gearbox);
-
+            var filterResults = vehicleRepo.FilterSearch(year, fuel, body, gearbox, minPrice, maxPrice);
+            
             return View(filterResults);
         }
         
