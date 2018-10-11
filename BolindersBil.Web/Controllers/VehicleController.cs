@@ -34,6 +34,7 @@ namespace BolindersBil.Web.Controllers
         // Index isn't used for anything important atm but is crutial
         public IActionResult Index()
         {
+            //return View();
             return RedirectToAction("VehicleList");
         }
 
@@ -53,15 +54,49 @@ namespace BolindersBil.Web.Controllers
             return View(getVehicles);
         }
 
+        [HttpPost]
+        public IActionResult VehicleList()
+        {
+
+            var vm = new VehiclesSearchViewModel
+            {
+                
+
+            };
+
+            return View(vm);
+        }
+
         // Paging
+        [HttpGet]
         public IActionResult VehicleList(int page = 1)
         {
+            // This list is used as the dropdown option in the "Årsmodell" input.
+            List<object> years = new List<object>();
+            var currentYear = DateTime.Now.Year;
+            var theFuture = currentYear + 1;
+            years.Add(theFuture);
+            var stopYear = 1980;
+            for (int y = currentYear; y >= stopYear; y--)
+            {
+                years.Add(y);
+            }
+            var seventies = "70-tal";
+            var sixties = "60-tal";
+            var fifties = "50-tal";
+            var superOld = "40-tal eller äldre";
+            years.Add(seventies);
+            years.Add(sixties);
+            years.Add(fifties);
+            years.Add(superOld);
+            ViewBag.vehicleYearOptions = years;
+            
             // page = 0 x pagelimit
             var toSkip = (page - 1) * PageLimit;
 
-            // Gets the (pagelimit) amount of vehicles and orders them by their ID
-            // This shall be changed to sort by UpdateDate in the future
-            var vehicles = vehicleRepo.Vehicles.OrderBy(x => x.Id).Skip(toSkip).Take(PageLimit);
+            // Gets the (pagelimit) amount of vehicles and orders them by 
+            // newest first and then the latest updated vehicle
+            var vehicles = vehicleRepo.Vehicles.OrderByDescending(x => x.UpdatedDate).ThenBy(x => x.Used == true).Skip(toSkip).Take(PageLimit);
 
             // Gets new info for the paging. Page becomes 1. (page x pagelimit). 
             // And creates new pages for the amount over the pagelimit (since page becomes 2 then 3...)
@@ -74,15 +109,18 @@ namespace BolindersBil.Web.Controllers
 
             var images = vehicleRepo.GetAllImages();
             var vehicleId = vehicleRepo.Images.OrderBy(x => x.VehicleId);
-
+            
+            // crutial to remove specific path from ImgPath
             string WebRootPath = _hostingEnvironment.WebRootPath;
             string ContentRootPath = _hostingEnvironment.ContentRootPath;
 
-            //var str = WebRootPath.Replace(ContentRootPath, "");
+            // This should be inside a if function to check if there's even a picture to look for
+            // ATM it just checks for a picture and if there isn't one it crashes
             string ImgPath = images.FirstOrDefault().Path.Replace(WebRootPath, "");
             var Parts = ImgPath.Split("\\");
             var NewPath = string.Join("/", Parts);
-
+            
+            // What you want to view
             var vm = new VehiclesSearchViewModel
             {
                 Vehicles = vehicles,
@@ -511,11 +549,32 @@ namespace BolindersBil.Web.Controllers
         [HttpGet]
         public IActionResult Vehicle(int vehicleId)
         {
+
+            // If you havent clicked into a vehicle, get the vehicle Id from TempData
+            if(vehicleId == 0)
+            {
+                vehicleId = (int)TempData["vehicleId"];
+            }
+
+            // Get the vehicle with the vehicle Id you clicked on
             var vehicle = vehicleRepo.Vehicles.FirstOrDefault(x => x.Id.Equals(vehicleId));
 
+            var allVehicles = vehicleRepo.Vehicles;
+
+            List<Vehicle> relatedVehicles = new List<Vehicle>();
+
+            foreach (var v in allVehicles)
+            {
+                if (v.Brand == vehicle.Brand && v.Price >= vehicle.Price && v.Id != vehicle.Id)
+                {
+                    relatedVehicles.Add(v);
+                };
+            }
+            
             var vm = new VehicleForSaleViewModel
             {
-                Vehicle = vehicle
+                Vehicle = vehicle,
+                ListOfVehicles = relatedVehicles
             };
 
             return View(vm);

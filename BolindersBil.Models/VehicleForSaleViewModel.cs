@@ -12,5 +12,12 @@ namespace BolindersBil.Models
         public List<Image> Images { get; set; }
         public Office Offices { get; set; }
         public SendMail SendMail { get; set; }
+        public int vehicleId { get; set; }
+        public string Brand { get; set; }
+        public string Model { get; set; }
+        public string ModelDescription { get; set; }
+        public string Year { get; set; }
+        public string CurrentOffice { get; set; }
+        public List<Vehicle> ListOfVehicles { get; set; }
     }
 }

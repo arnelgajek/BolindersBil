@@ -61,11 +61,12 @@ namespace BolindersBil.Repositories
             return ctxVehicle;
         }
 
+
         // To reload the page so see the vehicle add with specifik id:
         public Vehicle Vehicle(int vehicleId)
         {
             var ctxVehicle = ctx.Vehicles.FirstOrDefault(x => x.Id.Equals(vehicleId));
-
+            
             return ctxVehicle;
         }
 
@@ -77,11 +78,15 @@ namespace BolindersBil.Repositories
 
         // List all the Images from DB
         public IEnumerable<Image> GetAllImages()
-
         {
             return Images;
         }
+        //public IEnumerable<Vehicle> Filter(string searchString)
+        //{
+        //    IEnumerable<Vehicle> vehicles;
 
+            
+        //}
         public IEnumerable<Vehicle> Search(string searchString, bool used)
         {
             IEnumerable<Vehicle> vehicles;

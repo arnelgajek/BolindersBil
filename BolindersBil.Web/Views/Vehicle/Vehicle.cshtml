@@ -1,9 +1,7 @@
-﻿@model VehicleForSaleViewModel
-
+@model VehicleForSaleViewModel
 @{
     Layout = "~/Views/Shared/_VehicleForSaleLayout.cshtml";
 }
-
 <div class="container" style="margin-top:50px">
     <div class="row">
         <!-- Carousel: -->
@@ -25,7 +23,6 @@
                 </a>
             </div>
         </div>
-
         <!-- Bilmärke: -->
         <div class="col-sm-12" style="background-color:white; margin-bottom:20px">
             <h1>@Model.Vehicle.Brand @Model.Vehicle.Model</h1>
@@ -45,7 +42,7 @@
                 <strong>Attribut: </strong>@Model.Vehicle.VehicleAttribute <br />
                 <strong>Annons tillagd: </strong>@Model.Vehicle.AddedDate <br />
                 <strong>Annons uppdaterad: </strong>@Model.Vehicle.UpdatedDate <br />
-                <strong>Kontakta säljare: </strong> <!-- TODO: Can't reach the office phonenumber! -->
+                <strong>Kontakta säljare: </strong> <!-- TODO: Can't reach the office phonenumber! --> @*@Model.Offices.Name*@
             </h6>
             <h1><strong>Pris: </strong>@Model.Vehicle.Price</h1>
         </div>
@@ -54,20 +51,40 @@
         </div>
         <div class="col-sm-12" style="background-color:lightblue; margin-bottom:20px; padding:10px;">
             <h1>RELATERADE FORDON:</h1>
-        </div>
-        <div class="col-sm-12" style="background-color:orange; margin-bottom:20px; padding:10px;">
-            <h1>PRISKALKYL:</h1>
+
+            @foreach(var v in Model.ListOfVehicles.Take(4))
+            {
+                <p>@v.Brand | @v.Price</p>
+            }
+
         </div>
         <div class="col-sm-12" style="background-color:white; margin-bottom:20px; padding:10px;">
             <!-- Back to the page that lists all the vehicles: -->
-            <button type="button" class="btn btn-warning">Tillbaka</button>
+            <form asp-action="Index" asp-controller="Vehicle">
+                <input class="btn btn-warning" type="submit" value="Till alla fordon" />
+            </form>
+            @*Send vehicle to a friend*@
             <div class="vehicleButtons" style="float:right">
-
                 <!-- This form and its button allows you to share the vehicle: -->
-                <input asp-for="Email" placeholder="Ange emailadress..." />
-                <a asp-controller="Mail" asp-action="SendMail" class="btn btn-info">Dela</a>
+                <form asp-action="SendMail" asp-controller="Mail" method="get">
+                    <div class="form-group">
+                        <div class="input-group">
+                            @*Values for the mail*@
+                            <input asp-for="Link" type="hidden" id="UrlAdvert" value='@($"{Context.Request.Scheme}://{Context.Request.Host}{Context.Request.Path}{Context.Request.QueryString}")' />
+                            <input asp-for="vehicleId" type="hidden" value="@Model.Vehicle.Id" />
+                            <input asp-for="Brand" type="hidden" value="@Model.Vehicle.Brand" />
+                            <input asp-for="Model" type="hidden" value="@Model.Vehicle.Model" />
+                            <input asp-for="ModelDescription" type="hidden" value="@Model.Vehicle.ModelDescription" />
+                            <input asp-for="Year" type="hidden" value="@Model.Vehicle.Year" />
+                            <input asp-for="CurrentOffice" type="hidden" value="@Model.Vehicle.Office" />
+
+                            @*Send the mail*@
+                            <input asp-for="Email" class="form-control rounded" placeholder="Skicka vidare" pattern="[a-zA-Z0-9!#$%&'*+\/=?^_`{|}~.-]+@@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*" required />
+                            <input class="btn btn-success" type="submit" value="Dela" />
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
 </div>
-
