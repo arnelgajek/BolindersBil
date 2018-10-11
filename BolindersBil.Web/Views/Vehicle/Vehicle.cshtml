@@ -7,15 +7,15 @@
 <div class="container" style="margin-top:50px">
     <div class="row">
         <!-- Carousel: -->
-        <div class="col-sm-12" ">
+        <div class="col-sm-12">
             <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
                 <!-- Foreach that loops through all the images concerning the specific vehicleId: -->
                 <div class="carousel-inner" style="width:100%">
                     @foreach (var img in Model.Vehicle.Images)
                     {
-                        <div class="carousel-item">
-                            <img class="d-block w-100" src="@img.Path" alt="TEST" data-toggle="modal" data-target="#vehicleModal">
-                        </div>
+                    <div class="carousel-item">
+                        <img class="d-block w-100" src="@img.Path" alt="~/defaultimages/Image_Upload.png" data-toggle="modal" data-target="#vehicleModal">
+                    </div>
                     }
                 </div>
                 <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
@@ -31,10 +31,10 @@
 
         <div class="col-sm-12" style="background-color:white; margin-bottom:20px; padding:10px;">
             <!-- TODO: Link img to Modal: -->
-            <div class="col-sm-12 col-lg-4 justify-content-sm-center" style="margin:0 auto;">
+            <div class="col-sm-12" style="margin:0 auto;">
                 @foreach (var img in Model.Vehicle.Images)
                 {
-                    <img class="img-thumbnail" src="@img.Path" />
+                    <img class="img-thumbnailSpecialOne justify-content-xl-center" src="@img.Path" />
                 }
             </div>
         </div>
@@ -59,7 +59,8 @@
                 <strong>Annons uppdaterad: </strong>@Model.Vehicle.UpdatedDate <br />*@
                 <strong>Kontakta säljare: </strong> <a href="tel:+460 @Model.Vehicle.OfficeId.PhoneNumber">&#9742;</a>
             </h6>
-            <h1><strong>Pris (SEK): </strong>@Model.Vehicle.Price</h1>
+            <h4><strong>Pris (SEK): </strong>@Model.Vehicle.Price</h4>
+            <h4><strong>Pris Exkl. Moms (SEK): </strong>@Model.Vehicle.Price</h4> <!-- TODO: Räkna bort 25% från priset! -->
         </div>
         <div class="col-sm-12" style="background-color:orange; margin-bottom:20px; padding:10px;">
             <h1>PRISKALKYL:</h1>
@@ -81,11 +82,19 @@
         <div class="modal fade" id="vehicleModal">
             <div class="modal-dialog">
                 <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" title="Close"> <span class="glyphicon glyphicon-remove"></span></button>
-                    </div>
-                    <div class="modal-body">
+                    <div class="modal-body align-self-center" style="height:230px;">
                         <!--CAROUSEL CODE GOES HERE-->
+                        <div id="modalCarousel" class="carousel">
+                            <div class="carousel-inner"></div>
+                            <a class="carousel-control left" href="#modalCarousel" data-slide="prev">
+                                <i class="glyphicon glyphicon-chevron-left"></i>
+                            </a>
+                            <img src="~/images/vehicle_images/Volvo_GGG777/17f04b4d-fd94-4797-8a16-87a897b2eace_volvo-c30-polestar_3.jpg" class="img-thumbnail" />
+                            <a class="carousel-control right" href="#modalCarousel" data-slide="next">
+                                <i class="glyphicon glyphicon-chevron-right"></i>
+                            </a>
+                        </div>
+                        
                     </div>
                     <div class="modal-footer">
                         <button class="btn btn-danger" type="button" data-dismiss="modal">Close</button>
@@ -93,6 +102,5 @@
                 </div>
             </div>
         </div>
-
     </div>
 </div>
