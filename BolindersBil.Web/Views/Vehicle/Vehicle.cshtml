@@ -82,19 +82,22 @@
         <div class="modal fade" id="vehicleModal">
             <div class="modal-dialog">
                 <div class="modal-content">
-                    <div class="modal-body align-self-center" style="height:230px;">
-                        <!--CAROUSEL CODE GOES HERE-->
+                    <div class="modal-body align-self-center">
                         <div id="modalCarousel" class="carousel">
                             <div class="carousel-inner"></div>
                             <a class="carousel-control left" href="#modalCarousel" data-slide="prev">
                                 <i class="glyphicon glyphicon-chevron-left"></i>
                             </a>
-                            <img src="~/images/vehicle_images/Volvo_GGG777/17f04b4d-fd94-4797-8a16-87a897b2eace_volvo-c30-polestar_3.jpg" class="img-thumbnail" />
+                            @foreach (var carImg in Model.Vehicle.Images)
+                            {
+                            <div class="carousel-item">
+                                <img class="img-thumbnail justify-content-xl-center" src="@carImg.Path" />
+                            </div>
+                            }
                             <a class="carousel-control right" href="#modalCarousel" data-slide="next">
                                 <i class="glyphicon glyphicon-chevron-right"></i>
                             </a>
                         </div>
-                        
                     </div>
                     <div class="modal-footer">
                         <button class="btn btn-danger" type="button" data-dismiss="modal">Close</button>
