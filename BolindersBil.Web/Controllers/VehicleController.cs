@@ -90,16 +90,13 @@ namespace BolindersBil.Web.Controllers
             years.Add(fifties);
             years.Add(superOld);
             ViewBag.vehicleYearOptions = years;
-
-
-
-
+            
             // page = 0 x pagelimit
             var toSkip = (page - 1) * PageLimit;
 
             // Gets the (pagelimit) amount of vehicles and orders them by 
             // newest first and then the latest updated vehicle
-            var vehicles = vehicleRepo.Vehicles.OrderBy(x => x.Used == true).ThenByDescending(x => x.UpdatedDate).Skip(toSkip).Take(PageLimit);
+            var vehicles = vehicleRepo.Vehicles.OrderByDescending(x => x.UpdatedDate).ThenBy(x => x.Used == true).Skip(toSkip).Take(PageLimit);
 
             // Gets new info for the paging. Page becomes 1. (page x pagelimit). 
             // And creates new pages for the amount over the pagelimit (since page becomes 2 then 3...)
@@ -562,6 +559,18 @@ namespace BolindersBil.Web.Controllers
             // Get the vehicle with the vehicle Id you clicked on
             var vehicle = vehicleRepo.Vehicles.FirstOrDefault(x => x.Id.Equals(vehicleId));
 
+            var relatedVehicles = vehicleRepo.Vehicles;
+
+            var i = 0;
+
+            foreach (var rv in relatedVehicles)
+            {
+                if (rv.Brand == vehicle.Brand && rv.Price >= vehicle.Price)
+                {
+                    i++;
+                };
+            }
+            
             var vm = new VehicleForSaleViewModel
             {
                 Vehicle = vehicle
