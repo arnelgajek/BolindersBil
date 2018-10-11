@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Mail;
 using System.Threading.Tasks;
 using BolindersBil.Data.DataAccess;
 using BolindersBil.Models;
@@ -39,7 +40,6 @@ namespace BolindersBil.Web
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             // Configuration for DB connection.
@@ -71,6 +71,8 @@ namespace BolindersBil.Web
             });
 
             services.AddMvc();
+            services.AddMemoryCache();
+            services.AddSession();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -91,6 +93,8 @@ namespace BolindersBil.Web
 
             app.UseMvcWithDefaultRoute();
 
+            app.UseSession();
+
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
@@ -106,8 +110,8 @@ namespace BolindersBil.Web
                     template: "{controller=Vehicle}/{action=Vehicle}/{id?}");
 
                 //routes.MapRoute(
-                // name: "VehicleForSale",
-                // template: "{controller=VehicleForSale}/{action=Sale}/{id?}");
+                // name: "Vehicle",
+                // template: "{controller=Vehicle}/{action=Vehicle}/{id?}");
 
                 // Incase we need routing in navbar
                 //routes.MapRoute(

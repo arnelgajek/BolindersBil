@@ -11,17 +11,12 @@ namespace BolindersBil.Web.DataAccess
 {
     public class ApplicationDbContext : IdentityDbContext<IdentityUser> 
     {
-      
-
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
 
         }
-
         public DbSet<Office> Offices { get; set; }
         public DbSet<Vehicle> Vehicles { get; set; }
-        public DbSet<Image> Images { get; set; }        
-        public DbSet<Logo> Logos { get; set; }
-
+        public DbSet<Image> Images { get; set; }
     }
 }

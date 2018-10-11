@@ -2,18 +2,17 @@
 
     // Checks all the checkboxes for you:
     $('#checkAll').click(function () {
-        // TODO: If the checkAll checked, enable button #bulkDeleteVehicle:
 
         $('input:checkbox').prop('checked',
             this.checked);
-   });
+    });
 
     // Gets the value using class:
-    $('#testTest').click(function () {
+    $('#confirmVehicleDelete').click(function () {
         getValueUsingClass();
     });
 
-    $('#bulktest').click(function (e) {
+    $('#confirmVehicleBulkDelete').click(function () {
         getValueUsingClass();
     });
 

@@ -11,7 +11,7 @@ namespace BolindersBil.Models
         public string Brand { get; set; }
         public string Model { get; set; }
         public string ModelDescription { get; set; }
-        public int Year { get; set; }
+        public string Year { get; set; }
         public int Kilometer { get; set; }
         public double Price { get; set; }
         public string Body { get; set; }
@@ -22,8 +22,10 @@ namespace BolindersBil.Models
         public bool Used { get; set; }
         public Office OfficeId { get; set; }
         public string Office { get; set; }
-        public byte[] Picture { get; set; }
         public bool Leasable { get; set; }
+
+        public List<Image> Images { get; set; }
+
         public DateTime UpdatedDate { get; set; }
         public string VehicleAttribute { get; set; }
         public List<string> BodyTypes { get; set; }
