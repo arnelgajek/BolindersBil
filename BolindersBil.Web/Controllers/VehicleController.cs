@@ -22,7 +22,7 @@ namespace BolindersBil.Web.Controllers
         private IVehicleRepository vehicleRepo;
         public IOfficeRepository officeRepo;
         private IHostingEnvironment _hostingEnvironment;
-        public int PageLimit = 8;
+        //public int pageLimit = 8;
 
         public VehicleController(IVehicleRepository vehicleRepository, IOfficeRepository officeRepository, IHostingEnvironment hostingEnvironment)
         {
@@ -30,12 +30,124 @@ namespace BolindersBil.Web.Controllers
             officeRepo = officeRepository;
             _hostingEnvironment = hostingEnvironment;
         }
-
-        // Index isn't used for anything important atm but is crutial
+        
+        [HttpGet]
         public IActionResult Index()
         {
-            //return View();
-            return RedirectToAction("VehicleList");
+            // This list is used as the dropdown option in the "Årsmodell" input.
+            List<string> years = new List<string>();
+            var currentYear = DateTime.Now.Year;
+            var theFuture = currentYear + 1;
+            years.Add(theFuture.ToString());
+            var stopYear = 1980;
+            for (int y = currentYear; y >= stopYear; y--)
+            {
+                years.Add(y.ToString());
+            }
+            var seventies = "70-tal";
+            var sixties = "60-tal";
+            var fifties = "50-tal";
+            var superOld = "40-tal eller äldre";
+            years.Add(seventies);
+            years.Add(sixties);
+            years.Add(fifties);
+            years.Add(superOld);
+            ViewBag.vehicleYearOptions = years;
+
+            var filterResults = vehicleRepo.FilterSearch(null, null, null, null, 0, 0, 0);
+
+            var orderFilteredResults = filterResults.OrderByDescending(x => x.UpdatedDate).ThenBy(x => x.Used == true);
+
+
+            return View(orderFilteredResults);
+        }
+
+        [HttpPost]
+        public IActionResult Index(string year, string fuel, string body, string gearbox, double minPrice, double maxPrice, int maxKm)
+        {
+            // This list is used as the dropdown option in the "Årsmodell" input.
+            List<string> years = new List<string>();
+            var currentYear = DateTime.Now.Year;
+            var theFuture = currentYear + 1;
+            years.Add(theFuture.ToString());
+            var stopYear = 1980;
+            for (int y = currentYear; y >= stopYear; y--)
+            {
+                years.Add(y.ToString());
+            }
+            var seventies = "70-tal";
+            var sixties = "60-tal";
+            var fifties = "50-tal";
+            var superOld = "40-tal eller äldre";
+            years.Add(seventies);
+            years.Add(sixties);
+            years.Add(fifties);
+            years.Add(superOld);
+            ViewBag.vehicleYearOptions = years;
+
+            var filterResults = vehicleRepo.FilterSearch(year, fuel, body, gearbox, minPrice, maxPrice, maxKm);
+            
+            return View(filterResults);
+        }
+
+        [HttpGet]
+        public IActionResult New()
+        {
+            // This list is used as the dropdown option in the "Årsmodell" input.
+            List<string> years = new List<string>();
+            var currentYear = DateTime.Now.Year;
+            var theFuture = currentYear + 1;
+            years.Add(theFuture.ToString());
+            var stopYear = 1980;
+            for (int y = currentYear; y >= stopYear; y--)
+            {
+                years.Add(y.ToString());
+            }
+            var seventies = "70-tal";
+            var sixties = "60-tal";
+            var fifties = "50-tal";
+            var superOld = "40-tal eller äldre";
+            years.Add(seventies);
+            years.Add(sixties);
+            years.Add(fifties);
+            years.Add(superOld);
+            ViewBag.vehicleYearOptions = years;
+
+            var newVehicles = vehicleRepo.GetNewVehicles();
+
+            var orderedNewVehicles = newVehicles.OrderByDescending(x => x.UpdatedDate).ThenBy(x => x.Used == true);
+
+            return View("Index", orderedNewVehicles);
+        }
+
+        [HttpGet]
+        public IActionResult Used()
+        {
+            // This list is used as the dropdown option in the "Årsmodell" input.
+            List<string> years = new List<string>();
+            var currentYear = DateTime.Now.Year;
+            var theFuture = currentYear + 1;
+            years.Add(theFuture.ToString());
+            var stopYear = 1980;
+            for (int y = currentYear; y >= stopYear; y--)
+            {
+                years.Add(y.ToString());
+            }
+            var seventies = "70-tal";
+            var sixties = "60-tal";
+            var fifties = "50-tal";
+            var superOld = "40-tal eller äldre";
+            years.Add(seventies);
+            years.Add(sixties);
+            years.Add(fifties);
+            years.Add(superOld);
+            ViewBag.vehicleYearOptions = years;
+
+            var usedVehicles = vehicleRepo.GetUsedVehicles();
+
+            var orderedUsedVehicles = usedVehicles.OrderByDescending(x => x.UpdatedDate).ThenBy(x => x.Used == true);
+
+            return View("Index", orderedUsedVehicles);
         }
 
         [HttpPost]
@@ -61,87 +173,6 @@ namespace BolindersBil.Web.Controllers
             var getVehicles = vehicleRepo.GetAllVehicles();
 
             return View(getVehicles);
-        }
-
-        [HttpPost]
-        public IActionResult VehicleList()
-        {
-
-            var vm = new VehiclesSearchViewModel
-            {
-                
-
-            };
-
-            return View(vm);
-        }
-
-        // Paging
-        [HttpGet]
-        public IActionResult VehicleList(int page = 1)
-        {
-            // This list is used as the dropdown option in the "Årsmodell" input.
-            List<object> years = new List<object>();
-            var currentYear = DateTime.Now.Year;
-            var theFuture = currentYear + 1;
-            years.Add(theFuture);
-            var stopYear = 1980;
-            for (int y = currentYear; y >= stopYear; y--)
-            {
-                years.Add(y);
-            }
-            var seventies = "70-tal";
-            var sixties = "60-tal";
-            var fifties = "50-tal";
-            var superOld = "40-tal eller äldre";
-            years.Add(seventies);
-            years.Add(sixties);
-            years.Add(fifties);
-            years.Add(superOld);
-            ViewBag.vehicleYearOptions = years;
-            
-            // page = 0 x pagelimit
-            var toSkip = (page - 1) * PageLimit;
-
-            // Gets the (pagelimit) amount of vehicles and orders them by 
-            // newest first and then the latest updated vehicle
-            var vehicles = vehicleRepo.Vehicles.OrderByDescending(x => x.UpdatedDate).ThenBy(x => x.Used == true).Skip(toSkip).Take(PageLimit);
-
-            // Gets new info for the paging. Page becomes 1. (page x pagelimit). 
-            // And creates new pages for the amount over the pagelimit (since page becomes 2 then 3...)
-            var paging = new PagingInfo
-            {
-                CurrentPage = page,
-                ItemsPerPage = PageLimit,
-                TotalItems = vehicleRepo.Vehicles.Count()
-            };
-
-            var images = vehicleRepo.GetAllImages();
-            var vehicleId = vehicleRepo.Images.OrderBy(x => x.VehicleId);
-            
-            // crutial to remove specific path from ImgPath
-            string WebRootPath = _hostingEnvironment.WebRootPath;
-            string ContentRootPath = _hostingEnvironment.ContentRootPath;
-
-            // This should be inside a if function to check if there's even a picture to look for
-            // ATM it just checks for a picture and if there isn't one it crashes
-            string ImgPath = images.FirstOrDefault().Path.Replace(WebRootPath, "");
-            var Parts = ImgPath.Split("\\");
-            var NewPath = string.Join("/", Parts);
-            
-            // What you want to view
-            var vm = new VehiclesSearchViewModel
-            {
-                Vehicles = vehicles,
-                Pager = paging,
-                Images = images,
-                Path = NewPath,
-
-            };
-
-            //routes.MapRoute();
-
-            return View("Index", vm);
         }
 
         [HttpGet]
@@ -274,7 +305,7 @@ namespace BolindersBil.Web.Controllers
                     var defaultImage = new Models.Image
                     {
                         Name = defaultImageGuid,
-                        Path = "/defaultimages/Images_Upload.png"
+                        Path = "/defaultimages/Image_Upload.png"
                     };
                     defaultImageList.Add(defaultImage);
                     addNewVehicle.Images = defaultImageList;
@@ -310,7 +341,6 @@ namespace BolindersBil.Web.Controllers
         private void ImageResize(string inputImagePath, string outputImagePath, int newWidth)
         {
             const long quality = 50L;
-
 
             Bitmap sourceBitmap = new Bitmap(inputImagePath);
             double dblWidthOriginal = sourceBitmap.Width;

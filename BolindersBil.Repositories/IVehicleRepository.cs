@@ -1,6 +1,7 @@
 ﻿using BolindersBil.Models;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace BolindersBil.Repositories
@@ -28,6 +29,15 @@ namespace BolindersBil.Repositories
 
         IEnumerable<Vehicle> Search(string searchString, bool? Used);
 
+        Vehicle Vehicle(int vehicleId);
+
+        IEnumerable<Vehicle> FilterSearch(string year, string fuel, string body, string gearbox, double minPrice, double maxPrice, int maxKm);
+
+        IEnumerable<Vehicle> GetNewVehicles();
+
+        IEnumerable<Vehicle> GetUsedVehicles();
+      
         void UpdateVehicle(EditVehicleViewModel v);
+
     }
 }
