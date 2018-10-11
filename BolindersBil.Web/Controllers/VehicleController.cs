@@ -41,17 +41,16 @@ namespace BolindersBil.Web.Controllers
             //};
             //return View(vm);
 
-            var filterResults = vehicleRepo.FilterSearch(null, null, null);
+            var filterResults = vehicleRepo.FilterSearch(null, null, null, null);
             
             return View(filterResults);
         }
 
 
         [HttpPost]
-        public IActionResult Index(string fuel, string body, string gearbox)
+        public IActionResult Index(string year, string fuel, string body, string gearbox)
         {
-            
-            var filterResults = vehicleRepo.FilterSearch(fuel, body, gearbox);
+            var filterResults = vehicleRepo.FilterSearch(year, fuel, body, gearbox);
 
             return View(filterResults);
         }
