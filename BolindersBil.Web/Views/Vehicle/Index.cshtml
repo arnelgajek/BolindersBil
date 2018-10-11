@@ -9,11 +9,18 @@
                     <label for="year">Årstyp</label>
                     <select name="year" class="form-control">
                         <option disabled selected>Välj</option>
-                        <option value="modern-00">Modern-2000</option>
-                        <option value="99-80">1999-1980</option>
-                        <option value="79-60">1979-1960</option>
-                        <option value="59-old">1959-Older</option>
+                        @foreach(var y in ViewBag.vehicleYearOptions)
+                        {
+                            <option value="@y">@y</option>
+                        }
                     </select>
+                    @*<select name="year" class="form-control">
+                            <option disabled selected>Välj</option>
+                            <option value="modern-00">Modern-2000</option>
+                            <option value="99-80">1999-1980</option>
+                            <option value="79-60">1979-1960</option>
+                            <option value="59-old">1959-Older</option>
+                        </select>*@
                 </div>
             </div>
             <div class="col">
@@ -121,13 +128,15 @@
                     <h3>@v.Brand @v.Model @v.ModelDescription @v.Year</h3>
                     <span>@v.Fuel | @v.Gearbox | @v.Kilometer</span>
                     <h4>@v.Price Kr</h4>
+                    <a asp-action="Vehicle" class="btn btn-sm btn-success" asp-route-vehicleId="@v.Id">
+                        Mer information...
+                    </a>
                 </div>
                 <div class="col-3 float-sm-right">
                     <span><small><i>@v.UpdatedDate.ToString("dd/MM/yyyy hh:mm")</i></small></span>
                 </div>
-                <a asp-action="Vehicle" class="btn btn-sm btn-success" asp-route-vehicleId="@v.Id">
-                    Mer information...
-                </a>
+                <div></div>
+
             </div>
             <br />
             <br />
@@ -145,9 +154,9 @@
 
 <script src="~/js/site.min.js"></script>
 <script>
-                //$(document).ready(function () {
-                //    $('#filterSubmitBtn').on('click', function () {
-                //        $('#seeAllVehiclesBtn').show();
-                //    });
-                //});
+                    //$(document).ready(function () {
+                    //    $('#filterSubmitBtn').on('click', function () {
+                    //        $('#seeAllVehiclesBtn').show();
+                    //    });
+                    //});
 </script>

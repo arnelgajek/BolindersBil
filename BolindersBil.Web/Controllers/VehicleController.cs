@@ -34,36 +34,60 @@ namespace BolindersBil.Web.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            //var getVehicles = vehicleRepo.GetAllVehicles();
-            //var vm = new FilterVehicleViewModel()
-            //{
-            //    Vehicles = getVehicles
-            //};
-            //return View(vm);
+            // This list is used as the dropdown option in the "Årsmodell" input.
+            List<string> years = new List<string>();
+            var currentYear = DateTime.Now.Year;
+            var theFuture = currentYear + 1;
+            years.Add(theFuture.ToString());
+            var stopYear = 1980;
+            for (int y = currentYear; y >= stopYear; y--)
+            {
+                years.Add(y.ToString());
+            }
+            var seventies = "70-tal";
+            var sixties = "60-tal";
+            var fifties = "50-tal";
+            var superOld = "40-tal eller äldre";
+            years.Add(seventies);
+            years.Add(sixties);
+            years.Add(fifties);
+            years.Add(superOld);
+            ViewBag.vehicleYearOptions = years;
 
-            var filterResults = vehicleRepo.FilterSearch(null, null, null, null);
-            
-            return View(filterResults);
+            //var filterResults = vehicleRepo.FilterSearch(null, null, null, null);
+            var theVehicles = vehicleRepo.GetAllVehicles();
+
+            return View(theVehicles);
         }
-
 
         [HttpPost]
         public IActionResult Index(string year, string fuel, string body, string gearbox)
         {
+            // This list is used as the dropdown option in the "Årsmodell" input.
+            List<string> years = new List<string>();
+            var currentYear = DateTime.Now.Year;
+            var theFuture = currentYear + 1;
+            years.Add(theFuture.ToString());
+            var stopYear = 1980;
+            for (int y = currentYear; y >= stopYear; y--)
+            {
+                years.Add(y.ToString());
+            }
+            var seventies = "70-tal";
+            var sixties = "60-tal";
+            var fifties = "50-tal";
+            var superOld = "40-tal eller äldre";
+            years.Add(seventies);
+            years.Add(sixties);
+            years.Add(fifties);
+            years.Add(superOld);
+            ViewBag.vehicleYearOptions = years;
+
             var filterResults = vehicleRepo.FilterSearch(year, fuel, body, gearbox);
 
             return View(filterResults);
         }
-
-
-
-        //[HttpPost]
-        //public IActionResult Index(FilterVehicleViewModel filterForm)
-        //{
-        //    var filterResults = vehicleRepo.FilterVehicles(filterForm).ToList();
-        //    return View(filterResults);
-        //}
-
+        
         [HttpPost]
         public IActionResult Search(string searchString, bool Used)
         {

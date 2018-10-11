@@ -136,43 +136,14 @@ namespace BolindersBil.Repositories
         public IEnumerable<Vehicle> FilterSearch(string year, string fuel, string body, string gearbox)
         {
             IEnumerable<Vehicle> vehicles;
-
-            if (year == "modern-00")
-            {
-                year = "2005";
-            }
-
-            //List<string> years = new List<string>();
-            //var currentYear = DateTime.Now.Year;
-            //var theFuture = currentYear + 1;
-            //years.Add(theFuture.ToString());
-            //var stopYear = 1980;
-            //for (int y = currentYear; y >= stopYear; y--)
-            //{
-            //    years.Add(y.ToString());
-            //}
             
-            //years.ToArray();
-
-            ////var seventies = "70-tal";
-            ////var sixties = "60-tal";
-            ////var fifties = "50-tal";
-            ////var superOld = "40-tal eller äldre";
-            ////years.Add(seventies);
-            ////years.Add(sixties);
-            ////years.Add(fifties);
-            ////years.Add(superOld);
-
-
-
-
             if (string.IsNullOrEmpty(year) || string.IsNullOrEmpty(fuel) || string.IsNullOrEmpty(body) || string.IsNullOrEmpty(gearbox))
             {
                 vehicles = ctx.Vehicles;
             }
             else
             {
-                vehicles = ctx.Vehicles.Where(x => x.Year.Contains(year && year.Contains( /*a list of the modern vehicles*/ )) &&
+                vehicles = ctx.Vehicles.Where(x => x.Year.Contains(year) &&
                                                    x.Fuel.Contains(fuel) &&
                                                    x.Body.Contains(body) &&
                                                    x.Gearbox.Contains(gearbox));
