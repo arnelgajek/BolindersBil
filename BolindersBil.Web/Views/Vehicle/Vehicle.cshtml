@@ -57,24 +57,24 @@
             <form asp-action="Index" asp-controller="Vehicle">
                 <input class="btn btn-warning" type="submit" value="Till alla fordon" />
             </form>
+            @*Send vehicle to a friend*@
             <div class="vehicleButtons" style="float:right">
                 <!-- This form and its button allows you to share the vehicle: -->
                 <form asp-action="SendMail" asp-controller="Mail" method="get">
                     <div class="form-group">
                         <div class="input-group">
-
+                            @*Values for the mail*@
                             <input asp-for="Link" type="hidden" id="UrlAdvert" value='@($"{Context.Request.Scheme}://{Context.Request.Host}{Context.Request.Path}{Context.Request.QueryString}")' />
-                            <input asp-for="VehicleId" type="hidden" value="@Model.Vehicle.Id" />
+                            <input asp-for="vehicleId" type="hidden" value="@Model.Vehicle.Id" />
                             <input asp-for="Brand" type="hidden" value="@Model.Vehicle.Brand" />
                             <input asp-for="Model" type="hidden" value="@Model.Vehicle.Model" />
                             <input asp-for="ModelDescription" type="hidden" value="@Model.Vehicle.ModelDescription" />
                             <input asp-for="Year" type="hidden" value="@Model.Vehicle.Year" />
                             <input asp-for="CurrentOffice" type="hidden" value="@Model.Vehicle.Office" />
 
+                            @*Send the mail*@
                             <input asp-for="Email" class="form-control rounded" placeholder="Skicka vidare" pattern="[a-zA-Z0-9!#$%&'*+\/=?^_`{|}~.-]+@@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*" required />
-                            <a asp-action="Vehicle" class="btn btn-success" asp-route-vehicleId="@Model.Vehicle.Id">
-                                Dela
-                            </a>
+                            <input class="btn btn-success" type="submit" value="Dela" />
                         </div>
                     </div>
                 </form>

@@ -552,6 +552,14 @@ namespace BolindersBil.Web.Controllers
         [HttpGet]
         public IActionResult Vehicle(int vehicleId)
         {
+
+            // If you havent clicked into a vehicle, get the vehicle Id from TempData
+            if(vehicleId == 0)
+            {
+                vehicleId = (int)TempData["vehicleId"];
+            }
+
+            // Get the vehicle with the vehicle Id you clicked on
             var vehicle = vehicleRepo.Vehicles.FirstOrDefault(x => x.Id.Equals(vehicleId));
 
             var vm = new VehicleForSaleViewModel

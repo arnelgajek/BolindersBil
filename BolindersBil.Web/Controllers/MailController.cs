@@ -13,9 +13,13 @@ namespace BolindersBil.Web.Controllers
     public class MailController : Controller
     {
         private IVehicleRepository vehicleRepo;
+        public MailController(IVehicleRepository vehicleRepository)
+        {
+            vehicleRepo = vehicleRepository;
+        }
         // Send/Share the url from the vehicle for sale:
         [HttpGet]
-        public IActionResult SendMail(IVehicleRepository vehicleRepository, VehicleForSaleViewModel vehicleForSaleViewModel, int vehicleId)
+        public IActionResult SendMail(VehicleForSaleViewModel vehicleForSaleViewModel, int vehicleId)
         {
             // Mail client
             var smtpClient = new SmtpClient
@@ -26,7 +30,6 @@ namespace BolindersBil.Web.Controllers
             };
 
             // Can't have swedish letters in the email
-
             var vm = vehicleForSaleViewModel;
             if (vm.CurrentOffice == "Jönköping")
             {
@@ -55,9 +58,12 @@ namespace BolindersBil.Web.Controllers
             smtpClient.Send(message);
 
             var vehicle = vehicleRepo.Vehicles.FirstOrDefault(x => x.Id.Equals(vehicleId));
+
+            // Sends the vehicle Id to tempdata to later resend you to the vehicle you visited
+            TempData["vehicleId"] = vehicle.Id;
             
             // Return to vehicle
-            return RedirectToAction();
+            return RedirectToAction("Vehicle", "Vehicle");
         }
     }
 }
