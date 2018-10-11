@@ -108,26 +108,21 @@
             <div class="col">
                 <div style="float:right;">
                     <div class="form-group">
-                        <button class="btn btn-sm btn-primary" type="submit" id="filterSubmitBtn">Filter</button>&nbsp;
-                        <button type="reset" class="btn btn-sm btn-secondary">Clear</button>
+                        <button class="btn  btn-primary" type="submit" id="filterSubmitBtn">Filter</button>&nbsp;
+                        <button type="reset" class="btn  btn-secondary">Clear</button>
                     </div>
                 </div>
             </div>
         </div>
     </form>
 
-    <div>
-        <a asp-controller="Vehicle" asp-action="Index" class="btn btn-sm" id="seeAllVehiclesBtn" style="float:right;">See all vehicles</a><br />
+    <div style="float:right;">
+        <div class="form-group">
+            <a asp-controller="Vehicle" asp-action="Used" class="btn btn-sm" id="seeAllVehiclesBtn">Used vehicles</a> |
+            <a asp-controller="Vehicle" asp-action="New" class="btn btn-sm" id="seeAllVehiclesBtn">New vehicles</a> |
+            <a asp-controller="Vehicle" asp-action="Index" class="btn btn-sm" id="seeAllVehiclesBtn">All vehicles</a>
+        </div>
     </div>
-
-
-
-    <div>
-        <a asp-controller="Vehicle" asp-action="Used" class="btn btn-sm" id="seeAllVehiclesBtn">See used vehicles</a><br />
-        <a asp-controller="Vehicle" asp-action="New" class="btn btn-sm" id="seeAllVehiclesBtn">See new vehicles</a>
-    </div>
-
-
 
     <br />
     <br />
