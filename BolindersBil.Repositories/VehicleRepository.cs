@@ -173,46 +173,24 @@ namespace BolindersBil.Repositories
 
             return vehicles;
         }
-
         
+        public IEnumerable<Vehicle> GetNewVehicles()
+        {
+            IEnumerable<Vehicle> newVehicles;
 
-        //public IEnumerable<Vehicle> FilterVehicles(FilterVehicleViewModel filterForm)
-        //{
-        //    var vm = new FilterVehicleViewModel()
-        //    {
-        //        Fuel = filterForm.Fuel,
-        //        Body = filterForm.Body,
-        //        Gearbox = filterForm.Gearbox
-        //    };
+            newVehicles = ctx.Vehicles.Where(x => x.Used == false);
 
-        //    var filteredInfo = ctx.Vehicles.Where(f => /*f.Year.Contains(filterForm.Year) ||*/
-        //                                               f.Fuel.Contains(vm.Fuel) ||
-        //                                               f.Body.Contains(vm.Body) ||
-        //                                               f.Gearbox.Contains(vm.Gearbox));
+            return newVehicles;
+        }
 
-        //    return filteredInfo;
-        //}
+        public IEnumerable<Vehicle> GetUsedVehicles()
+        {
+            IEnumerable<Vehicle> usedVehicles;
 
-        //public IEnumerable<Vehicle> FilterVehicles(FilterVehicleViewModel filterVehicleViewModel)
-        //{
-        //    IEnumerable<Vehicle> listOfVehicles;
-        //    // List of vehicles in the DB.
-        //    listOfVehicles = ctx.Vehicles.ToList();
+            usedVehicles = ctx.Vehicles.Where(x => x.Used == true);
 
-
-        //    if (filterVehicleViewModel.Id != 0)
-        //    {
-        //        //listOfVehicles = ctx.Vehicles.Where(x => x.Fuel.Contains(filterVehicleViewModel.Fuel) ||
-        //        //                                         x.Body.Contains(filterVehicleViewModel.Body) ||
-        //        //                                         x.Gearbox.Contains(filterVehicleViewModel.Gearbox));
-
-
-        //        //return SomeOtherVar;    
-        //    }
-
-        //    // Return ALL of the vehicles in the DB (on first load OR when user has not used filter).
-        //    return listOfVehicles;
-        //}
+            return usedVehicles;
+        }
 
     }
 }

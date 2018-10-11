@@ -55,7 +55,6 @@ namespace BolindersBil.Web.Controllers
             ViewBag.vehicleYearOptions = years;
 
             var filterResults = vehicleRepo.FilterSearch(null, null, null, null, 0, 0, 0);
-            //var theVehicles = vehicleRepo.GetAllVehicles();
 
             return View(filterResults);
         }
@@ -87,7 +86,63 @@ namespace BolindersBil.Web.Controllers
             
             return View(filterResults);
         }
-        
+
+        [HttpGet]
+        public IActionResult New()
+        {
+            // This list is used as the dropdown option in the "Årsmodell" input.
+            List<string> years = new List<string>();
+            var currentYear = DateTime.Now.Year;
+            var theFuture = currentYear + 1;
+            years.Add(theFuture.ToString());
+            var stopYear = 1980;
+            for (int y = currentYear; y >= stopYear; y--)
+            {
+                years.Add(y.ToString());
+            }
+            var seventies = "70-tal";
+            var sixties = "60-tal";
+            var fifties = "50-tal";
+            var superOld = "40-tal eller äldre";
+            years.Add(seventies);
+            years.Add(sixties);
+            years.Add(fifties);
+            years.Add(superOld);
+            ViewBag.vehicleYearOptions = years;
+
+            var newVehicles = vehicleRepo.GetNewVehicles();
+
+            return View("Index", newVehicles);
+        }
+
+        [HttpGet]
+        public IActionResult Used()
+        {
+            // This list is used as the dropdown option in the "Årsmodell" input.
+            List<string> years = new List<string>();
+            var currentYear = DateTime.Now.Year;
+            var theFuture = currentYear + 1;
+            years.Add(theFuture.ToString());
+            var stopYear = 1980;
+            for (int y = currentYear; y >= stopYear; y--)
+            {
+                years.Add(y.ToString());
+            }
+            var seventies = "70-tal";
+            var sixties = "60-tal";
+            var fifties = "50-tal";
+            var superOld = "40-tal eller äldre";
+            years.Add(seventies);
+            years.Add(sixties);
+            years.Add(fifties);
+            years.Add(superOld);
+            ViewBag.vehicleYearOptions = years;
+
+            var usedVehicles = vehicleRepo.GetUsedVehicles();
+
+            return View("Index", usedVehicles);
+        }
+
         [HttpPost]
         public IActionResult Search(string searchString, bool Used)
         {

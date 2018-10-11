@@ -117,8 +117,17 @@
     </form>
 
     <div>
-        <a asp-controller="Vehicle" asp-action="Index" class="btn btn-sm" id="seeAllVehiclesBtn" style="float:right;">See all vehicles</a>
+        <a asp-controller="Vehicle" asp-action="Index" class="btn btn-sm" id="seeAllVehiclesBtn" style="float:right;">See all vehicles</a><br />
     </div>
+
+
+
+    <div>
+        <a asp-controller="Vehicle" asp-action="Used" class="btn btn-sm" id="seeAllVehiclesBtn">See used vehicles</a><br />
+        <a asp-controller="Vehicle" asp-action="New" class="btn btn-sm" id="seeAllVehiclesBtn">See new vehicles</a>
+    </div>
+
+
 
     <br />
     <br />
@@ -164,20 +173,33 @@
         }
     </div>
 
-    @*<div page-model="@Model.Pager" page-action="VehicleList">
-
-        </div>*@
 </div>
 
-@*@Html.ActionLink("Load next 8 Vehicles", "Vehicles", "Controller", new { page = Model.Pager.CurrentPage + 1 })*@
-
-
-
-<script src="~/js/site.min.js"></script>
+@*<script src="~/js/site.min.js"></script>
 <script>
-                        //$(document).ready(function () {
-                        //    $('#filterSubmitBtn').on('click', function () {
-                        //        $('#seeAllVehiclesBtn').show();
-                        //    });
-                        //});
-</script>
+    $(document).ready(function () {
+
+        $('#usedBtn').on('click', function () {
+
+            $.ajax({
+                url: '/Vehicle/Index',
+                dataType: 'json',
+                method: 'GET',
+                contentType: 'application/json; charset=utf-8',
+                cache: false,
+                data: { test: comments },
+                success: function (data) {
+                    // data is your result from controller
+                    if (data.success) {
+                        alert(data.message);
+                    }
+                },
+                error: function (error) {
+                    alert('error');
+                }
+            });
+
+        });
+
+    });
+</script>*@
