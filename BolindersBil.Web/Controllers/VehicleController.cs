@@ -559,21 +559,22 @@ namespace BolindersBil.Web.Controllers
             // Get the vehicle with the vehicle Id you clicked on
             var vehicle = vehicleRepo.Vehicles.FirstOrDefault(x => x.Id.Equals(vehicleId));
 
-            var relatedVehicles = vehicleRepo.Vehicles;
+            var allVehicles = vehicleRepo.Vehicles;
 
-            var i = 0;
+            List<Vehicle> relatedVehicles = new List<Vehicle>();
 
-            foreach (var rv in relatedVehicles)
+            foreach (var v in allVehicles)
             {
-                if (rv.Brand == vehicle.Brand && rv.Price >= vehicle.Price)
+                if (v.Brand == vehicle.Brand && v.Price >= vehicle.Price && v.Id != vehicle.Id)
                 {
-                    i++;
+                    relatedVehicles.Add(v);
                 };
             }
             
             var vm = new VehicleForSaleViewModel
             {
-                Vehicle = vehicle
+                Vehicle = vehicle,
+                ListOfVehicles = relatedVehicles
             };
 
             return View(vm);

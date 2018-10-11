@@ -52,7 +52,10 @@
         <div class="col-sm-12" style="background-color:lightblue; margin-bottom:20px; padding:10px;">
             <h1>RELATERADE FORDON:</h1>
 
-
+            @foreach(var v in Model.ListOfVehicles.Take(4))
+            {
+                <p>@v.Brand | @v.Price</p>
+            }
 
         </div>
         <div class="col-sm-12" style="background-color:white; margin-bottom:20px; padding:10px;">
