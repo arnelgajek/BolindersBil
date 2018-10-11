@@ -42,7 +42,16 @@ namespace BolindersBil.Web.Controllers
         public IActionResult Search(string searchString, bool Used)
         {
             var searchResults = vehicleRepo.Search(searchString, Used);
-            return View("Index", searchResults);
+            return View("SearchResults", searchResults);
+            
+        }
+
+        [HttpGet]
+        public IActionResult Search(string searchString)
+        {
+            var searchResults = vehicleRepo.Search(searchString, null);
+            return View("SearchResults", searchResults);
+
         }
 
         [Authorize]

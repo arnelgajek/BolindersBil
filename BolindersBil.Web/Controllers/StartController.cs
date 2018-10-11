@@ -27,12 +27,16 @@ namespace BolindersBil.Web.Controllers
 
         public IActionResult Cookies()
         {
+            
+
             return View();
         }
 
         public IActionResult Index()
         {
-            return View();
+            VehiclesSearchViewModel model = new VehiclesSearchViewModel();
+            model.Brands = vehicleRepo.Vehicles.Select(x => x.Brand).Distinct();
+            return View(model);
         }
 
         public ActionResult Search()

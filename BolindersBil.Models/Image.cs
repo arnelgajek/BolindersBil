@@ -11,5 +11,7 @@ namespace BolindersBil.Models
         public string Path { get; set; }
         public virtual Vehicle Vehicle { get; set; }
         public int VehicleId { get; set; }
+
+       
     }
 }
