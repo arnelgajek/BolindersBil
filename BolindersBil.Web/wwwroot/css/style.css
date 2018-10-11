@@ -170,9 +170,16 @@ pre {
 figure {
   margin: 0 0 1rem; }
 
+#img_omg {
+    width: 100px; /* You can set the dimensions to whatever you want */
+    height: 100px;
+    object-fit: cover;
+}
+
 img {
-  vertical-align: middle;
-  border-style: none; }
+    vertical-align: middle;
+    border-style: none;
+}
 
 svg {
   overflow: hidden;
