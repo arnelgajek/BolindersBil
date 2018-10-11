@@ -31,10 +31,10 @@
                 <div class="col-lg-12">
                     <div class="input-group-prepend justify-content-center">
                         <div class="input-group-text" style="margin:10px">
-                            <input type="radio" name="Used">New Car<br>
+                            <input type="radio" name="Used" value="false">New Car<br>
                         </div>
                         <div class="input-group-text" style="margin:10px">
-                            <input type="radio" name="Used">Used Car<br>
+                            <input type="radio" name="Used" value="true">Used Car<br>
                         </div>
                     </div>
                 </div>
@@ -109,7 +109,7 @@
     <h4 class="text-center">Auktoriserad återförsäljare av</h4>
     <br />
     <!-- Footer Elements -->
-    @*<div class="container">
+    <div class="container">
 
   
         <!--Grid row-->
@@ -117,38 +117,23 @@
 
 
             <div class="available-logo col-12">
-                <div class="row justify-content-center">
-                    @foreach (var v in Model.Vehicles)
+                <div class="row justify-content-ceSSnter">
+                    
+                    @foreach (var brand in Model.Brands)
                     {
-                                              
-                        <a asp-controller="Vehicle" asp-action="Logo">
-                            <img  id="img_omg" src="@v.Brand" class="img-fluid" alt="Responsive image">
+
+                        <a asp-controller="Vehicle" asp-action="Search" asp-route-searchstring="@brand">
+                            <img id="img_omg" src="@($"Logo/{brand}.png")" class="img-fluid" style="margin-right:20px;" alt="@brand">
+
                         </a>
                         
-
                     }
+
                 </div>
             </div>
         </div>
 
-            <!--Grid column-->
-            <div class="col-lg-2 col-md-12 mb-5">*@
-
-          @*@foreach (var v in Model)
-           {
-            <div class="view overlay z-depth-1-half">
-                <form name="search">
-                  
-                    <input type="hidden" value="Saab" />""
-                </form>
-            </div>
-
-        }*@
-
-
-            </div>
-
-        </div>
+      </div>    
 
 
     <!-- Copyright -->

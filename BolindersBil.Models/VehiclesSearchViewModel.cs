@@ -25,5 +25,7 @@ namespace BolindersBil.Models
         public string VehicleAttribute { get; set; }
         public IEnumerable<Vehicle> Vehicles { get; set; }
         public PagingInfo Pager { get; set; }
+        public Logo Logo { get; set; }
+        public IEnumerable<string> Brands { get; set; }
      }
 }

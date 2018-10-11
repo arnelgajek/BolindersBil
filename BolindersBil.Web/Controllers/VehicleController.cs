@@ -42,11 +42,13 @@ namespace BolindersBil.Web.Controllers
             return View("SearchResults", searchResults);
             
         }
-        
-        public IActionResult Logo(string logoString)
+
+        [HttpGet]
+        public IActionResult Search(string searchString)
         {
-            var logoResults = vehicleRepo.Logo(logoString);
-            return View("SearchResults", logoResults);
+            var searchResults = vehicleRepo.Search(searchString, null);
+            return View("SearchResults", searchResults);
+
         }
 
         [Authorize]
