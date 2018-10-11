@@ -133,7 +133,7 @@ namespace BolindersBil.Repositories
             ctx.SaveChanges();
         }
 
-        public IEnumerable<Vehicle> FilterSearch(string year, string fuel, string body, string gearbox, double minPrice, double maxPrice)
+        public IEnumerable<Vehicle> FilterSearch(string year, string fuel, string body, string gearbox, double minPrice, double maxPrice, int maxKm)
         {
             IEnumerable<Vehicle> vehicles;
             
@@ -149,7 +149,6 @@ namespace BolindersBil.Repositories
                                                    x.Body.Contains(body) &&
                                                    x.Gearbox.Contains(gearbox));
 
-
                 List<Vehicle> priceFiltered = new List<Vehicle>();
                 foreach (var v in vehicles)
                 {
@@ -159,6 +158,17 @@ namespace BolindersBil.Repositories
                     }
                 }
                 vehicles = priceFiltered;
+
+                List<Vehicle> kmFiltered = new List<Vehicle>();
+                foreach (var v in vehicles)
+                {
+                    if (v.Kilometer <= maxKm)
+                    {
+                        kmFiltered.Add(v);
+                    }
+                }
+                vehicles = kmFiltered;
+
             }
 
             return vehicles;

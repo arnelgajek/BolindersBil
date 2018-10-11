@@ -31,7 +31,7 @@ namespace BolindersBil.Repositories
 
         Vehicle Vehicle(int vehicleId);
 
-        IEnumerable<Vehicle> FilterSearch(string year, string fuel, string body, string gearbox, double minPrice, double maxPrice);
+        IEnumerable<Vehicle> FilterSearch(string year, string fuel, string body, string gearbox, double minPrice, double maxPrice, int maxKm);
 
         //IEnumerable<Vehicle> FilterVehicles(FilterVehicleViewModel filterForm);
     }
