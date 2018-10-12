@@ -22,7 +22,7 @@ namespace BolindersBil.Web.Controllers
         private IVehicleRepository vehicleRepo;
         public IOfficeRepository officeRepo;
         private IHostingEnvironment _hostingEnvironment;
-        //public int pageLimit = 8;
+        public int pageLimit = 8;
 
         public VehicleController(IVehicleRepository vehicleRepository, IOfficeRepository officeRepository, IHostingEnvironment hostingEnvironment)
         {
@@ -58,6 +58,8 @@ namespace BolindersBil.Web.Controllers
 
             var orderFilteredResults = filterResults.OrderByDescending(x => x.UpdatedDate).ThenBy(x => x.Used == true);
 
+
+
             return View(orderFilteredResults);
         }
 
@@ -90,6 +92,7 @@ namespace BolindersBil.Web.Controllers
         }
 
         [HttpGet]
+        [Route("bilar/nya")]
         public IActionResult New()
         {
             // This list is used as the dropdown option in the "Årsmodell" input.
@@ -120,6 +123,7 @@ namespace BolindersBil.Web.Controllers
         }
 
         [HttpGet]
+        [Route("bilar/begagnade")]
         public IActionResult Used()
         {
             // This list is used as the dropdown option in the "Årsmodell" input.
@@ -326,7 +330,6 @@ namespace BolindersBil.Web.Controllers
                     var theImage = new Models.Image
                     {
                         Name = uniqueGuid,
-                        //Path = resizedImageFolder + "\\" + targetFileName
                         Path = "/images/vehicle_images/" + addNewVehicle.Brand + "_" + addNewVehicle.RegNr + "/" + targetFileName
                     };
                     images.Add(theImage);
@@ -337,7 +340,6 @@ namespace BolindersBil.Web.Controllers
                 if (uploadedImages.Count() == 0)
                 {
                     List<Models.Image> defaultImageList = new List<Models.Image>();
-                    //var path = webrootPath + "\\defaultimages\\Image_Upload.png";
                     Guid defaultImageGuid = Guid.NewGuid();
                     var defaultImage = new Models.Image
                     {
@@ -620,6 +622,7 @@ namespace BolindersBil.Web.Controllers
         }
 
         [HttpGet]
+        [Route("bilar/{Brand}-{Model}-{ModelDescription}-{vehicleId}")]
         public IActionResult Vehicle(int vehicleId)
         {
 

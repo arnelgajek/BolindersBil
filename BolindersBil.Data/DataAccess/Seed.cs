@@ -11,14 +11,6 @@ namespace BolindersBil.Web.DataAccess
     {
         public static void FillIfEmpty(ApplicationDbContext ctx)
         {
-            //if (!ctx.Admins.Any())
-            //{
-            //    ctx.Admins.Add(new Admin { FirstName = "Mattias", LastName = "Jarl" });
-            //    ctx.Admins.Add(new Admin { FirstName = "Mallory", LastName = "Fraiche" });
-            //    ctx.Admins.Add(new Admin { FirstName = "Timmie", LastName = "Bark" });
-            //    ctx.Admins.Add(new Admin { FirstName = "Arnel", LastName = "Gajek" });
-            //    ctx.SaveChanges();
-            //}
             if (!ctx.Offices.Any())
             {
                 ctx.Offices.Add(new Office { OfficeCode = "BB1", Name = "Bolinders Bil Jönköping", Address = "Lovsjövägen 33", ZipCode = 67890, City = "Jönköping", PhoneNumber = 036123456, Email = "jonkoping@bolindersbil.se" });
@@ -55,6 +47,7 @@ namespace BolindersBil.Web.DataAccess
                     Office = "Jönköping",
                     Leasable = true,
                     VehicleAttribute = "Speglar|Takfönster|kasettspelare"
+                     
                 },
                 new Vehicle
                 {

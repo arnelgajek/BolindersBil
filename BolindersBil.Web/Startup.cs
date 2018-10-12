@@ -106,19 +106,16 @@ namespace BolindersBil.Web
                     template: "{controller=Contact}/{action=Contact}/{id?}");
 
                 routes.MapRoute(
-                    name: "Vehicle",
-                    template: "{controller=Vehicle}/{action=Vehicle}/{id?}");
+                   name: "Vehicles/vehicleId",
+                   template: "Vehicle/{Brand}/{Model}/{ModelDescription}/{Id:int}",
+                   defaults: new { controller = "Vehicle", action = "Index" }
+                   );
 
                 //routes.MapRoute(
-                // name: "Vehicle",
-                // template: "{controller=Vehicle}/{action=Vehicle}/{id?}");
+                //    name: "Vehicle",
+                //    template: "{controller=Vehicle}/{action=Vehicle}/{id?}");
 
-                // Incase we need routing in navbar
-                //routes.MapRoute(
-                //  name: null,
-                //  template: "",
-                //  defaults: new { controller = "Home", action = "Home" }
-                //  );
+
             });
 
             var runIdentitySeed = Task.Run(async () => await identitySeeder.CreateAdminAccountIfEmpty()).Result;
