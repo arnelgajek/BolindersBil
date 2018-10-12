@@ -96,7 +96,14 @@ namespace BolindersBil.Web
             app.UseSession();
 
             app.UseMvc(routes =>
+
             {
+                routes.MapRoute(
+                    name: "Vehicles/vehicleId",
+                    template: "Vehicle/{Brand}/{Model}/{ModelDescription}/{Id:int}",
+                    defaults: new { controller = "Vehicle", action = "Index" }
+                    );
+
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Start}/{action=Index}/{id?}");
@@ -105,11 +112,7 @@ namespace BolindersBil.Web
                     name: "Contact",
                     template: "{controller=Contact}/{action=Contact}/{id?}");
 
-                routes.MapRoute(
-                    name: null,
-                    template: "Vehicle/{Brand}/{Model}/{ModelDescription}/{Id:int}",
-                    defaults: new { controller = "Vehicle", action = "Vehicle" }
-                    );
+                
 
                 //routes.MapRoute(
                 // name: "Vehicle",

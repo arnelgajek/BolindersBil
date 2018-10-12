@@ -90,7 +90,7 @@
             }
 
         </div>
-        
+
         <div class="col-sm-12" style="background-color:white; margin-bottom:20px; padding:10px;">
             <!-- Back to the page that lists all the vehicles: -->
             <form asp-action="Index" asp-controller="Vehicle">
@@ -123,46 +123,34 @@
 </div>
 <script src="~/js/site.min.js"></script>
 <script>
-    $(document).ready(function () {
-        $("#delPrice").hide();
+        $(document).ready(function () {
+            $("#delPrice").hide();
         $("#newPrice").hide();
         $("#taxFree").click(function () {
-
-
-
             $("#vehiclePrice").toggle();
             $("#delPrice").toggle();
             $("#newPrice").toggle();
         });
-        
-        //let currentValue = $('#kalkylValue').value();
-        //let retval = currentValue.value;
-
-        let x = @Model.Vehicle.Price;
-
-        //let e = document.getElementById("kalkylSelect");
-
-        //let eOption = e.options[e.selectedIndex].value
-
-        let eOption = $("#kalkylSelect").val();
-
-        let y = eOption
-
-        let z = x * 0.8;
-            
-        let b = z / y;
-
-        let a = b * 1.045
-
-        //$("#kalkyl").append(a);
 
         $("#getKalkyl").click(function () {
-            console.log(a);
+
+            let x = @Model.Vehicle.Price;
+
+            let y = $('#kalkylSelect').find('option:selected').val();
+
+            let z = x * 0.8;
+
+            let b = z / y;
+
+            let a = b * 1.045
+
+            let c = a.toFixed(2);
+
+            console.log(y);
 
             $("#kalkyl").empty();
 
-            $("#kalkyl").append(a);
+            $("#kalkyl").append(c);
         });
-        
-    });
+        });
 </script>

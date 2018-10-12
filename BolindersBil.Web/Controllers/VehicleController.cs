@@ -90,6 +90,7 @@ namespace BolindersBil.Web.Controllers
         }
 
         [HttpGet]
+        [Route("bilar/nya")]
         public IActionResult New()
         {
             // This list is used as the dropdown option in the "Årsmodell" input.
@@ -120,6 +121,7 @@ namespace BolindersBil.Web.Controllers
         }
 
         [HttpGet]
+        [Route("bilar/begagnade")]
         public IActionResult Used()
         {
             // This list is used as the dropdown option in the "Årsmodell" input.
@@ -177,13 +179,33 @@ namespace BolindersBil.Web.Controllers
         }
 
 
-        //// WHY THIS GET?
-        //[HttpGet]
-        //public IActionResult Search(string searchString)
-        //{
-        //    var searchResults = vehicleRepo.Search(searchString, null);
-        //    return View("Index", searchResults);
-        //}
+    
+        [HttpGet]
+        public IActionResult Search(string searchString)
+        {
+            // This list is used as the dropdown option in the "Årsmodell" input.
+            List<string> years = new List<string>();
+            var currentYear = DateTime.Now.Year;
+            var theFuture = currentYear + 1;
+            years.Add(theFuture.ToString());
+            var stopYear = 1980;
+            for (int y = currentYear; y >= stopYear; y--)
+            {
+                years.Add(y.ToString());
+            }
+            var seventies = "70-tal";
+            var sixties = "60-tal";
+            var fifties = "50-tal";
+            var superOld = "40-tal eller äldre";
+            years.Add(seventies);
+            years.Add(sixties);
+            years.Add(fifties);
+            years.Add(superOld);
+            ViewBag.vehicleYearOptions = years;
+
+            var searchResults = vehicleRepo.Search(searchString, null);
+            return View("Index", searchResults);
+        }
 
         [Authorize]
         public IActionResult Admin()
@@ -602,6 +624,8 @@ namespace BolindersBil.Web.Controllers
         }
 
         [HttpGet]
+        //www.bolindersbil.se/bilar/Volvo-V60-the discription-1
+        [Route("bilar/{Brand}-{Model}-{ModelDescription}-{vehicleId}")]
         public IActionResult Vehicle(int vehicleId)
         {
 
