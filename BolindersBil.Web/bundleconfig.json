@@ -1,12 +1,27 @@
 [
   {
-    // Name of the file that has the Bootstrap js and jquery info.
     "outputFileName": "wwwroot/js/site.min.js",
     "inputFiles": [
       "node_modules/jquery/dist/jquery.min.js",
       "node_modules/popper.js/dist/umd/popper.min.js",
       "node_modules/bootstrap/dist/js/bootstrap.min.js"
-    ],
-    "sourceMap": false
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/customBundle.js",
+    "inputFiles": [
+      "wwwroot/js/addNewVehicle.js",
+      "wwwroot/js/MapsApi.js",
+      "wwwroot/js/editVehicle.js",
+      "wwwroot/js/vehicleDelete.js",
+      "wwwroot/js/vehicleForSale.js",
+      "wwwroot/js/VehicleIndex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/css/vehicleAdStyle.min.css",
+    "inputFiles": [
+      "wwwroot/css/vehicleAdStyle.css"
+    ]
   }
 ]

@@ -53,11 +53,9 @@ namespace BolindersBil.Web.Controllers
             years.Add(fifties);
             years.Add(superOld);
             ViewBag.vehicleYearOptions = years;
-
+            
             var filterResults = vehicleRepo.FilterSearch(null, null, null, null, 0, 0, 0);
-
             var orderFilteredResults = filterResults.OrderByDescending(x => x.UpdatedDate).ThenBy(x => x.Used == true);
-
             return View(orderFilteredResults);
         }
 
@@ -85,11 +83,29 @@ namespace BolindersBil.Web.Controllers
             ViewBag.vehicleYearOptions = years;
 
             var filterResults = vehicleRepo.FilterSearch(year, fuel, body, gearbox, minPrice, maxPrice, maxKm);
-            
             return View(filterResults);
         }
 
+        //public IActionResult Paging(int page = 1)
+        //{
+        //    var toSkip = (page - 1) * pageLimit;
+        //    var vehicles = vehicleRepo.Vehicles.Skip(toSkip).Take(pageLimit);
+        //    var paging = new PagingInfo
+        //    {
+        //        CurrentPage = page,
+        //        ItemsPerPage = pageLimit,
+        //        TotalItems = vehicleRepo.Vehicles.Count()
+        //    };
+        //    var vm = new VehiclePagerViewModel
+        //    {
+        //        Vehicles = vehicles,
+        //        Pager = paging
+        //    };
+        //    return View("Index", vm);
+        //}
+
         [HttpGet]
+        [Route("bilar/nya")]
         public IActionResult New()
         {
             // This list is used as the dropdown option in the "Årsmodell" input.
@@ -120,6 +136,7 @@ namespace BolindersBil.Web.Controllers
         }
 
         [HttpGet]
+        [Route("bilar/begagnade")]
         public IActionResult Used()
         {
             // This list is used as the dropdown option in the "Årsmodell" input.
@@ -175,15 +192,33 @@ namespace BolindersBil.Web.Controllers
             var searchResults = vehicleRepo.Search(searchString, Used);
             return View("Index", searchResults);
         }
+        
+        [HttpGet]
+        public IActionResult Search(string searchString)
+        {
+            // This list is used as the dropdown option in the "Årsmodell" input.
+            List<string> years = new List<string>();
+            var currentYear = DateTime.Now.Year;
+            var theFuture = currentYear + 1;
+            years.Add(theFuture.ToString());
+            var stopYear = 1980;
+            for (int y = currentYear; y >= stopYear; y--)
+            {
+                years.Add(y.ToString());
+            }
+            var seventies = "70-tal";
+            var sixties = "60-tal";
+            var fifties = "50-tal";
+            var superOld = "40-tal eller äldre";
+            years.Add(seventies);
+            years.Add(sixties);
+            years.Add(fifties);
+            years.Add(superOld);
+            ViewBag.vehicleYearOptions = years;
 
-
-        //// WHY THIS GET?
-        //[HttpGet]
-        //public IActionResult Search(string searchString)
-        //{
-        //    var searchResults = vehicleRepo.Search(searchString, null);
-        //    return View("Index", searchResults);
-        //}
+            var searchResults = vehicleRepo.Search(searchString, null);
+            return View("Index", searchResults);
+        }
 
         [Authorize]
         public IActionResult Admin()
@@ -308,7 +343,6 @@ namespace BolindersBil.Web.Controllers
                     var theImage = new Models.Image
                     {
                         Name = uniqueGuid,
-                        //Path = resizedImageFolder + "\\" + targetFileName
                         Path = "/images/vehicle_images/" + addNewVehicle.Brand + "_" + addNewVehicle.RegNr + "/" + targetFileName
                     };
                     images.Add(theImage);
@@ -319,7 +353,6 @@ namespace BolindersBil.Web.Controllers
                 if (uploadedImages.Count() == 0)
                 {
                     List<Models.Image> defaultImageList = new List<Models.Image>();
-                    //var path = webrootPath + "\\defaultimages\\Image_Upload.png";
                     Guid defaultImageGuid = Guid.NewGuid();
                     var defaultImage = new Models.Image
                     {
@@ -602,6 +635,7 @@ namespace BolindersBil.Web.Controllers
         }
 
         [HttpGet]
+        [Route("bilar/{Brand}-{Model}-{ModelDescription}-{vehicleId}")]
         public IActionResult Vehicle(int vehicleId)
         {
 

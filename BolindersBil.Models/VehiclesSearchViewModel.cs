@@ -6,7 +6,6 @@ namespace BolindersBil.Models
 {
      public class VehiclesSearchViewModel
      {
-        // VehicleInfo
         public string RegNr { get; set; }
         public string Brand { get; set; }
         public string Model { get; set; }
@@ -26,13 +25,10 @@ namespace BolindersBil.Models
         public string VehicleAttribute { get; set; }
         public IEnumerable<Vehicle> Vehicles { get; set; }
         public IEnumerable<string> Brands { get; set; }
-        // Get the first image
         public IEnumerable<Image> Images { get; set; }
         public string Path { get; set; }
         public int VehicleId { get; set; }
-        // Pagination
         public PagingInfo Pager { get; set; }
-        // ListFilter
         public int PriceFrom { get; set; }
         public int PriceTo { get; set; }
         public int MillageFrom { get; set; }

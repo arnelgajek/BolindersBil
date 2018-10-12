@@ -36,6 +36,5 @@ namespace BolindersBil.Repositories
         IEnumerable<Vehicle> GetUsedVehicles();
       
         void UpdateVehicle(EditVehicleViewModel v);
-
     }
 }

@@ -9,7 +9,6 @@ namespace BolindersBil.Repositories
 {
     public class OfficeRepository : IOfficeRepository
     {
-
         private ApplicationDbContext ctx;
         public OfficeRepository(ApplicationDbContext context)
         {
@@ -21,6 +20,5 @@ namespace BolindersBil.Repositories
         {
             return Offices;
         }
-
     }
 }

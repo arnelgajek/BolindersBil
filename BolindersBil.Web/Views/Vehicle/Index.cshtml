@@ -1,3 +1,4 @@
+@*@model VehiclePagerViewModel*@
 @model IEnumerable<Vehicle>
 
 <div class="container">
@@ -136,12 +137,11 @@
             <div class="row">
                 <input type="hidden" value="@v.Id" />
                 <div class="col-5">
-                    @if (v.Images != null)
+                    @if (v.Images.Count() != 0)
                     {
-                        foreach (var i in v.Images)
-                        {
-                            @*<img src="@i.Path" />*@
-                        }
+                        var vehicleImage = v.Images.FirstOrDefault();
+                        var imagePath = vehicleImage.Path;
+                        <img src="@imagePath" alt="@v.Brand : @v.Model" class="img-thumbnail" />
                     }
                     else
                     {
@@ -153,7 +153,7 @@
                     <h3>@v.Brand @v.Model @v.ModelDescription @v.Year</h3>
                     <span>@v.Fuel | @v.Gearbox | @v.Kilometer</span>
                     <h4>@v.Price Kr</h4>
-                    <a asp-action="Vehicle" class="btn btn-sm btn-success" asp-route-vehicleId="@v.Id">
+                    <a asp-action="Vehicle" class="btn btn-sm btn-success" asp-route-brand="@v.Brand" asp-route-model="@v.Model" asp-route-modeldescription="@v.ModelDescription" asp-route-vehicleId="@v.Id">
                         Mer information...
                     </a>
                 </div>
@@ -166,35 +166,16 @@
             <br />
         }
     </div>
+    @*<div class="float-right">
+        <div page-model="@Model.Pager" page-action="Index"
+             enable-page-classes="true"
+             page-class="btn"
+             page-class-normal="btn-default"
+             page-class-selected="btn-primary"
+             class="btn-group">
+        </div>
+    </div>
+    <br />
+    <br />*@
 
 </div>
-
-@*<script src="~/js/site.min.js"></script>
-<script>
-    $(document).ready(function () {
-
-        $('#usedBtn').on('click', function () {
-
-            $.ajax({
-                url: '/Vehicle/Index',
-                dataType: 'json',
-                method: 'GET',
-                contentType: 'application/json; charset=utf-8',
-                cache: false,
-                data: { test: comments },
-                success: function (data) {
-                    // data is your result from controller
-                    if (data.success) {
-                        alert(data.message);
-                    }
-                },
-                error: function (error) {
-                    alert('error');
-                }
-            });
-
-        });
-
-    });
-</script>*@
-

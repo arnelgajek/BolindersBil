@@ -27,7 +27,6 @@ namespace BolindersBil.Repositories
             ctx.SaveChanges();
         }
 
-        // So we can AddNewVehicles to our DB.
         public void AddNewVehicle(Vehicle vehicle)
         {
             if (vehicle.Id == 0)
@@ -48,7 +47,6 @@ namespace BolindersBil.Repositories
             return ctxVehicle;
         }
 
-        // So we can BulkDeleteVehicles from our DB.
         public Vehicle BulkDeleteVehicle(int vehicleId)
         {
             var ctxVehicle = ctx.Vehicles.FirstOrDefault(x => x.Id.Equals(vehicleId));
@@ -60,7 +58,6 @@ namespace BolindersBil.Repositories
             return ctxVehicle;
         }
 
-        // To reload the page so see the vehicle add with specific id:
         public Vehicle Vehicle(int vehicleId)
         {
             var ctxVehicle = ctx.Vehicles.FirstOrDefault(x => x.Id.Equals(vehicleId));
@@ -68,14 +65,12 @@ namespace BolindersBil.Repositories
             return ctxVehicle;
         }
 
-        // List all the Vehicles from DB.
         public IEnumerable<Vehicle> GetAllVehicles()
         {
             
             return Vehicles;
         }
 
-        // List all the Images from DB.
         public IEnumerable<Image> GetAllImages()
         {
             return Images;
@@ -108,7 +103,6 @@ namespace BolindersBil.Repositories
             return vehicles;
         }
         
-        // Update(Edit) the vehicle. 
         public void UpdateVehicle(EditVehicleViewModel v)
         {
             var ctxVehicle = ctx.Vehicles.FirstOrDefault(x => x.Id.Equals(v.Id));
