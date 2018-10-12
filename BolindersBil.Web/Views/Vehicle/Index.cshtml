@@ -1,4 +1,5 @@
-@model IEnumerable<Vehicle>
+@*@model IEnumerable<Vehicle>*@
+@model VehiclePagerViewModel
 
 <div class="container">
     <form asp-controller="Vehicle" asp-action="Index" method="post">
@@ -131,7 +132,7 @@
 
     @* Div that shows all filtered vehicle results. *@
     <div>
-        @foreach (var v in Model)
+        @foreach (var v in Model.Vehicles)
         {
             <div class="row">
                 <input type="hidden" value="@v.Id" />
@@ -140,7 +141,7 @@
                     {
                         var vehicleImage = v.Images.FirstOrDefault();
                         var imagePath = vehicleImage.Path;
-                        <img src="@imagePath" alt="@v.Brand : @v.Model" class="img-thumbnail" /> 
+                        <img src="@imagePath" alt="@v.Brand : @v.Model" class="img-thumbnail" />
                     }
                     else
                     {
@@ -165,5 +166,16 @@
             <br />
         }
     </div>
+    <div class="float-right">
+        <div page-model="@Model.Pager" page-action="Index"
+             enable-page-classes="true"
+             page-class="btn"
+             page-class-normal="btn-default"
+             page-class-selected="btn-primary"
+             class="btn-group">
+        </div>
+    </div>
+    <br />
+    <br />
 
 </div>

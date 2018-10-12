@@ -32,7 +32,7 @@ namespace BolindersBil.Web.Controllers
         }
         
         [HttpGet]
-        public IActionResult Index()
+        public IActionResult Index(int page = 1)
         {
             // This list is used as the dropdown option in the "Årsmodell" input.
             List<string> years = new List<string>();
@@ -54,13 +54,25 @@ namespace BolindersBil.Web.Controllers
             years.Add(superOld);
             ViewBag.vehicleYearOptions = years;
 
+            var toSkip = (page - 1) * pageLimit;
             var filterResults = vehicleRepo.FilterSearch(null, null, null, null, 0, 0, 0);
 
-            var orderFilteredResults = filterResults.OrderByDescending(x => x.UpdatedDate).ThenBy(x => x.Used == true);
+            var orderFilteredResults = filterResults.OrderByDescending(x => x.UpdatedDate).ThenBy(x => x.Used == true).Skip(toSkip).Take(pageLimit);
 
+            var paging = new PagingInfo
+            {
+                CurrentPage = page,
+                ItemsPerPage = pageLimit,
+                TotalItems = vehicleRepo.Vehicles.Count()
+            };
 
+            var vm = new VehiclePagerViewModel
+            {
+                Vehicles = orderFilteredResults,
+                Pager = paging
+            };
 
-            return View(orderFilteredResults);
+            return View(vm);
         }
 
         [HttpPost]
