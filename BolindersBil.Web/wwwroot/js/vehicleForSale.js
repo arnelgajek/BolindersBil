@@ -17,6 +17,7 @@
 
         var theSrc = $('.thumbs img').eq(index).attr('src');
 
+        // Find the id from .thumbs img and use it to the modalCarousel:
          $("#modalCarousel").find("img").attr("src", theSrc);
     });
 });
