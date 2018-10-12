@@ -26,9 +26,7 @@
                 </a>
             </div>
         </div>
-
-
-        <div class="col-sm-12" style="background-color:white; margin-bottom:20px; padding:10px;">
+        <div class="col-sm-12 thumbs" style="background-color:white; margin-bottom:20px; padding:10px;">
             <!-- TODO: Link img to Modal: -->
             <div class="col-sm-12" style="margin:0 auto;">
                 @foreach (var img in Model.Vehicle.Images)
@@ -55,11 +53,9 @@
                 <strong>Begagnad: </strong>@Model.Vehicle.Used <br />
                 <strong>Leasbar: </strong>@Model.Vehicle.Leasable <br />
                 <strong>Attribut: </strong>@Model.Vehicle.VehicleAttribute <br />
-
                 @*<strong>Annons tillagd: </strong>@Model.Vehicle.AddedDate <br />
                 <strong>Annons uppdaterad: </strong>@Model.Vehicle.UpdatedDate <br />*@
                 <strong>Kontakta säljare: </strong> <a href="tel:+460 @Model.Vehicle.OfficeId.PhoneNumber">&#9742;</a>
-
             </h6>
             <h4><strong>Pris (SEK): </strong>@Model.Vehicle.Price</h4>
             <h4><strong>Pris Exkl. Moms (SEK): </strong>@Model.Vehicle.Price</h4> <!-- TODO: Räkna bort 25% från priset! -->
@@ -69,12 +65,10 @@
         </div>
         <div class="col-sm-12" style="background-color:lightblue; margin-bottom:20px; padding:10px;">
             <h1>RELATERADE FORDON:</h1>
-
             @foreach(var v in Model.ListOfVehicles.Take(4))
             {
                 <p>@v.Brand | @v.Price</p>
             }
-
         </div>
         <div class="col-sm-12" style="background-color:white; margin-bottom:20px; padding:10px;">
             <!-- Back to the page that lists all the vehicles: -->
@@ -111,19 +105,7 @@
                 <div class="modal-content">
                     <div class="modal-body align-self-center">
                         <div id="modalCarousel" class="carousel">
-                            <div class="carousel-inner"></div>
-                            <a class="carousel-control left" href="#modalCarousel" data-slide="prev">
-                                <i class="glyphicon glyphicon-chevron-left"></i>
-                            </a>
-                            @foreach (var carImg in Model.Vehicle.Images)
-                            {
-                            <div class="carousel-item">
-                                <img class="img-thumbnail justify-content-xl-center" src="@carImg.Path" />
-                            </div>
-                            }
-                            <a class="carousel-control right" href="#modalCarousel" data-slide="next">
-                                <i class="glyphicon glyphicon-chevron-right"></i>
-                            </a>
+                                <img src=""  class="img-thumbnail"/>
                         </div>
                     </div>
                     <div class="modal-footer">
