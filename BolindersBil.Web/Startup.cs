@@ -106,8 +106,10 @@ namespace BolindersBil.Web
                     template: "{controller=Contact}/{action=Contact}/{id?}");
 
                 routes.MapRoute(
-                    name: "Vehicle",
-                    template: "{controller=Vehicle}/{action=Vehicle}/{id?}");
+                    name: null,
+                    template: "Vehicle/{Brand}/{Model}/{ModelDescription}/{Id:int}",
+                    defaults: new { controller = "Vehicle", action = "Vehicle" }
+                    );
 
                 //routes.MapRoute(
                 // name: "Vehicle",
