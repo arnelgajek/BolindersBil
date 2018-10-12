@@ -54,6 +54,7 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
   display: block; }
 
 body {
+ 
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   font-size: 1rem;
@@ -170,9 +171,16 @@ pre {
 figure {
   margin: 0 0 1rem; }
 
+#img_omg {
+    width: 100px; /* You can set the dimensions to whatever you want */
+    height: 100px;
+    object-fit: cover;
+}
+
 img {
-  vertical-align: middle;
-  border-style: none; }
+    vertical-align: middle;
+    border-style: none;
+}
 
 svg {
   overflow: hidden;
@@ -6299,4 +6307,3 @@ a.text-dark:hover, a.text-dark:focus {
   .table .thead-dark th {
     color: inherit;
     border-color: #dee2e6; } }
-
