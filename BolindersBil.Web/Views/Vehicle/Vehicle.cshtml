@@ -26,7 +26,7 @@
                 </a>
             </div>
         </div>
-<<<<<<< HEAD
+
 
         <div class="col-sm-12" style="background-color:white; margin-bottom:20px; padding:10px;">
             <!-- TODO: Link img to Modal: -->
@@ -37,8 +37,7 @@
                 }
             </div>
         </div>
-=======
->>>>>>> f26d6cb50898492cfbc6da84ba597614cc57a0dd
+
         <!-- Bilmärke: -->
         <div class="col-sm-12" style="background-color:white; margin-bottom:20px">
             <h1>@Model.Vehicle.Brand @Model.Vehicle.Model</h1>
@@ -56,15 +55,11 @@
                 <strong>Begagnad: </strong>@Model.Vehicle.Used <br />
                 <strong>Leasbar: </strong>@Model.Vehicle.Leasable <br />
                 <strong>Attribut: </strong>@Model.Vehicle.VehicleAttribute <br />
-<<<<<<< HEAD
+
                 @*<strong>Annons tillagd: </strong>@Model.Vehicle.AddedDate <br />
                 <strong>Annons uppdaterad: </strong>@Model.Vehicle.UpdatedDate <br />*@
                 <strong>Kontakta säljare: </strong> <a href="tel:+460 @Model.Vehicle.OfficeId.PhoneNumber">&#9742;</a>
-=======
-                <strong>Annons tillagd: </strong>@Model.Vehicle.AddedDate <br />
-                <strong>Annons uppdaterad: </strong>@Model.Vehicle.UpdatedDate <br />
-                <strong>Kontakta säljare: </strong> <!-- TODO: Can't reach the office phonenumber! --> @*@Model.Offices.Name*@
->>>>>>> f26d6cb50898492cfbc6da84ba597614cc57a0dd
+
             </h6>
             <h4><strong>Pris (SEK): </strong>@Model.Vehicle.Price</h4>
             <h4><strong>Pris Exkl. Moms (SEK): </strong>@Model.Vehicle.Price</h4> <!-- TODO: Räkna bort 25% från priset! -->
@@ -74,15 +69,12 @@
         </div>
         <div class="col-sm-12" style="background-color:lightblue; margin-bottom:20px; padding:10px;">
             <h1>RELATERADE FORDON:</h1>
-<<<<<<< HEAD
-=======
 
             @foreach(var v in Model.ListOfVehicles.Take(4))
             {
                 <p>@v.Brand | @v.Price</p>
             }
 
->>>>>>> f26d6cb50898492cfbc6da84ba597614cc57a0dd
         </div>
         <div class="col-sm-12" style="background-color:white; margin-bottom:20px; padding:10px;">
             <!-- Back to the page that lists all the vehicles: -->
@@ -112,7 +104,6 @@
                 </form>
             </div>
         </div>
-<<<<<<< HEAD
 
         <!-- CrarouselModal: -->
         <div class="modal fade" id="vehicleModal">
@@ -143,7 +134,3 @@
         </div>
     </div>
 </div>
-=======
-    </div>
-</div>
->>>>>>> f26d6cb50898492cfbc6da84ba597614cc57a0dd

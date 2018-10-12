@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-
 namespace BolindersBil.Repositories
 {
     public class VehicleRepository : IVehicleRepository
@@ -72,8 +71,7 @@ namespace BolindersBil.Repositories
         // List all the Vehicles from DB.
         public IEnumerable<Vehicle> GetAllVehicles()
         {
-
-
+            
             return Vehicles;
         }
 
@@ -82,20 +80,12 @@ namespace BolindersBil.Repositories
         {
             return Images;
         }
-        //public IEnumerable<Vehicle> Filter(string searchString)
-        //{
-        //    IEnumerable<Vehicle> vehicles;
-
-            
-        //}
-
-
+      
         public IEnumerable<Vehicle> Search(string searchString, bool? used)
         {
             IEnumerable<Vehicle> vehicles;
             if (string.IsNullOrEmpty(searchString))
             {
-
                 vehicles = ctx.Vehicles.Where(x => x.Used == used.Value);
             }
             else
@@ -112,15 +102,12 @@ namespace BolindersBil.Repositories
                 {
                     vehicles = vehicles.Where(x => x.Used == used.Value);
                 }
-
-
+                
             }
 
             return vehicles;
         }
-
-
-
+        
         // Update(Edit) the vehicle. 
         public void UpdateVehicle(EditVehicleViewModel v)
         {
@@ -208,7 +195,5 @@ namespace BolindersBil.Repositories
 
             return usedVehicles;
         }
-
     }
 }
-
