@@ -22,7 +22,7 @@ namespace BolindersBil.Web.Controllers
         private IVehicleRepository vehicleRepo;
         public IOfficeRepository officeRepo;
         private IHostingEnvironment _hostingEnvironment;
-        public int pageLimit = 8;
+        //public int pageLimit = 8;
 
         public VehicleController(IVehicleRepository vehicleRepository, IOfficeRepository officeRepository, IHostingEnvironment hostingEnvironment)
         {
@@ -32,7 +32,7 @@ namespace BolindersBil.Web.Controllers
         }
         
         [HttpGet]
-        public IActionResult Index(int page = 1)
+        public IActionResult Index()
         {
             // This list is used as the dropdown option in the "Årsmodell" input.
             List<string> years = new List<string>();
@@ -53,26 +53,10 @@ namespace BolindersBil.Web.Controllers
             years.Add(fifties);
             years.Add(superOld);
             ViewBag.vehicleYearOptions = years;
-
-            var toSkip = (page - 1) * pageLimit;
+            
             var filterResults = vehicleRepo.FilterSearch(null, null, null, null, 0, 0, 0);
-
-            var orderFilteredResults = filterResults.OrderByDescending(x => x.UpdatedDate).ThenBy(x => x.Used == true).Skip(toSkip).Take(pageLimit);
-
-            var paging = new PagingInfo
-            {
-                CurrentPage = page,
-                ItemsPerPage = pageLimit,
-                TotalItems = vehicleRepo.Vehicles.Count()
-            };
-
-            var vm = new VehiclePagerViewModel
-            {
-                Vehicles = orderFilteredResults,
-                Pager = paging
-            };
-
-            return View(vm);
+            var orderFilteredResults = filterResults.OrderByDescending(x => x.UpdatedDate).ThenBy(x => x.Used == true);
+            return View(orderFilteredResults);
         }
 
         [HttpPost]
@@ -99,9 +83,26 @@ namespace BolindersBil.Web.Controllers
             ViewBag.vehicleYearOptions = years;
 
             var filterResults = vehicleRepo.FilterSearch(year, fuel, body, gearbox, minPrice, maxPrice, maxKm);
-            
             return View(filterResults);
         }
+
+        //public IActionResult Paging(int page = 1)
+        //{
+        //    var toSkip = (page - 1) * pageLimit;
+        //    var vehicles = vehicleRepo.Vehicles.Skip(toSkip).Take(pageLimit);
+        //    var paging = new PagingInfo
+        //    {
+        //        CurrentPage = page,
+        //        ItemsPerPage = pageLimit,
+        //        TotalItems = vehicleRepo.Vehicles.Count()
+        //    };
+        //    var vm = new VehiclePagerViewModel
+        //    {
+        //        Vehicles = vehicles,
+        //        Pager = paging
+        //    };
+        //    return View("Index", vm);
+        //}
 
         [HttpGet]
         [Route("bilar/nya")]

@@ -21,14 +21,9 @@ namespace BolindersBil.Web.Controllers
         {
             vehicleRepo = vehicleRepository;
         }
-
         
-        //public IActionResult Privacy() { }
-
         public IActionResult Cookies()
         {
-            
-
             return View();
         }
 
@@ -42,14 +37,12 @@ namespace BolindersBil.Web.Controllers
         public ActionResult Search()
         {
             VehiclesSearchViewModel model = new VehiclesSearchViewModel();
-
             return View(model);
         }
 
         [HttpGet]
         public IActionResult Vehicles()
         {
-
             // This list is used as the dropdown option in the "Årsmodell" input.
             List<object> years = new List<object>();
             var currentYear = DateTime.Now.Year;
@@ -110,7 +103,6 @@ namespace BolindersBil.Web.Controllers
         {
             return RedirectToAction("Index", "Contact");
         }
-
     }
 }       
 

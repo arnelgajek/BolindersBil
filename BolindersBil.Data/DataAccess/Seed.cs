@@ -65,7 +65,7 @@ namespace BolindersBil.Web.DataAccess
                     Horsepower = 170,
                     Used = true,
                     OfficeId = varnOffice,
-                    Office = "Varnamö",
+                    Office = "Värnamo",
                     Leasable = true,
                     VehicleAttribute = "Speglar|Cdspelare"
                 },
@@ -125,7 +125,7 @@ namespace BolindersBil.Web.DataAccess
                     Horsepower = 130,
                     Used = true,
                     OfficeId = varnOffice,
-                    Office = "Varnamö",
+                    Office = "Värnamo",
                     Leasable = true,
                     VehicleAttribute = "Speglar|Cdspelare|Elegant"
                 },
@@ -185,7 +185,7 @@ namespace BolindersBil.Web.DataAccess
                     Horsepower = 96,
                     Used = true,
                     OfficeId = varnOffice,
-                    Office = "Varnamö",
+                    Office = "Värnamo",
                     Leasable = false,
                     VehicleAttribute = "Speglar|Vinterdäck|El-speglar"
                 },
@@ -245,7 +245,7 @@ namespace BolindersBil.Web.DataAccess
                     Horsepower = 190,
                     Used = false,
                     OfficeId = varnOffice,
-                    Office = "Varnamö",
+                    Office = "Värnamo",
                     Leasable = false,
                     VehicleAttribute = "Speglar|Takfönster|CD-växlare"
                 }

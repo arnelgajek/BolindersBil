@@ -110,19 +110,11 @@ namespace BolindersBil.Web
                    template: "Vehicle/{Brand}/{Model}/{ModelDescription}/{Id:int}",
                    defaults: new { controller = "Vehicle", action = "Index" }
                    );
-
-                //routes.MapRoute(
-                //    name: "Vehicle",
-                //    template: "{controller=Vehicle}/{action=Vehicle}/{id?}");
-
-
             });
 
             var runIdentitySeed = Task.Run(async () => await identitySeeder.CreateAdminAccountIfEmpty()).Result;
 
-            //identitySeeder.CreateAdminAccountIfEmpty();
             Seed.FillIfEmpty(ctx);
-            
         }
     }
 }
