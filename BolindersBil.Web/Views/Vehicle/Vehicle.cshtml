@@ -44,20 +44,53 @@
                 <strong>Annons uppdaterad: </strong>@Model.Vehicle.UpdatedDate <br />
                 <strong>Kontakta säljare: </strong> <!-- TODO: Can't reach the office phonenumber! --> @*@Model.Offices.Name*@
             </h6>
-            <h1><strong>Pris: </strong>@Model.Vehicle.Price</h1>
+            <form>
+                <h2 id="vehiclePrice"><strong>Pris: </strong>@Model.Vehicle.Price kr</h2>
+                <h2 id="delPrice"><del><strong>Pris: </strong>@Model.Vehicle.Price kr</del></h2>
+                <h1 id="newPrice">
+                    <strong>Nytt pris:</strong>
+                    @{
+                        var a = Model.Vehicle.Price * 0.94;
+
+                    }
+                    @Math.Round(a, 2)
+                </h1>
+                <a id="taxFree" class="btn btn-sm btn-warning">utan moms</a>
+            </form>
         </div>
         <div class="col-sm-12" style="background-color:orange; margin-bottom:20px; padding:10px;">
             <h1>PRISKALKYL:</h1>
+            <form>
+                <div class="input-group">
+                    <label for="kalkylSelectName"></label>
+                    <select id="kalkylSelect" class="form-control col-3" name="kalkylSelectName">
+                        <option value="12">12</option>
+                        <option value="24">24</option>
+                        <option value="36" selected>36</option>
+                        <option value="48">48</option>
+                        <option value="60">60</option>
+                        <option value="72">72</option>
+                    </select>
+                    <a id="getKalkyl" class="btn btn-success form-control col-4">hämta pris i månaden</a>
+
+                    <div id="kalkyl" class="col-3">
+
+                    </div>
+                </div>
+            </form>
         </div>
         <div class="col-sm-12" style="background-color:lightblue; margin-bottom:20px; padding:10px;">
-            <h1>RELATERADE FORDON:</h1>
+            <h3>RELATERADE FORDON:</h3>
 
-            @foreach(var v in Model.ListOfVehicles.Take(4))
+            @foreach (var v in Model.ListOfVehicles.Take(4))
             {
-                <p>@v.Brand | @v.Price</p>
+                <a asp-action="Vehicle" class="btn btn-sm btn-success" asp-route-vehicleId="@v.Id">
+                    @v.Brand @v.Model | @v.Price kr
+                </a>
             }
 
         </div>
+        
         <div class="col-sm-12" style="background-color:white; margin-bottom:20px; padding:10px;">
             <!-- Back to the page that lists all the vehicles: -->
             <form asp-action="Index" asp-controller="Vehicle">
@@ -88,3 +121,48 @@
         </div>
     </div>
 </div>
+<script src="~/js/site.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#delPrice").hide();
+        $("#newPrice").hide();
+        $("#taxFree").click(function () {
+
+
+
+            $("#vehiclePrice").toggle();
+            $("#delPrice").toggle();
+            $("#newPrice").toggle();
+        });
+        
+        //let currentValue = $('#kalkylValue').value();
+        //let retval = currentValue.value;
+
+        let x = @Model.Vehicle.Price;
+
+        //let e = document.getElementById("kalkylSelect");
+
+        //let eOption = e.options[e.selectedIndex].value
+
+        let eOption = $("#kalkylSelect").val();
+
+        let y = eOption
+
+        let z = x * 0.8;
+            
+        let b = z / y;
+
+        let a = b * 1.045
+
+        //$("#kalkyl").append(a);
+
+        $("#getKalkyl").click(function () {
+            console.log(a);
+
+            $("#kalkyl").empty();
+
+            $("#kalkyl").append(a);
+        });
+        
+    });
+</script>
