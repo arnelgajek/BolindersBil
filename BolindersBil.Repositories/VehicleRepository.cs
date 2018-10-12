@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-
 namespace BolindersBil.Repositories
 {
     public class VehicleRepository : IVehicleRepository
@@ -49,7 +48,7 @@ namespace BolindersBil.Repositories
             return ctxVehicle;
         }
 
-        // So we can BulkDeleteVehicles from our DB:
+        // So we can BulkDeleteVehicles from our DB.
         public Vehicle BulkDeleteVehicle(int vehicleId)
         {
             var ctxVehicle = ctx.Vehicles.FirstOrDefault(x => x.Id.Equals(vehicleId));
@@ -61,8 +60,7 @@ namespace BolindersBil.Repositories
             return ctxVehicle;
         }
 
-
-        // To reload the page so see the vehicle add with specifik id:
+        // To reload the page so see the vehicle add with specific id:
         public Vehicle Vehicle(int vehicleId)
         {
             var ctxVehicle = ctx.Vehicles.FirstOrDefault(x => x.Id.Equals(vehicleId));
@@ -73,30 +71,21 @@ namespace BolindersBil.Repositories
         // List all the Vehicles from DB.
         public IEnumerable<Vehicle> GetAllVehicles()
         {
-
-
+            
             return Vehicles;
         }
 
-        // List all the Images from DB
+        // List all the Images from DB.
         public IEnumerable<Image> GetAllImages()
         {
             return Images;
         }
-        //public IEnumerable<Vehicle> Filter(string searchString)
-        //{
-        //    IEnumerable<Vehicle> vehicles;
-
-            
-        //}
-
-
+      
         public IEnumerable<Vehicle> Search(string searchString, bool? used)
         {
             IEnumerable<Vehicle> vehicles;
             if (string.IsNullOrEmpty(searchString))
             {
-
                 vehicles = ctx.Vehicles.Where(x => x.Used == used.Value);
             }
             else
@@ -113,14 +102,12 @@ namespace BolindersBil.Repositories
                 {
                     vehicles = vehicles.Where(x => x.Used == used.Value);
                 }
-
+                
             }
 
             return vehicles;
         }
-
-
-
+        
         // Update(Edit) the vehicle. 
         public void UpdateVehicle(EditVehicleViewModel v)
         {
@@ -149,6 +136,64 @@ namespace BolindersBil.Repositories
             }
             ctx.SaveChanges();
         }
+
+        public IEnumerable<Vehicle> FilterSearch(string year, string fuel, string body, string gearbox, double minPrice, double maxPrice, int maxKm)
+        {
+            IEnumerable<Vehicle> vehicles;
+            
+            if (string.IsNullOrEmpty(year) || string.IsNullOrEmpty(fuel) 
+                || string.IsNullOrEmpty(body) || string.IsNullOrEmpty(gearbox))
+            {
+                vehicles = ctx.Vehicles;
+            }
+            else
+            {
+                vehicles = ctx.Vehicles.Where(x => x.Year.Contains(year) &&
+                                                   x.Fuel.Contains(fuel) &&
+                                                   x.Body.Contains(body) &&
+                                                   x.Gearbox.Contains(gearbox));
+
+                List<Vehicle> priceFiltered = new List<Vehicle>();
+                foreach (var v in vehicles)
+                {
+                    if (v.Price >= minPrice && v.Price <= maxPrice)
+                    {
+                        priceFiltered.Add(v);
+                    }
+                }
+                vehicles = priceFiltered;
+
+                List<Vehicle> kmFiltered = new List<Vehicle>();
+                foreach (var v in vehicles)
+                {
+                    if (v.Kilometer <= maxKm)
+                    {
+                        kmFiltered.Add(v);
+                    }
+                }
+                vehicles = kmFiltered;
+
+            }
+
+            return vehicles;
+        }
+        
+        public IEnumerable<Vehicle> GetNewVehicles()
+        {
+            IEnumerable<Vehicle> newVehicles;
+
+            newVehicles = ctx.Vehicles.Where(x => x.Used == false);
+
+            return newVehicles;
+        }
+
+        public IEnumerable<Vehicle> GetUsedVehicles()
+        {
+            IEnumerable<Vehicle> usedVehicles;
+
+            usedVehicles = ctx.Vehicles.Where(x => x.Used == true);
+
+            return usedVehicles;
+        }
     }
 }
-

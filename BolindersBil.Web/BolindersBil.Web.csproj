@@ -37,9 +37,6 @@
     <Content Update="Views\Vehicle\EditVehicle.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
-    <Content Update="Views\Vehicle\TestVehicleAdded.cshtml">
-      <Pack>$(IncludeRazorContentInPack)</Pack>
-    </Content>
   </ItemGroup>
 
   <ItemGroup>
